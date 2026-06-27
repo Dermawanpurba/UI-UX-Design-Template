@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Design Catalog</title>
+    <meta name="description" content="Katalog UI/UX design styles modern untuk membantu Anda memilih gaya desain aplikasi yang tepat.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg-color: #0A0D14;
+            --panel-bg: #111420;
+            --card-bg: #151825;
+            --border-color: #1E2336;
+            --border-hover: #2D3560;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8892B0;
+            --accent: #6366F1;
+            --accent-hover: #4F46E5;
+            --accent-glow: rgba(99, 102, 241, 0.25);
+            --green: #10B981;
+            --yellow: #F59E0B;
+            --pink: #EC4899;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2D3560; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4A5568; }
+
+        /* ============ SIDEBAR LEFT ============ */
+        .sidebar-left {
+            width: 240px;
+            min-width: 240px;
+            background: var(--panel-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar-logo {
+            padding: 20px 16px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 16px rgba(99,102,241,0.4);
+        }
+
+        /* ============ MENU NAV ============ */
+        .nav-section {
+            padding: 12px 10px 0;
+        }
+        .nav-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #4A5578;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 0 8px 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6B7A9E;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 2px;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+        .nav-item:hover {
+            color: #C8CFEA;
+            background: rgba(99,102,241,0.08);
+        }
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(99,102,241,0.2), rgba(99,102,241,0.05));
+            color: #A5B4FC;
+            border-left: 2px solid #6366F1;
+        }
+        .nav-item.active .nav-icon {
+            color: #6366F1;
+        }
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .nav-badge {
+            margin-left: auto;
+            background: rgba(99,102,241,0.2);
+            color: #818CF8;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 1px 7px;
+            border-radius: 20px;
+            border: 1px solid rgba(99,102,241,0.3);
+        }
+        .nav-badge.green {
+            background: rgba(16,185,129,0.15);
+            color: #10B981;
+            border-color: rgba(16,185,129,0.3);
+        }
+
+        /* ============ CATEGORIES ============ */
+        .cat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #5B6A8E;
+            transition: all 0.2s ease;
+            margin-bottom: 1px;
+        }
+        .cat-item:hover { color: #A0AECE; background: rgba(255,255,255,0.04); }
+        .cat-item.active {
+            background: rgba(99,102,241,0.12);
+            color: #A5B4FC;
+        }
+        .cat-count {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            color: #5B6A8E;
+        }
+        .cat-item.active .cat-count {
+            background: rgba(99,102,241,0.25);
+            color: #818CF8;
+        }
+
+        /* ============ ILLUSTRATION ============ */
+        .sidebar-illustration {
+            margin: 10px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #13163A 0%, #1A1040 100%);
+            border: 1px solid rgba(99,102,241,0.2);
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar-illustration::before {
+            content: '';
+            position: absolute;
+            top: -30px; right: -30px;
+            width: 100px; height: 100px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* ============ MAIN AREA ============ */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ============ TOPBAR / HEADER ============ */
+        .topbar {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.04) 100%);
+        }
+
+        /* ============ SEARCH ============ */
+        .search-box {
+            position: relative;
+            width: 280px;
+        }
+        .search-box input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 9px 38px 9px 14px;
+            color: white;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus { border-color: rgba(99,102,241,0.5); }
+        .search-box input::placeholder { color: #4A5578; }
+        .search-box i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4A5578;
+            font-size: 12px;
+        }
+
+        /* ============ TAB FILTER ============ */
+        .tab-filter {
+            display: flex;
+            gap: 6px;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #5B6A8E;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-btn:hover { color: #A0AECE; background: rgba(255,255,255,0.04); }
+        .tab-btn.active {
+            background: rgba(99,102,241,0.18);
+            color: #A5B4FC;
+            border-color: rgba(99,102,241,0.35);
+        }
+
+        /* ============ GRID CARDS ============ */
+        .grid-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 18px 20px;
+        }
+        #style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+            gap: 14px;
+        }
+
+        .style-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .style-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99,102,241,0.4);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.15);
+        }
+        .style-card .thumb {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 110px;
+            background: #0A0D14;
+            position: relative;
+        }
+        .style-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+        .style-card:hover .thumb img { opacity: 1; }
+        .style-card .num-badge {
+            position: absolute;
+            top: 0; left: 0;
+            background: linear-gradient(135deg, #6366F1, #4F46E5);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 7px;
+            border-bottom-right-radius: 8px;
+        }
+        .style-card h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #CBD5F0;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* ============ RIGHT SIDEBAR ============ */
+        .sidebar-right {
+            width: 260px;
+            min-width: 260px;
+            background: var(--panel-bg);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* ============ VIEWS ============ */
+        .view { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+        .view.active { display: flex; }
+
+        /* ============ EMPTY STATE ============ */
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        /* ============ HISTORY LIST ============ */
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .history-item:hover {
+            border-color: rgba(99,102,241,0.3);
+        }
+        .history-thumb {
+            width: 44px;
+            height: 30px;
+            border-radius: 6px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .history-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .float-anim { animation: float 3s ease-in-out infinite; }
+        .float-anim-slow { animation: float 4.5s ease-in-out infinite; }
+        .pulse-anim { animation: pulse-glow 2s ease-in-out infinite; }
+        .fade-up { animation: fadeInUp 0.4s ease forwards; }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #6366F1 0%, #A5B4FC 40%, #6366F1 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* ============ STATUS BAR ============ */
+        .status-bar {
+            padding: 8px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #3D4A6B;
+            background: var(--panel-bg);
+        }
+        .status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+            margin-right: 5px;
+            box-shadow: 0 0 6px rgba(16,185,129,0.6);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* ============ RIGHT PANEL SECTIONS ============ */
+        .rp-section {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .rp-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #3D4A6B;
+            margin-bottom: 12px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(99,102,241,0.3);
+        }
+
+        .feature-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: #5B6A8E;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            margin: 3px 3px 3px 0;
+            transition: all 0.2s;
+        }
+        .feature-tag:hover {
+            border-color: rgba(99,102,241,0.3);
+            color: #A5B4FC;
+        }
+        .feature-tag i { color: #6366F1; font-size: 10px; }
+
+        /* ============ TIPS CARD ============ */
+        .tips-card {
+            margin: 10px;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.04));
+            border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tips-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #F59E0B, #FBBF24);
+        }
+
+        /* ============ PROGRESS BAR ============ */
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #6366F1, #8B5CF6);
+            transition: width 1s ease;
+        }
+
+        .rp-scroll { flex: 1; overflow-y: auto; }
+
+        /* ============ HEADER HERO ============ */
+        .header-hero {
+            padding: 16px 24px 14px;
+            background: linear-gradient(135deg, #0D0F2B 0%, #10164A 50%, #0A0D14 100%);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: 80px;
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+        }
+        .header-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; right: -20px;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%);
+        }
+        .hero-stat {
+            text-align: center;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366F1, #EC4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(99,102,241,0.3);
+        }
+    </style>
+</head>
+<body>
+<div style="display:flex; height:100vh; overflow:hidden;">
+
+    <!-- ==================== SIDEBAR LEFT ==================== -->
+    <aside class="sidebar-left">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-palette" style="color:white; font-size:15px;"></i>
+                </div>
+                <div>
+                    <div style="font-weight:800; font-size:14px; color:#E2E8FF; line-height:1.2;">Design</div>
+                    <div class="shimmer-text" style="font-size:11px; font-weight:700;">Catalog</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illustration Banner -->
+        <div class="sidebar-illustration" style="margin-top:10px;">
+            <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+                <defs>
+                    <pattern id="dots" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1" fill="rgba(99,102,241,0.15)"/>
+                    </pattern>
+                </defs>
+                <rect width="200" height="90" fill="url(#dots)"/>
+                <!-- Monitor frame -->
+                <rect x="55" y="8" width="90" height="58" rx="5" fill="#0D1035" stroke="#3B3FA0" stroke-width="1.5"/>
+                <rect x="57" y="10" width="86" height="52" rx="3" fill="#080D28"/>
+                <!-- Monitor stand -->
+                <rect x="95" y="66" width="10" height="7" rx="1" fill="#1A1F55"/>
+                <rect x="85" y="73" width="30" height="3" rx="1.5" fill="#1A1F55"/>
+                <!-- Sidebar strip -->
+                <rect x="59" y="12" width="16" height="48" rx="2" fill="#11154A"/>
+                <circle cx="67" cy="21" r="3" fill="#4F52C0"/>
+                <rect x="61" y="29" width="10" height="2" rx="1" fill="rgba(99,102,241,0.4)"/>
+                <rect x="61" y="34" width="10" height="2" rx="1" fill="rgba(99,102,241,0.3)"/>
+                <rect x="61" y="39" width="10" height="2" rx="1" fill="rgba(99,102,241,0.2)"/>
+                <rect x="61" y="49" width="10" height="2" rx="1" fill="rgba(99,102,241,0.2)"/>
+                <!-- Header bar -->
+                <rect x="77" y="12" width="68" height="10" rx="2" fill="#13174D"/>
+                <rect x="80" y="15" width="20" height="4" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="132" y="15" width="10" height="4" rx="1" fill="#5558E8"/>
+                <!-- Cards row 1 -->
+                <rect x="77" y="25" width="20" height="16" rx="2" fill="#1A1F6A"/>
+                <rect x="79" y="27" width="16" height="8" rx="1" fill="#252A7A"/>
+                <rect x="79" y="37" width="8" height="2" rx="1" fill="rgba(255,255,255,0.3)"/>
+                <rect x="100" y="25" width="20" height="16" rx="2" fill="#1A1F6A"/>
+                <rect x="102" y="27" width="16" height="8" rx="1" fill="#252A7A"/>
+                <rect x="102" y="37" width="8" height="2" rx="1" fill="rgba(255,255,255,0.3)"/>
+                <rect x="123" y="25" width="20" height="16" rx="2" fill="#1A1F6A"/>
+                <rect x="125" y="27" width="16" height="8" rx="1" fill="#252A7A"/>
+                <rect x="125" y="37" width="8" height="2" rx="1" fill="rgba(255,255,255,0.3)"/>
+                <!-- Cards row 2 -->
+                <rect x="77" y="44" width="20" height="14" rx="2" fill="#17206A"/>
+                <rect x="100" y="44" width="20" height="14" rx="2" fill="#17206A"/>
+                <rect x="123" y="44" width="20" height="14" rx="2" fill="#17206A"/>
+                <!-- Floating palette -->
+                <rect x="18" y="33" width="24" height="24" rx="4" fill="#0D1040" stroke="#3B3FA0" stroke-width="1"/>
+                <circle cx="24" cy="39" r="3" fill="#6366F1"/>
+                <circle cx="31" cy="39" r="3" fill="#EC4899"/>
+                <circle cx="38" cy="39" r="3" fill="#10B981"/>
+                <circle cx="24" cy="46" r="3" fill="#F59E0B"/>
+                <circle cx="31" cy="46" r="3" fill="#38BDF8"/>
+                <circle cx="38" cy="46" r="3" fill="#818CF8"/>
+                <!-- Sparkles -->
+                <text x="155" y="22" font-size="8" fill="#F59E0B" class="pulse-anim">✦</text>
+                <text x="165" y="48" font-size="6" fill="#6366F1" class="pulse-anim">✦</text>
+                <text x="148" y="58" font-size="5" fill="#EC4899" class="pulse-anim">✦</text>
+            </svg>
+            <div style="margin-top:6px;">
+                <div style="font-size:11px; font-weight:700; color:#A5B4FC;">30+ Design Styles</div>
+                <div style="font-size:10px; color:#4A5578; margin-top:2px;">Pilih &amp; preview langsung</div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="nav-section" style="margin-top:4px;">
+            <div class="nav-label">Menu</div>
+            <button class="nav-item active" id="menu-catalog" onclick="switchView('catalog')">
+                <i class="fa-solid fa-layer-group nav-icon"></i>
+                <span>Katalog Design</span>
+                <span class="nav-badge">30+</span>
+            </button>
+            <button class="nav-item" id="menu-favorit" onclick="switchView('favorit')">
+                <i class="fa-regular fa-heart nav-icon"></i>
+                <span>Favorit</span>
+                <span class="nav-badge" id="fav-count-badge">0</span>
+            </button>
+            <button class="nav-item" id="menu-riwayat" onclick="switchView('riwayat')">
+                <i class="fa-solid fa-clock-rotate-left nav-icon"></i>
+                <span>Riwayat</span>
+                <span class="nav-badge green" id="hist-count-badge">0</span>
+            </button>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:1px; background:var(--border-color); margin:10px 14px;"></div>
+
+        <!-- Categories -->
+        <div class="nav-section" style="flex:1; overflow-y:auto; padding-bottom:8px;">
+            <div class="nav-label">Kategori</div>
+            <div id="category-nav"></div>
+        </div>
+
+        <!-- Bottom Help -->
+        <div style="padding:10px;">
+            <div onclick="showFeatureAlert('Pusat Bantuan','Dokumentasi lengkap tersedia. Tim support kami siap membantu Anda 24/7.')" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:rgba(99,102,241,0.07); border:1px solid rgba(99,102,241,0.15); cursor:pointer; transition:all 0.2s;"
+                 onmouseover="this.style.borderColor='rgba(99,102,241,0.35)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.15)'">
+                <div style="width:30px; height:30px; border-radius:8px; background:rgba(99,102,241,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <i class="fa-solid fa-question" style="color:#6366F1; font-size:12px;"></i>
+                </div>
+                <div>
+                    <div style="font-size:12px; font-weight:600; color:#C8CFEA;">Butuh Bantuan?</div>
+                    <div style="font-size:10px; color:#4A5578;">Lihat panduan lengkap</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ==================== MAIN AREA ==================== -->
+    <main class="main-content">
+
+        <!-- ===== VIEW: CATALOG ===== -->
+        <div class="view active" id="view-catalog">
+            <div class="header-hero">
+                <div style="display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
+                    <div>
+                        <h1 style="font-size:20px; font-weight:800; margin:0 0 3px; color:#E2E8FF;">UI/UX Design Catalog</h1>
+                        <p style="font-size:12px; color:#5B6A8E; margin:0;">Pilih gaya desain yang sesuai dengan kebutuhan aplikasi Anda</p>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="hero-stat">
+                            <div style="font-size:18px; font-weight:800;" class="shimmer-text">30+</div>
+                            <div style="font-size:10px; color:#4A5578;">Styles</div>
+                        </div>
+                        <div class="user-avatar" title="Profile">D</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tab Filter -->
+            <div class="tab-filter" id="tab-filter"></div>
+            <!-- Search bar -->
+            <div style="padding:10px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border-color);">
+                <span style="font-size:12px; color:#4A5578;" id="result-count">30 styles</span>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Cari design style..." oninput="onSearch(this.value)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <!-- Grid -->
+            <div class="grid-scroll">
+                <div id="style-grid"></div>
+            </div>
+            <div class="status-bar">
+                <div><span class="status-dot"></span>Live Preview Ready</div>
+                <div style="color:#4A5578;">Klik kartu untuk melihat preview</div>
+                <div style="color:#2D3560;">v2.0.0</div>
+            </div>
+        </div>
+
+        <!-- ===== VIEW: FAVORIT ===== -->
+        <div class="view" id="view-favorit">
+            <div class="header-hero">
+                <div style="display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
+                    <div>
+                        <h1 style="font-size:20px; font-weight:800; margin:0 0 3px; color:#E2E8FF;">
+                            <i class="fa-solid fa-heart" style="color:#EC4899; margin-right:8px; font-size:16px;"></i>Design Favorit
+                        </h1>
+                        <p style="font-size:12px; color:#5B6A8E; margin:0;">Koleksi design style yang Anda simpan</p>
+                    </div>
+                    <button onclick="clearFavorites()" style="padding:6px 14px; border-radius:8px; background:rgba(236,72,153,0.1); border:1px solid rgba(236,72,153,0.2); color:#EC4899; font-size:11px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif;">
+                        <i class="fa-solid fa-trash-can" style="margin-right:4px; font-size:10px;"></i>Hapus Semua
+                    </button>
+                </div>
+            </div>
+            <div class="grid-scroll" style="position:relative;">
+                <!-- Empty State Illustration -->
+                <div id="fav-empty" class="empty-state">
+                    <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" style="width:180px; height:auto; margin-bottom:20px;">
+                        <defs>
+                            <radialGradient id="favGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="rgba(236,72,153,0.12)"/>
+                                <stop offset="100%" stop-color="transparent"/>
+                            </radialGradient>
+                        </defs>
+                        <ellipse cx="100" cy="90" rx="80" ry="55" fill="url(#favGlow)"/>
+                        <!-- Big heart outline -->
+                        <path d="M100 130 L60 88 C46 73 46 53 60 44 C70 36 84 40 92 50 L100 60 L108 50 C116 40 130 36 140 44 C154 53 154 73 140 88 Z" 
+                              fill="none" stroke="rgba(236,72,153,0.2)" stroke-width="2.5" stroke-dasharray="6 4"/>
+                        <!-- Half-filled heart (left side) -->
+                        <path d="M100 122 L66 88 C55 76 55 60 66 52 C73 46 83 48 90 57 L100 68" 
+                              fill="none" stroke="#EC4899" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Small sparkles around -->
+                        <circle cx="48" cy="60" r="2" fill="rgba(236,72,153,0.3)" class="pulse-anim"/>
+                        <circle cx="152" cy="60" r="2" fill="rgba(236,72,153,0.3)" class="pulse-anim"/>
+                        <circle cx="65" cy="130" r="1.5" fill="rgba(99,102,241,0.3)" class="pulse-anim"/>
+                        <circle cx="135" cy="130" r="1.5" fill="rgba(99,102,241,0.3)" class="pulse-anim"/>
+                        <text x="35" y="50" font-size="12" fill="rgba(236,72,153,0.3)">+</text>
+                        <text x="158" y="75" font-size="10" fill="rgba(99,102,241,0.3)">+</text>
+                        <text x="60" y="148" font-size="8" fill="rgba(236,72,153,0.25)">✦</text>
+                        <text x="142" y="42" font-size="8" fill="rgba(99,102,241,0.25)">✦</text>
+                        <!-- Label -->
+                        <text x="100" y="152" text-anchor="middle" font-size="9" fill="rgba(236,72,153,0.5)" font-family="Inter,sans-serif">Simpan design favorit Anda</text>
+                    </svg>
+                    <div style="font-size:15px; font-weight:700; color:#5B6A8E; margin-bottom:6px;">Belum ada favorit</div>
+                    <div style="font-size:12px; color:#3D4A6B; max-width:220px; line-height:1.5;">Klik ikon ❤️ saat melihat preview untuk menyimpan design yang Anda sukai.</div>
+                    <button onclick="switchView('catalog')" style="margin-top:20px; padding:9px 20px; border-radius:10px; background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.3); color:#A5B4FC; font-size:12px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif;">
+                        <i class="fa-solid fa-compass" style="margin-right:6px;"></i>Jelajahi Katalog
+                    </button>
+                </div>
+                <!-- Fav Grid -->
+                <div id="fav-grid" style="display:none; grid-template-columns:repeat(auto-fill, minmax(155px, 1fr)); gap:14px; padding:18px 20px;"></div>
+            </div>
+            <div class="status-bar">
+                <div><span class="status-dot" style="background:#EC4899; box-shadow:0 0 6px rgba(236,72,153,0.6);"></span>Favorit</div>
+                <div id="fav-count-label" style="color:#4A5578;">0 design tersimpan</div>
+            </div>
+        </div>
+
+        <!-- ===== VIEW: RIWAYAT ===== -->
+        <div class="view" id="view-riwayat">
+            <div class="header-hero">
+                <div style="display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
+                    <div>
+                        <h1 style="font-size:20px; font-weight:800; margin:0 0 3px; color:#E2E8FF;">
+                            <i class="fa-solid fa-clock-rotate-left" style="color:#10B981; margin-right:8px; font-size:16px;"></i>Riwayat Pilihan
+                        </h1>
+                        <p style="font-size:12px; color:#5B6A8E; margin:0;">Design yang pernah Anda lihat atau gunakan</p>
+                    </div>
+                    <button onclick="clearHistory()" style="padding:6px 14px; border-radius:8px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); color:#10B981; font-size:11px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif;">
+                        <i class="fa-solid fa-trash-can" style="margin-right:4px; font-size:10px;"></i>Hapus Semua
+                    </button>
+                </div>
+            </div>
+            <div class="grid-scroll" style="position:relative;">
+                <!-- Empty State Illustration -->
+                <div id="history-empty" class="empty-state">
+                    <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" style="width:180px; height:auto; margin-bottom:20px;">
+                        <defs>
+                            <radialGradient id="histGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="rgba(16,185,129,0.08)"/>
+                                <stop offset="100%" stop-color="transparent"/>
+                            </radialGradient>
+                        </defs>
+                        <ellipse cx="100" cy="85" rx="75" ry="55" fill="url(#histGlow)"/>
+                        <!-- Clock body -->
+                        <circle cx="100" cy="72" r="38" fill="#0D1040" stroke="rgba(16,185,129,0.35)" stroke-width="2.5"/>
+                        <circle cx="100" cy="72" r="33" fill="#111535" stroke="rgba(16,185,129,0.12)" stroke-width="1"/>
+                        <!-- Clock ticks -->
+                        <line x1="100" y1="41" x2="100" y2="46" stroke="rgba(16,185,129,0.5)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="100" y1="98" x2="100" y2="103" stroke="rgba(16,185,129,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="69" y1="72" x2="74" y2="72" stroke="rgba(16,185,129,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="126" y1="72" x2="131" y2="72" stroke="rgba(16,185,129,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Hour hand -->
+                        <line x1="100" y1="72" x2="100" y2="52" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- Minute hand -->
+                        <line x1="100" y1="72" x2="116" y2="80" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Center dot -->
+                        <circle cx="100" cy="72" r="3" fill="#10B981"/>
+                        <!-- Ghost history items -->
+                        <rect x="20" y="125" width="70" height="8" rx="4" fill="rgba(16,185,129,0.1)"/>
+                        <rect x="20" y="137" width="45" height="5" rx="2.5" fill="rgba(16,185,129,0.07)"/>
+                        <rect x="110" y="125" width="70" height="8" rx="4" fill="rgba(16,185,129,0.1)"/>
+                        <rect x="110" y="137" width="40" height="5" rx="2.5" fill="rgba(16,185,129,0.07)"/>
+                        <!-- Sparkles -->
+                        <text x="45" y="118" font-size="8" fill="rgba(16,185,129,0.3)">✦</text>
+                        <text x="148" y="42" font-size="8" fill="rgba(99,102,241,0.3)">✦</text>
+                        <circle cx="55" cy="55" r="2" fill="rgba(16,185,129,0.2)" class="pulse-anim"/>
+                        <circle cx="148" cy="95" r="2" fill="rgba(99,102,241,0.2)" class="pulse-anim"/>
+                    </svg>
+                    <div style="font-size:15px; font-weight:700; color:#5B6A8E; margin-bottom:6px;">Belum ada riwayat</div>
+                    <div style="font-size:12px; color:#3D4A6B; max-width:220px; line-height:1.5;">Riwayat akan muncul otomatis saat Anda membuka preview design.</div>
+                    <button onclick="switchView('catalog')" style="margin-top:20px; padding:9px 20px; border-radius:10px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); color:#10B981; font-size:12px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif;">
+                        <i class="fa-solid fa-compass" style="margin-right:6px;"></i>Mulai Eksplorasi
+                    </button>
+                </div>
+                <!-- History list -->
+                <div id="history-list" style="padding:16px 20px; display:none;"></div>
+            </div>
+            <div class="status-bar">
+                <div><span class="status-dot"></span>Riwayat</div>
+                <div id="hist-count-label" style="color:#4A5578;">0 aktivitas</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==================== SIDEBAR RIGHT ==================== -->
+    <aside class="sidebar-right">
+        <!-- Top UI Preview Illustration -->
+        <div style="padding:14px 14px 0;">
+            <div style="border-radius:14px; overflow:hidden; border:1px solid var(--border-color); background:#0A0D14; position:relative;">
+                <svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+                    <rect width="220" height="100" fill="#0A0D14"/>
+                    <!-- Sidebar -->
+                    <rect x="0" y="0" width="50" height="100" fill="#111420"/>
+                    <rect x="6" y="12" width="38" height="7" rx="3" fill="#1A1E3A"/>
+                    <rect x="6" y="23" width="38" height="7" rx="3" fill="#6366F1"/>
+                    <rect x="6" y="34" width="38" height="7" rx="3" fill="#1A1E3A"/>
+                    <rect x="6" y="45" width="38" height="7" rx="3" fill="#1A1E3A"/>
+                    <rect x="14" y="14.5" width="20" height="2" rx="1" fill="rgba(255,255,255,0.15)"/>
+                    <rect x="14" y="25.5" width="20" height="2" rx="1" fill="rgba(255,255,255,0.85)"/>
+                    <rect x="14" y="36.5" width="20" height="2" rx="1" fill="rgba(255,255,255,0.15)"/>
+                    <rect x="14" y="47.5" width="20" height="2" rx="1" fill="rgba(255,255,255,0.15)"/>
+                    <!-- Main -->
+                    <rect x="55" y="6" width="160" height="18" rx="3" fill="#111420"/>
+                    <rect x="60" y="11" width="40" height="3" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="190" y="10" width="20" height="5" rx="2" fill="#6366F1"/>
+                    <!-- Cards top row -->
+                    <rect x="55" y="28" width="47" height="30" rx="3" fill="#151825"/>
+                    <rect x="57" y="30" width="43" height="18" rx="2" fill="#1A1E3A"/>
+                    <rect x="57" y="51" width="25" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="107" y="28" width="47" height="30" rx="3" fill="#151825"/>
+                    <rect x="109" y="30" width="43" height="18" rx="2" fill="#312E81"/>
+                    <rect x="109" y="51" width="25" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="159" y="28" width="47" height="30" rx="3" fill="#151825"/>
+                    <rect x="161" y="30" width="43" height="18" rx="2" fill="#1A1F6A"/>
+                    <rect x="161" y="51" width="25" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <!-- Cards bottom row -->
+                    <rect x="55" y="63" width="47" height="28" rx="3" fill="#151825"/>
+                    <rect x="57" y="65" width="43" height="16" rx="2" fill="#14532D"/>
+                    <rect x="107" y="63" width="47" height="28" rx="3" fill="#151825"/>
+                    <rect x="109" y="65" width="43" height="16" rx="2" fill="#1E1B4B"/>
+                    <rect x="159" y="63" width="47" height="28" rx="3" fill="#151825"/>
+                    <rect x="161" y="65" width="43" height="16" rx="2" fill="#3B1F0A"/>
+                    <!-- Cursor -->
+                    <circle cx="133" cy="39" r="3.5" fill="rgba(99,102,241,0.4)" class="pulse-anim"/>
+                    <circle cx="133" cy="39" r="1.8" fill="#6366F1"/>
+                    <!-- Glow -->
+                    <defs>
+                        <radialGradient id="rg2" cx="60%" cy="40%" r="50%">
+                            <stop offset="0%" stop-color="rgba(99,102,241,0.06)"/>
+                            <stop offset="100%" stop-color="transparent"/>
+                        </radialGradient>
+                    </defs>
+                    <rect width="220" height="100" fill="url(#rg2)"/>
+                </svg>
+                <div style="position:absolute; top:6px; right:8px; font-size:9px; font-weight:700; color:#6366F1; background:rgba(99,102,241,0.15); padding:2px 6px; border-radius:4px; border:1px solid rgba(99,102,241,0.25);">PREVIEW</div>
+            </div>
+            <!-- Stats 3-col -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:10px;">
+                <div style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:8px 6px; text-align:center;">
+                    <div style="font-size:14px; font-weight:800; color:#A5B4FC;">30</div>
+                    <div style="font-size:9px; color:#3D4A6B; font-weight:500;">Styles</div>
+                </div>
+                <div style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:8px 6px; text-align:center;">
+                    <div style="font-size:14px; font-weight:800; color:#EC4899;" id="rp-fav-count">0</div>
+                    <div style="font-size:9px; color:#3D4A6B; font-weight:500;">Favorit</div>
+                </div>
+                <div style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:8px 6px; text-align:center;">
+                    <div style="font-size:14px; font-weight:800; color:#10B981;" id="rp-hist-count">0</div>
+                    <div style="font-size:9px; color:#3D4A6B; font-weight:500;">Dilihat</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rp-scroll">
+            <!-- Steps -->
+            <div class="rp-section">
+                <div class="rp-title">Petunjuk Penggunaan</div>
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div>
+                        <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Pilih Design Style</div>
+                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Pilih gaya desain dari 30+ koleksi yang tersedia.</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div>
+                        <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Lihat Preview</div>
+                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Sistem menampilkan preview visual dan deskripsi detail.</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div>
+                        <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Favorit / Revisi</div>
+                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Simpan ke favorit atau minta penyesuaian.</div>
+                    </div>
+                </div>
+                <div class="step-item" style="margin-bottom:0;">
+                    <div class="step-num">4</div>
+                    <div>
+                        <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Generate Prompt</div>
+                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Buat prompt AI Builder siap pakai secara otomatis.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="rp-section">
+                <div class="rp-title">Fitur Tersedia</div>
+                <div>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>30+ Styles Modern</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Live Preview</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Favorit &amp; Riwayat</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Filter Kategori</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Generate Prompt AI</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Pencarian Cepat</span>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="rp-section">
+                <div class="rp-title">Progres Eksplorasi</div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                    <span style="font-size:11px; color:#4A5578;">Styles dilihat</span>
+                    <span style="font-size:11px; color:#6366F1;" id="prog-text">0 / 30</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="prog-bar" style="width:0%;"></div>
+                </div>
+                <div style="font-size:10px; color:#3D4A6B; margin-top:6px;">Eksplorasi semua style untuk menemukan yang terbaik!</div>
+            </div>
+
+            <!-- Tips -->
+            <div class="tips-card">
+                <i class="fa-solid fa-lightbulb" style="color:#F59E0B; font-size:13px; float:right; margin-top:2px;"></i>
+                <div style="font-size:10px; font-weight:800; color:#F59E0B; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.8px;">Tips</div>
+                <p style="font-size:11px; color:#9CA3AF; line-height:1.6; margin:0;">
+                    Pilih style yang mencerminkan karakter bisnis Anda. Desain yang baik meningkatkan konversi hingga <strong style="color:#F59E0B;">200%</strong>.
+                </p>
+            </div>
+
+            <!-- Design Insight Chart -->
+            <div style="margin:10px; padding:12px; border-radius:14px; background:linear-gradient(145deg,#0D1535,#0A0F2A); border:1px solid rgba(56,189,248,0.15);">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <div style="width:22px; height:22px; border-radius:6px; background:rgba(56,189,248,0.15); display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-solid fa-chart-bar" style="color:#38BDF8; font-size:10px;"></i>
+                    </div>
+                    <span style="font-size:11px; font-weight:700; color:#7DD3FC;">Design Insights</span>
+                </div>
+                <svg viewBox="0 0 200 55" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+                    <rect x="10" y="28" width="17" height="22" rx="3" fill="rgba(99,102,241,0.35)"/>
+                    <rect x="33" y="13" width="17" height="37" rx="3" fill="#6366F1"/>
+                    <rect x="56" y="20" width="17" height="30" rx="3" fill="rgba(99,102,241,0.55)"/>
+                    <rect x="79" y="6" width="17" height="44" rx="3" fill="#818CF8"/>
+                    <rect x="102" y="16" width="17" height="34" rx="3" fill="rgba(99,102,241,0.5)"/>
+                    <rect x="125" y="23" width="17" height="27" rx="3" fill="rgba(99,102,241,0.35)"/>
+                    <rect x="148" y="10" width="17" height="40" rx="3" fill="#6366F1"/>
+                    <text x="14" y="54" font-size="6.5" fill="#3D4A6B" font-family="Inter,sans-serif">Min</text>
+                    <text x="36" y="54" font-size="6.5" fill="#6366F1" font-family="Inter,sans-serif">Gls</text>
+                    <text x="58" y="54" font-size="6.5" fill="#3D4A6B" font-family="Inter,sans-serif">Neo</text>
+                    <text x="82" y="54" font-size="6.5" fill="#6366F1" font-family="Inter,sans-serif">Bld</text>
+                    <text x="103" y="54" font-size="6.5" fill="#3D4A6B" font-family="Inter,sans-serif">Neon</text>
+                    <text x="126" y="54" font-size="6.5" fill="#3D4A6B" font-family="Inter,sans-serif">Ret</text>
+                    <text x="150" y="54" font-size="6.5" fill="#6366F1" font-family="Inter,sans-serif">Mod</text>
+                </svg>
+                <div style="font-size:10px; color:#3D4A6B; margin-top:4px; text-align:center;">Popularitas per kategori</div>
+            </div>
+        </div>
+    </aside>
+
+</div>
+
+<script>
+    /* ==================== MOCK DATABASE ==================== */
+    const MOCK_DB = {
+        categories: [
+            { id:'all', name:'Semua Style', count:'30', icon:'fa-solid fa-border-all', type:'all' },
+            { id:'cat1', name:'Modern', count:'8', icon:'fa-regular fa-square-check', type:'modern' },
+            { id:'cat2', name:'Glass & Blur', count:'4', icon:'fa-solid fa-clone', type:'glass' },
+            { id:'cat3', name:'Minimal', count:'7', icon:'fa-solid fa-compress', type:'minimal' },
+            { id:'cat4', name:'Bold & Vibrant', count:'4', icon:'fa-solid fa-bolt', type:'bold' },
+            { id:'cat5', name:'Neon & Futuristic', count:'3', icon:'fa-solid fa-rocket', type:'neon' },
+            { id:'cat6', name:'Classic & Retro', count:'4', icon:'fa-solid fa-landmark', type:'retro' }
+        ],
+        styles: [
+            { id:1,  name:'Glassmorphism 2.0',  type:'glass',   color:'1e3a8a,3b82f6', desc:'Efek tembus pandang seperti kaca buram, frosted glass blur, dan border tipis mengkilap. Memberikan kesan modern dan ringan.',       refs:['https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80','https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80','https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80'] },
+            { id:2,  name:'Bento UI',            type:'modern',  color:'312e81,6366f1', desc:'Tata letak grid rapi terinspirasi kotak bento Jepang. Sangat baik untuk menampilkan banyak informasi secara terorganisir.',          refs:['https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80','https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80','https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80'] },
+            { id:3,  name:'Material Design 3',   type:'modern',  color:'1e40af,3b82f6', desc:'Evolusi terbaru sistem desain Google. Rounded shapes, dynamic color, dan personalisasi tinggi.',                                      refs:['https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=800&q=80','https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80','https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80'] },
+            { id:4,  name:'Minimalism',           type:'minimal', color:'1e293b,64748b', desc:'Less is more. White space besar, tipografi sederhana, tanpa dekorasi berlebihan.',                                                    refs:['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80','https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80','https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80'] },
+            { id:5,  name:'Aurora UI',            type:'glass',   color:'0f172a,8b5cf6', desc:'Gradien lembut, blur organik yang mengingatkan pada Aurora Borealis. Suasana magis dan futuristik.',                                  refs:['https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80','https://images.unsplash.com/photo-1519638399535-1b036603ac77?w=800&q=80','https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'] },
+            { id:6,  name:'Neumorphism',          type:'minimal', color:'1e293b,94a3b8', desc:'Flat design meets skeuomorphism. Elemen menonjol atau tenggelam dari latar, ilusi 3D yang lembut.',                                  refs:['https://images.unsplash.com/photo-1545239351-ef35f43d514b?w=800&q=80','https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80','https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80'] },
+            { id:7,  name:'Dark Mode Pro',        type:'modern',  color:'111827,3b82f6', desc:'Skema gelap premium mengurangi ketegangan mata. Elegan, menghemat baterai OLED, menonjolkan konten.',                                refs:['https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80','https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=800&q=80','https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80'] },
+            { id:8,  name:'Frosted Glass',        type:'glass',   color:'0369a1,38bdf8', desc:'Tingkat blur tinggi pada latar transparan. Efek kaca berembun yang memukau.',                                                        refs:['https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80','https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80','https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&q=80'] },
+            { id:9,  name:'Soft UI',              type:'minimal', color:'1e293b,60a5fa', desc:'Mirip Neumorphism, kontras rendah, bayangan halus. Nuansa bersahabat dan tidak mengintimidasi.',                                     refs:['https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80','https://images.unsplash.com/photo-1596558450268-9c27524ba856?w=800&q=80','https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80'] },
+            { id:10, name:'Claymorphism',         type:'modern',  color:'7c3aed,fb923c', desc:'Elemen UI terlihat seperti tanah liat 3D yang mengembang dan melayang lembut.',                                                      refs:['https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80','https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80','https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80'] },
+            { id:11, name:'Gradient Mesh',        type:'bold',    color:'c026d3,3b82f6', desc:'Perpaduan gradien multi-warna kompleks yang melengkung organik. Tampilan dinamis dan kaya warna.',                                  refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80','https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80','https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=80'] },
+            { id:12, name:'Liquid UI',            type:'neon',    color:'1e1b4b,8b5cf6', desc:'Visual meniru sifat cairan; animasi mulus, bentuk organik, transisi mengalir.',                                                      refs:['https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80','https://images.unsplash.com/photo-1535223289429-462edb9d7634?w=800&q=80','https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'] },
+            { id:13, name:'Cyberpunk UI',         type:'neon',    color:'000000,ec4899', desc:'Estetika distopia masa depan. Latar gelap, neon mencolok (pink, cyan), grid matrix, font tekno.',                                  refs:['https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=800&q=80','https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80','https://images.unsplash.com/photo-1520587100034-5c31c78ccdef?w=800&q=80'] },
+            { id:14, name:'Brutalism',            type:'brutalism',color:'1c1917,fafaf9', desc:'Desain mentah, tidak terpoles. Mengabaikan konvensi standar. Font tebal, warna kontras tinggi.',                                     refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80','https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80','https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80'] },
+            { id:15, name:'Retro Futurism',       type:'retro',   color:'1c1917,f59e0b', desc:'Visi masa depan dari perspektif 80-an. Synthwave colors, grid neon, efek VHS.',                                                      refs:['https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80','https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80','https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80'] },
+            { id:16, name:'3D UI',                type:'modern',  color:'1e293b,64748b', desc:'Elemen grafis tiga dimensi menonjol memberikan kedalaman realistis pada antarmuka.',                                                refs:['https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80','https://images.unsplash.com/photo-1619472032094-eadb7ec4556e?w=800&q=80','https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=800&q=80'] },
+            { id:17, name:'Dashboard Pro',        type:'modern',  color:'1e293b,3b82f6', desc:'Khusus analitik padat data. Hierarki informasi, widget ringkas, visualisasi data jelas.',                                           refs:['https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80','https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80','https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80'] },
+            { id:18, name:'Corporate Clean',      type:'minimal', color:'1e293b,0ea5e9', desc:'Profesional, aman, bersih. Cocok B2B dan lembaga keuangan. Keterbacaan dan kepercayaan.',                                         refs:['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80','https://images.unsplash.com/photo-1606765962248-7ff407b51667?w=800&q=80','https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80'] },
+            { id:19, name:'Sidebar Float',        type:'modern',  color:'0f172a,2563eb', desc:'Sidebar melayang (floating) dengan bayangan. Antarmuka terpusat dan elegan.',                                                       refs:['https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80','https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=800&q=80','https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80'] },
+            { id:20, name:'Neon Glow',            type:'neon',    color:'000000,22d3ee', desc:'Garis, teks, ikon bersinar seperti neon di atas latar belakang gelap gulita.',                                                     refs:['https://images.unsplash.com/photo-1493514789931-586cb221d7a7?w=800&q=80','https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=800&q=80','https://images.unsplash.com/photo-1535909339361-ef9551a1b18d?w=800&q=80'] },
+            { id:21, name:'Glass Gradient',       type:'glass',   color:'1e40af,3b82f6', desc:'Glassmorphism + gradien kaya. Kedalaman berlapis yang memanjakan mata.',                                                           refs:['https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80','https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80','https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80'] },
+            { id:22, name:'Outline Minimal',      type:'minimal', color:'1e293b,475569', desc:'Menghindari fill padat, mengandalkan stroke/outline untuk mendefinisikan elemen.',                                                refs:['https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80','https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80','https://images.unsplash.com/photo-1470723710355-95304d8aece4?w=800&q=80'] },
+            { id:23, name:'Pastel Dream',         type:'minimal', color:'2e1065,d946ef', desc:'Palet pastel lembut dan menenangkan. Cocok lifestyle, kesehatan, desain feminin.',                                               refs:['https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80','https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80','https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80'] },
+            { id:24, name:'Duotone',              type:'bold',    color:'4c1d95,e879f9', desc:'Dua warna kontras untuk seluruh antarmuka. Identitas visual sangat kuat dan mencolok.',                                           refs:['https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80','https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=80','https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80'] },
+            { id:25, name:'Vintage Classic',      type:'retro',   color:'78350f,d97706', desc:'Nostalgia dengan tekstur kertas, font serif klasik, palet sepia hangat, ornamen jadul.',                                         refs:['https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80','https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=800&q=80','https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80'] },
+            { id:26, name:'Game Dashboard',       type:'bold',    color:'171717,10b981', desc:'Terinspirasi HUD video game. Progress bar, badge pencapaian, angka menonjol.',                                                   refs:['https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80','https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80','https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=800&q=80'] },
+            { id:27, name:'Data Visualization',   type:'modern',  color:'0f172a,f59e0b', desc:'Fokus eksklusif pada grafik, bagan, metrik kompleks secara elegan dan mudah dicerna.',                                           refs:['https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80','https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80','https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'] },
+            { id:28, name:'Magazine Style',       type:'minimal', color:'0f172a,172554', desc:'Terinspirasi editorial majalah. Tipografi besar, grid tak simetris, gambar beresolusi tinggi.',                                   refs:['https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80','https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80','https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80'] },
+            { id:29, name:'Apple Inspired',       type:'minimal', color:'1e293b,6b7280', desc:'HIG Apple. Presisi, blur latar, sangat memperhatikan detail kecil.',                                                             refs:['https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80','https://images.unsplash.com/photo-1529336953628-035ea4e5bb6d?w=800&q=80','https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=800&q=80'] },
+            { id:30, name:'Split Screen',         type:'retro',   color:'1e293b,38bdf8', desc:'Layar terbagi dua untuk dua alur informasi utama atau interaksi ganda bersamaan.',                                              refs:['https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80','https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80','https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80'] }
+        ]
+    };
+
+    /* ==================== STATE ==================== */
+    let currentCategory = 'all';
+    let favorites = JSON.parse(localStorage.getItem('uiux_favorites') || '[]');
+    let historyData = JSON.parse(localStorage.getItem('uiux_history') || '[]');
+    let viewedSet = new Set(historyData.map(h => h.id));
+
+    /* ==================== INIT ==================== */
+    window.onload = () => {
+        renderCategories();
+        renderTabFilter();
+        renderGrid(MOCK_DB.styles);
+        updateCounters();
+    };
+
+    /* ==================== SWITCH VIEW ==================== */
+    function switchView(view) {
+        ['catalog','favorit','riwayat'].forEach(v => {
+            document.getElementById('view-' + v).classList.remove('active');
+            document.getElementById('menu-' + v).classList.remove('active');
+        });
+        document.getElementById('view-' + view).classList.add('active');
+        document.getElementById('menu-' + view).classList.add('active');
+        if (view === 'favorit') renderFavorites();
+        if (view === 'riwayat') renderHistoryView();
+    }
+
+    /* ==================== CATEGORIES ==================== */
+    function renderCategories() {
+        const nav = document.getElementById('category-nav');
+        nav.innerHTML = '';
+        MOCK_DB.categories.forEach(cat => {
+            const isActive = cat.type === currentCategory;
+            const div = document.createElement('div');
+            div.className = 'cat-item' + (isActive ? ' active' : '');
+            div.onclick = () => filterCategory(cat.type);
+            div.innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <i class="${cat.icon}" style="width:14px;text-align:center;font-size:11px;"></i>
+                    <span>${cat.name}</span>
+                </div>
+                <span class="cat-count">${cat.count}</span>
+            `;
+            nav.appendChild(div);
+        });
+    }
+
+    function renderTabFilter() {
+        const el = document.getElementById('tab-filter');
+        el.innerHTML = '';
+        MOCK_DB.categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn' + (cat.type === currentCategory ? ' active' : '');
+            btn.textContent = cat.name;
+            btn.onclick = () => filterCategory(cat.type);
+            el.appendChild(btn);
+        });
+    }
+
+    function filterCategory(type) {
+        currentCategory = type;
+        renderCategories();
+        renderTabFilter();
+        let filtered = MOCK_DB.styles;
+        if (type !== 'all') filtered = filtered.filter(s => s.type === type);
+        const sv = (document.getElementById('search-input') || {}).value || '';
+        if (sv) filtered = filtered.filter(s => s.name.toLowerCase().includes(sv.toLowerCase()) || s.desc.toLowerCase().includes(sv.toLowerCase()));
+        renderGrid(filtered);
+    }
+
+    /* ==================== SEARCH ==================== */
+    function onSearch(val) {
+        let filtered = MOCK_DB.styles;
+        if (currentCategory !== 'all') filtered = filtered.filter(s => s.type === currentCategory);
+        if (val) filtered = filtered.filter(s => s.name.toLowerCase().includes(val.toLowerCase()) || s.desc.toLowerCase().includes(val.toLowerCase()));
+        renderGrid(filtered);
+    }
+
+    /* ==================== GENERATE THUMB ==================== */
+    function generateThumb(item) {
+        if (item.refs && item.refs.length > 0) {
+            return item.refs[0];
+        }
+        const cols = item.color.split(',');
+        const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
+        const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
+        // Menggunakan Data URI SVG agar gambar gradien premium langsung ter-render tanpa bergantung pada server luar
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+            <defs>
+                <linearGradient id="grad-${item.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="${c1}" />
+                    <stop offset="100%" stop-color="${c2}" />
+                </linearGradient>
+            </defs>
+            <rect width="400" height="250" fill="url(#grad-${item.id})" />
+            <circle cx="200" cy="125" r="80" fill="rgba(255,255,255,0.05)" />
+            <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#ffffff" opacity="0.9">${item.name}</text>
+            <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#ffffff" opacity="0.6" letter-spacing="1.5px">${item.type.toUpperCase()}</text>
+        </svg>`;
+        return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    /* ==================== RENDER GRID ==================== */
+    function renderGrid(data) {
+        const grid = document.getElementById('style-grid');
+        const rc = document.getElementById('result-count');
+        grid.innerHTML = '';
+        rc.textContent = data.length + ' styles';
+
+        if (data.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;color:#4A5578;">
+                <i class="fa-solid fa-magnifying-glass" style="font-size:32px;margin-bottom:12px;color:#2D3560;"></i>
+                <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Tidak ditemukan</div>
+                <div style="font-size:12px;">Coba kata kunci lain</div>
+            </div>`;
+            return;
+        }
+
+        const favSet = new Set(favorites);
+        data.forEach((item, i) => {
+            const div = document.createElement('div');
+            div.className = 'style-card fade-up';
+            div.style.animationDelay = (i * 25) + 'ms';
+            const isFav = favSet.has(item.id);
+            const isViewed = viewedSet.has(item.id);
+            div.innerHTML = `
+                <div class="thumb">
+                    <div class="num-badge">${item.id}</div>
+                    ${isViewed ? '<div style="position:absolute;top:0;right:0;background:rgba(16,185,129,0.85);font-size:9px;font-weight:700;padding:2px 6px;border-bottom-left-radius:6px;color:white;letter-spacing:0.5px;">✓ DILIHAT</div>' : ''}
+                    <img src="${generateThumb(item)}" alt="${item.name}" loading="lazy">
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding:0 2px;">
+                    <h3 style="font-size:11px;font-weight:600;color:#CBD5F0;margin:0;text-align:left;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.name}</h3>
+                    <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart" style="color:${isFav ? '#EC4899' : '#3D4A6B'};font-size:11px;cursor:pointer;flex-shrink:0;margin-left:4px;transition:all 0.2s;"
+                       onclick="toggleFav(event,${item.id})"
+                       onmouseover="this.style.color='#EC4899';this.style.transform='scale(1.2)'"
+                       onmouseout="this.style.color='${isFav ? '#EC4899' : '#3D4A6B'}';this.style.transform='scale(1)'"></i>
+                </div>
+            `;
+            div.onclick = () => showPreview(item.id);
+            grid.appendChild(div);
+        });
+    }
+
+    /* ==================== FAVORITES ==================== */
+    function toggleFav(e, id) {
+        e.stopPropagation();
+        if (favorites.includes(id)) {
+            favorites = favorites.filter(f => f !== id);
+        } else {
+            favorites.push(id);
+        }
+        localStorage.setItem('uiux_favorites', JSON.stringify(favorites));
+        updateCounters();
+        filterCategory(currentCategory);
+    }
+
+    function renderFavorites() {
+        const grid = document.getElementById('fav-grid');
+        const empty = document.getElementById('fav-empty');
+        const lbl = document.getElementById('fav-count-label');
+        const favItems = MOCK_DB.styles.filter(s => favorites.includes(s.id));
+        lbl.textContent = favItems.length + ' design tersimpan';
+
+        if (favItems.length === 0) {
+            empty.style.display = 'flex';
+            grid.style.display = 'none';
+        } else {
+            empty.style.display = 'none';
+            grid.style.display = 'grid';
+            grid.innerHTML = '';
+            favItems.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'style-card fade-up';
+                div.style.animationDelay = (i * 25) + 'ms';
+                div.innerHTML = `
+                    <div class="thumb">
+                        <div class="num-badge">${item.id}</div>
+                        <img src="${generateThumb(item)}" alt="${item.name}" loading="lazy">
+                        <div style="position:absolute;top:0;right:0;background:rgba(236,72,153,0.85);font-size:9px;font-weight:700;padding:2px 6px;border-bottom-left-radius:6px;color:white;">♥</div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding:0 2px;">
+                        <h3 style="font-size:11px;font-weight:600;color:#CBD5F0;margin:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.name}</h3>
+                        <i class="fa-solid fa-heart" style="color:#EC4899;font-size:11px;cursor:pointer;flex-shrink:0;margin-left:4px;" onclick="removeFav(event,${item.id})"></i>
+                    </div>
+                `;
+                div.onclick = () => showPreview(item.id);
+                grid.appendChild(div);
+            });
+        }
+    }
+
+    function removeFav(e, id) {
+        e.stopPropagation();
+        favorites = favorites.filter(f => f !== id);
+        localStorage.setItem('uiux_favorites', JSON.stringify(favorites));
+        updateCounters();
+        renderFavorites();
+    }
+
+    function clearFavorites() {
+        if (favorites.length === 0) return;
+        favorites = [];
+        localStorage.setItem('uiux_favorites', JSON.stringify(favorites));
+        updateCounters();
+        renderFavorites();
+    }
+
+    /* ==================== HISTORY ==================== */
+    function addToHistory(item) {
+        historyData = historyData.filter(h => h.id !== item.id);
+        historyData.unshift({ id:item.id, name:item.name, type:item.type, color:item.color, viewedAt:new Date().toISOString() });
+        if (historyData.length > 20) historyData = historyData.slice(0, 20);
+        viewedSet.add(item.id);
+        localStorage.setItem('uiux_history', JSON.stringify(historyData));
+        updateCounters();
+    }
+
+    function renderHistoryView() {
+        const list = document.getElementById('history-list');
+        const empty = document.getElementById('history-empty');
+        const lbl = document.getElementById('hist-count-label');
+        lbl.textContent = historyData.length + ' aktivitas';
+
+        if (historyData.length === 0) {
+            empty.style.display = 'flex';
+            list.style.display = 'none';
+        } else {
+            empty.style.display = 'none';
+            list.style.display = 'block';
+            list.innerHTML = '';
+            historyData.forEach((h, i) => {
+                const item = MOCK_DB.styles.find(s => s.id === h.id);
+                if (!item) return;
+                const div = document.createElement('div');
+                div.className = 'history-item fade-up';
+                div.style.animationDelay = (i * 25) + 'ms';
+                div.innerHTML = `
+                    <div class="history-thumb">
+                        <img src="${generateThumb(item)}" alt="${item.name}">
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-size:12px;font-weight:600;color:#CBD5F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</div>
+                        <div style="font-size:10px;color:#3D4A6B;margin-top:2px;">${getTimeAgo(new Date(h.viewedAt))}</div>
+                    </div>
+                    <span style="font-size:9px;padding:2px 7px;border-radius:5px;background:rgba(99,102,241,0.1);color:#6366F1;font-weight:700;flex-shrink:0;text-transform:capitalize;">${item.type}</span>
+                `;
+                div.onclick = () => showPreview(item.id);
+                list.appendChild(div);
+            });
+        }
+    }
+
+    function clearHistory() {
+        if (historyData.length === 0) return;
+        historyData = [];
+        viewedSet = new Set();
+        localStorage.setItem('uiux_history', JSON.stringify(historyData));
+        updateCounters();
+        renderHistoryView();
+    }
+
+    function getTimeAgo(date) {
+        const diff = Math.floor((Date.now() - date) / 1000);
+        if (diff < 60) return 'Baru saja';
+        if (diff < 3600) return Math.floor(diff/60) + ' menit lalu';
+        if (diff < 86400) return Math.floor(diff/3600) + ' jam lalu';
+        return Math.floor(diff/86400) + ' hari lalu';
+    }
+
+    /* ==================== COUNTERS ==================== */
+    function updateCounters() {
+        const fc = favorites.length;
+        const hc = historyData.length;
+        const prog = Math.round((viewedSet.size / 30) * 100);
+        document.getElementById('fav-count-badge').textContent = fc;
+        document.getElementById('hist-count-badge').textContent = hc;
+        document.getElementById('rp-fav-count').textContent = fc;
+        document.getElementById('rp-hist-count').textContent = viewedSet.size;
+        document.getElementById('prog-text').textContent = viewedSet.size + ' / 30';
+        document.getElementById('prog-bar').style.width = prog + '%';
+    }
+
+    /* ==================== PREVIEW MODAL ==================== */
+    function showPreview(id) {
+        const style = MOCK_DB.styles.find(s => s.id === id);
+        if (!style) return;
+        addToHistory(style);
+        const isFav = favorites.includes(id);
+
+        Swal.fire({
+            title: `<span style="font-size:18px;font-weight:800;color:#E2E8FF;">${style.name}</span>`,
+            html: `
+                <div style="text-align:left;margin-top:4px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+                        <span style="padding:3px 10px;background:rgba(99,102,241,0.15);color:#818CF8;font-size:10px;font-weight:700;border-radius:20px;border:1px solid rgba(99,102,241,0.3);text-transform:uppercase;letter-spacing:0.8px;">${style.type}</span>
+                        <button id="fav-btn-modal" onclick="toggleFavModal(${id})" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:${isFav?'rgba(236,72,153,0.15)':'rgba(255,255,255,0.05)'};color:${isFav?'#EC4899':'#6B7A9E'};font-size:10px;font-weight:700;border-radius:20px;border:1px solid ${isFav?'rgba(236,72,153,0.3)':'rgba(255,255,255,0.08)'};cursor:pointer;font-family:Inter,sans-serif;">
+                            <i class="${isFav?'fa-solid':'fa-regular'} fa-heart"></i> ${isFav?'Tersimpan':'Simpan Favorit'}
+                        </button>
+                    </div>
+                    <p style="color:#8892B0;font-size:13px;line-height:1.6;margin:0;">${style.desc}</p>
+                </div>
+            `,
+            imageUrl: generateThumb(style),
+            imageWidth: 400,
+            imageHeight: 220,
+            imageAlt: style.name,
+            background: '#111420',
+            color: '#fff',
+            confirmButtonColor: '#6366F1',
+            confirmButtonText: '<i class="fa-solid fa-play" style="margin-right:6px;"></i>Mulai Live Demo',
+            showCancelButton: true,
+            cancelButtonText: 'Tutup',
+            cancelButtonColor: '#1E2336',
+            customClass: {
+                popup: 'border border-gray-700 rounded-2xl shadow-2xl',
+                image: 'rounded-xl border border-gray-700 mt-4 mb-2'
+            }
+        }).then(result => {
+            if (result.isConfirmed) {
+                showLiveDemo(id);
+            }
+        });
+
+        // Refresh grid viewed status
+        filterCategory(currentCategory);
+    }
+
+    function toggleFavModal(id) {
+        const btn = document.getElementById('fav-btn-modal');
+        const icon = btn.querySelector('i');
+        if (favorites.includes(id)) {
+            favorites = favorites.filter(f => f !== id);
+            icon.className = 'fa-regular fa-heart';
+            btn.lastChild.textContent = ' Simpan Favorit';
+            btn.style.color = '#6B7A9E';
+            btn.style.background = 'rgba(255,255,255,0.05)';
+            btn.style.borderColor = 'rgba(255,255,255,0.08)';
+        } else {
+            favorites.push(id);
+            icon.className = 'fa-solid fa-heart';
+            btn.lastChild.textContent = ' Tersimpan';
+            btn.style.color = '#EC4899';
+            btn.style.background = 'rgba(236,72,153,0.15)';
+            btn.style.borderColor = 'rgba(236,72,153,0.3)';
+        }
+        localStorage.setItem('uiux_favorites', JSON.stringify(favorites));
+        updateCounters();
+    }
+
+    /* ==================== MISC ==================== */
+    function showFeatureAlert(title, message) {
+        Swal.fire({
+            title: title,
+            text: message,
+            icon: 'info',
+            background: '#111420',
+            color: '#fff',
+            confirmButtonColor: '#6366F1',
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        });
+    }
+
+    /* ==================== LIVE DEMO ENGINE ==================== */
+    const DEMO_THEMES = {
+        glass: {
+            bg:'linear-gradient(135deg,#0a1628 0%,#1a2744 50%,#0d1f3c 100%)',
+            sidebar:'rgba(255,255,255,0.06)', sidebarBorder:'1px solid rgba(255,255,255,0.14)',
+            card:'rgba(255,255,255,0.07)', cardBorder:'1px solid rgba(255,255,255,0.15)',
+            accent:'#3b82f6', accentGlow:'rgba(59,130,246,0.45)',
+            header:'rgba(255,255,255,0.04)', text:'#e2e8f0', sub:'rgba(255,255,255,0.5)',
+            badge:'rgba(59,130,246,0.25)', badgeText:'#93c5fd',
+            blur:'backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);'
+        },
+        modern: {
+            bg:'linear-gradient(135deg,#0f172a 0%,#1e293b 100%)',
+            sidebar:'#1e293b', sidebarBorder:'1px solid #334155',
+            card:'#1e293b', cardBorder:'1px solid #334155',
+            accent:'#6366f1', accentGlow:'rgba(99,102,241,0.4)',
+            header:'#1a2236', text:'#f1f5f9', sub:'#94a3b8',
+            badge:'rgba(99,102,241,0.2)', badgeText:'#a5b4fc', blur:''
+        },
+        minimal: {
+            bg:'#f8fafc',
+            sidebar:'#ffffff', sidebarBorder:'1px solid #e2e8f0',
+            card:'#ffffff', cardBorder:'1px solid #e2e8f0',
+            accent:'#6366f1', accentGlow:'rgba(99,102,241,0.2)',
+            header:'#f1f5f9', text:'#1e293b', sub:'#64748b',
+            badge:'#ede9fe', badgeText:'#7c3aed', blur:''
+        },
+        bold: {
+            bg:'linear-gradient(135deg,#1a0533 0%,#2d1b69 50%,#0f0a1e 100%)',
+            sidebar:'rgba(139,92,246,0.14)', sidebarBorder:'1px solid rgba(139,92,246,0.3)',
+            card:'rgba(139,92,246,0.1)', cardBorder:'1px solid rgba(139,92,246,0.25)',
+            accent:'#a855f7', accentGlow:'rgba(168,85,247,0.5)',
+            header:'rgba(139,92,246,0.12)', text:'#f5f3ff', sub:'#c4b5fd',
+            badge:'rgba(168,85,247,0.25)', badgeText:'#d8b4fe', blur:''
+        },
+        neon: {
+            bg:'#000000',
+            sidebar:'#0a0a0a', sidebarBorder:'1px solid #22d3ee',
+            card:'#0d0d0d', cardBorder:'1px solid rgba(34,211,238,0.35)',
+            accent:'#22d3ee', accentGlow:'rgba(34,211,238,0.6)',
+            header:'#080808', text:'#ecfeff', sub:'rgba(34,211,238,0.65)',
+            badge:'rgba(34,211,238,0.15)', badgeText:'#67e8f9', blur:''
+        },
+        retro: {
+            bg:'linear-gradient(135deg,#1c1917 0%,#292524 100%)',
+            sidebar:'#1c1917', sidebarBorder:'1px solid #f59e0b',
+            card:'#292524', cardBorder:'1px solid rgba(245,158,11,0.3)',
+            accent:'#f59e0b', accentGlow:'rgba(245,158,11,0.5)',
+            header:'#171410', text:'#fef3c7', sub:'#d97706',
+            badge:'rgba(245,158,11,0.2)', badgeText:'#fcd34d', blur:''
+        }
+    };
+
+    const TYPE_CHARS = {
+        glass:  ['✦ Frosted Glass Effect','✦ Background Blur (backdrop-filter)','✦ Semi-transparent panels','✦ Thin glowing borders','✦ Depth layering'],
+        modern: ['✦ Dark color scheme','✦ Clean grid layout','✦ High contrast typography','✦ Rounded corners','✦ Subtle drop shadows'],
+        minimal:['✦ Maximum white space','✦ Simple sans-serif typography','✦ Zero unnecessary decoration','✦ Maximum readability','✦ Content-first approach'],
+        bold:   ['✦ Vibrant gradients','✦ High color saturation','✦ Dynamic visual impact','✦ Strong brand identity','✦ Rich layered texture'],
+        neon:   ['✦ Glowing neon elements','✦ Pure black background','✦ Cyan / pink accent glow','✦ Cyberpunk aesthetic','✦ Light emission shadows'],
+        retro:  ['✦ Warm amber/sepia palette','✦ Vintage typography feel','✦ Nostalgic UI patterns','✦ Old-school grid structure','✦ Historical design cues']
+    };
+
+    let ldRefIdx = 0;
+    let ldCurrentStyle = null;
+
+    function showLiveDemo(id) {
+        const style = MOCK_DB.styles.find(s => s.id === id);
+        if (!style) return;
+        ldCurrentStyle = style;
+        ldRefIdx = 0;
+
+        const overlay = document.getElementById('live-demo-overlay');
+        overlay.style.display = 'flex';
+        requestAnimationFrame(() => overlay.style.opacity = '1');
+
+        document.getElementById('ld-title').textContent = style.name;
+        document.getElementById('ld-badge').textContent = style.type.toUpperCase();
+        document.getElementById('ld-desc').textContent = style.desc;
+        
+        const switcher = document.getElementById('ld-theme-switcher');
+        switcher.innerHTML = '';
+        MOCK_DB.styles.forEach(s => {
+            const opt = document.createElement('option');
+            opt.value = s.id;
+            opt.textContent = `${s.name} (${s.type})`;
+            if(s.id === id) opt.selected = true;
+            switcher.appendChild(opt);
+        });
+
+        renderLiveDemoUI(style);
+        renderRefImages(style);
+        renderPaletteAndChars(style);
+    }
+
+    function closeLiveDemo() {
+        const overlay = document.getElementById('live-demo-overlay');
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 300);
+    }
+
+    function renderLiveDemoUI(style) {
+        const t = DEMO_THEMES[style.type] || DEMO_THEMES.modern;
+        const neon = style.type === 'neon';
+        const brutalism = style.type === 'bold' || style.name.toLowerCase().includes('brutalism');
+        const retro = style.type === 'retro';
+        const minimal = style.type === 'minimal';
+        const glass = style.type === 'glass' || style.name.toLowerCase().includes('glass');
+        const bento = style.name.toLowerCase().includes('bento');
+        const material = style.name.toLowerCase().includes('material');
+
+        const glowShadow = neon
+            ? `0 0 18px ${t.accentGlow}, 0 0 35px ${t.accentGlow}`
+            : (brutalism ? '5px 5px 0px #000000' : `0 4px 18px ${t.accentGlow}`);
+            
+        const frame = document.getElementById('ld-demo-frame');
+        frame.style.background = t.bg;
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const bars   = [35,55,40,65,50,80,60,90,70,85,75,95];
+
+        // Specific CSS adjustments depending on style
+        let customStyles = '';
+        let htmlStr = '';
+        if (brutalism) {
+            customStyles = `
+                #ldf { font-family: 'Arial Black', sans-serif !important; }
+                #ldf .sb { width:175px; min-width:175px; height:100%; background:#FAF9F6; border:3px solid #000 !important; display:flex; flex-direction:column; color:#000; }
+                #ldf .ni { display:flex; align-items:center; gap:9px; padding:10px 14px; font-size:11px; font-weight:900; color:#000; cursor:pointer; border-bottom:2px solid #000; text-transform:uppercase; transition:all .1s; }
+                #ldf .ni.act { background:#f59e0b !important; color:#000 !important; border-left:none !important; }
+                #ldf .ni:hover { background:#fef3c7; }
+                #ldf .card { background:#FAF9F6 !important; border:3px solid #000 !important; border-radius:0px !important; padding:14px; color:#000 !important; box-shadow: 4px 4px 0px #000 !important; transition:none; }
+                #ldf .card:hover { transform:translate(2px, 2px); box-shadow: 2px 2px 0px #000 !important; }
+                #ldf .hdr { background:#FAF9F6; border-bottom:3px solid #000 !important; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; color:#000; }
+                #ldf .pill { display:inline-block; padding:3px 9px; background:#000; color:#fff; border:2px solid #000; font-size:9px; font-weight:900; border-radius:0px; text-transform:uppercase; }
+                #ldf .btn { padding:8px 14px; background:#f59e0b !important; color:#000 !important; border:3px solid #000 !important; border-radius:0px !important; font-size:11px; font-weight:900; cursor:pointer; box-shadow: 3px 3px 0px #000 !important; text-transform:uppercase; }
+                #ldf .logo { width:28px; height:28px; border-radius:0px !important; border:2.5px solid #000; background:#000 !important; display:flex; align-items:center; justify-content:center; }
+                #ldf .sv { font-size:20px; font-weight:900; color:#000 !important; }
+                #ldf .sl { font-size:10px; color:#000 !important; font-weight:bold; }
+                #ldf .bar { border: 2px solid #000; background:#f59e0b !important; border-radius:0px !important; opacity:1 !important; }
+                #ldf .row { display:flex; align-items:center; gap:9px; padding:7px 0; border-bottom:2px solid #000 !important; font-size:11px; color:#000 !important; font-weight:bold; }
+                #ldf .dot { width:10px; height:10px; border-radius:0px !important; border:2px solid #000; background:#000 !important; }
+            `;
+        } else if (retro) {
+            customStyles = `
+                #ldf { font-family: 'Georgia', serif !important; }
+                #ldf .sb { width:175px; min-width:175px; height:100%; background:#1c1917; border-right:2px solid #d97706; display:flex; flex-direction:column; }
+                #ldf .ni { display:flex; align-items:center; gap:9px; padding:9px 14px; font-size:12px; font-weight:500; color:#f59e0b; cursor:pointer; border-bottom:1px solid rgba(217,119,6,0.15); transition:all .2s; }
+                #ldf .ni.act { background:rgba(245,158,11,0.15); color:#fef3c7; border-left:3px solid #f59e0b; }
+                #ldf .ni:hover { background:rgba(245,158,11,0.1); color:#fef3c7; }
+                #ldf .card { background:#292524; border:1px solid #d97706; border-radius:6px !important; padding:14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); }
+                #ldf .card:hover { transform:scale(1.01); }
+                #ldf .hdr { background:#171410; border-bottom:2px solid #d97706; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; }
+                #ldf .pill { display:inline-block; padding:2px 9px; background:rgba(245,158,11,0.2); color:#fcd34d; border-radius:4px !important; font-size:10px; font-weight:bold; border:1px solid rgba(245,158,11,0.3); }
+                #ldf .btn { padding:7px 14px; background:#d97706; color:#fef3c7; border:none; border-radius:6px !important; font-size:11px; font-weight:bold; cursor:pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+                #ldf .logo { width:28px; height:28px; border-radius:6px !important; background:#d97706; display:flex; align-items:center; justify-content:center; }
+                #ldf .sv { font-size:18px; font-weight:bold; color:#fef3c7 !important; }
+                #ldf .sl { font-size:10px; color:#d97706 !important; }
+                #ldf .bar { border-radius:2px 2px 0 0; background:#f59e0b; opacity:.85; }
+                #ldf .row { display:flex; align-items:center; gap:9px; padding:7px 0; border-bottom:1px solid rgba(217,119,6,0.15); font-size:11px; color:#fef3c7 !important; }
+                #ldf .dot { width:8px; height:8px; border-radius:50%; background:#f59e0b; }
+            `;
+        } else if (glass) {
+            const orbs = `<div style="position:absolute;top:-50px;left:-50px;width:300px;height:300px;background:rgba(99,102,241,0.4);filter:blur(60px);border-radius:50%;z-index:0;pointer-events:none;"></div>
+                          <div style="position:absolute;bottom:-50px;right:-50px;width:300px;height:300px;background:rgba(139,92,246,0.4);filter:blur(60px);border-radius:50%;z-index:0;pointer-events:none;"></div>`;
+            customStyles = `
+                #ldf { position:relative; overflow:hidden; }
+                #ldf .sb { width:175px; min-width:175px; height:100%; background:rgba(255,255,255,0.02); border-right:1px solid rgba(255,255,255,0.1); display:flex; flex-direction:column; backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); position:relative; z-index:1; }
+                #ldf .ni { display:flex; align-items:center; gap:9px; padding:9px 14px; font-size:12px; font-weight:500; color:#94a3b8; cursor:pointer; transition:all .2s; border-radius:8px; margin:2px 8px; }
+                #ldf .ni.act { background:rgba(255,255,255,0.1); color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.1); border:1px solid rgba(255,255,255,0.05); }
+                #ldf .ni:hover { background:rgba(255,255,255,0.05); color:#fff; }
+                #ldf .card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:14px; backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); box-shadow:0 8px 32px rgba(0,0,0,0.2); position:relative; z-index:1; transition:transform .2s; }
+                #ldf .card:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.2); }
+                #ldf .hdr { background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:12px 18px; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1; }
+                #ldf .pill { display:inline-block; padding:2px 9px; background:rgba(99,102,241,0.2); color:#a5b4fc; border-radius:20px; font-size:10px; font-weight:700; border:1px solid rgba(99,102,241,0.3); }
+                #ldf .btn { padding:7px 14px; background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:12px; font-size:11px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.1); backdrop-filter:blur(8px); }
+                #ldf .logo { width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,rgba(255,255,255,0.2),rgba(255,255,255,0.05)); border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+                #ldf .sv { font-size:18px; font-weight:800; color:#fff; }
+                #ldf .sl { font-size:10px; color:#cbd5e1; margin-top:2px; }
+                #ldf .spark { height:38px; display:flex; align-items:flex-end; gap:3px; }
+                #ldf .bar { border-radius:3px 3px 0 0; background:linear-gradient(to top, rgba(99,102,241,0.2), rgba(99,102,241,0.8)); }
+                #ldf .row { display:flex; align-items:center; gap:9px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:11px; color:#e2e8f0; }
+                #ldf .dot { width:8px; height:8px; border-radius:50%; background:#a5b4fc; box-shadow:0 0 10px rgba(165,180,252,0.5); }
+            `;
+            htmlStr = `<style>${customStyles}</style><div id="ldf" style="display:flex;height:100%;background:#09090b;">${orbs}`;
+        } else if (bento) {
+            customStyles = `
+                #ldf .sb { width:175px; min-width:175px; height:100%; background:#000; border-right:none; display:flex; flex-direction:column; padding:12px 12px 12px 0; }
+                #ldf .sb-inner { background:#111; border-radius:0 24px 24px 0; height:100%; display:flex; flex-direction:column; overflow:hidden; }
+                #ldf .ni { display:flex; align-items:center; gap:9px; padding:9px 14px; font-size:12px; font-weight:600; color:#666; cursor:pointer; transition:all .2s; border-radius:12px; margin:2px 12px; }
+                #ldf .ni.act { background:#222; color:#fff; }
+                #ldf .ni:hover { background:#1a1a1a; color:#fff; }
+                #ldf .card { background:#111; border:none; border-radius:24px; padding:18px; transition:transform .2s; }
+                #ldf .card:hover { transform:scale(1.02); }
+                #ldf .hdr { background:#000; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+                #ldf .pill { display:inline-block; padding:4px 12px; background:#222; color:#888; border-radius:24px; font-size:10px; font-weight:700; }
+                #ldf .btn { padding:8px 16px; background:#fff; color:#000; border:none; border-radius:24px; font-size:11px; font-weight:700; cursor:pointer; }
+                #ldf .logo { width:32px; height:32px; border-radius:12px; background:#fff; display:flex; align-items:center; justify-content:center; }
+                #ldf .sv { font-size:22px; font-weight:800; color:#fff; }
+                #ldf .sl { font-size:11px; color:#888; margin-top:2px; font-weight:500; }
+                #ldf .spark { height:38px; display:flex; align-items:flex-end; gap:4px; }
+                #ldf .bar { border-radius:4px 4px 0 0; background:#333; }
+                #ldf .row { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid #1a1a1a; font-size:12px; color:#ccc; font-weight:500; }
+                #ldf .dot { width:8px; height:8px; border-radius:4px; background:#555; }
+                #ldf .grid-container { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:0 24px 24px; }
+            `;
+            htmlStr = `<style>${customStyles}</style><div id="ldf" style="display:flex;height:100%;background:#000;">`;
+        } else if (material) {
+            customStyles = `
+                #ldf .sb { width:175px; min-width:175px; height:100%; background:#f3f4f6; border-right:none; display:flex; flex-direction:column; padding:12px; }
+                #ldf .ni { display:flex; align-items:center; gap:12px; padding:10px 16px; font-size:13px; font-weight:600; color:#4b5563; cursor:pointer; transition:all .2s; border-radius:100px; margin-bottom:4px; }
+                #ldf .ni.act { background:#dbeafe; color:#1d4ed8; }
+                #ldf .ni:hover:not(.act) { background:#e5e7eb; }
+                #ldf .card { background:#fff; border:none; border-radius:24px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06); transition:box-shadow .2s; }
+                #ldf .card:hover { box-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+                #ldf .hdr { background:#f9fafb; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+                #ldf .pill { display:inline-block; padding:4px 12px; background:#e0e7ff; color:#4338ca; border-radius:8px; font-size:11px; font-weight:600; }
+                #ldf .btn { padding:10px 20px; background:#3b82f6; color:#fff; border:none; border-radius:100px; font-size:12px; font-weight:600; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:background .2s; }
+                #ldf .btn:hover { background:#2563eb; }
+                #ldf .logo { width:32px; height:32px; border-radius:50%; background:#3b82f6; display:flex; align-items:center; justify-content:center; color:#fff; }
+                #ldf .sv { font-size:20px; font-weight:400; color:#111827; }
+                #ldf .sl { font-size:12px; color:#6b7280; margin-top:2px; font-weight:500; }
+                #ldf .spark { height:40px; display:flex; align-items:flex-end; gap:4px; }
+                #ldf .bar { border-radius:2px 2px 0 0; background:#93c5fd; }
+                #ldf .row { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #f3f4f6; font-size:12px; color:#374151; font-weight:500; }
+                #ldf .dot { width:10px; height:10px; border-radius:50%; background:#3b82f6; }
+            `;
+            htmlStr = `<style>${customStyles}</style><div id="ldf" style="display:flex;height:100%;background:#f9fafb;">`;
+        } else {
+            // Default template layout
+            customStyles = `
+                #ldf .sb{width:175px;min-width:175px;height:100%;background:${t.sidebar};border-right:${t.sidebarBorder};display:flex;flex-direction:column;${t.blur}}
+                #ldf .ni{display:flex;align-items:center;gap:9px;padding:9px 14px;font-size:12px;font-weight:500;color:${t.sub};cursor:pointer;transition:all .2s;}
+                #ldf .ni.act{background:${t.badge};color:${t.text};border-left:3px solid ${t.accent};}
+                #ldf .ni:hover{background:${t.badge};color:${t.text};}
+                #ldf .card{background:${t.card};border:${t.cardBorder};border-radius:12px;padding:14px;${t.blur}transition:transform .2s;}
+                #ldf .card:hover{transform:translateY(-2px);}
+                #ldf .hdr{background:${t.header};border-bottom:${t.cardBorder};padding:12px 18px;display:flex;align-items:center;justify-content:space-between;${t.blur}}
+                #ldf .pill{display:inline-block;padding:2px 9px;background:${t.badge};color:${t.badgeText};border-radius:20px;font-size:10px;font-weight:700;}
+                #ldf .btn{padding:7px 14px;background:${t.accent};color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;box-shadow:${glowShadow};}
+                #ldf .logo{width:28px;height:28px;border-radius:8px;background:${t.accent};display:flex;align-items:center;justify-content:center;box-shadow:${glowShadow};}
+                #ldf .sv{font-size:18px;font-weight:800;color:${t.text};}
+                #ldf .sl{font-size:10px;color:${t.sub};margin-top:2px;}
+                #ldf .spark{height:38px;display:flex;align-items:flex-end;gap:3px;}
+                #ldf .bar{border-radius:3px 3px 0 0;background:${t.accent};opacity:.85;}
+                #ldf .row{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:${t.cardBorder};font-size:11px;color:${t.sub};}
+                #ldf .dot{width:8px;height:8px;border-radius:50%;background:${t.accent};${neon?`box-shadow:0 0 8px ${t.accentGlow};`:''}}
+                ${neon ? `#ldf .ni.act{text-shadow:0 0 10px ${t.accent};}` : ''}
+            `;
+            htmlStr = `<style>${customStyles}</style><div id="ldf" style="display:flex;height:100%;${brutalism?'background:#FAF9F6;':''}">`;
+        }
+
+        // Common HTML structure for all themes
+        htmlStr += `
+          <div class="sb">
+            ${bento ? '<div class="sb-inner">' : ''}
+            <div style="padding:13px 14px;border-bottom:${brutalism?'3px solid #000':(bento||material?'none':t.cardBorder)};display:flex;align-items:center;gap:9px;">
+              <div class="logo"><i class="fa-solid fa-palette" style="${bento?'color:#000;':(material||brutalism?'color:#fff;':'color:#fff;')}font-size:12px;"></i></div>
+              <span style="font-size:13px;font-weight:800;${brutalism?'color:#000':(bento?'color:#fff':(material?'color:#111827':'color:'+t.text))};">AppUI</span>
+            </div>
+            <div style="padding:10px 8px;flex:1;overflow:hidden;">
+              <div style="font-size:9px;font-weight:700;color:${brutalism?'#000':(bento?'#555':(material?'#9ca3af':t.sub))};text-transform:uppercase;letter-spacing:1px;padding:0 6px 5px;">Main</div>
+              <div class="ni act"><i class="fa-solid fa-chart-pie" style="font-size:11px;width:14px;"></i>Dashboard</div>
+              <div class="ni"><i class="fa-solid fa-users" style="font-size:11px;width:14px;"></i>Users</div>
+              <div class="ni"><i class="fa-solid fa-box" style="font-size:11px;width:14px;"></i>Products</div>
+              <div class="ni"><i class="fa-solid fa-chart-bar" style="font-size:11px;width:14px;"></i>Analytics</div>
+              <div style="height:1px;background:${brutalism?'#000':(bento||material||glass?'rgba(255,255,255,0.05)':t.sidebarBorder.replace('1px solid ',''))};margin:8px 6px;"></div>
+              <div style="font-size:9px;font-weight:700;color:${brutalism?'#000':(bento?'#555':(material?'#9ca3af':t.sub))};text-transform:uppercase;letter-spacing:1px;padding:0 6px 5px;">System</div>
+              <div class="ni"><i class="fa-solid fa-gear" style="font-size:11px;width:14px;"></i>Settings</div>
+              <div class="ni"><i class="fa-solid fa-shield" style="font-size:11px;width:14px;"></i>Security</div>
+            </div>
+            <div style="padding:8px;">
+              <div style="display:flex;align-items:center;gap:8px;padding:9px;border-radius:${brutalism?'0px':'9px'};background:${brutalism?'#FAF9F6':(bento?'#1a1a1a':(material?'#e5e7eb':t.badge))};border:${brutalism?'2px solid #000':'none'};">
+                <div style="width:26px;height:26px;border-radius:${brutalism?'0px':'50%'};background:${bento?'#333':(material?'#9ca3af':t.accent)};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;${brutalism?'border:2px solid #000':''}">AD</div>
+                <div><div style="font-size:11px;font-weight:600;color:${brutalism?'#000':(bento?'#fff':(material?'#374151':t.text))};">Admin</div><div style="font-size:9px;color:${brutalism?'#000':(bento?'#888':(material?'#6b7280':t.sub))};">Administrator</div></div>
+              </div>
+            </div>
+            ${bento ? '</div>' : ''}
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+            <div class="hdr">
+              <div>
+                <div style="font-size:14px;font-weight:800;color:${brutalism?'#000':(bento||glass?'#fff':(material?'#111827':t.text))};">Dashboard Overview</div>
+                <div style="font-size:10px;color:${brutalism?'#000':(bento?'#888':(glass?'#cbd5e1':(material?'#6b7280':t.sub)))};margin-top:1px;">Welcome back, Admin</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="pill">Live</span>
+                <button class="btn"><i class="fa-solid fa-plus" style="margin-right:4px;font-size:9px;"></i>New Report</button>
+              </div>
+            </div>
+            <div style="flex:1;padding:${bento?'24px':'14px'};overflow-y:auto;display:flex;flex-direction:column;gap:${bento?'16px':'12px'};">
+              <div style="${bento?'':'display:grid;grid-template-columns:repeat(4,1fr);gap:10px;'}" class="${bento?'grid-container':''}">
+                <div class="card" style="text-align:center;"><div class="sv" style="color:${bento?'#fff':(material?'#1d4ed8':t.accent)};">24.8K</div><div class="sl">Total Users</div><div style="font-size:9px;color:#10b981;margin-top:4px;">↑ 12.5%</div></div>
+                <div class="card" style="text-align:center;"><div class="sv" style="color:${bento?'#fff':(material?'#1d4ed8':t.accent)};">$18.2K</div><div class="sl">Revenue</div><div style="font-size:9px;color:#10b981;margin-top:4px;">↑ 8.2%</div></div>
+                <div class="card" style="text-align:center;"><div class="sv" style="color:${bento?'#fff':(material?'#1d4ed8':t.accent)};">1.2K</div><div class="sl">Active Now</div><div style="font-size:9px;color:#f59e0b;margin-top:4px;">→ 0.0%</div></div>
+                <div class="card" style="text-align:center;"><div class="sv" style="color:${bento?'#fff':(material?'#1d4ed8':t.accent)};">98.9%</div><div class="sl">Uptime</div><div style="font-size:9px;color:#ef4444;margin-top:4px;">↓ 1.1%</div></div>
+              </div>
+              <div style="display:grid;grid-template-columns:2fr 1fr;gap:${bento?'16px':'10px'};">
+                <div class="card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:14px;">
+                    <div style="font-size:12px;font-weight:700;color:${brutalism?'#000':(bento||glass?'#fff':(material?'#111827':t.text))};">Revenue Trend</div>
+                    <span class="pill">Monthly</span>
+                  </div>
+                  <div class="spark">${bars.map((h,i)=>`<div class="bar" style="height:${h}%;flex:1;${bento && i%2===0?'background:#444;':''}${material && i===bars.length-1?'background:#3b82f6;':''}"></div>`).join('')}</div>
+                  <div style="display:flex;justify-content:space-between;margin-top:4px;">${months.map(m=>`<div style="font-size:7px;color:${brutalism?'#000':(bento?'#666':(glass?'#94a3b8':(material?'#9ca3af':t.sub)))};">${m}</div>`).join('')}</div>
+                </div>
+                <div class="card">
+                  <div style="font-size:12px;font-weight:700;color:${brutalism?'#000':(bento||glass?'#fff':(material?'#111827':t.text))};margin-bottom:9px;">Recent Activity</div>
+                  <div class="row"><div class="dot"></div>New user registered<span style="margin-left:auto;font-size:9px;">2m</span></div>
+                  <div class="row"><div class="dot" style="background:#10b981;${neon?'box-shadow:0 0 8px rgba(16,185,129,0.6);':''}"></div>Order #4821 paid<span style="margin-left:auto;font-size:9px;">5m</span></div>
+                  <div class="row"><div class="dot" style="background:#f59e0b;"></div>Server warning<span style="margin-left:auto;font-size:9px;">12m</span></div>
+                  <div class="row"><div class="dot"></div>Report generated<span style="margin-left:auto;font-size:9px;">1h</span></div>
+                  <div class="row" style="border:none;"><div class="dot" style="background:#ec4899;${neon?'box-shadow:0 0 8px rgba(236,72,153,0.6);':''}"></div>New product added<span style="margin-left:auto;font-size:9px;">2h</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        frame.innerHTML = htmlStr;
+    }
+
+    function renderPaletteAndChars(style) {
+        const cols = style.color.split(',');
+        const extras = { glass:['#3b82f6','#1d4ed8','rgba(255,255,255,0.15)'], modern:['#6366f1','#4f46e5','#374151'], minimal:['#f8fafc','#e2e8f0','#6366f1'], bold:['#a855f7','#c026d3','#3b82f6'], neon:['#22d3ee','#00ff88','#ff44cc'], retro:['#f59e0b','#92400e','#78350f'] };
+        const allCols = ['#'+cols[0],'#'+cols[1],...(extras[style.type]||[])];
+        document.getElementById('ld-palette').innerHTML = allCols.map(c =>
+            `<div title="${c}" style="width:30px;height:30px;border-radius:7px;background:${c};border:2px solid rgba(255,255,255,0.1);cursor:pointer;transition:transform .2s;flex-shrink:0;" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>`
+        ).join('');
+        const chars = TYPE_CHARS[style.type] || [];
+        document.getElementById('ld-chars').innerHTML = chars.map(c =>
+            `<div style="font-size:11px;color:#5B6A8E;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${c}</div>`
+        ).join('');
+    }
+
+    function generatePromptFromLiveDemo() {
+        if(!ldCurrentStyle) return;
+        const style = ldCurrentStyle;
+        const cols = style.color.split(',');
+        const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
+        const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
+        
+        const promptText = `Create a premium UI/UX design dashboard layout using "${style.name}" style (${style.type}). Color palette: ${c1} and ${c2} as primary accents on a dark modern background. Design attributes: ${style.desc}. Ensure sleek typography, clean spacing, and modern component widgets.`;
+        
+        navigator.clipboard.writeText(promptText).then(() => {
+            Swal.fire({
+                title: '✨ Prompt Berhasil Disalin!',
+                html: `
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
+                    <textarea readonly style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                    <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Midjourney, v0.dev, Claude, atau AI Builder Anda.</p>
+                `,
+                icon: 'success',
+                background: '#111420',
+                color: '#fff',
+                confirmButtonColor: '#6366F1',
+                confirmButtonText: 'Selesai',
+                target: document.getElementById('live-demo-overlay'),
+                customClass: { popup: 'border border-gray-700 rounded-2xl' }
+            });
+        }).catch(() => {
+            Swal.fire({
+                title: '✨ Prompt Berhasil Dibuat!',
+                html: `
+                    <textarea id="fallback-prompt-text" style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                    <button onclick="document.getElementById('fallback-prompt-text').select(); document.execCommand('copy'); Swal.fire('Tersalin!', '', 'success');" style="margin-top:10px;padding:6px 16px;background:#6366F1;color:white;border:none;border-radius:6px;font-size:11px;cursor:pointer;">Salin Teks</button>
+                `,
+                background: '#111420',
+                color: '#fff',
+                showConfirmButton: false,
+                showCancelButton: true,
+                cancelButtonText: 'Tutup',
+                cancelButtonColor: '#1E2336',
+                target: document.getElementById('live-demo-overlay'),
+                customClass: { popup: 'border border-gray-700 rounded-2xl' }
+            });
+        });
+    }
+</script>
+
+<!-- ==================== LIVE DEMO FULLSCREEN OVERLAY ==================== -->
+<div id="live-demo-overlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity 0.3s ease;flex-direction:column;">
+
+    <!-- Top Bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 22px;background:#0E1118;border-bottom:1px solid #1E2336;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(99,102,241,0.4);">
+                <i class="fa-solid fa-tv" style="color:white;font-size:13px;"></i>
+            </div>
+            <div>
+                <div style="font-size:15px;font-weight:800;color:#E2E8FF;" id="ld-title">Live Demo</div>
+                <div style="font-size:10px;color:#4A5578;">Simulasi tampilan antarmuka nyata</div>
+            </div>
+            <span id="ld-badge" style="padding:3px 10px;background:rgba(99,102,241,0.15);color:#818CF8;font-size:10px;font-weight:700;border-radius:20px;border:1px solid rgba(99,102,241,0.3);letter-spacing:0.8px;"></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <select id="ld-theme-switcher" onchange="showLiveDemo(parseInt(this.value))" style="background:#151825;border:1px solid #1E2336;border-radius:8px;color:#E2E8FF;font-size:11px;padding:6px 12px;outline:none;cursor:pointer;font-family:'Inter',sans-serif;max-width:150px;"></select>
+            <div style="font-size:11px;color:#3D4A6B;padding:6px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;">
+                <i class="fa-solid fa-circle" style="color:#10b981;font-size:7px;margin-right:5px;"></i>Live
+            </div>
+            <button onclick="closeLiveDemo()" style="display:flex;align-items:center;gap:6px;padding:7px 16px;border-radius:9px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#f87171;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.1)'">
+                <i class="fa-solid fa-xmark"></i> Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Body — 2 columns -->
+    <div style="flex:1;display:grid;grid-template-columns:1fr 360px;overflow:hidden;">
+
+        <!-- LEFT: Browser Frame + Rendered Demo -->
+        <div style="display:flex;flex-direction:column;overflow:hidden;border-right:1px solid #1E2336;">
+            <!-- Browser chrome bar -->
+            <div style="background:#1A1E2C;padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #1E2336;flex-shrink:0;">
+                <div style="display:flex;gap:5px;">
+                    <div style="width:10px;height:10px;border-radius:50%;background:#ef4444;"></div>
+                    <div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div>
+                    <div style="width:10px;height:10px;border-radius:50%;background:#10b981;"></div>
+                </div>
+                <div style="flex:1;background:#111420;border-radius:6px;padding:4px 12px;font-size:11px;color:#4A5578;border:1px solid #1E2336;">
+                    <i class="fa-solid fa-lock" style="font-size:9px;margin-right:5px;color:#10b981;"></i>localhost/app/dashboard
+                </div>
+                <div style="font-size:10px;color:#6366F1;background:rgba(99,102,241,0.1);padding:3px 9px;border-radius:5px;border:1px solid rgba(99,102,241,0.2);font-weight:600;">
+                    <i class="fa-solid fa-rotate-right" style="margin-right:4px;"></i>Live
+                </div>
+            </div>
+            <!-- Rendered UI frame -->
+            <div id="ld-demo-frame" style="flex:1;overflow:hidden;font-family:'Inter',sans-serif;font-size:12px;"></div>
+        </div>
+
+        <!-- RIGHT: Info Panel -->
+        <div style="display:flex;flex-direction:column;overflow-y:auto;background:#0A0D14;">
+
+            <!-- Description -->
+            <div style="padding:16px;border-bottom:1px solid #1E2336;">
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#3D4A6B;margin-bottom:8px;">Deskripsi Style</div>
+                <p id="ld-desc" style="font-size:12px;color:#8892B0;line-height:1.7;margin:0;"></p>
+            </div>
+
+            <!-- Color Palette -->
+            <div style="padding:16px;border-bottom:1px solid #1E2336;">
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#3D4A6B;margin-bottom:10px;">Palet Warna</div>
+                <div id="ld-palette" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+            </div>
+
+            <!-- Characteristics -->
+            <div style="padding:16px;">
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#3D4A6B;margin-bottom:8px;">Karakteristik Utama</div>
+                <div id="ld-chars"></div>
+            </div>
+
+            <!-- Generate Prompt Action -->
+            <div style="padding:16px;margin-top:auto;border-top:1px solid #1E2336;background:linear-gradient(to bottom, transparent, rgba(99,102,241,0.05));">
+                <div style="font-size:11px;color:#8892B0;margin-bottom:12px;line-height:1.5;">Gunakan gaya desain ini untuk AI Builder atau Image Generator Anda.</div>
+                <button onclick="generatePromptFromLiveDemo()" style="width:100%;padding:12px;background:#6366F1;color:white;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(99,102,241,0.3);transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(99,102,241,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(99,102,241,0.3)';">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Prompt
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
