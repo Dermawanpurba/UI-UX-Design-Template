@@ -643,7 +643,7 @@
                 <text x="148" y="58" font-size="5" fill="#EC4899" class="pulse-anim">✦</text>
             </svg>
             <div style="margin-top:6px;">
-                <div style="font-size:11px; font-weight:700; color:#A5B4FC;">30+ Design Styles</div>
+                <div style="font-size:11px; font-weight:700; color:#A5B4FC;">40+ Design Styles</div>
                 <div style="font-size:10px; color:#4A5578; margin-top:2px;">Pilih &amp; preview langsung</div>
             </div>
         </div>
@@ -654,7 +654,7 @@
             <button class="nav-item active" id="menu-catalog" onclick="switchView('catalog')">
                 <i class="fa-solid fa-layer-group nav-icon"></i>
                 <span>Katalog Design</span>
-                <span class="nav-badge">30+</span>
+                <span class="nav-badge">40+</span>
             </button>
             <button class="nav-item" id="menu-favorit" onclick="switchView('favorit')">
                 <i class="fa-regular fa-heart nav-icon"></i>
@@ -705,7 +705,7 @@
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div class="hero-stat">
-                            <div style="font-size:18px; font-weight:800;" class="shimmer-text">30+</div>
+                            <div style="font-size:18px; font-weight:800;" class="shimmer-text">40+</div>
                             <div style="font-size:10px; color:#4A5578;">Styles</div>
                         </div>
                         <div class="user-avatar" title="Profile">D</div>
@@ -716,7 +716,7 @@
             <div class="tab-filter" id="tab-filter"></div>
             <!-- Search bar -->
             <div style="padding:10px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border-color);">
-                <span style="font-size:12px; color:#4A5578;" id="result-count">30 styles</span>
+                <span style="font-size:12px; color:#4A5578;" id="result-count">40 styles</span>
                 <div class="search-box">
                     <input type="text" id="search-input" placeholder="Cari design style..." oninput="onSearch(this.value)">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -857,6 +857,8 @@
                 <div id="hist-count-label" style="color:#4A5578;">0 aktivitas</div>
             </div>
         </div>
+
+
     </main>
 
     <!-- ==================== SIDEBAR RIGHT ==================== -->
@@ -1032,13 +1034,13 @@
     /* ==================== MOCK DATABASE ==================== */
     const MOCK_DB = {
         categories: [
-            { id:'all', name:'Semua Style', count:'30', icon:'fa-solid fa-border-all', type:'all' },
-            { id:'cat1', name:'Modern', count:'8', icon:'fa-regular fa-square-check', type:'modern' },
-            { id:'cat2', name:'Glass & Blur', count:'4', icon:'fa-solid fa-clone', type:'glass' },
-            { id:'cat3', name:'Minimal', count:'7', icon:'fa-solid fa-compress', type:'minimal' },
-            { id:'cat4', name:'Bold & Vibrant', count:'4', icon:'fa-solid fa-bolt', type:'bold' },
-            { id:'cat5', name:'Neon & Futuristic', count:'3', icon:'fa-solid fa-rocket', type:'neon' },
-            { id:'cat6', name:'Classic & Retro', count:'4', icon:'fa-solid fa-landmark', type:'retro' }
+            { id:'all', name:'Semua Style', count:'40', icon:'fa-solid fa-border-all', type:'all' },
+            { id:'cat1', name:'Modern', count:'9', icon:'fa-regular fa-square-check', type:'modern' },
+            { id:'cat2', name:'Glass & Blur', count:'6', icon:'fa-solid fa-clone', type:'glass' },
+            { id:'cat3', name:'Minimal', count:'8', icon:'fa-solid fa-compress', type:'minimal' },
+            { id:'cat4', name:'Bold & Vibrant', count:'7', icon:'fa-solid fa-bolt', type:'bold' },
+            { id:'cat5', name:'Neon & Futuristic', count:'4', icon:'fa-solid fa-rocket', type:'neon' },
+            { id:'cat6', name:'Classic & Retro', count:'6', icon:'fa-solid fa-landmark', type:'retro' }
         ],
         styles: [
             { id:1,  name:'Glassmorphism 2.0',  type:'glass',   color:'1e3a8a,3b82f6', desc:'Efek tembus pandang seperti kaca buram, frosted glass blur, dan border tipis mengkilap. Memberikan kesan modern dan ringan.',       refs:['https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80','https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80','https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80'] },
@@ -1054,7 +1056,7 @@
             { id:11, name:'Gradient Mesh',        type:'bold',    color:'c026d3,3b82f6', desc:'Perpaduan gradien multi-warna kompleks yang melengkung organik. Tampilan dinamis dan kaya warna.',                                  refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80','https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80','https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=80'] },
             { id:12, name:'Liquid UI',            type:'neon',    color:'1e1b4b,8b5cf6', desc:'Visual meniru sifat cairan; animasi mulus, bentuk organik, transisi mengalir.',                                                      refs:['https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80','https://images.unsplash.com/photo-1535223289429-462edb9d7634?w=800&q=80','https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'] },
             { id:13, name:'Cyberpunk UI',         type:'neon',    color:'000000,ec4899', desc:'Estetika distopia masa depan. Latar gelap, neon mencolok (pink, cyan), grid matrix, font tekno.',                                  refs:['https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=800&q=80','https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80','https://images.unsplash.com/photo-1520587100034-5c31c78ccdef?w=800&q=80'] },
-            { id:14, name:'Brutalism',            type:'brutalism',color:'1c1917,fafaf9', desc:'Desain mentah, tidak terpoles. Mengabaikan konvensi standar. Font tebal, warna kontras tinggi.',                                     refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80','https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80','https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80'] },
+            { id:14, name:'Brutalism',            type:'retro',   color:'1c1917,fafaf9', desc:'Desain mentah, tidak terpoles. Mengabaikan konvensi standar. Font tebal, warna kontras tinggi.',                                     refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80','https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80','https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80'] },
             { id:15, name:'Retro Futurism',       type:'retro',   color:'1c1917,f59e0b', desc:'Visi masa depan dari perspektif 80-an. Synthwave colors, grid neon, efek VHS.',                                                      refs:['https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80','https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80','https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80'] },
             { id:16, name:'3D UI',                type:'modern',  color:'1e293b,64748b', desc:'Elemen grafis tiga dimensi menonjol memberikan kedalaman realistis pada antarmuka.',                                                refs:['https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80','https://images.unsplash.com/photo-1619472032094-eadb7ec4556e?w=800&q=80','https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=800&q=80'] },
             { id:17, name:'Dashboard Pro',        type:'modern',  color:'1e293b,3b82f6', desc:'Khusus analitik padat data. Hierarki informasi, widget ringkas, visualisasi data jelas.',                                           refs:['https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80','https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80','https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80'] },
@@ -1070,7 +1072,17 @@
             { id:27, name:'Data Visualization',   type:'modern',  color:'0f172a,f59e0b', desc:'Fokus eksklusif pada grafik, bagan, metrik kompleks secara elegan dan mudah dicerna.',                                           refs:['https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80','https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80','https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'] },
             { id:28, name:'Magazine Style',       type:'minimal', color:'0f172a,172554', desc:'Terinspirasi editorial majalah. Tipografi besar, grid tak simetris, gambar beresolusi tinggi.',                                   refs:['https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80','https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80','https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80'] },
             { id:29, name:'Apple Inspired',       type:'minimal', color:'1e293b,6b7280', desc:'HIG Apple. Presisi, blur latar, sangat memperhatikan detail kecil.',                                                             refs:['https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80','https://images.unsplash.com/photo-1529336953628-035ea4e5bb6d?w=800&q=80','https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=800&q=80'] },
-            { id:30, name:'Split Screen',         type:'retro',   color:'1e293b,38bdf8', desc:'Layar terbagi dua untuk dua alur informasi utama atau interaksi ganda bersamaan.',                                              refs:['https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80','https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80','https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80'] }
+            { id:30, name:'Split Screen',         type:'retro',   color:'1e293b,38bdf8', desc:'Layar terbagi dua untuk dua alur informasi utama atau interaksi ganda bersamaan.',                                              refs:['https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80','https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80','https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80'] },
+            { id:31, name:'Neobrutalism',         type:'bold',    color:'facc15,000000', desc:'Kontras sangat tinggi dengan bayangan hitam pekat tanpa blur, border tebal, warna primer jenuh, dan sudut tegas. Populer di Figma dan Gumroad.', refs:['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80'] },
+            { id:32, name:'Holographic Design',   type:'glass',   color:'f472b6,38bdf8', desc:'Efek logam mengkilap dengan refleksi pelangi 3D, memadukan transparansi kaca dengan gradien pastel dinamis yang futuristik.', refs:['https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&q=80'] },
+            { id:33, name:'Terminal Console',     type:'neon',    color:'0f172a,22c55e', desc:'Estetika komputer retro/hacker dengan latar belakang hitam, teks monospaced berwarna hijau fosfor, efek scanlines, dan kursor berkedip.', refs:['https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80'] },
+            { id:34, name:'Swiss Design',         type:'minimal', color:'ef4444,ffffff', desc:'Gaya Tipografi Internasional yang mengutamakan keterbacaan. Layout grid asimetris, tipografi sans-serif tebal (Helvetica), dan sangat bersih.', refs:['https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80'] },
+            { id:35, name:'Memphis Design',        type:'bold',    color:'fb7185,60a5fa', desc:'Estetika retro 80-an yang ceria. Kombinasi pola geometris acak seperti garis-garis, bintik-bintik, warna pastel cerah, dan bentuk abstrak.', refs:['https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80'] },
+            { id:36, name:'Bauhaus Style',        type:'retro',   color:'b91c1c,facc15', desc:'Desain fungsional klasik abad ke-20. Menggunakan bentuk geometris dasar (lingkaran, segitiga) dengan warna primer merah, kuning, biru, dan hitam.', refs:['https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=800&q=80'] },
+            { id:37, name:'Glassmorphism Dark',   type:'glass',   color:'0b0f19,10b981', desc:'Perpaduan latar belakang gelap pekat dengan kartu kaca buram transparan dan lampu neon hijau/cyan di belakangnya untuk efek kedalaman ekstra.', refs:['https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80'] },
+            { id:38, name:'Isometric 3D',         type:'modern',  color:'4f46e5,818cf8', desc:'Presentasi antarmuka tiga dimensi dengan sudut isometrik 30 derajat. Sangat populer untuk ilustrasi SaaS modern dan visualisasi arsitektur.', refs:['https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80'] },
+            { id:39, name:'Skeuomorphism Retro',  type:'retro',   color:'78350f,f59e0b', desc:'Meniru dunia nyata secara presisi dengan tekstur kulit, tombol glossy 3D berkilau, efek bayangan dalam, dan permukaan logam yang realistis.', refs:['https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80'] },
+            { id:40, name:'Acid Graphic',         type:'bold',    color:'a3e635,d946ef', desc:'Estetika distorsif bernuansa rave metalik. Menampilkan tipografi cair bergelombang, gradien warna asam yang tajam, dan elemen krom mengkilap.', refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'] }
         ]
     };
 
@@ -1347,12 +1359,12 @@
     function updateCounters() {
         const fc = favorites.length;
         const hc = historyData.length;
-        const prog = Math.round((viewedSet.size / 30) * 100);
+        const prog = Math.round((viewedSet.size / 40) * 100);
         document.getElementById('fav-count-badge').textContent = fc;
         document.getElementById('hist-count-badge').textContent = hc;
         document.getElementById('rp-fav-count').textContent = fc;
         document.getElementById('rp-hist-count').textContent = viewedSet.size;
-        document.getElementById('prog-text').textContent = viewedSet.size + ' / 30';
+        document.getElementById('prog-text').textContent = viewedSet.size + ' / 40';
         document.getElementById('prog-bar').style.width = prog + '%';
     }
 
@@ -1524,6 +1536,13 @@
             if(s.id === id) opt.selected = true;
             switcher.appendChild(opt);
         });
+        switcher.onchange = (e) => showLiveDemo(parseInt(e.target.value));
+
+        // Restore Action Button for normal styles
+        document.getElementById('ld-action-text').innerHTML = 'Gunakan gaya desain ini untuk AI Builder atau Image Generator Anda.';
+        const actionBtn = document.getElementById('ld-action-btn');
+        actionBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Prompt';
+        actionBtn.onclick = () => generatePromptFromLiveDemo();
 
         renderLiveDemoUI(style);
         renderRefImages(style);
@@ -1811,6 +1830,148 @@
             });
         });
     }
+
+
+
+    /* ==================== GLOBAL INTERACTIVE DEMO FUNCTIONS ==================== */
+    window.switchDesignSystem = function(sys) {
+        const tabs = ['primer', 'polaris', 'spectrum'];
+        tabs.forEach(t => {
+            const btn = document.getElementById('ds-tab-' + t);
+            if (btn) {
+                btn.style.background = t === sys ? '#6366F1' : 'transparent';
+                btn.style.color = t === sys ? '#FFF' : '#94A3B8';
+            }
+        });
+        
+        const name = document.getElementById('ds-name');
+        const badge = document.getElementById('ds-badge');
+        const desc = document.getElementById('ds-desc');
+        const btn = document.getElementById('ds-btn-preview');
+        
+        if (!name || !badge || !desc || !btn) return;
+        
+        if (sys === 'primer') {
+            name.textContent = 'GitHub Primer';
+            badge.textContent = 'Developer-First';
+            desc.textContent = 'Mengutamakan kesederhanaan, keterbacaan kode, dan kontras tinggi. Menggunakan ukuran teks kompak dan border tegas.';
+            btn.style.cssText = 'padding:5px 12px; font-size:12px; font-weight:600; border-radius:6px; border:1px solid rgba(27,31,36,0.15); background:#24292f; color:#FFF; box-shadow:0 1px 0 rgba(27,31,35,0.1);';
+        } else if (sys === 'polaris') {
+            name.textContent = 'Shopify Polaris';
+            badge.textContent = 'Merchant & E-Commerce';
+            desc.textContent = 'Berfokus pada kemudahan transaksi dan aksesibilitas. Menggunakan warna-warna kontras tinggi, font tebal, dan sudut yang membulat.';
+            btn.style.cssText = 'padding:8px 16px; font-size:13px; font-weight:700; border-radius:8px; border:none; background:#008060; color:#FFF; box-shadow:0 2px 4px rgba(0,0,0,0.1);';
+        } else if (sys === 'spectrum') {
+            name.textContent = 'Adobe Spectrum';
+            badge.textContent = 'Creative & Professional';
+            desc.textContent = 'Didesain untuk aplikasi profesional yang kompleks. Menggunakan tata letak yang presisi, border tipis, warna pastel netral, dan transisi halus.';
+            btn.style.cssText = 'padding:6px 14px; font-size:12px; font-weight:700; border-radius:4px; border:2px solid #1473e6; background:transparent; color:#1473e6;';
+        }
+    };
+
+    window.togglePlaygroundSwitch = function(el) {
+        const dot = el.firstElementChild;
+        if (!dot) return;
+        const isOff = dot.style.left === '2px' || dot.style.left === '';
+        dot.style.left = isOff ? '20px' : '2px';
+        el.style.background = isOff ? '#38BDF8' : '#475569';
+        
+        const code = document.getElementById('pg-code');
+        if (code) {
+            code.textContent = isOff 
+                ? '<div class="bg-sky-400 w-10 h-6 rounded-full p-1 transition-all">\n  <div class="bg-white w-4 h-4 rounded-full translate-x-4 transition-all"></div>\n</div>'
+                : '<div class="bg-slate-600 w-10 h-6 rounded-full p-1 transition-all">\n  <div class="bg-white w-4 h-4 rounded-full transition-all"></div>\n</div>';
+        }
+    };
+
+    window.changeDaisyTheme = function(theme) {
+        const container = document.getElementById('daisy-container');
+        const title = document.getElementById('daisy-title');
+        const subtitle = document.getElementById('daisy-subtitle');
+        const btn1 = document.getElementById('d-btn-1');
+        const btn2 = document.getElementById('d-btn-2');
+        const card = document.getElementById('d-card');
+        const cardTitle = document.getElementById('d-card-title');
+        const cardDesc = document.getElementById('d-card-desc');
+        
+        if (!container) return;
+        
+        if (theme === 'dark') {
+            container.style.background = '#1E2330';
+            if (title) title.style.color = '#FF00FF';
+            if (subtitle) subtitle.style.color = '#8892B0';
+            if (btn1) { btn1.style.background = '#FF00FF'; btn1.style.color = '#FFF'; }
+            if (btn2) { btn2.style.background = '#00FFFF'; btn2.style.color = '#000'; }
+            if (card) { card.style.background = '#0F172A'; card.style.borderColor = '#334155'; }
+            if (cardTitle) cardTitle.style.color = '#FFF'; 
+            if (cardDesc) cardDesc.style.color = '#8892B0';
+        } else if (theme === 'cupcake') {
+            container.style.background = '#FAF7F5';
+            if (title) title.style.color = '#65C3C8';
+            if (subtitle) subtitle.style.color = '#7A7A7A';
+            if (btn1) { btn1.style.background = '#65C3C8'; btn1.style.color = '#FFF'; }
+            if (btn2) { btn2.style.background = '#EEAF3A'; btn2.style.color = '#FFF'; }
+            if (card) { card.style.background = '#FFF'; card.style.borderColor = '#E2E8F0'; }
+            if (cardTitle) cardTitle.style.color = '#2F2F2F'; 
+            if (cardDesc) cardDesc.style.color = '#7A7A7A';
+        } else if (theme === 'cyberpunk') {
+            container.style.background = '#FFE600';
+            if (title) title.style.color = '#000';
+            if (subtitle) subtitle.style.color = '#000';
+            if (btn1) { btn1.style.background = '#FF0055'; btn1.style.color = '#FFF'; }
+            if (btn2) { btn2.style.background = '#00E1FF'; btn2.style.color = '#000'; }
+            if (card) { card.style.background = '#FFF'; card.style.borderColor = '#000'; }
+            if (cardTitle) cardTitle.style.color = '#000'; 
+            if (cardDesc) cardDesc.style.color = '#000';
+        } else if (theme === 'aqua') {
+            container.style.background = '#092C3E';
+            if (title) title.style.color = '#09DBF2';
+            if (subtitle) subtitle.style.color = '#94A3B8';
+            if (btn1) { btn1.style.background = '#09DBF2'; btn1.style.color = '#092C3E'; }
+            if (btn2) { btn2.style.background = '#F28585'; btn2.style.color = '#FFF'; }
+            if (card) { card.style.background = '#061E2B'; card.style.borderColor = '#09DBF2'; }
+            if (cardTitle) cardTitle.style.color = '#FFF'; 
+            if (cardDesc) cardDesc.style.color = '#94A3B8';
+        }
+    };
+
+    window.triggerBoxAnim = function(type) {
+        const box = document.getElementById('anim-box');
+        if (!box) return;
+        box.style.transform = 'none';
+        setTimeout(() => {
+            if (type === 'bounce') {
+                box.style.transform = 'translateY(-30px)';
+                setTimeout(() => box.style.transform = 'translateY(0)', 300);
+            } else if (type === 'rotate') {
+                box.style.transform = 'rotate(180deg)';
+            } else if (type === 'scale') {
+                box.style.transform = 'scale(1.3)';
+                setTimeout(() => box.style.transform = 'scale(1)', 300);
+            }
+        }, 10);
+    };
+
+    window.updateGsapTimeline = function(val) {
+        const v = parseInt(val);
+        const c1 = document.getElementById('gsap-c-1');
+        const c2 = document.getElementById('gsap-c-2');
+        const c3 = document.getElementById('gsap-c-3');
+        
+        if (!c1 || !c2 || !c3) return;
+        
+        const progress1 = Math.min(Math.max(v / 50, 0), 1);
+        c1.style.opacity = progress1;
+        c1.style.transform = `translateX(${-50 + (progress1 * 50)}px) rotate(${progress1 * 180}deg)`;
+        
+        const progress2 = Math.min(Math.max((v - 25) / 50, 0), 1);
+        c2.style.opacity = progress2;
+        c2.style.transform = `scale(${0.3 + (progress2 * 0.7)})`;
+        
+        const progress3 = Math.min(Math.max((v - 50) / 50, 0), 1);
+        c3.style.opacity = progress3;
+        c3.style.transform = `translateY(${50 - (progress3 * 50)}px)`;
+    };
 </script>
 
 <!-- ==================== LIVE DEMO FULLSCREEN OVERLAY ==================== -->
@@ -1885,8 +2046,8 @@
 
             <!-- Generate Prompt Action -->
             <div style="padding:16px;margin-top:auto;border-top:1px solid #1E2336;background:linear-gradient(to bottom, transparent, rgba(99,102,241,0.05));">
-                <div style="font-size:11px;color:#8892B0;margin-bottom:12px;line-height:1.5;">Gunakan gaya desain ini untuk AI Builder atau Image Generator Anda.</div>
-                <button onclick="generatePromptFromLiveDemo()" style="width:100%;padding:12px;background:#6366F1;color:white;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(99,102,241,0.3);transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(99,102,241,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(99,102,241,0.3)';">
+                <div id="ld-action-text" style="font-size:11px;color:#8892B0;margin-bottom:12px;line-height:1.5;">Gunakan gaya desain ini untuk AI Builder atau Image Generator Anda.</div>
+                <button id="ld-action-btn" onclick="generatePromptFromLiveDemo()" style="width:100%;padding:12px;background:#6366F1;color:white;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(99,102,241,0.3);transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(99,102,241,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(99,102,241,0.3)';">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Prompt
                 </button>
             </div>
