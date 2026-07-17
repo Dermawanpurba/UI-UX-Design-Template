@@ -643,7 +643,7 @@
                 <text x="148" y="58" font-size="5" fill="#EC4899" class="pulse-anim">✦</text>
             </svg>
             <div style="margin-top:6px;">
-                <div style="font-size:11px; font-weight:700; color:#A5B4FC;">40+ Design Styles</div>
+                <div style="font-size:11px; font-weight:700; color:#A5B4FC;">50+ Design Styles</div>
                 <div style="font-size:10px; color:#4A5578; margin-top:2px;">Pilih &amp; preview langsung</div>
             </div>
         </div>
@@ -654,7 +654,7 @@
             <button class="nav-item active" id="menu-catalog" onclick="switchView('catalog')">
                 <i class="fa-solid fa-layer-group nav-icon"></i>
                 <span>Katalog Design</span>
-                <span class="nav-badge">40+</span>
+                <span class="nav-badge">50+</span>
             </button>
             <button class="nav-item" id="menu-favorit" onclick="switchView('favorit')">
                 <i class="fa-regular fa-heart nav-icon"></i>
@@ -705,7 +705,7 @@
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div class="hero-stat">
-                            <div style="font-size:18px; font-weight:800;" class="shimmer-text">40+</div>
+                            <div style="font-size:18px; font-weight:800;" class="shimmer-text">50+</div>
                             <div style="font-size:10px; color:#4A5578;">Styles</div>
                         </div>
                         <div class="user-avatar" title="Profile">D</div>
@@ -716,7 +716,7 @@
             <div class="tab-filter" id="tab-filter"></div>
             <!-- Search bar -->
             <div style="padding:10px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border-color);">
-                <span style="font-size:12px; color:#4A5578;" id="result-count">40 styles</span>
+                <span style="font-size:12px; color:#4A5578;" id="result-count">50 styles</span>
                 <div class="search-box">
                     <input type="text" id="search-input" placeholder="Cari design style..." oninput="onSearch(this.value)">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -916,7 +916,7 @@
             <!-- Stats 3-col -->
             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:10px;">
                 <div style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:8px 6px; text-align:center;">
-                    <div style="font-size:14px; font-weight:800; color:#A5B4FC;">30</div>
+                    <div style="font-size:14px; font-weight:800; color:#A5B4FC;">50</div>
                     <div style="font-size:9px; color:#3D4A6B; font-weight:500;">Styles</div>
                 </div>
                 <div style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:8px 6px; text-align:center;">
@@ -938,7 +938,7 @@
                     <div class="step-num">1</div>
                     <div>
                         <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Pilih Design Style</div>
-                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Pilih gaya desain dari 30+ koleksi yang tersedia.</div>
+                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Pilih gaya desain dari 50+ koleksi yang tersedia.</div>
                     </div>
                 </div>
                 <div class="step-item">
@@ -958,8 +958,8 @@
                 <div class="step-item" style="margin-bottom:0;">
                     <div class="step-num">4</div>
                     <div>
-                        <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Generate Prompt</div>
-                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Buat prompt AI Builder siap pakai secara otomatis.</div>
+                        <div style="font-size:12px; font-weight:700; color:#CBD5F0; margin-bottom:3px;">Generate Code Prompt</div>
+                        <div style="font-size:11px; color:#4A5578; line-height:1.5;">Buat prompt AI generator kode index.html siap pakai secara otomatis.</div>
                     </div>
                 </div>
             </div>
@@ -968,11 +968,11 @@
             <div class="rp-section">
                 <div class="rp-title">Fitur Tersedia</div>
                 <div>
-                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>30+ Styles Modern</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>50+ Styles Modern</span>
                     <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Live Preview</span>
                     <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Favorit &amp; Riwayat</span>
                     <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Filter Kategori</span>
-                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Generate Prompt AI</span>
+                    <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Generate Code Prompt AI</span>
                     <span class="feature-tag"><i class="fa-solid fa-check-circle"></i>Pencarian Cepat</span>
                 </div>
             </div>
@@ -982,7 +982,7 @@
                 <div class="rp-title">Progres Eksplorasi</div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
                     <span style="font-size:11px; color:#4A5578;">Styles dilihat</span>
-                    <span style="font-size:11px; color:#6366F1;" id="prog-text">0 / 30</span>
+                    <span style="font-size:11px; color:#6366F1;" id="prog-text">0 / 50</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="prog-bar" style="width:0%;"></div>
@@ -1034,13 +1034,13 @@
     /* ==================== MOCK DATABASE ==================== */
     const MOCK_DB = {
         categories: [
-            { id:'all', name:'Semua Style', count:'40', icon:'fa-solid fa-border-all', type:'all' },
-            { id:'cat1', name:'Modern', count:'9', icon:'fa-regular fa-square-check', type:'modern' },
-            { id:'cat2', name:'Glass & Blur', count:'6', icon:'fa-solid fa-clone', type:'glass' },
-            { id:'cat3', name:'Minimal', count:'8', icon:'fa-solid fa-compress', type:'minimal' },
-            { id:'cat4', name:'Bold & Vibrant', count:'7', icon:'fa-solid fa-bolt', type:'bold' },
-            { id:'cat5', name:'Neon & Futuristic', count:'4', icon:'fa-solid fa-rocket', type:'neon' },
-            { id:'cat6', name:'Classic & Retro', count:'6', icon:'fa-solid fa-landmark', type:'retro' }
+            { id:'all', name:'Semua Style', count:'60', icon:'fa-solid fa-border-all', type:'all' },
+            { id:'cat1', name:'Modern', count:'11', icon:'fa-regular fa-square-check', type:'modern' },
+            { id:'cat2', name:'Glass & Blur', count:'8', icon:'fa-solid fa-clone', type:'glass' },
+            { id:'cat3', name:'Minimal', count:'14', icon:'fa-solid fa-compress', type:'minimal' },
+            { id:'cat4', name:'Bold & Vibrant', count:'10', icon:'fa-solid fa-bolt', type:'bold' },
+            { id:'cat5', name:'Neon & Futuristic', count:'7', icon:'fa-solid fa-rocket', type:'neon' },
+            { id:'cat6', name:'Classic & Retro', count:'10', icon:'fa-solid fa-landmark', type:'retro' }
         ],
         styles: [
             { id:1,  name:'Glassmorphism 2.0',  type:'glass',   color:'1e3a8a,3b82f6', desc:'Efek tembus pandang seperti kaca buram, frosted glass blur, dan border tipis mengkilap. Memberikan kesan modern dan ringan.',       refs:['https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80','https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80','https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80'] },
@@ -1082,7 +1082,27 @@
             { id:37, name:'Glassmorphism Dark',   type:'glass',   color:'0b0f19,10b981', desc:'Perpaduan latar belakang gelap pekat dengan kartu kaca buram transparan dan lampu neon hijau/cyan di belakangnya untuk efek kedalaman ekstra.', refs:['https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80'] },
             { id:38, name:'Isometric 3D',         type:'modern',  color:'4f46e5,818cf8', desc:'Presentasi antarmuka tiga dimensi dengan sudut isometrik 30 derajat. Sangat populer untuk ilustrasi SaaS modern dan visualisasi arsitektur.', refs:['https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80'] },
             { id:39, name:'Skeuomorphism Retro',  type:'retro',   color:'78350f,f59e0b', desc:'Meniru dunia nyata secara presisi dengan tekstur kulit, tombol glossy 3D berkilau, efek bayangan dalam, dan permukaan logam yang realistis.', refs:['https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80'] },
-            { id:40, name:'Acid Graphic',         type:'bold',    color:'a3e635,d946ef', desc:'Estetika distorsif bernuansa rave metalik. Menampilkan tipografi cair bergelombang, gradien warna asam yang tajam, dan elemen krom mengkilap.', refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'] }
+            { id:40, name:'Acid Graphic',         type:'bold',    color:'a3e635,d946ef', desc:'Estetika distorsif bernuansa rave metalik. Menampilkan tipografi cair bergelombang, gradien warna asam yang tajam, dan elemen krom mengkilap.', refs:['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'] },
+            { id:41, name:'Botanical / Eco UI',   type:'minimal', color:'14532d,fef08a', desc:'Desain ramah lingkungan dengan palet warna bumi (earth tones) seperti hijau hutan, krem, dan terracotta. Menggunakan bentuk organik melengkung.', refs:['https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80'] },
+            { id:42, name:'Frutiger Aero',        type:'glass',   color:'0284c7,22c55e', desc:'Estetika optimis awal 2000-an. Memadukan tombol gelembung mengkilap (glossy bubble), tekstur air/udara, gradien biru-hijau, dan efek kaca transparan.', refs:['https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80'] },
+            { id:43, name:'Kawaii UI',            type:'bold',    color:'db2777,fbcfe8', desc:'Gaya antarmuka imut khas budaya pop Jepang. Sudut membulat sangat lebar (puffy), outline tebal, warna pink permen, dan ikon ekspresi ceria.', refs:['https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80'] },
+            { id:44, name:'Paper Cut-out',        type:'retro',   color:'78350f,fef3c7', desc:'Desain berlapis yang menyerupai potongan kertas fisik. Menggunakan bayangan tajam bertingkat (layered drop shadows) dan tekstur serat kertas lembut.', refs:['https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80'] },
+            { id:45, name:'Sci-Fi HUD',           type:'neon',    color:'090d16,06b6d4', desc:'Gaya Heads-Up Display kapal luar angkasa. Menampilkan visualisasi data lingkaran telemetri, koordinat grid, teks monospace, dan widget semi-transparan.', refs:['https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80'] },
+            { id:46, name:'Y2K Aesthetic',        type:'retro',   color:'4f46e5,c084fc', desc:'Estetika digital pergantian milenium (akhir 90-an). Warna perak/ungu metalik, font bubble retro, gradien hologram, dan ikon grafis bergaya tech klasik.', refs:['https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80'] },
+            { id:47, name:'Scandinavian Minimal', type:'minimal', color:'1e293b,fafaf9', desc:'Desain fungsional khas Nordik. Mengutamakan ruang luas yang bersih, warna netral abu-abu terang, elemen kayu hangat, dan tata letak yang sangat praktis.', refs:['https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80'] },
+            { id:48, name:'Web3 Crypto',          type:'modern',  color:'0b0f19,a855f7', desc:'Estetika antarmuka terdesentralisasi modern. Latar belakang gelap kosmik dengan gradien ungu-biru neon, kartu mengambang, dan metrik token.', refs:['https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80'] },
+            { id:49, name:'Monochrome Stark',     type:'minimal', color:'000000,ffffff', desc:'Desain dengan kontras monokrom absolut. Hanya menggunakan hitam dan putih murni, tanpa warna abu-abu atau gradien, dengan border garis tipis presisi.', refs:['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80'] },
+            { id:50, name:'Vaporwave Dream',       type:'bold',    color:'1e1b4b,f472b6', desc:'Nostalgia digital retro-futuristik. Gradien pink-cyan-ungu yang kaya, wireframe grid 3D perspektif, visualisasi glitch, dan estetika komputer jadul.', refs:['https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80'] },
+            { id:51, name:'Deep Space UI',        type:'neon',    color:'020617,1e3a8a', desc:'Antarmuka bernuansa ruang angkasa dalam, dengan warna biru tua, aksen bintang dan nebula, serta tipografi tech futuristik.', refs:['https://images.unsplash.com/photo-1506318137071-a8e063b4bae0?w=800&q=80'] },
+            { id:52, name:'Serene Zen',           type:'minimal', color:'f0fdf4,166534', desc:'Desain tenang terinspirasi taman zen. Warna hijau lembut, banyak ruang putih, dan elemen alami.', refs:['https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80'] },
+            { id:53, name:'Pixel Art Retro',      type:'retro',   color:'171717,e11d48', desc:'Estetika game 8-bit klasik. Font pixel, warna kontras tajam, dan elemen UI kotak-kotak.', refs:['https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80'] },
+            { id:54, name:'Fluid Gradient',      type:'bold',    color:'e11d48,2563eb', desc:'Gradien cair yang dinamis, tidak memiliki batas tegas antar warna. Sangat energik.', refs:['https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80'] },
+            { id:55, name:'Corporate Dark',       type:'modern',  color:'111827,4b5563', desc:'Desain korporat dengan mode gelap yang profesional, tegas, dan dapat diandalkan.', refs:['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80'] },
+            { id:56, name:'Frosted Gradient',     type:'glass',   color:'3b82f6,a855f7', desc:'Perpaduan efek frosted glass dengan gradien warna cerah yang tembus pandang.', refs:['https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=800&q=80'] },
+            { id:57, name:'Organic Curves',       type:'minimal', color:'fff7ed,ea580c', desc:'Layout dengan banyak lengkungan organik yang lembut dan santai.', refs:['https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80'] },
+            { id:58, name:'Cyber Neon Grid',      type:'neon',    color:'000000,facc15', desc:'Grid berbasis garis neon kuning terang, sangat kontras pada latar belakang hitam.', refs:['https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'] },
+            { id:59, name:'Paper Sketch',         type:'retro',   color:'fef3c7,57534e', desc:'Antarmuka bergaya sketsa tangan di atas kertas tua dengan guratan pensil.', refs:['https://images.unsplash.com/photo-1515462277126-2dd0c162007a?w=800&q=80'] },
+            { id:60, name:'Royal Luxury',         type:'bold',    color:'1a1a1a,d4af37', desc:'Desain mewah dengan palet warna emas dan hitam matte, sangat elegan.', refs:['https://images.unsplash.com/photo-1549488448-933e4618e47f?w=800&q=80'] }
         ]
     };
 
@@ -1359,12 +1379,12 @@
     function updateCounters() {
         const fc = favorites.length;
         const hc = historyData.length;
-        const prog = Math.round((viewedSet.size / 40) * 100);
+        const prog = Math.round((viewedSet.size / 60) * 100);
         document.getElementById('fav-count-badge').textContent = fc;
         document.getElementById('hist-count-badge').textContent = hc;
         document.getElementById('rp-fav-count').textContent = fc;
         document.getElementById('rp-hist-count').textContent = viewedSet.size;
-        document.getElementById('prog-text').textContent = viewedSet.size + ' / 40';
+        document.getElementById('prog-text').textContent = viewedSet.size + ' / 60';
         document.getElementById('prog-bar').style.width = prog + '%';
     }
 
@@ -1539,9 +1559,9 @@
         switcher.onchange = (e) => showLiveDemo(parseInt(e.target.value));
 
         // Restore Action Button for normal styles
-        document.getElementById('ld-action-text').innerHTML = 'Gunakan gaya desain ini untuk AI Builder atau Image Generator Anda.';
+        document.getElementById('ld-action-text').innerHTML = 'Gunakan gaya desain ini untuk menghasilkan kode index.html dengan AI.';
         const actionBtn = document.getElementById('ld-action-btn');
-        actionBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Prompt';
+        actionBtn.innerHTML = '<i class="fa-solid fa-code"></i> Generate HTML Code Prompt';
         actionBtn.onclick = () => generatePromptFromLiveDemo();
 
         renderLiveDemoUI(style);
@@ -1794,39 +1814,108 @@
         const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
         const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
         
-        const promptText = `Create a premium UI/UX design dashboard layout using "${style.name}" style (${style.type}). Color palette: ${c1} and ${c2} as primary accents on a dark modern background. Design attributes: ${style.desc}. Ensure sleek typography, clean spacing, and modern component widgets.`;
-        
-        navigator.clipboard.writeText(promptText).then(() => {
+        Swal.fire({
+            title: '✨ Nama Website / Aplikasi',
+            text: 'Nama website atau aplikasi yang ingin Anda buat:',
+            input: 'text',
+            inputPlaceholder: 'Contoh: Toko Online Sepatu, Portfolio Fotografi, Dashboard Penjualan',
+            background: '#111420',
+            color: '#fff',
+            confirmButtonColor: '#6366F1',
+            confirmButtonText: 'Lanjut',
+            cancelButtonColor: '#1E2336',
+            cancelButtonText: 'Batal',
+            showCancelButton: true,
+            target: document.getElementById('live-demo-overlay'),
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        }).then((nameResult) => {
+            if (nameResult.isDismissed) {
+                return; // User cancelled
+            }
+            
+            const webName = nameResult.value ? nameResult.value.trim() : 'Premium Web Application';
+            
             Swal.fire({
-                title: '✨ Prompt Berhasil Disalin!',
-                html: `
-                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
-                    <textarea readonly style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
-                    <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Midjourney, v0.dev, Claude, atau AI Builder Anda.</p>
-                `,
-                icon: 'success',
+                title: '📝 Penjelasan Singkat',
+                text: `Jelaskan secara singkat fitur atau tujuan untuk "${webName}":`,
+                input: 'textarea',
+                inputPlaceholder: 'Contoh: Menampilkan daftar produk unggulan dengan filter kategori, keranjang belanja interaktif, dan formulir checkout yang bersih.',
                 background: '#111420',
                 color: '#fff',
                 confirmButtonColor: '#6366F1',
-                confirmButtonText: 'Selesai',
-                target: document.getElementById('live-demo-overlay'),
-                customClass: { popup: 'border border-gray-700 rounded-2xl' }
-            });
-        }).catch(() => {
-            Swal.fire({
-                title: '✨ Prompt Berhasil Dibuat!',
-                html: `
-                    <textarea id="fallback-prompt-text" style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
-                    <button onclick="document.getElementById('fallback-prompt-text').select(); document.execCommand('copy'); Swal.fire('Tersalin!', '', 'success');" style="margin-top:10px;padding:6px 16px;background:#6366F1;color:white;border:none;border-radius:6px;font-size:11px;cursor:pointer;">Salin Teks</button>
-                `,
-                background: '#111420',
-                color: '#fff',
-                showConfirmButton: false,
-                showCancelButton: true,
-                cancelButtonText: 'Tutup',
+                confirmButtonText: 'Generate Prompt',
                 cancelButtonColor: '#1E2336',
+                cancelButtonText: 'Batal',
+                showCancelButton: true,
                 target: document.getElementById('live-demo-overlay'),
                 customClass: { popup: 'border border-gray-700 rounded-2xl' }
+            }).then((descResult) => {
+                if (descResult.isDismissed) {
+                    return; // User cancelled
+                }
+                
+                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern dashboard layout with essential features';
+                
+                const promptText = `Write a complete, single-file, production-ready, and responsive "index.html" representing a premium frontend interface for:
+- App Name: "${webName}"
+- User Input Description: ${webDesc}
+
+AI ENRICHMENT INSTRUCTION (CRITICAL):
+As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
+1. At least 3-4 relevant navigation menus/pages (e.g. Dashboard overview, detailed analytics, data management table, configurations) with real simulation logic.
+2. Rich interactive components: status badges, beautiful KPI widgets, charts (simulated via SVG or Chart.js), searchable data tables, action modals (SweetAlert2).
+3. Realistic, high-density mock data matching the application's context.
+
+DESIGN & UI/UX REQUIREMENTS:
+1. Design Aesthetic Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
+2. UI Context-Aware Theme:
+   - For operational/field modules: use High-Contrast Flat Industrial UI (Caterpillar Yellow / Safety Orange / Emergency Red / Active Green).
+   - For managerial/administrative modules: use clean corporate dark/neutral colors.
+3. High Data Density: Use Solid & Flat Cards with solid borders, minimal padding, and monospace/tabular-nums for all numbers (costs, quantities, values).
+4. Responsive Navigation: Left Sidebar Navigation for Desktop, Bottom Navigation Bar for Mobile. Synchronized menu switching.
+5. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+
+FRONTEND SIMULATION & BUG PREVENTION:
+1. Anti-overlap transitions: Display: none on inactive pages, and display: block/flex on active. Switch menus instantly using JavaScript DOM manipulation without page reload.
+2. Full self-contained simulation: Embed all styles and JS script inside this single HTML file. Make buttons interactive with SweetAlert2 toast alerts or simulation responses.
+3. Responsive Tables: Wrap all tables in overflow-x-auto container.
+
+OUTPUT FORMAT:
+Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation.`;
+                
+                navigator.clipboard.writeText(promptText).then(() => {
+                    Swal.fire({
+                        title: '✨ Prompt Berhasil Disalin!',
+                        html: `
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk menghasilkan kode index.html dengan gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
+                            <textarea readonly style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                            <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Claude, ChatGPT, v0.dev, Gemini, atau AI code generator pilihan Anda.</p>
+                        `,
+                        icon: 'success',
+                        background: '#111420',
+                        color: '#fff',
+                        confirmButtonColor: '#6366F1',
+                        confirmButtonText: 'Selesai',
+                        target: document.getElementById('live-demo-overlay'),
+                        customClass: { popup: 'border border-gray-700 rounded-2xl' }
+                    });
+                }).catch(() => {
+                    Swal.fire({
+                        title: '✨ Prompt Berhasil Dibuat!',
+                        html: `
+                            <textarea id="fallback-prompt-text" style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                            <button onclick="document.getElementById('fallback-prompt-text').select(); document.execCommand('copy'); Swal.fire('Tersalin!', '', 'success');" style="margin-top:10px;padding:6px 16px;background:#6366F1;color:white;border:none;border-radius:6px;font-size:11px;cursor:pointer;">Salin Teks</button>
+                        `,
+                        background: '#111420',
+                        color: '#fff',
+                        showConfirmButton: false,
+                        showCancelButton: true,
+                        cancelButtonText: 'Tutup',
+                        cancelButtonColor: '#1E2336',
+                        target: document.getElementById('live-demo-overlay'),
+                        customClass: { popup: 'border border-gray-700 rounded-2xl' }
+                    });
+                });
             });
         });
     }
@@ -2046,9 +2135,9 @@
 
             <!-- Generate Prompt Action -->
             <div style="padding:16px;margin-top:auto;border-top:1px solid #1E2336;background:linear-gradient(to bottom, transparent, rgba(99,102,241,0.05));">
-                <div id="ld-action-text" style="font-size:11px;color:#8892B0;margin-bottom:12px;line-height:1.5;">Gunakan gaya desain ini untuk AI Builder atau Image Generator Anda.</div>
+                <div id="ld-action-text" style="font-size:11px;color:#8892B0;margin-bottom:12px;line-height:1.5;">Gunakan gaya desain ini untuk menghasilkan kode index.html dengan AI.</div>
                 <button id="ld-action-btn" onclick="generatePromptFromLiveDemo()" style="width:100%;padding:12px;background:#6366F1;color:white;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(99,102,241,0.3);transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(99,102,241,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(99,102,241,0.3)';">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Prompt
+                    <i class="fa-solid fa-code"></i> Generate HTML Code Prompt
                 </button>
             </div>
         </div>
