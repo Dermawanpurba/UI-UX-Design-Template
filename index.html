@@ -1025,6 +1025,20 @@
                 </svg>
                 <div style="font-size:10px; color:#3D4A6B; margin-top:4px; text-align:center;">Popularitas per kategori</div>
             </div>
+
+            <!-- BULK GENERATE ALL PROMPTS -->
+            <div style="margin:10px; padding:14px; border-radius:14px; background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.02)); border:1px solid rgba(16,185,129,0.2);">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <div style="width:22px;height:22px;border-radius:6px;background:rgba(16,185,129,0.15);display:flex;align-items:center;justify-content:center;">
+                        <i class="fa-solid fa-layer-group" style="color:#10B981;font-size:10px;"></i>
+                    </div>
+                    <span style="font-size:11px;font-weight:700;color:#6EE7B7;">Bulk Generate</span>
+                </div>
+                <p style="font-size:10px;color:#6B7A9E;line-height:1.5;margin:0 0 10px;">Hasilkan prompt AI untuk <strong style="color:#10B981;">60 design styles</strong> sekaligus. Tiap prompt sudah include sidebar kiri, bottom nav mobile, settings panel.</p>
+                <button onclick="generateAllPrompts()" style="width:100%;padding:10px;background:#10B981;color:white;border:none;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 3px 12px rgba(16,185,129,0.3);transition:all .2s;font-family:'Inter',sans-serif;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 5px 16px rgba(16,185,129,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 3px 12px rgba(16,185,129,0.3)';">
+                    <i class="fa-solid fa-code"></i> Generate 60 Design Prompts
+                </button>
+            </div>
         </div>
     </aside>
 
@@ -1862,7 +1876,7 @@
 
 AI ENRICHMENT INSTRUCTION (CRITICAL):
 As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
-1. At least 3-4 relevant navigation menus/pages (e.g. Dashboard overview, detailed analytics, data management table, configurations) with real simulation logic.
+1. At least 5-6 relevant navigation menus/pages (e.g. Dashboard overview, detailed analytics, data management table, configurations, Settings/Pengaturan) with real simulation logic.
 2. Rich interactive components: status badges, beautiful KPI widgets, charts (simulated via SVG or Chart.js), searchable data tables, action modals (SweetAlert2).
 3. Realistic, high-density mock data matching the application's context.
 
@@ -1872,16 +1886,84 @@ DESIGN & UI/UX REQUIREMENTS:
    - For operational/field modules: use High-Contrast Flat Industrial UI (Caterpillar Yellow / Safety Orange / Emergency Red / Active Green).
    - For managerial/administrative modules: use clean corporate dark/neutral colors.
 3. High Data Density: Use Solid & Flat Cards with solid borders, minimal padding, and monospace/tabular-nums for all numbers (costs, quantities, values).
-4. Responsive Navigation: Left Sidebar Navigation for Desktop, Bottom Navigation Bar for Mobile. Synchronized menu switching.
-5. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+
+⚡ MANDATORY RESPONSIVE NAVIGATION (CRITICAL - DO NOT SKIP):
+4. DESKTOP/LAPTOP MODE (screen width >= 768px):
+   - LEFT SIDEBAR NAVIGATION: A persistent sidebar on the LEFT side (width: 220-260px) containing:
+     * Company Logo (top section, with circular/square logo container)
+     * Company Name text below logo
+     * Main navigation menu items with icons (Dashboard, Analytics, Data, Settings, etc.)
+     * Active menu item highlighted with accent color + left border indicator
+     * User profile section at bottom of sidebar (avatar, name, role)
+     * Watermark/credit footer at the very bottom of sidebar
+   - The sidebar MUST be fixed/sticky, always visible, full height (100vh)
+   - Main content area fills remaining space to the right of sidebar
+
+5. SMARTPHONE/MOBILE MODE (screen width < 768px):
+   - BOTTOM NAVIGATION BAR: A fixed bottom bar (height: 56-64px) containing:
+     * 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile)
+     * Active item highlighted with accent color + icon fill
+     * Subtle top border/shadow for elevation
+     * Each item has icon (18-22px) + tiny label text (9-10px) below icon
+   - NO left sidebar on mobile - it must be hidden (display:none)
+   - A compact TOP HEADER bar with hamburger menu icon + company name
+   - Hamburger menu opens a slide-in drawer from the left (overlay, not push)
+   - Content area fills full width with bottom padding to avoid nav overlap
+   - Smooth transition between desktop sidebar and mobile bottom nav using CSS media queries
+
+⚡ MANDATORY SETTINGS / PENGATURAN PANEL (CRITICAL - MUST BE FULLY FUNCTIONAL):
+6. SETTINGS PAGE (accessible from sidebar "Settings" / bottom nav gear icon):
+   This is a dedicated settings page/panel that MUST be fully interactive. It MUST include ALL of the following:
+
+   a) 🎨 COLOR / THEME PICKER:
+      - A color palette section showing 8-12 predefined theme color options as clickable circle swatches
+      - At least 2 custom color inputs (type="color") for primary accent and secondary accent
+      - A "Live Preview" section that immediately updates accent colors across the entire app when user picks a color
+      - JavaScript function: when color is selected, update all CSS variables (--primary, --accent, --sidebar-bg, etc.) in real-time
+      - Save selected color to localStorage so it persists on page reload
+      - Display current active theme name
+
+   b) 🏢 LOGO UPLOAD / CHANGE:
+      - A logo preview area (circular or rounded square, 80-100px) showing current logo
+      - "Upload Logo" button that triggers a file input (accept: image/*)
+      - Use FileReader API to convert uploaded image to base64 data URL
+      - Display the uploaded logo immediately in the preview area
+      - Save logo to localStorage as base64 string
+      - On page load, check localStorage for saved logo; if exists, use it; otherwise use default placeholder
+      - Also show a "Reset to Default" button to clear custom logo
+
+   c) 📝 COMPANY NAME / PT NAME EDITOR:
+      - An editable text input field pre-filled with default company name (e.g., "PT. Maju Bersama")
+      - "Save" button to confirm changes
+      - On save, update: sidebar company name, browser tab title, header bar company name, and any footer references
+      - Save company name to localStorage
+      - On page load, use saved company name or fallback to default
+
+   d) 👤 USER SETTINGS / PROFILE:
+      - User avatar display (circular, with option to upload custom avatar same as logo upload logic)
+      - Editable text fields: Username, Full Name, Email, Role/Position
+      - "Save Profile" button
+      - Save all user data to localStorage
+      - Update sidebar user section (avatar + name + role) in real-time after save
+      - Show "Profile Updated" toast notification (SweetAlert2)
+
+   e) SETTINGS PAGE UI LAYOUT:
+      - Settings page uses a clean card-based layout (NOT a modal)
+      - Each section (Color, Logo, Company, User) is in its own card with clear header
+      - Cards are arranged in a 2-column grid on desktop, single column on mobile
+      - Each card has subtle border, rounded corners, and consistent padding
+      - "Save" / "Reset" buttons use accent colors with hover effects
+
+7. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
 
 FRONTEND SIMULATION & BUG PREVENTION:
 1. Anti-overlap transitions: Display: none on inactive pages, and display: block/flex on active. Switch menus instantly using JavaScript DOM manipulation without page reload.
 2. Full self-contained simulation: Embed all styles and JS script inside this single HTML file. Make buttons interactive with SweetAlert2 toast alerts or simulation responses.
 3. Responsive Tables: Wrap all tables in overflow-x-auto container.
+4. CSS Variables: Define all theme colors as CSS custom properties (--primary, --accent, --bg, --sidebar-bg, --text, --text-secondary, --card-bg, --border) at :root level so the color picker can update them via JavaScript.
 
 OUTPUT FORMAT:
-Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation.`;
+Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS media queries for responsive sidebar (desktop) vs bottom nav (mobile). The Settings page MUST be fully coded with working file upload, color picker, text inputs, and localStorage persistence.`;
                 
                 navigator.clipboard.writeText(promptText).then(() => {
                     Swal.fire({
@@ -1921,6 +2003,223 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
     }
 
 
+
+    /* ==================== BULK GENERATE ALL 60 PROMPTS ==================== */
+    function generateAllPrompts() {
+        Swal.fire({
+            title: '📝 Nama Website / Aplikasi (untuk semua prompt)',
+            text: 'Masukkan nama website/aplikasi yang akan digunakan di semua 60 prompt:',
+            input: 'text',
+            inputPlaceholder: 'Contoh: PT. Maju Bersama - Dashboard ERP',
+            background: '#111420',
+            color: '#fff',
+            confirmButtonColor: '#10B981',
+            confirmButtonText: 'Lanjut',
+            cancelButtonColor: '#1E2336',
+            cancelButtonText: 'Batal',
+            showCancelButton: true,
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        }).then((nameResult) => {
+            if (nameResult.isDismissed) return;
+            const webName = nameResult.value ? nameResult.value.trim() : 'Premium Web Application';
+
+            Swal.fire({
+                title: '📝 Penjelasan Singkat',
+                text: 'Jelaskan secara singkat fitur atau tujuan:',
+                input: 'textarea',
+                inputPlaceholder: 'Contoh: Sistem manajemen inventori dengan dashboard real-time, laporan penjualan, dan pengaturan user.',
+                background: '#111420',
+                color: '#fff',
+                confirmButtonColor: '#10B981',
+                confirmButtonText: 'Generate 60 Prompts',
+                cancelButtonColor: '#1E2336',
+                cancelButtonText: 'Batal',
+                showCancelButton: true,
+                customClass: { popup: 'border border-gray-700 rounded-2xl' }
+            }).then((descResult) => {
+                if (descResult.isDismissed) return;
+                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern dashboard layout with essential features';
+
+                // Show loading
+                Swal.fire({
+                    title: 'Generating 60 Prompts...',
+                    text: 'Mohon tunggu, sedang membuat prompt untuk semua design styles.',
+                    allowOutsideClick: false,
+                    background: '#111420',
+                    color: '#fff',
+                    didOpen: () => Swal.showLoading()
+                });
+
+                let allPrompts = '';
+                const separator = '\n\n' + '='.repeat(80) + '\n\n';
+
+                MOCK_DB.styles.forEach((style, idx) => {
+                    const cols = style.color.split(',');
+                    const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
+                    const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
+
+                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2);
+                    allPrompts += `========== PROMPT #${idx + 1} | ${style.name} (${style.type}) ==========\n\n${prompt}`;
+                    if (idx < MOCK_DB.styles.length - 1) allPrompts += separator;
+                });
+
+                Swal.close();
+
+                // Show result modal
+                Swal.fire({
+                    title: '🎉 60 Design Prompts Generated!',
+                    html: `
+                        <div style="text-align:left;">
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Setiap prompt sudah include sidebar kiri, bottom nav mobile, dan settings panel.</p>
+                            <textarea id="bulk-prompt-textarea" readonly style="width:100%;height:280px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:10px;color:#CBD5F0;font-size:10px;font-family:'Courier New',monospace;resize:none;outline:none;">${allPrompts.replace(/</g,'<').replace(/>/g,'>')}</textarea>
+                            <div style="display:flex;gap:8px;margin-top:10px;">
+                                <button onclick="copyBulkPrompts()" style="flex:1;padding:10px;background:#6366F1;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
+                                    <i class="fa-solid fa-copy" style="margin-right:5px;"></i>Copy All
+                                </button>
+                                <button onclick="downloadBulkPrompts()" style="flex:1;padding:10px;background:#10B981;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
+                                    <i class="fa-solid fa-download" style="margin-right:5px;"></i>Download .txt
+                                </button>
+                            </div>
+                        </div>
+                    `,
+                    background: '#111420',
+                    color: '#fff',
+                    width: '700px',
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: 'Tutup',
+                    cancelButtonColor: '#1E2336',
+                    customClass: { popup: 'border border-gray-700 rounded-2xl' }
+                });
+            });
+        });
+    }
+
+    function buildSinglePrompt(style, webName, webDesc, c1, c2) {
+        return `Write a complete, single-file, production-ready, and responsive "index.html" representing a premium frontend interface for:
+- App Name: "${webName}"
+- User Input Description: ${webDesc}
+
+AI ENRICHMENT INSTRUCTION (CRITICAL):
+As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
+1. At least 5-6 relevant navigation menus/pages (e.g. Dashboard overview, detailed analytics, data management table, configurations, Settings/Pengaturan) with real simulation logic.
+2. Rich interactive components: status badges, beautiful KPI widgets, charts (simulated via SVG or Chart.js), searchable data tables, action modals (SweetAlert2).
+3. Realistic, high-density mock data matching the application's context.
+
+DESIGN & UI/UX REQUIREMENTS:
+1. Design Aesthetic Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
+2. UI Context-Aware Theme:
+   - For operational/field modules: use High-Contrast Flat Industrial UI (Caterpillar Yellow / Safety Orange / Emergency Red / Active Green).
+   - For managerial/administrative modules: use clean corporate dark/neutral colors.
+3. High Data Density: Use Solid & Flat Cards with solid borders, minimal padding, and monospace/tabular-nums for all numbers (costs, quantities, values).
+
+⚡ MANDATORY RESPONSIVE NAVIGATION (CRITICAL - DO NOT SKIP):
+4. DESKTOP/LAPTOP MODE (screen width >= 768px):
+   - LEFT SIDEBAR NAVIGATION: A persistent sidebar on the LEFT side (width: 220-260px) containing:
+     * Company Logo (top section, with circular/square logo container)
+     * Company Name text below logo
+     * Main navigation menu items with icons (Dashboard, Analytics, Data, Settings, etc.)
+     * Active menu item highlighted with accent color + left border indicator
+     * User profile section at bottom of sidebar (avatar, name, role)
+     * Watermark/credit footer at the very bottom of sidebar
+   - The sidebar MUST be fixed/sticky, always visible, full height (100vh)
+   - Main content area fills remaining space to the right of sidebar
+
+5. SMARTPHONE/MOBILE MODE (screen width < 768px):
+   - BOTTOM NAVIGATION BAR: A fixed bottom bar (height: 56-64px) containing:
+     * 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile)
+     * Active item highlighted with accent color + icon fill
+     * Subtle top border/shadow for elevation
+     * Each item has icon (18-22px) + tiny label text (9-10px) below icon
+   - NO left sidebar on mobile - it must be hidden (display:none)
+   - A compact TOP HEADER bar with hamburger menu icon + company name
+   - Hamburger menu opens a slide-in drawer from the left (overlay, not push)
+   - Content area fills full width with bottom padding to avoid nav overlap
+   - Smooth transition between desktop sidebar and mobile bottom nav using CSS media queries
+
+⚡ MANDATORY SETTINGS / PENGATURAN PANEL (CRITICAL - MUST BE FULLY FUNCTIONAL):
+6. SETTINGS PAGE (accessible from sidebar "Settings" / bottom nav gear icon):
+   This is a dedicated settings page/panel that MUST be fully interactive. It MUST include ALL of the following:
+
+   a) 🎨 COLOR / THEME PICKER:
+      - A color palette section showing 8-12 predefined theme color options as clickable circle swatches
+      - At least 2 custom color inputs (type="color") for primary accent and secondary accent
+      - A "Live Preview" section that immediately updates accent colors across the entire app when user picks a color
+      - JavaScript function: when color is selected, update all CSS variables (--primary, --accent, --sidebar-bg, etc.) in real-time
+      - Save selected color to localStorage so it persists on page reload
+      - Display current active theme name
+
+   b) 🏢 LOGO UPLOAD / CHANGE:
+      - A logo preview area (circular or rounded square, 80-100px) showing current logo
+      - "Upload Logo" button that triggers a file input (accept: image/*)
+      - Use FileReader API to convert uploaded image to base64 data URL
+      - Display the uploaded logo immediately in the preview area
+      - Save logo to localStorage as base64 string
+      - On page load, check localStorage for saved logo; if exists, use it; otherwise use default placeholder
+      - Also show a "Reset to Default" button to clear custom logo
+
+   c) 📝 COMPANY NAME / PT NAME EDITOR:
+      - An editable text input field pre-filled with default company name (e.g., "PT. Maju Bersama")
+      - "Save" button to confirm changes
+      - On save, update: sidebar company name, browser tab title, header bar company name, and any footer references
+      - Save company name to localStorage
+      - On page load, use saved company name or fallback to default
+
+   d) 👤 USER SETTINGS / PROFILE:
+      - User avatar display (circular, with option to upload custom avatar same as logo upload logic)
+      - Editable text fields: Username, Full Name, Email, Role/Position
+      - "Save Profile" button
+      - Save all user data to localStorage
+      - Update sidebar user section (avatar + name + role) in real-time after save
+      - Show "Profile Updated" toast notification (SweetAlert2)
+
+   e) SETTINGS PAGE UI LAYOUT:
+      - Settings page uses a clean card-based layout (NOT a modal)
+      - Each section (Color, Logo, Company, User) is in its own card with clear header
+      - Cards are arranged in a 2-column grid on desktop, single column on mobile
+      - Each card has subtle border, rounded corners, and consistent padding
+      - "Save" / "Reset" buttons use accent colors with hover effects
+
+7. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+
+FRONTEND SIMULATION & BUG PREVENTION:
+1. Anti-overlap transitions: Display: none on inactive pages, and display: block/flex on active. Switch menus instantly using JavaScript DOM manipulation without page reload.
+2. Full self-contained simulation: Embed all styles and JS script inside this single HTML file. Make buttons interactive with SweetAlert2 toast alerts or simulation responses.
+3. Responsive Tables: Wrap all tables in overflow-x-auto container.
+4. CSS Variables: Define all theme colors as CSS custom properties (--primary, --accent, --bg, --sidebar-bg, --text, --text-secondary, --card-bg, --border) at :root level so the color picker can update them via JavaScript.
+
+OUTPUT FORMAT:
+Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS media queries for responsive sidebar (desktop) vs bottom nav (mobile). The Settings page MUST be fully coded with working file upload, color picker, text inputs, and localStorage persistence.`;
+    }
+
+    function copyBulkPrompts() {
+        const textarea = document.getElementById('bulk-prompt-textarea');
+        if (textarea) {
+            textarea.select();
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                Swal.fire({ title: 'Tersalin!', text: '60 prompt telah disalin ke clipboard.', icon: 'success', background: '#111420', color: '#fff', confirmButtonColor: '#10B981', timer: 2000, showConfirmButton: false });
+            }).catch(() => {
+                document.execCommand('copy');
+                Swal.fire({ title: 'Tersalin!', text: '60 prompt telah disalin.', icon: 'success', background: '#111420', color: '#fff', confirmButtonColor: '#10B981', timer: 2000, showConfirmButton: false });
+            });
+        }
+    }
+
+    function downloadBulkPrompts() {
+        const textarea = document.getElementById('bulk-prompt-textarea');
+        if (textarea) {
+            const blob = new Blob([textarea.value], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '60_Design_Prompts.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            Swal.fire({ title: 'Downloaded!', text: '60 Design Prompts berhasil didownload.', icon: 'success', background: '#111420', color: '#fff', confirmButtonColor: '#10B981', timer: 2000, showConfirmButton: false });
+        }
+    }
 
     /* ==================== GLOBAL INTERACTIVE DEMO FUNCTIONS ==================== */
     window.switchDesignSystem = function(sys) {
