@@ -1199,25 +1199,22 @@
 
     /* ==================== GENERATE THUMB ==================== */
     function generateThumb(item) {
-        if (item.refs && item.refs.length > 0) {
-            return item.refs[0];
-        }
-        const cols = item.color.split(',');
-        const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
-        const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
-        // Menggunakan Data URI SVG agar gambar gradien premium langsung ter-render tanpa bergantung pada server luar
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
-            <defs>
-                <linearGradient id="grad-${item.id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="${c1}" />
-                    <stop offset="100%" stop-color="${c2}" />
-                </linearGradient>
-            </defs>
-            <rect width="400" height="250" fill="url(#grad-${item.id})" />
-            <circle cx="200" cy="125" r="80" fill="rgba(255,255,255,0.05)" />
-            <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#ffffff" opacity="0.9">${item.name}</text>
-            <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#ffffff" opacity="0.6" letter-spacing="1.5px">${item.type.toUpperCase()}</text>
-        </svg>`;
+        // Preview dibuat berdasarkan karakter style; refs eksternal sengaja tidak dipakai
+        // agar foto stock tidak salah merepresentasikan gaya UI.
+        const cols = (item.color || '6366f1,a855f7').split(',');
+        const c1 = '#' + (cols[0] || '6366f1');
+        const c2 = '#' + (cols[1] || 'a855f7');
+        const id = 'style-' + item.id;
+        const name = String(item.name).replace(/[<&>]/g, '');
+        const lower = String(item.name).toLowerCase();
+        const glass = ['glass', 'frosted', 'holographic', 'aurora', 'frutiger'].some(k => lower.includes(k)) || item.type === 'glass';
+        const neon = ['neon', 'cyber', 'terminal', 'sci-fi', 'vaporwave', 'space', 'hud'].some(k => lower.includes(k)) || item.type === 'neon';
+        const retro = ['retro', 'vintage', 'pixel', 'bauhaus', 'paper', 'sketch', 'memphis', 'y2k'].some(k => lower.includes(k)) || item.type === 'retro';
+        const bold = ['bold', 'brutal', 'acid', 'kawaii', 'duotone', 'royal'].some(k => lower.includes(k)) || item.type === 'bold';
+        const grid = retro || neon ? `<path d="M0 205h400M0 220h400M40 190v60M100 190v60M160 190v60M220 190v60M280 190v60M340 190v60" stroke="${c2}" opacity=".3"/>` : '';
+        const cards = glass ? `<rect x="42" y="48" width="145" height="108" rx="16" fill="white" opacity=".18" stroke="white" stroke-opacity=".65"/><rect x="205" y="78" width="145" height="108" rx="16" fill="white" opacity=".14" stroke="white" stroke-opacity=".5"/>` : `<rect x="38" y="52" width="324" height="136" rx="${bold ? 2 : 18}" fill="${retro ? '#fff8' : '#ffffff18'}" stroke="${bold ? '#fff' : c2}" stroke-width="${bold ? 4 : 1}"/>`;
+        const accent = neon ? `<circle cx="320" cy="55" r="28" fill="${c2}" opacity=".8" filter="url(#glow)"/>` : `<circle cx="320" cy="55" r="25" fill="${c2}" opacity=".7"/>`;
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="400" height="250" fill="url(#${id})"/>${grid}${cards}${accent}<rect x="62" y="78" width="105" height="10" rx="5" fill="white" opacity=".85"/><rect x="62" y="101" width="75" height="7" rx="3" fill="white" opacity=".45"/><rect x="62" y="125" width="52" height="28" rx="8" fill="${c2}" opacity=".85"/><rect x="125" y="125" width="42" height="28" rx="8" fill="white" opacity=".22"/><text x="200" y="222" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="white">${name}</text></svg>`;
         return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     }
 
@@ -1876,9 +1873,11 @@
 
 AI ENRICHMENT INSTRUCTION (CRITICAL):
 As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
-1. At least 5-6 relevant navigation menus/pages (e.g. Dashboard overview, detailed analytics, data management table, configurations, Settings/Pengaturan) with real simulation logic.
-2. Rich interactive components: status badges, beautiful KPI widgets, charts (simulated via SVG or Chart.js), searchable data tables, action modals (SweetAlert2).
-3. Realistic, high-density mock data matching the application's context.
+1. At least 6 relevant pages with working client-side navigation: Dashboard, Analytics/Reports, Master Data, Transactions/Operations, Approvals/Notifications, and Settings/Profile.
+2. Rich interactive components: KPI widgets, status badges, filters, charts via SVG or Chart.js, searchable/sortable/paginated tables, detail drawers, create/edit forms, delete confirmation and SweetAlert2 feedback.
+3. Realistic, context-specific mock data; every table must include loading, empty, error, and success states.
+4. Generate a DESIGN SPEC section before the HTML: explain the chosen visual treatment for "${style.name}", layout hierarchy, spacing scale, typography, component states, accessibility contrast, and responsive behavior.
+5. Do not use generic filler labels. Derive menu names, table names, columns, statuses, actions, KPIs, and mock data from the application domain and user description.
 
 DESIGN & UI/UX REQUIREMENTS:
 1. Design Aesthetic Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
@@ -1892,8 +1891,10 @@ DESIGN & UI/UX REQUIREMENTS:
    - LEFT SIDEBAR NAVIGATION: A persistent sidebar on the LEFT side (width: 220-260px) containing:
      * Company Logo (top section, with circular/square logo container)
      * Company Name text below logo
-     * Main navigation menu items with icons (Dashboard, Analytics, Data, Settings, etc.)
+     * Main navigation grouped into Overview, Workspace, Master Data, Reports, Administration
+     * Each item has icon, label, optional badge/count, active state, tooltip, and keyboard focus state
      * Active menu item highlighted with accent color + left border indicator
+     * Collapsible sidebar with persisted expanded/collapsed state; show full labels when expanded
      * User profile section at bottom of sidebar (avatar, name, role)
      * Watermark/credit footer at the very bottom of sidebar
    - The sidebar MUST be fixed/sticky, always visible, full height (100vh)
@@ -2102,9 +2103,11 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
 
 AI ENRICHMENT INSTRUCTION (CRITICAL):
 As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
-1. At least 5-6 relevant navigation menus/pages (e.g. Dashboard overview, detailed analytics, data management table, configurations, Settings/Pengaturan) with real simulation logic.
-2. Rich interactive components: status badges, beautiful KPI widgets, charts (simulated via SVG or Chart.js), searchable data tables, action modals (SweetAlert2).
-3. Realistic, high-density mock data matching the application's context.
+1. At least 6 relevant pages with working client-side navigation: Dashboard, Analytics/Reports, Master Data, Transactions/Operations, Approvals/Notifications, and Settings/Profile.
+2. Rich interactive components: KPI widgets, status badges, filters, charts via SVG or Chart.js, searchable/sortable/paginated tables, detail drawers, create/edit forms, delete confirmation and SweetAlert2 feedback.
+3. Realistic, context-specific mock data; every table must include loading, empty, error, and success states.
+4. Generate a DESIGN SPEC section before the HTML: explain the chosen visual treatment for the selected style, layout hierarchy, spacing scale, typography, component states, accessibility contrast, and responsive behavior.
+5. Do not use generic filler labels. Derive menu names, table names, columns, statuses, actions, KPIs, and mock data from the application domain and user description.
 
 DESIGN & UI/UX REQUIREMENTS:
 1. Design Aesthetic Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
@@ -2118,8 +2121,10 @@ DESIGN & UI/UX REQUIREMENTS:
    - LEFT SIDEBAR NAVIGATION: A persistent sidebar on the LEFT side (width: 220-260px) containing:
      * Company Logo (top section, with circular/square logo container)
      * Company Name text below logo
-     * Main navigation menu items with icons (Dashboard, Analytics, Data, Settings, etc.)
+     * Main navigation grouped into Overview, Workspace, Master Data, Reports, Administration
+     * Each item has icon, label, optional badge/count, active state, tooltip, and keyboard focus state
      * Active menu item highlighted with accent color + left border indicator
+     * Collapsible sidebar with persisted expanded/collapsed state; show full labels when expanded
      * User profile section at bottom of sidebar (avatar, name, role)
      * Watermark/credit footer at the very bottom of sidebar
    - The sidebar MUST be fixed/sticky, always visible, full height (100vh)
@@ -2183,10 +2188,12 @@ DESIGN & UI/UX REQUIREMENTS:
 7. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
 
 FRONTEND SIMULATION & BUG PREVENTION:
-1. Anti-overlap transitions: Display: none on inactive pages, and display: block/flex on active. Switch menus instantly using JavaScript DOM manipulation without page reload.
-2. Full self-contained simulation: Embed all styles and JS script inside this single HTML file. Make buttons interactive with SweetAlert2 toast alerts or simulation responses.
-3. Responsive Tables: Wrap all tables in overflow-x-auto container.
-4. CSS Variables: Define all theme colors as CSS custom properties (--primary, --accent, --bg, --sidebar-bg, --text, --text-secondary, --card-bg, --border) at :root level so the color picker can update them via JavaScript.
+1. Anti-overlap transitions: Display none on inactive pages; navigation must work without reload, preserve active route in URL hash, and restore it on refresh.
+2. Full self-contained simulation: Embed all CSS and JS in one HTML file; use SweetAlert2 toast/confirmation feedback.
+3. Tables to create: define at least 3 domain-specific tables: (A) master/reference table, (B) operational transaction table, (C) audit/activity table. For each table specify purpose, exact columns with type, sample rows, filters, sort, pagination, row actions, bulk actions, export CSV, and responsive mobile card fallback.
+4. Default settings: start with light theme for data-heavy business apps or dark theme for neon/dark styles; primary accent ${c1}, secondary accent ${c2}, 8px spacing scale, 14px base font, 12px table text, compact density, 220-260px sidebar, 768px mobile breakpoint, Indonesian locale (id-ID), Asia/Jakarta timezone, 10 rows/page, and localStorage persistence.
+5. Settings page must include theme/light-dark-system, accent colors, density compact/comfortable, sidebar expanded/collapsed, language, timezone, date format, rows per page, notifications, reduced motion, company identity/logo, profile/avatar, reset defaults, and save feedback.
+6. CSS Variables: define --primary, --accent, --bg, --sidebar-bg, --text, --text-secondary, --card-bg, --border, --radius, --sidebar-width; update them live from settings.
 
 OUTPUT FORMAT:
 Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS media queries for responsive sidebar (desktop) vs bottom nav (mobile). The Settings page MUST be fully coded with working file upload, color picker, text inputs, and localStorage persistence.`;
