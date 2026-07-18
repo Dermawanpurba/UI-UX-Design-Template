@@ -39,6 +39,8 @@
 
         * { box-sizing: border-box; }
 
+        html, body { width: 100%; min-width: 0; }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
@@ -568,6 +570,105 @@
             color: white;
             cursor: pointer;
             box-shadow: 0 0 12px rgba(99,102,241,0.3);
+        }
+
+        /* ============ MOBILE RESPONSIVE ============ */
+        @media (max-width: 767px) {
+            body {
+                height: auto;
+                min-height: 100dvh;
+                overflow: auto;
+            }
+
+            body > div {
+                display: block !important;
+                height: auto !important;
+                min-height: 100dvh;
+                overflow: visible !important;
+            }
+
+            .sidebar-left,
+            .sidebar-right {
+                display: none;
+            }
+
+            .main-content {
+                width: 100%;
+                min-height: 100dvh;
+                overflow: visible;
+            }
+
+            .topbar {
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 12px 14px;
+            }
+
+            .topbar > div:first-child {
+                min-width: 0;
+                flex: 1 1 100%;
+            }
+
+            .topbar > div:last-child {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .search-box {
+                width: 100%;
+                flex: 1;
+            }
+
+            .tab-filter {
+                padding: 10px 14px;
+                scrollbar-width: none;
+            }
+            .tab-filter::-webkit-scrollbar { display: none; }
+
+            .grid-scroll {
+                padding: 14px;
+                overflow: visible;
+            }
+
+            #style-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .style-card {
+                min-width: 0;
+                padding: 8px;
+            }
+            .style-card .thumb { height: 100px; }
+            .style-card h3 {
+                font-size: 11px;
+                line-height: 1.35;
+            }
+
+            .header-hero { padding: 14px; }
+            .status-bar {
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 8px 14px;
+            }
+
+            button,
+            .nav-item,
+            .cat-item,
+            .style-card,
+            select,
+            input {
+                -webkit-tap-highlight-color: transparent;
+            }
+            .nav-item, .cat-item, button { min-height: 40px; }
+        }
+
+        @media (max-width: 380px) {
+            #style-grid { grid-template-columns: 1fr; }
+            .style-card .thumb { height: 145px; }
         }
     </style>
 </head>
