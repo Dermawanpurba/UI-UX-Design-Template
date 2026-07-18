@@ -2018,104 +2018,140 @@
                 
                 const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern dashboard layout with essential features';
                 
-                const promptText = `Write a complete, single-file, production-ready, and responsive "index.html" representing a premium frontend interface for:
+                const promptText = `# ROLE
+You are the world's best Prompt Engineer, Enterprise Software Architect, Senior Product Manager, Senior Business Analyst, UI/UX Lead, and Full Stack Solution Architect.
+Your task is to write a complete, single-file, production-ready, and responsive "index.html" representing a premium enterprise-grade web application frontend for:
 - App Name: "${webName}"
 - User Input Description: ${webDesc}
 
-AI ENRICHMENT INSTRUCTION (CRITICAL):
-As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
-1. At least 6 relevant pages with working client-side navigation: Dashboard, Analytics/Reports, Master Data, Transactions/Operations, Approvals/Notifications, and Settings/Profile.
-2. Rich interactive components: KPI widgets, status badges, filters, charts via SVG or Chart.js, searchable/sortable/paginated tables, detail drawers, create/edit forms, delete confirmation and SweetAlert2 feedback.
-3. Realistic, context-specific mock data; every table must include loading, empty, error, and success states.
-4. Generate a DESIGN SPEC section before the HTML: explain the chosen visual treatment for "${style.name}", layout hierarchy, spacing scale, typography, component states, accessibility contrast, and responsive behavior.
-5. Do not use generic filler labels. Derive menu names, table names, columns, statuses, actions, KPIs, and mock data from the application domain and user description.
+---
 
-DESIGN & UI/UX REQUIREMENTS:
-1. Design Aesthetic Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
-2. UI Context-Aware Theme:
-   - For operational/field modules: use High-Contrast Flat Industrial UI (Caterpillar Yellow / Safety Orange / Emergency Red / Active Green).
-   - For managerial/administrative modules: use clean corporate dark/neutral colors.
-3. High Data Density: Use Solid & Flat Cards with solid borders, minimal padding, and monospace/tabular-nums for all numbers (costs, quantities, values).
+# OBJECTIVE
+Create a complete, single-file, production-ready, and responsive "index.html" representing a premium Enterprise Web Application.
+The final web application must feel like a commercial enterprise application instead of a generic dashboard or bootstrap tutorial.
 
-⚡ MANDATORY RESPONSIVE NAVIGATION (CRITICAL - DO NOT SKIP):
-4. DESKTOP/LAPTOP MODE (screen width >= 768px):
-   - LEFT SIDEBAR NAVIGATION: A persistent sidebar on the LEFT side (width: 220-260px) containing:
-     * Company Logo (top section, with circular/square logo container)
-     * Company Name text below logo
-     * Main navigation grouped into Overview, Workspace, Master Data, Reports, Administration
-     * Each item has icon, label, optional badge/count, active state, tooltip, and keyboard focus state
-     * Active menu item highlighted with accent color + left border indicator
-     * Collapsible sidebar with persisted expanded/collapsed state; show full labels when expanded
-     * User profile section at bottom of sidebar (avatar, name, role)
-     * Watermark/credit footer at the very bottom of sidebar
-   - The sidebar MUST be fixed/sticky, always visible, full height (100vh)
-   - Main content area fills remaining space to the right of sidebar
+---
 
-5. SMARTPHONE/MOBILE MODE (screen width < 768px):
-   - BOTTOM NAVIGATION BAR: A fixed bottom bar (height: 56-64px) containing:
-     * 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile)
-     * Active item highlighted with accent color + icon fill
-     * Subtle top border/shadow for elevation
-     * Each item has icon (18-22px) + tiny label text (9-10px) below icon
-   - NO left sidebar on mobile - it must be hidden (display:none)
-   - A compact TOP HEADER bar with hamburger menu icon + company name
-   - Hamburger menu opens a slide-in drawer from the left (overlay, not push)
-   - Content area fills full width with bottom padding to avoid nav overlap
-   - Smooth transition between desktop sidebar and mobile bottom nav using CSS media queries
+# THINKING PROCESS
+You MUST follow this exact thinking order before writing any code:
+1. Analyze Business Context: Understand the business domain (e.g. CMMS, ERP, Inventory, HRIS, Fleet Management, HSE, etc.).
+2. Analyze User Needs: Understand the target users and define their access roles.
+3. Analyze Process Workflow: Map the end-to-end industrial/business workflow stages.
+4. Analyze Database: Design normalized mock database tables and describe their relationships.
+5. Analyze Features: Outline dashboard widgets, search, filter, alerts, actions, and AI features.
+6. Analyze UI/UX design spec for "${style.name}" (${style.type}).
+7. Analyze Reports and KPIs.
+8. Analyze Risks: Risk summary and operational failures.
+9. Design Architecture: Plan modular CSS variables and clean HTML/JS structure.
+10. Create Wireframe Mentally: Plan desktop layout (persistent sidebar) vs mobile layout (bottom nav).
+11. Validate Design: Verify accessibility, density, contrast, and navigation transitions.
+12. Generate Code: Write the full code without placeholders.
 
-⚡ MANDATORY SETTINGS / PENGATURAN PANEL (CRITICAL - MUST BE FULLY FUNCTIONAL):
-6. SETTINGS PAGE (accessible from sidebar "Settings" / bottom nav gear icon):
-   This is a dedicated settings page/panel that MUST be fully interactive. It MUST include ALL of the following:
+---
 
-   a) 🎨 COLOR / THEME PICKER:
-      - A color palette section showing 8-12 predefined theme color options as clickable circle swatches
-      - At least 2 custom color inputs (type="color") for primary accent and secondary accent
-      - A "Live Preview" section that immediately updates accent colors across the entire app when user picks a color
-      - JavaScript function: when color is selected, update all CSS variables (--primary, --accent, --sidebar-bg, etc.) in real-time
-      - Save selected color to localStorage so it persists on page reload
-      - Display current active theme name
+# REQUIREMENTS
+You must automatically design and implement:
+1. Business Problem Analysis: Pre-analyze and document the domain problem.
+2. User Objective Analysis.
+3. Target User Personas.
+4. Workflow Stages: Operational states (e.g. Backlog, To Do, In Progress, Review, Completed).
+5. Business Rules Enforcement: Form validation, error handling, status-aware components.
+6. Multi-Module Navigation: Support at least 5 client-side pages (Dashboard, Analytics & Reports, Master Data, Transactions/Operations, and Settings/Profile).
+7. Simulated Database: At least 3 tables with realistic mock data, sorting, pagination, and CSV export.
+8. Schema Relationships: Explain table linkages clearly.
+9. User Roles (e.g. Admin, Operator, Supervisor).
+10. Permissions: Conditional UI view based on active role selection.
+11. Dashboard KPIs with high data density (using tabular-nums).
+12. Reports & Summaries: Exportable tables with search/filter features.
+13. Notifications: simulated Real-time toast alerts via SweetAlert2.
+14. Mandatory Print & Export Actions (MUST BE FULLY FUNCTIONAL): Fully working frontend buttons to (A) **Cetak PDF (Print PDF)** which triggers browser print with custom CSS rules ('@media print') hiding sidebars/headers and formatting reports cleanly, and (B) **Import/Export to Excel/CSV** which extracts current data from tables and downloads it as a CSV file in the browser with interactive SweetAlert2 success notifications.
+15. Advanced Search & Filtering: Global search + multi-select filters.
+16. AI Features (Simulated): AI Recommendations or automated insights box.
+17. Mobile Responsiveness: Desktop sidebar vs mobile bottom nav.
+18. Enterprise UI Standards: Solid flat borders, minimal padding, high contrast.
+19. Clean Coding Standards: Write clean, SOLID-compliant, reusable code.
+20. Performance Optimization: DOM caching, transition handling, clean state persistence.
 
-   b) 🏢 LOGO UPLOAD / CHANGE:
-      - A logo preview area (circular or rounded square, 80-100px) showing current logo
-      - "Upload Logo" button that triggers a file input (accept: image/*)
-      - Use FileReader API to convert uploaded image to base64 data URL
-      - Display the uploaded logo immediately in the preview area
-      - Save logo to localStorage as base64 string
-      - On page load, check localStorage for saved logo; if exists, use it; otherwise use default placeholder
-      - Also show a "Reset to Default" button to clear custom logo
+---
 
-   c) 📝 COMPANY NAME / PT NAME EDITOR:
-      - An editable text input field pre-filled with default company name (e.g., "PT. Maju Bersama")
-      - "Save" button to confirm changes
-      - On save, update: sidebar company name, browser tab title, header bar company name, and any footer references
-      - Save company name to localStorage
-      - On page load, use saved company name or fallback to default
+# UI REQUIREMENTS
+The application UI must resemble real-world commercial enterprise systems such as:
+- SAP PM / IBM Maximo (for maintenance, plant, and asset tracking)
+- Honeywell Forge / ABB Ability (for operations and field monitoring)
+- Oracle ERP / Microsoft Dynamics / ServiceNow (for business process workflows)
 
-   d) 👤 USER SETTINGS / PROFILE:
-      - User avatar display (circular, with option to upload custom avatar same as logo upload logic)
-      - Editable text fields: Username, Full Name, Email, Role/Position
-      - "Save Profile" button
-      - Save all user data to localStorage
-      - Update sidebar user section (avatar + name + role) in real-time after save
-      - Show "Profile Updated" toast notification (SweetAlert2)
+Strictly avoid looking like:
+- Simple tutorial dashboards or basic Bootstrap/AdminLTE templates
+- Unrealistic Dribbble concepts or standard marketing landing pages
 
-   e) SETTINGS PAGE UI LAYOUT:
-      - Settings page uses a clean card-based layout (NOT a modal)
-      - Each section (Color, Logo, Company, User) is in its own card with clear header
-      - Cards are arranged in a 2-column grid on desktop, single column on mobile
-      - Each card has subtle border, rounded corners, and consistent padding
-      - "Save" / "Reset" buttons use accent colors with hover effects
+Specific Design Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
+Visual Enhancements:
+- Immersive Hero Background: A beautiful, modern header banner utilizing abstract CSS glassmorphism blobs, gradient meshes, or layered SVGs.
+- Parallax Scrolling: Subtle parallax scrolling effects on page headers to give depth.
 
-7. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+---
 
-FRONTEND SIMULATION & BUG PREVENTION:
-1. Anti-overlap transitions: Display: none on inactive pages, and display: block/flex on active. Switch menus instantly using JavaScript DOM manipulation without page reload.
-2. Full self-contained simulation: Embed all styles and JS script inside this single HTML file. Make buttons interactive with SweetAlert2 toast alerts or simulation responses.
-3. Responsive Tables: Wrap all tables in overflow-x-auto container.
-4. CSS Variables: Define all theme colors as CSS custom properties (--primary, --accent, --bg, --sidebar-bg, --text, --text-secondary, --card-bg, --border) at :root level so the color picker can update them via JavaScript.
+# DASHBOARD & KANBAN REQUIREMENTS
+Every page must contain meaningful business information. Never create charts or cards just to fill space. Every component must answer a business question and support decision making.
+Every page should contain:
+- Executive Summary & KPI Widgets (high data density, tabular-nums)
+- Operational Status & Risk Summaries
+- Recent Activity Logs & Priority Action Tasks
+- Smart Recommendations Panel (AI-simulated suggestions)
+- Interactive Kanban Board Dashboard: Integrated workflow board featuring columns (Backlog, To Do, In Progress, Done) holding task cards with task titles, descriptions, due dates, priority tags (Low/Medium/High/Urgent), checklist completion stats, and assigned member avatars. Include simulated drag-and-drop or status-change logic with visual feedback.
+- Data Table with filters, quick actions, and reports.
+- Explanatory design spec at the top of the file.
 
-OUTPUT FORMAT:
-Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS media queries for responsive sidebar (desktop) vs bottom nav (mobile). The Settings page MUST be fully coded with working file upload, color picker, text inputs, and localStorage persistence.`;
+---
+
+# ANALYTICS & REPORTS REQUIREMENTS (INTERACTIVE)
+The Analytics & Reports page must NOT be a simple or plain static page. It must be highly professional and interactive:
+- Dynamic Data Visualization: Implement multiple responsive charts (using Chart.js or interactive SVGs) showing business trends, KPIs, and metric distributions.
+- Hierarchical Sub-Folder Directory: Implement a fully interactive foldered workspace. It must show a directory grid of folders (e.g. Workshop fabrication, Preventative maintenance, Safety records). Clicking/opening a folder must reveal its sub-folders or nested files/reports with detailed file metadata (file size, type, creation date, status).
+- Sub-folder Navigation: Users must be able to go back to the parent directory level easily, with smooth CSS transitions.
+- Filter and Search: Search bar inside the folder view to filter nested files by name or division.
+
+---
+
+# DATABASE REQUIREMENTS
+Simulate a backend database with high fidelity:
+- Normalize database, avoid duplicate tables, and build a scalable schema.
+- Explain relationships.
+- Use proper naming conventions and prepare for future expansion.
+- Every table must include loading, empty, error, and success states.
+
+---
+
+# CODING REQUIREMENTS
+- Think before coding and explain architecture internally.
+- Build reusable components and write clean code following SOLID principles where applicable.
+- Keep UI modular, optimize performance, avoid duplicate code, and build a maintainable codebase.
+
+---
+
+# ⚡ MANDATORY RESPONSIVE NAVIGATION
+- DESKTOP MODE (width >= 768px):
+  - PERSISTENT LEFT SIDEBAR: Width 220-260px. Contains Company Logo, Company Name, collapsible grouped navigation menus, active state indicators (accent color + left border), user profile footer with avatar, name, role, and watermark footer.
+  - Sticky full-height (100vh). Main content fills remaining space.
+- SMARTPHONE/MOBILE MODE (width < 768px):
+  - FIXED BOTTOM NAVIGATION BAR: Height 56-64px. Contains 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile) with active state highlights.
+  - Compact top header bar with hamburger menu trigger, which opens a slide-in drawer from the left.
+  - Sidebar hidden on mobile. Content area has bottom padding.
+
+---
+
+# ⚡ MANDATORY SETTINGS PAGE (CRITICAL)
+A dedicated settings page/panel that MUST be fully interactive. It MUST include:
+a) COLOR / THEME PICKER: Predefined swatches + custom color picker inputs updating CSS variables ('--primary', '--accent', '--bg', etc.) live, updating visual accent colors across the app instantly, and saving to localStorage.
+b) LOGO UPLOAD: File input using FileReader to preview and store base64 custom logo to localStorage, with reset option.
+c) COMPANY IDENTITY: Text input updating pt/company names across header/footer, saving to localStorage.
+d) USER SETTINGS: Editable username, email, full name, role, and avatar, updating sidebar profile in real-time, saving to localStorage.
+e) WATERMARK: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+
+---
+
+# OUTPUT FORMAT
+Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS and JS.`;
                 
                 navigator.clipboard.writeText(promptText).then(() => {
                     Swal.fire({
@@ -2248,106 +2284,140 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
     }
 
     function buildSinglePrompt(style, webName, webDesc, c1, c2) {
-        return `Write a complete, single-file, production-ready, and responsive "index.html" representing a premium frontend interface for:
+        return `# ROLE
+You are the world's best Prompt Engineer, Enterprise Software Architect, Senior Product Manager, Senior Business Analyst, UI/UX Lead, and Full Stack Solution Architect.
+Your task is to write a complete, single-file, production-ready, and responsive "index.html" representing a premium enterprise-grade web application frontend for:
 - App Name: "${webName}"
 - User Input Description: ${webDesc}
 
-AI ENRICHMENT INSTRUCTION (CRITICAL):
-As an AI Specialist, you MUST enrich and expand the user's input above. Turn their brief description into a feature-rich, high-fidelity corporate web application. Automatically design and implement:
-1. At least 6 relevant pages with working client-side navigation: Dashboard, Analytics/Reports, Master Data, Transactions/Operations, Approvals/Notifications, and Settings/Profile.
-2. Rich interactive components: KPI widgets, status badges, filters, charts via SVG or Chart.js, searchable/sortable/paginated tables, detail drawers, create/edit forms, delete confirmation and SweetAlert2 feedback.
-3. Realistic, context-specific mock data; every table must include loading, empty, error, and success states.
-4. Generate a DESIGN SPEC section before the HTML: explain the chosen visual treatment for the selected style, layout hierarchy, spacing scale, typography, component states, accessibility contrast, and responsive behavior.
-5. Do not use generic filler labels. Derive menu names, table names, columns, statuses, actions, KPIs, and mock data from the application domain and user description.
+---
 
-DESIGN & UI/UX REQUIREMENTS:
-1. Design Aesthetic Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
-2. UI Context-Aware Theme:
-   - For operational/field modules: use High-Contrast Flat Industrial UI (Caterpillar Yellow / Safety Orange / Emergency Red / Active Green).
-   - For managerial/administrative modules: use clean corporate dark/neutral colors.
-3. High Data Density: Use Solid & Flat Cards with solid borders, minimal padding, and monospace/tabular-nums for all numbers (costs, quantities, values).
+# OBJECTIVE
+Create a complete, single-file, production-ready, and responsive "index.html" representing a premium Enterprise Web Application.
+The final web application must feel like a commercial enterprise application instead of a generic dashboard or bootstrap tutorial.
 
-⚡ MANDATORY RESPONSIVE NAVIGATION (CRITICAL - DO NOT SKIP):
-4. DESKTOP/LAPTOP MODE (screen width >= 768px):
-   - LEFT SIDEBAR NAVIGATION: A persistent sidebar on the LEFT side (width: 220-260px) containing:
-     * Company Logo (top section, with circular/square logo container)
-     * Company Name text below logo
-     * Main navigation grouped into Overview, Workspace, Master Data, Reports, Administration
-     * Each item has icon, label, optional badge/count, active state, tooltip, and keyboard focus state
-     * Active menu item highlighted with accent color + left border indicator
-     * Collapsible sidebar with persisted expanded/collapsed state; show full labels when expanded
-     * User profile section at bottom of sidebar (avatar, name, role)
-     * Watermark/credit footer at the very bottom of sidebar
-   - The sidebar MUST be fixed/sticky, always visible, full height (100vh)
-   - Main content area fills remaining space to the right of sidebar
+---
 
-5. SMARTPHONE/MOBILE MODE (screen width < 768px):
-   - BOTTOM NAVIGATION BAR: A fixed bottom bar (height: 56-64px) containing:
-     * 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile)
-     * Active item highlighted with accent color + icon fill
-     * Subtle top border/shadow for elevation
-     * Each item has icon (18-22px) + tiny label text (9-10px) below icon
-   - NO left sidebar on mobile - it must be hidden (display:none)
-   - A compact TOP HEADER bar with hamburger menu icon + company name
-   - Hamburger menu opens a slide-in drawer from the left (overlay, not push)
-   - Content area fills full width with bottom padding to avoid nav overlap
-   - Smooth transition between desktop sidebar and mobile bottom nav using CSS media queries
+# THINKING PROCESS
+You MUST follow this exact thinking order before writing any code:
+1. Analyze Business Context: Understand the business domain (e.g. CMMS, ERP, Inventory, HRIS, Fleet Management, HSE, etc.).
+2. Analyze User Needs: Understand the target users and define their access roles.
+3. Analyze Process Workflow: Map the end-to-end industrial/business workflow stages.
+4. Analyze Database: Design normalized mock database tables and describe their relationships.
+5. Analyze Features: Outline dashboard widgets, search, filter, alerts, actions, and AI features.
+6. Analyze UI/UX design spec for "${style.name}" (${style.type}).
+7. Analyze Reports and KPIs.
+8. Analyze Risks: Risk summary and operational failures.
+9. Design Architecture: Plan modular CSS variables and clean HTML/JS structure.
+10. Create Wireframe Mentally: Plan desktop layout (persistent sidebar) vs mobile layout (bottom nav).
+11. Validate Design: Verify accessibility, density, contrast, and navigation transitions.
+12. Generate Code: Write the full code without placeholders.
 
-⚡ MANDATORY SETTINGS / PENGATURAN PANEL (CRITICAL - MUST BE FULLY FUNCTIONAL):
-6. SETTINGS PAGE (accessible from sidebar "Settings" / bottom nav gear icon):
-   This is a dedicated settings page/panel that MUST be fully interactive. It MUST include ALL of the following:
+---
 
-   a) 🎨 COLOR / THEME PICKER:
-      - A color palette section showing 8-12 predefined theme color options as clickable circle swatches
-      - At least 2 custom color inputs (type="color") for primary accent and secondary accent
-      - A "Live Preview" section that immediately updates accent colors across the entire app when user picks a color
-      - JavaScript function: when color is selected, update all CSS variables (--primary, --accent, --sidebar-bg, etc.) in real-time
-      - Save selected color to localStorage so it persists on page reload
-      - Display current active theme name
+# REQUIREMENTS
+You must automatically design and implement:
+1. Business Problem Analysis: Pre-analyze and document the domain problem.
+2. User Objective Analysis.
+3. Target User Personas.
+4. Workflow Stages: Operational states (e.g. Backlog, To Do, In Progress, Review, Completed).
+5. Business Rules Enforcement: Form validation, error handling, status-aware components.
+6. Multi-Module Navigation: Support at least 5 client-side pages (Dashboard, Analytics & Reports, Master Data, Transactions/Operations, and Settings/Profile).
+7. Simulated Database: At least 3 tables with realistic mock data, sorting, pagination, and CSV export.
+8. Schema Relationships: Explain table linkages clearly.
+9. User Roles (e.g. Admin, Operator, Supervisor).
+10. Permissions: Conditional UI view based on active role selection.
+11. Dashboard KPIs with high data density (using tabular-nums).
+12. Reports & Summaries: Exportable tables with search/filter features.
+13. Notifications: simulated Real-time toast alerts via SweetAlert2.
+14. Mandatory Print & Export Actions (MUST BE FULLY IMPLEMENTED): Fully working frontend buttons to (A) **Cetak PDF (Print PDF)** which triggers browser print with custom CSS rules ('@media print') hiding sidebars/headers and formatting reports cleanly, and (B) **Import/Export to Excel/CSV** which extracts current data from tables and downloads it as a CSV file in the browser with interactive SweetAlert2 success notifications.
+15. Advanced Search & Filtering: Global search + multi-select filters.
+16. AI Features (Simulated): AI Recommendations or automated insights box.
+17. Mobile Responsiveness: Desktop sidebar vs mobile bottom nav.
+18. Enterprise UI Standards: Solid flat borders, minimal padding, high contrast.
+19. Clean Coding Standards: Write clean, SOLID-compliant, reusable code.
+20. Performance Optimization: DOM caching, transition handling, clean state persistence.
 
-   b) 🏢 LOGO UPLOAD / CHANGE:
-      - A logo preview area (circular or rounded square, 80-100px) showing current logo
-      - "Upload Logo" button that triggers a file input (accept: image/*)
-      - Use FileReader API to convert uploaded image to base64 data URL
-      - Display the uploaded logo immediately in the preview area
-      - Save logo to localStorage as base64 string
-      - On page load, check localStorage for saved logo; if exists, use it; otherwise use default placeholder
-      - Also show a "Reset to Default" button to clear custom logo
+---
 
-   c) 📝 COMPANY NAME / PT NAME EDITOR:
-      - An editable text input field pre-filled with default company name (e.g., "PT. Maju Bersama")
-      - "Save" button to confirm changes
-      - On save, update: sidebar company name, browser tab title, header bar company name, and any footer references
-      - Save company name to localStorage
-      - On page load, use saved company name or fallback to default
+# UI REQUIREMENTS
+The application UI must resemble real-world commercial enterprise systems such as:
+- SAP PM / IBM Maximo (for maintenance, plant, and asset tracking)
+- Honeywell Forge / ABB Ability (for operations and field monitoring)
+- Oracle ERP / Microsoft Dynamics / ServiceNow (for business process workflows)
 
-   d) 👤 USER SETTINGS / PROFILE:
-      - User avatar display (circular, with option to upload custom avatar same as logo upload logic)
-      - Editable text fields: Username, Full Name, Email, Role/Position
-      - "Save Profile" button
-      - Save all user data to localStorage
-      - Update sidebar user section (avatar + name + role) in real-time after save
-      - Show "Profile Updated" toast notification (SweetAlert2)
+Strictly avoid looking like:
+- Simple tutorial dashboards or basic Bootstrap/AdminLTE templates
+- Unrealistic Dribbble concepts or standard marketing landing pages
 
-   e) SETTINGS PAGE UI LAYOUT:
-      - Settings page uses a clean card-based layout (NOT a modal)
-      - Each section (Color, Logo, Company, User) is in its own card with clear header
-      - Cards are arranged in a 2-column grid on desktop, single column on mobile
-      - Each card has subtle border, rounded corners, and consistent padding
-      - "Save" / "Reset" buttons use accent colors with hover effects
+Specific Design Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
+Visual Enhancements:
+- Immersive Hero Background: A beautiful, modern header banner utilizing abstract CSS glassmorphism blobs, gradient meshes, or layered SVGs.
+- Parallax Scrolling: Subtle parallax scrolling effects on page headers to give depth.
 
-7. Watermark: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+---
 
-FRONTEND SIMULATION & BUG PREVENTION:
-1. Anti-overlap transitions: Display none on inactive pages; navigation must work without reload, preserve active route in URL hash, and restore it on refresh.
-2. Full self-contained simulation: Embed all CSS and JS in one HTML file; use SweetAlert2 toast/confirmation feedback.
-3. Tables to create: define at least 3 domain-specific tables: (A) master/reference table, (B) operational transaction table, (C) audit/activity table. For each table specify purpose, exact columns with type, sample rows, filters, sort, pagination, row actions, bulk actions, export CSV, and responsive mobile card fallback.
-4. Default settings: start with light theme for data-heavy business apps or dark theme for neon/dark styles; primary accent ${c1}, secondary accent ${c2}, 8px spacing scale, 14px base font, 12px table text, compact density, 220-260px sidebar, 768px mobile breakpoint, Indonesian locale (id-ID), Asia/Jakarta timezone, 10 rows/page, and localStorage persistence.
-5. Settings page must include theme/light-dark-system, accent colors, density compact/comfortable, sidebar expanded/collapsed, language, timezone, date format, rows per page, notifications, reduced motion, company identity/logo, profile/avatar, reset defaults, and save feedback.
-6. CSS Variables: define --primary, --accent, --bg, --sidebar-bg, --text, --text-secondary, --card-bg, --border, --radius, --sidebar-width; update them live from settings.
+# DASHBOARD & KANBAN REQUIREMENTS
+Every page must contain meaningful business information. Never create charts or cards just to fill space. Every component must answer a business question and support decision making.
+Every page should contain:
+- Executive Summary & KPI Widgets (high data density, tabular-nums)
+- Operational Status & Risk Summaries
+- Recent Activity Logs & Priority Action Tasks
+- Smart Recommendations Panel (AI-simulated suggestions)
+- Interactive Kanban Board Dashboard: Integrated workflow board featuring columns (Backlog, To Do, In Progress, Done) holding task cards with task titles, descriptions, due dates, priority tags (Low/Medium/High/Urgent), checklist completion stats, and assigned member avatars. Include simulated drag-and-drop or status-change logic with visual feedback.
+- Data Table with filters, quick actions, and reports.
+- Explanatory design spec at the top of the file.
 
-OUTPUT FORMAT:
-Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS media queries for responsive sidebar (desktop) vs bottom nav (mobile). The Settings page MUST be fully coded with working file upload, color picker, text inputs, and localStorage persistence.`;
+---
+
+# ANALYTICS & REPORTS REQUIREMENTS (INTERACTIVE)
+The Analytics & Reports page must NOT be a simple or plain static page. It must be highly professional and interactive:
+- Dynamic Data Visualization: Implement multiple responsive charts (using Chart.js or interactive SVGs) showing business trends, KPIs, and metric distributions.
+- Hierarchical Sub-Folder Directory: Implement a fully interactive foldered workspace. It must show a directory grid of folders (e.g. Workshop fabrication, Preventative maintenance, Safety records). Clicking/opening a folder must reveal its sub-folders or nested files/reports with detailed file metadata (file size, type, creation date, status).
+- Sub-folder Navigation: Users must be able to go back to the parent directory level easily, with smooth CSS transitions.
+- Filter and Search: Search bar inside the folder view to filter nested files by name or division.
+
+---
+
+# DATABASE REQUIREMENTS
+Simulate a backend database with high fidelity:
+- Normalize database, avoid duplicate tables, and build a scalable schema.
+- Explain relationships.
+- Use proper naming conventions and prepare for future expansion.
+- Every table must include loading, empty, error, and success states.
+
+---
+
+# CODING REQUIREMENTS
+- Think before coding and explain architecture internally.
+- Build reusable components and write clean code following SOLID principles where applicable.
+- Keep UI modular, optimize performance, avoid duplicate code, and build a maintainable codebase.
+
+---
+
+# ⚡ MANDATORY RESPONSIVE NAVIGATION
+- DESKTOP MODE (width >= 768px):
+  - PERSISTENT LEFT SIDEBAR: Width 220-260px. Contains Company Logo, Company Name, collapsible grouped navigation menus, active state indicators (accent color + left border), user profile footer with avatar, name, role, and watermark footer.
+  - Sticky full-height (100vh). Main content fills remaining space.
+- SMARTPHONE/MOBILE MODE (width < 768px):
+  - FIXED BOTTOM NAVIGATION BAR: Height 56-64px. Contains 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile) with active state highlights.
+  - Compact top header bar with hamburger menu trigger, which opens a slide-in drawer from the left.
+  - Sidebar hidden on mobile. Content area has bottom padding.
+
+---
+
+# ⚡ MANDATORY SETTINGS PAGE (CRITICAL)
+A dedicated settings page/panel that MUST be fully interactive. It MUST include:
+a) COLOR / THEME PICKER: Predefined swatches + custom color picker inputs updating CSS variables ('--primary', '--accent', '--bg', etc.) live, updating visual accent colors across the app instantly, and saving to localStorage.
+b) LOGO UPLOAD: File input using FileReader to preview and store base64 custom logo to localStorage, with reset option.
+c) COMPANY IDENTITY: Text input updating pt/company names across header/footer, saving to localStorage.
+d) USER SETTINGS: Editable username, email, full name, role, and avatar, updating sidebar profile in real-time, saving to localStorage.
+e) WATERMARK: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
+
+---
+
+# OUTPUT FORMAT
+Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS and JS.`;
     }
 
     function copyBulkPrompts() {
