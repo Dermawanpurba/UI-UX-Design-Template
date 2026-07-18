@@ -670,6 +670,45 @@
             #style-grid { grid-template-columns: 1fr; }
             .style-card .thumb { height: 145px; }
         }
+        /* Live demo: usable on smartphone widths; audit/info panel remains reachable. */
+        @media (max-width: 767px) {
+            #live-demo-overlay > div:first-child {
+                padding: 9px 12px !important;
+                gap: 8px;
+            }
+            #live-demo-overlay > div:first-child > div:first-child {
+                min-width: 0;
+                gap: 7px !important;
+            }
+            #live-demo-overlay > div:first-child > div:first-child > div:nth-child(2) {
+                min-width: 0;
+            }
+            #live-demo-overlay > div:first-child > div:first-child > div:nth-child(2) > div:first-child {
+                max-width: 125px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            #ld-theme-switcher { max-width: 110px !important; }
+            #live-demo-overlay > div:last-child {
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+            }
+            #live-demo-overlay > div:last-child > div:first-child {
+                min-height: 48vh;
+                flex: 1 1 52%;
+                border-right: 0 !important;
+                border-bottom: 1px solid #1E2336;
+            }
+            #live-demo-overlay > div:last-child > div:last-child {
+                min-height: 0;
+                flex: 1 1 48%;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch;
+            }
+            #ld-demo-frame { min-height: 0; overflow: auto !important; }
+        }
     </style>
 </head>
 <body>
@@ -1280,21 +1319,37 @@
     }
 
     function filterCategory(type) {
-        currentCategory = type;
+        currentCategory = String(type || 'all').toLowerCase().trim();
         renderCategories();
         renderTabFilter();
         let filtered = MOCK_DB.styles;
-        if (type !== 'all') filtered = filtered.filter(s => s.type === type);
-        const sv = (document.getElementById('search-input') || {}).value || '';
-        if (sv) filtered = filtered.filter(s => s.name.toLowerCase().includes(sv.toLowerCase()) || s.desc.toLowerCase().includes(sv.toLowerCase()));
+        if (currentCategory !== 'all') {
+            filtered = filtered.filter(s => String(s.type).toLowerCase() === currentCategory);
+        }
+        const search = document.getElementById('search-input');
+        const sv = search ? search.value.trim().toLowerCase() : '';
+        if (sv) {
+            filtered = filtered.filter(s =>
+                String(s.name).toLowerCase().includes(sv) ||
+                String(s.desc).toLowerCase().includes(sv)
+            );
+        }
         renderGrid(filtered);
     }
 
     /* ==================== SEARCH ==================== */
     function onSearch(val) {
         let filtered = MOCK_DB.styles;
-        if (currentCategory !== 'all') filtered = filtered.filter(s => s.type === currentCategory);
-        if (val) filtered = filtered.filter(s => s.name.toLowerCase().includes(val.toLowerCase()) || s.desc.toLowerCase().includes(val.toLowerCase()));
+        if (currentCategory !== 'all') {
+            filtered = filtered.filter(s => String(s.type).toLowerCase() === currentCategory);
+        }
+        const query = String(val || '').trim().toLowerCase();
+        if (query) {
+            filtered = filtered.filter(s =>
+                String(s.name).toLowerCase().includes(query) ||
+                String(s.desc).toLowerCase().includes(query)
+            );
+        }
         renderGrid(filtered);
     }
 
@@ -1502,7 +1557,8 @@
 
     /* ==================== PREVIEW MODAL ==================== */
     function showPreview(id) {
-        const style = MOCK_DB.styles.find(s => s.id === id);
+        const numericId = Number(id);
+        const style = MOCK_DB.styles.find(s => s.id === numericId);
         if (!style) return;
         addToHistory(style);
         const isFav = favorites.includes(id);
@@ -1646,7 +1702,8 @@
     let ldCurrentStyle = null;
 
     function showLiveDemo(id) {
-        const style = MOCK_DB.styles.find(s => s.id === id);
+        const numericId = Number(id);
+        const style = MOCK_DB.styles.find(s => s.id === numericId);
         if (!style) return;
         ldCurrentStyle = style;
         ldRefIdx = 0;
@@ -1668,7 +1725,7 @@
             if(s.id === id) opt.selected = true;
             switcher.appendChild(opt);
         });
-        switcher.onchange = (e) => showLiveDemo(parseInt(e.target.value));
+        switcher.onchange = (e) => showLiveDemo(Number(e.target.value));
 
         // Restore Action Button for normal styles
         document.getElementById('ld-action-text').innerHTML = 'Gunakan gaya desain ini untuk menghasilkan kode index.html dengan AI.';
