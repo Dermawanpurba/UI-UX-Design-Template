@@ -1972,194 +1972,99 @@
     function generatePromptFromLiveDemo() {
         if(!ldCurrentStyle) return;
         const style = ldCurrentStyle;
-        const cols = style.color.split(',');
+        const cols = style.color ? style.color.split(',') : [];
         const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
         const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
         
         Swal.fire({
-            title: '✨ Nama Website / Aplikasi',
-            text: 'Nama website atau aplikasi yang ingin Anda buat:',
-            input: 'text',
-            inputPlaceholder: 'Contoh: Toko Online Sepatu, Portfolio Fotografi, Dashboard Penjualan',
+            title: '✨ Konfigurasi Prompt AI',
+            html: `
+                <div style="text-align:left;font-family:'Inter',sans-serif;">
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:14px;line-height:1.5;">Pilih <strong>Archetype Aplikasi</strong> agar AI menghasilkan tata letak & fitur yang 100% pas (ERP, SOP/Arsip, Landing Page, atau E-Commerce):</p>
+                    
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">1. Tipe / Archetype Aplikasi</label>
+                    <select id="swal-app-archetype" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;cursor:pointer;">
+                        <option value="AUTO">🎯 Otomatis (Deteksi dari Kata Kunci & Style)</option>
+                        <option value="ERP_DASHBOARD">🏭 ERP / CMMS Dashboard (High Density Data, Kanban Board, Export PDF/Excel)</option>
+                        <option value="ARCHIVE_SOP">📁 Digital Archive / SOP / DMS (Directory Tree, Breadcrumbs, PDF Viewer Modal)</option>
+                        <option value="LANDING_PAGE">🚀 Marketing Landing Page (GSAP + Lenis Animation, Parallax Hero, CTA Focus)</option>
+                        <option value="ECOMMERCE">🛒 E-Commerce / Storefront (Product Grid Cards, Slide Cart Drawer, Checkout Flow)</option>
+                    </select>
+
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">2. Nama Website / Aplikasi</label>
+                    <input id="swal-web-name" type="text" placeholder="Contoh: PT. Maju Bersama - WebApp SOP / ERP Penjualan" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;box-sizing:border-box;">
+
+                    <div style="font-size:11px;color:#8892B0;background:rgba(99,102,241,0.1);padding:10px;border-radius:8px;border:1px solid rgba(99,102,241,0.25);line-height:1.5;">
+                        <i class="fa-solid fa-lightbulb" style="color:#818CF8;margin-right:4px;"></i>
+                        <strong style="color:#CBD5F0;">Petunjuk Hasil Prompt:</strong>
+                        <ul style="margin:4px 0 0 16px;padding:0;font-size:10px;color:#94A3B8;">
+                            <li><strong>Digital Archive/SOP:</strong> Tree Folder Workspace & PDF Viewer Modal. Hapus sales charts.</li>
+                            <li><strong>ERP Dashboard:</strong> Tabular Data, Kanban Board, & Export PDF/CSV. Hapus Hero Blobs.</li>
+                            <li><strong>Landing Page:</strong> Animasi GSAP + Lenis Smooth Scroll & Parallax. Hapus Sidebar ERP.</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
             background: '#111420',
             color: '#fff',
+            focusConfirm: false,
             confirmButtonColor: '#6366F1',
-            confirmButtonText: 'Lanjut',
+            confirmButtonText: 'Lanjut <i class="fa-solid fa-arrow-right" style="margin-left:4px;"></i>',
             cancelButtonColor: '#1E2336',
             cancelButtonText: 'Batal',
             showCancelButton: true,
             target: document.body,
-            customClass: { popup: 'border border-gray-700 rounded-2xl' }
-        }).then((nameResult) => {
-            if (nameResult.isDismissed) {
-                return; // User cancelled
+            customClass: { popup: 'border border-gray-700 rounded-2xl' },
+            preConfirm: () => {
+                const name = document.getElementById('swal-web-name').value;
+                const archetype = document.getElementById('swal-app-archetype').value;
+                if (!name || !name.trim()) {
+                    Swal.showValidationMessage('Silakan masukkan nama website / aplikasi');
+                    return false;
+                }
+                return { name: name.trim(), archetype: archetype };
             }
+        }).then((nameResult) => {
+            if (nameResult.isDismissed || !nameResult.value) return;
             
-            const webName = nameResult.value ? nameResult.value.trim() : 'Premium Web Application';
+            const webName = nameResult.value.name;
+            const forcedArchetype = nameResult.value.archetype;
             
             Swal.fire({
-                title: '📝 Penjelasan Singkat',
-                text: `Jelaskan secara singkat fitur atau tujuan untuk "${webName}":`,
+                title: '📝 Penjelasan Fitur & Tujuan',
+                text: `Jelaskan secara singkat fitur utama untuk "${webName}":`,
                 input: 'textarea',
-                inputPlaceholder: 'Contoh: Menampilkan daftar produk unggulan dengan filter kategori, keranjang belanja interaktif, dan formulir checkout yang bersih.',
+                inputPlaceholder: forcedArchetype === 'ARCHIVE_SOP'
+                    ? 'Contoh: Repositori dokumen SOP pabrikasi, JSA keselamatan kerja, filter kategori divisi, dan preview PDF.'
+                    : (forcedArchetype === 'LANDING_PAGE'
+                        ? 'Contoh: Landing page promosi SaaS dengan animasi hero GSAP, daftar fitur interaktif, testimoni, dan tombol CTA.'
+                        : 'Contoh: Dashboard ERP inventori dengan KPI real-time, papan Kanban, dan laporan transaksi yang bisa diekspor.'),
                 background: '#111420',
                 color: '#fff',
                 confirmButtonColor: '#6366F1',
-                confirmButtonText: 'Generate Prompt',
+                confirmButtonText: 'Generate Prompt ✨',
                 cancelButtonColor: '#1E2336',
                 cancelButtonText: 'Batal',
                 showCancelButton: true,
                 target: document.body,
                 customClass: { popup: 'border border-gray-700 rounded-2xl' }
             }).then((descResult) => {
-                if (descResult.isDismissed) {
-                    return; // User cancelled
-                }
+                if (descResult.isDismissed) return;
                 
-                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern dashboard layout with essential features';
-                
-                const promptText = `# ROLE
-You are the world's best Prompt Engineer, Enterprise Software Architect, Senior Product Manager, Senior Business Analyst, UI/UX Lead, and Full Stack Solution Architect.
-Your task is to write a complete, single-file, production-ready, and responsive "index.html" representing a premium enterprise-grade web application frontend for:
-- App Name: "${webName}"
-- User Input Description: ${webDesc}
-
----
-
-# OBJECTIVE
-Create a complete, single-file, production-ready, and responsive "index.html" representing a premium Enterprise Web Application.
-The final web application must feel like a commercial enterprise application instead of a generic dashboard or bootstrap tutorial.
-
----
-
-# THINKING PROCESS
-You MUST follow this exact thinking order before writing any code:
-1. Analyze Business Context: Understand the business domain (e.g. CMMS, ERP, Inventory, HRIS, Fleet Management, HSE, etc.).
-2. Analyze User Needs: Understand the target users and define their access roles.
-3. Analyze Process Workflow: Map the end-to-end industrial/business workflow stages.
-4. Analyze Database: Design normalized mock database tables and describe their relationships.
-5. Analyze Features: Outline dashboard widgets, search, filter, alerts, actions, and AI features.
-6. Analyze UI/UX design spec for "${style.name}" (${style.type}).
-7. Analyze Reports and KPIs.
-8. Analyze Risks: Risk summary and operational failures.
-9. Design Architecture: Plan modular CSS variables and clean HTML/JS structure.
-10. Create Wireframe Mentally: Plan desktop layout (persistent sidebar) vs mobile layout (bottom nav).
-11. Validate Design: Verify accessibility, density, contrast, and navigation transitions.
-12. Generate Code: Write the full code without placeholders.
-
----
-
-# REQUIREMENTS
-You must automatically design and implement:
-1. Business Problem Analysis: Pre-analyze and document the domain problem.
-2. User Objective Analysis.
-3. Target User Personas.
-4. Workflow Stages: Operational states (e.g. Backlog, To Do, In Progress, Review, Completed).
-5. Business Rules Enforcement: Form validation, error handling, status-aware components.
-6. Multi-Module Navigation: Support at least 5 client-side pages (Dashboard, Analytics & Reports, Master Data, Transactions/Operations, and Settings/Profile).
-7. Simulated Database: At least 3 tables with realistic mock data, sorting, pagination, and CSV export.
-8. Schema Relationships: Explain table linkages clearly.
-9. User Roles (e.g. Admin, Operator, Supervisor).
-10. Permissions: Conditional UI view based on active role selection.
-11. Dashboard KPIs with high data density (using tabular-nums).
-12. Reports & Summaries: Exportable tables with search/filter features.
-13. Notifications: simulated Real-time toast alerts via SweetAlert2.
-14. Mandatory Print & Export Actions (MUST BE FULLY FUNCTIONAL): Fully working frontend buttons to (A) **Cetak PDF (Print PDF)** which triggers browser print with custom CSS rules ('@media print') hiding sidebars/headers and formatting reports cleanly, and (B) **Import/Export to Excel/CSV** which extracts current data from tables and downloads it as a CSV file in the browser with interactive SweetAlert2 success notifications.
-15. Advanced Search & Filtering: Global search + multi-select filters.
-16. AI Features (Simulated): AI Recommendations or automated insights box.
-17. Mobile Responsiveness: Desktop sidebar vs mobile bottom nav.
-18. Enterprise UI Standards: Solid flat borders, minimal padding, high contrast.
-19. Clean Coding Standards: Write clean, SOLID-compliant, reusable code.
-20. Performance Optimization: DOM caching, transition handling, clean state persistence.
-
----
-
-# UI REQUIREMENTS
-The application UI must resemble real-world commercial enterprise systems such as:
-- SAP PM / IBM Maximo (for maintenance, plant, and asset tracking)
-- Honeywell Forge / ABB Ability (for operations and field monitoring)
-- Oracle ERP / Microsoft Dynamics / ServiceNow (for business process workflows)
-
-Strictly avoid looking like:
-- Simple tutorial dashboards or basic Bootstrap/AdminLTE templates
-- Unrealistic Dribbble concepts or standard marketing landing pages
-
-Specific Design Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
-Visual Enhancements:
-- Immersive Hero Background: A beautiful, modern header banner utilizing abstract CSS glassmorphism blobs, gradient meshes, or layered SVGs.
-- Parallax Scrolling: Subtle parallax scrolling effects on page headers to give depth.
-
----
-
-# DASHBOARD & KANBAN REQUIREMENTS
-Every page must contain meaningful business information. Never create charts or cards just to fill space. Every component must answer a business question and support decision making.
-Every page should contain:
-- Executive Summary & KPI Widgets (high data density, tabular-nums)
-- Operational Status & Risk Summaries
-- Recent Activity Logs & Priority Action Tasks
-- Smart Recommendations Panel (AI-simulated suggestions)
-- Interactive Kanban Board Dashboard: Integrated workflow board featuring columns (Backlog, To Do, In Progress, Done) holding task cards with task titles, descriptions, due dates, priority tags (Low/Medium/High/Urgent), checklist completion stats, and assigned member avatars. Include simulated drag-and-drop or status-change logic with visual feedback.
-- Data Table with filters, quick actions, and reports.
-- Explanatory design spec at the top of the file.
-
----
-
-# ANALYTICS & REPORTS REQUIREMENTS (INTERACTIVE)
-The Analytics & Reports page must NOT be a simple or plain static page. It must be highly professional and interactive:
-- Dynamic Data Visualization: Implement multiple responsive charts (using Chart.js or interactive SVGs) showing business trends, KPIs, and metric distributions.
-- Hierarchical Sub-Folder Directory: Implement a fully interactive foldered workspace. It must show a directory grid of folders (e.g. Workshop fabrication, Preventative maintenance, Safety records). Clicking/opening a folder must reveal its sub-folders or nested files/reports with detailed file metadata (file size, type, creation date, status).
-- Sub-folder Navigation: Users must be able to go back to the parent directory level easily, with smooth CSS transitions.
-- Filter and Search: Search bar inside the folder view to filter nested files by name or division.
-
----
-
-# DATABASE REQUIREMENTS
-Simulate a backend database with high fidelity:
-- Normalize database, avoid duplicate tables, and build a scalable schema.
-- Explain relationships.
-- Use proper naming conventions and prepare for future expansion.
-- Every table must include loading, empty, error, and success states.
-
----
-
-# CODING REQUIREMENTS
-- Think before coding and explain architecture internally.
-- Build reusable components and write clean code following SOLID principles where applicable.
-- Keep UI modular, optimize performance, avoid duplicate code, and build a maintainable codebase.
-
----
-
-# ⚡ MANDATORY RESPONSIVE NAVIGATION
-- DESKTOP MODE (width >= 768px):
-  - PERSISTENT LEFT SIDEBAR: Width 220-260px. Contains Company Logo, Company Name, collapsible grouped navigation menus, active state indicators (accent color + left border), user profile footer with avatar, name, role, and watermark footer.
-  - Sticky full-height (100vh). Main content fills remaining space.
-- SMARTPHONE/MOBILE MODE (width < 768px):
-  - FIXED BOTTOM NAVIGATION BAR: Height 56-64px. Contains 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile) with active state highlights.
-  - Compact top header bar with hamburger menu trigger, which opens a slide-in drawer from the left.
-  - Sidebar hidden on mobile. Content area has bottom padding.
-
----
-
-# ⚡ MANDATORY SETTINGS PAGE (CRITICAL)
-A dedicated settings page/panel that MUST be fully interactive. It MUST include:
-a) COLOR / THEME PICKER: Predefined swatches + custom color picker inputs updating CSS variables ('--primary', '--accent', '--bg', etc.) live, updating visual accent colors across the app instantly, and saving to localStorage.
-b) LOGO UPLOAD: File input using FileReader to preview and store base64 custom logo to localStorage, with reset option.
-c) COMPANY IDENTITY: Text input updating pt/company names across header/footer, saving to localStorage.
-d) USER SETTINGS: Editable username, email, full name, role, and avatar, updating sidebar profile in real-time, saving to localStorage.
-e) WATERMARK: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
-
----
-
-# OUTPUT FORMAT
-Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS and JS.`;
+                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern application frontend with essential features';
+                const promptText = buildSinglePrompt(style, webName, webDesc, c1, c2, forcedArchetype);
+                const activeArchetypeLabel = getArchetypeLabel(detectActiveArchetype(style, webName, webDesc, forcedArchetype));
                 
                 navigator.clipboard.writeText(promptText).then(() => {
                     Swal.fire({
                         title: '✨ Prompt Berhasil Disalin!',
                         html: `
-                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk menghasilkan kode index.html dengan gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
-                            <textarea readonly style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
-                            <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Claude, ChatGPT, v0.dev, Gemini, atau AI code generator pilihan Anda.</p>
+                            <div style="margin-bottom:10px;">
+                                <span style="padding:4px 12px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
+                            </div>
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
+                            <textarea readonly style="width:100%;height:120px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                            <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Claude, ChatGPT, v0.dev, Gemini, atau AI pilihan Anda.</p>
                         `,
                         icon: 'success',
                         background: '#111420',
@@ -2173,7 +2078,10 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
                     Swal.fire({
                         title: '✨ Prompt Berhasil Dibuat!',
                         html: `
-                            <textarea id="fallback-prompt-text" style="width:100%;height:100px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                            <div style="margin-bottom:10px;">
+                                <span style="padding:4px 12px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
+                            </div>
+                            <textarea id="fallback-prompt-text" style="width:100%;height:120px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
                             <button onclick="document.getElementById('fallback-prompt-text').select(); document.execCommand('copy'); Swal.fire('Tersalin!', '', 'success');" style="margin-top:10px;padding:6px 16px;background:#6366F1;color:white;border:none;border-radius:6px;font-size:11px;cursor:pointer;">Salin Teks</button>
                         `,
                         background: '#111420',
@@ -2195,38 +2103,62 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
     /* ==================== BULK GENERATE ALL 60 PROMPTS ==================== */
     function generateAllPrompts() {
         Swal.fire({
-            title: '📝 Nama Website / Aplikasi (untuk semua prompt)',
-            text: 'Masukkan nama website/aplikasi yang akan digunakan di semua 60 prompt:',
-            input: 'text',
-            inputPlaceholder: 'Contoh: PT. Maju Bersama - Dashboard ERP',
+            title: '📝 Bulk 60 Prompts Configuration',
+            html: `
+                <div style="text-align:left;font-family:'Inter',sans-serif;">
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:14px;">Membuat 60 Prompt sekaligus untuk semua Design Styles.</p>
+                    
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">1. Target Archetype Aplikasi</label>
+                    <select id="swal-bulk-archetype" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;cursor:pointer;">
+                        <option value="AUTO">🎯 Otomatis (Deteksi dari Nama & Fitur)</option>
+                        <option value="ERP_DASHBOARD">🏭 ERP / CMMS Dashboard System</option>
+                        <option value="ARCHIVE_SOP">📁 Digital Archive / SOP / DMS Management</option>
+                        <option value="LANDING_PAGE">🚀 Marketing Landing Page (GSAP + Lenis)</option>
+                        <option value="ECOMMERCE">🛒 E-Commerce Platform & POS</option>
+                    </select>
+
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">2. Nama Website / Aplikasi</label>
+                    <input id="swal-bulk-name" type="text" placeholder="Contoh: PT. Maju Bersama - Enterprise System" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;box-sizing:border-box;">
+                </div>
+            `,
             background: '#111420',
             color: '#fff',
             confirmButtonColor: '#10B981',
-            confirmButtonText: 'Lanjut',
+            confirmButtonText: 'Lanjut <i class="fa-solid fa-arrow-right" style="margin-left:4px;"></i>',
             cancelButtonColor: '#1E2336',
             cancelButtonText: 'Batal',
             showCancelButton: true,
-            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+            customClass: { popup: 'border border-gray-700 rounded-2xl' },
+            preConfirm: () => {
+                const name = document.getElementById('swal-bulk-name').value;
+                const archetype = document.getElementById('swal-bulk-archetype').value;
+                if (!name || !name.trim()) {
+                    Swal.showValidationMessage('Masukkan nama website / aplikasi');
+                    return false;
+                }
+                return { name: name.trim(), archetype: archetype };
+            }
         }).then((nameResult) => {
-            if (nameResult.isDismissed) return;
-            const webName = nameResult.value ? nameResult.value.trim() : 'Premium Web Application';
+            if (nameResult.isDismissed || !nameResult.value) return;
+            const webName = nameResult.value.name;
+            const forcedArchetype = nameResult.value.archetype;
 
             Swal.fire({
                 title: '📝 Penjelasan Singkat',
                 text: 'Jelaskan secara singkat fitur atau tujuan:',
                 input: 'textarea',
-                inputPlaceholder: 'Contoh: Sistem manajemen inventori dengan dashboard real-time, laporan penjualan, dan pengaturan user.',
+                inputPlaceholder: 'Contoh: Sistem manajemen dengan dashboard real-time, laporan, dan pengaturan user.',
                 background: '#111420',
                 color: '#fff',
                 confirmButtonColor: '#10B981',
-                confirmButtonText: 'Generate 60 Prompts',
+                confirmButtonText: 'Generate 60 Prompts ✨',
                 cancelButtonColor: '#1E2336',
                 cancelButtonText: 'Batal',
                 showCancelButton: true,
                 customClass: { popup: 'border border-gray-700 rounded-2xl' }
             }).then((descResult) => {
                 if (descResult.isDismissed) return;
-                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern dashboard layout with essential features';
+                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern application layout with essential features';
 
                 // Show loading
                 Swal.fire({
@@ -2246,7 +2178,7 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
                     const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
                     const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
 
-                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2);
+                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2, forcedArchetype);
                     allPrompts += `========== PROMPT #${idx + 1} | ${style.name} (${style.type}) ==========\n\n${prompt}`;
                     if (idx < MOCK_DB.styles.length - 1) allPrompts += separator;
                 });
@@ -2258,7 +2190,7 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
                     title: '🎉 60 Design Prompts Generated!',
                     html: `
                         <div style="text-align:left;">
-                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Setiap prompt sudah include sidebar kiri, bottom nav mobile, dan settings panel.</p>
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Menggunakan Mode Archetype: <strong style="color:#A5B4FC;">${getArchetypeLabel(forcedArchetype)}</strong>.</p>
                             <textarea id="bulk-prompt-textarea" readonly style="width:100%;height:280px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:10px;color:#CBD5F0;font-size:10px;font-family:'Courier New',monospace;resize:none;outline:none;">${allPrompts.replace(/</g,'<').replace(/>/g,'>')}</textarea>
                             <div style="display:flex;gap:8px;margin-top:10px;">
                                 <button onclick="copyBulkPrompts()" style="flex:1;padding:10px;background:#6366F1;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
@@ -2283,141 +2215,119 @@ Output the complete HTML code within a single markdown code block. Do NOT use pl
         });
     }
 
-    function buildSinglePrompt(style, webName, webDesc, c1, c2) {
-        return `# ROLE
-You are the world's best Prompt Engineer, Enterprise Software Architect, Senior Product Manager, Senior Business Analyst, UI/UX Lead, and Full Stack Solution Architect.
-Your task is to write a complete, single-file, production-ready, and responsive "index.html" representing a premium enterprise-grade web application frontend for:
+    function getArchetypeLabel(type) {
+        if (type === 'ARCHIVE_SOP') return '📁 WebApp Digital Archive / SOP';
+        if (type === 'LANDING_PAGE') return '🚀 Marketing Landing Page (GSAP + Lenis)';
+        if (type === 'ECOMMERCE') return '🛒 E-Commerce / Storefront';
+        return '🏭 ERP / CMMS Operational Dashboard';
+    }
+
+    function detectActiveArchetype(style, webName, webDesc, forcedArchetype = 'AUTO') {
+        if (forcedArchetype && forcedArchetype !== 'AUTO') return forcedArchetype;
+        const fullText = (((style && style.name) || '') + ' ' + ((style && style.type) || '') + ' ' + webName + ' ' + webDesc).toLowerCase();
+        if (fullText.includes('arsip') || fullText.includes('sop') || fullText.includes('jsa') || fullText.includes('document') || fullText.includes('archive') || fullText.includes('dms') || fullText.includes('berkas')) {
+            return 'ARCHIVE_SOP';
+        } else if (fullText.includes('landing') || fullText.includes('portfolio') || fullText.includes('showcase') || fullText.includes('company profile') || fullText.includes('promosi') || fullText.includes('marketing') || fullText.includes('hero')) {
+            return 'LANDING_PAGE';
+        } else if (fullText.includes('toko') || fullText.includes('shop') || fullText.includes('e-commerce') || fullText.includes('ecommerce') || fullText.includes('store') || fullText.includes('produk') || fullText.includes('kasir') || fullText.includes('pos')) {
+            return 'ECOMMERCE';
+        }
+        return 'ERP_DASHBOARD';
+    }
+
+    function buildSinglePrompt(style, webName, webDesc, c1, c2, forcedArchetype = 'AUTO') {
+        const archetype = detectActiveArchetype(style, webName, webDesc, forcedArchetype);
+        let archetypeSpec = '';
+
+        if (archetype === 'ARCHIVE_SOP') {
+            archetypeSpec = `
+# 📁 ARCHETYPE: WEBAPP DIGITAL ARCHIVE, SOP & DOCUMENT MANAGEMENT (DMS)
+The requested application is a Document & Archive Management System.
+
+## ARCHITECTURE & LAYOUT REQUIREMENTS
+- Layout: Top Breadcrumb Bar + Dual-Pane Tree Navigation Sidebar (Left) + File Workspace & Document Preview Panel (Center/Right).
+- Hierarchical Sub-Folder Directory: Fully interactive foldered workspace. Display directory grid of folders (e.g. Workshop Fabrication SOP, Preventative Maintenance JSA, Safety & Compliance Records, HSE Guidelines).
+- Folder & Sub-Folder Navigation: Clicking a folder opens its nested files/reports with smooth transitions and back-navigation buttons.
+- Document Viewer & PDF Preview Modal: Clicking a file triggers a crisp preview modal displaying file metadata (file size, file type, author, creation date, security classification, version tags) and simulated PDF/document contents.
+- Advanced Search & Filtering: Search bar inside folder view to instantly filter documents by name, division, tag, or status.
+- Document Audit Log & Actions: Support Download, Print PDF, Share link, and Version History timeline.
+- Clean Workspace UI: High-contrast document tree UI, compact list rows, status badges (Approved, Draft, Under Review, Archived).
+- Avoid: Sales/revenue charts or irrelevant marketing hero banners. Focus entirely on document clarity, organization, and access speed.`;
+
+        } else if (archetype === 'LANDING_PAGE') {
+            archetypeSpec = `
+# 🚀 ARCHETYPE: HIGH-IMPACT MARKETING LANDING PAGE & SHOWCASE
+The requested application is a Marketing Landing Page / Product Showcase.
+
+## ARCHITECTURE & LAYOUT REQUIREMENTS
+- Layout: Top Floating Glassmorphism Navbar -> Hero Section -> Social Proof & Client Logos -> Feature Showcase Grid -> Interactive Demo Section -> Testimonial Carousel -> Pricing & Offer Cards -> FAQ Accordion -> Final CTA Banner -> Footer.
+- MANDATORY ANIMATIONS & MOTION LIBRARIES:
+  - Include GSAP (GreenSock) CDN and Lenis Smooth Scroll CDN.
+  - Implement ScrollTrigger animations, smooth scrolling, magnetic button hover effects, and motion typography reveals.
+- Hero Background & Visual Effects:
+  - Abstract CSS/SVG gradient mesh, glowing animated glassmorphism blobs, or interactive canvas particles.
+  - Parallax scrolling effects on section headers.
+- Interactive Features: Interactive feature switcher/tabs, live pricing monthly/yearly toggle, animated counter metrics.
+- Avoid: Persistent ERP left sidebars, mobile bottom navigation bars, Kanban task boards, or backend enterprise settings panels.`;
+
+        } else if (archetype === 'ECOMMERCE') {
+            archetypeSpec = `
+# 🛒 ARCHETYPE: COMMERCIAL E-COMMERCE & MERCHANTS PLATFORM
+The requested application is an E-Commerce / Merchant Platform.
+
+## ARCHITECTURE & LAYOUT REQUIREMENTS
+- Layout: Top Search Header with Cart Icon Badge -> Category Pills Filter Bar -> Main Product Cards Grid -> Slide-over Cart Drawer -> Checkout Modal.
+- Product Cards Grid: Cards with high-resolution image container, product title, price tag, discount badge, star ratings, quick view modal button, and "Add to Cart" CTA.
+- Shopping Cart Drawer: Interactive slide-over cart drawer showing selected items, quantity controls (+/-), subtotal calculation, promo code input field, and checkout button.
+- Interactive Checkout Modal: Complete form containing shipping details, payment gateway selection (Credit Card, QRIS, Transfer), order summary, and simulated SweetAlert2 payment confirmation.
+- Filter & Search: Global product search bar, price range slider, category tabs (e.g. All, Trending, Electronics, Apparel), and sorting (Popularity, Price Low/High).`;
+
+        } else {
+            // Default: ERP_DASHBOARD
+            archetypeSpec = `
+# 🏭 ARCHETYPE: ENTERPRISE ERP, CMMS & OPERATIONAL DASHBOARD
+The requested application is an Enterprise-Grade Operational ERP / CMMS System.
+
+## ARCHITECTURE & LAYOUT REQUIREMENTS
+- Layout: Persistent Left Sidebar (Desktop width 220-260px) vs Fixed Mobile Bottom Navigation Bar (Mobile height 56-64px) + Top Header Bar with User Avatar & Alerts.
+- Multi-Module Navigation: Support 5 client-side view pages (Executive Dashboard, Analytics & KPIs, Master Data, Operational Transactions, and System Settings).
+- Executive Dashboard & High-Density KPIs: High data density KPI cards using 'font-variant-numeric: tabular-nums', operational risk summaries, recent activity logs, and simulated AI recommendation panel.
+- Interactive Kanban Board: Workflow board with status columns (Backlog, To Do, In Progress, Done), task cards with priority tags (Low/Medium/High/Urgent), due dates, assigned avatars, and drag/status update logic.
+- Data Tables & Master Data: Full interactive tables with global search, column sorting, pagination, and multi-select filters.
+- Mandatory Print & Export Actions: Fully working frontend buttons to (A) Cetak PDF (Print PDF via @media print hiding sidebars/headers) and (B) Import/Export Excel/CSV file generation.
+- Enterprise UI Standards: Solid flat borders, high contrast, compact padding, resembling SAP PM, IBM Maximo, or Honeywell Forge. Avoid cluttering marketing hero banners.`;
+        }
+
+        return `# ROLE & SYSTEM ARCHITECTURE
+You are the world's best Prompt Engineer, Enterprise Solution Architect, UI/UX Lead, and Senior Full-Stack Frontend Developer.
+Your task is to write a complete, single-file, production-ready, and responsive "index.html" representing a state-of-the-art web application for:
 - App Name: "${webName}"
-- User Input Description: ${webDesc}
+- User Specification: ${webDesc}
+- Specific Design Style: "${style.name}" (${style.type})
+- Color Palette Accents: Primary Accent ${c1}, Secondary Accent ${c2}
+- Design Style Attributes: ${style.desc}
 
 ---
 
-# OBJECTIVE
-Create a complete, single-file, production-ready, and responsive "index.html" representing a premium Enterprise Web Application.
-The final web application must feel like a commercial enterprise application instead of a generic dashboard or bootstrap tutorial.
+${archetypeSpec}
 
 ---
 
-# THINKING PROCESS
-You MUST follow this exact thinking order before writing any code:
-1. Analyze Business Context: Understand the business domain (e.g. CMMS, ERP, Inventory, HRIS, Fleet Management, HSE, etc.).
-2. Analyze User Needs: Understand the target users and define their access roles.
-3. Analyze Process Workflow: Map the end-to-end industrial/business workflow stages.
-4. Analyze Database: Design normalized mock database tables and describe their relationships.
-5. Analyze Features: Outline dashboard widgets, search, filter, alerts, actions, and AI features.
-6. Analyze UI/UX design spec for "${style.name}" (${style.type}).
-7. Analyze Reports and KPIs.
-8. Analyze Risks: Risk summary and operational failures.
-9. Design Architecture: Plan modular CSS variables and clean HTML/JS structure.
-10. Create Wireframe Mentally: Plan desktop layout (persistent sidebar) vs mobile layout (bottom nav).
-11. Validate Design: Verify accessibility, density, contrast, and navigation transitions.
-12. Generate Code: Write the full code without placeholders.
+# ⚡ MANDATORY SETTINGS & WATERMARK PANEL
+Unless building a pure landing page, include a fully functional Settings Panel with:
+1. Live Theme Picker: Swatches + color picker inputs dynamically updating CSS variables ('--primary', '--accent', '--bg') saved to localStorage.
+2. Custom Logo Upload: File input using FileReader to preview and store base64 custom logo to localStorage.
+3. User Settings: Editable profile (username, email, role, avatar) with live UI update.
+4. Mandatory Watermark: Must include:
+   "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>"
+   in the Left Sidebar footer (Desktop) and Page Footer (Mobile).
 
 ---
 
-# REQUIREMENTS
-You must automatically design and implement:
-1. Business Problem Analysis: Pre-analyze and document the domain problem.
-2. User Objective Analysis.
-3. Target User Personas.
-4. Workflow Stages: Operational states (e.g. Backlog, To Do, In Progress, Review, Completed).
-5. Business Rules Enforcement: Form validation, error handling, status-aware components.
-6. Multi-Module Navigation: Support at least 5 client-side pages (Dashboard, Analytics & Reports, Master Data, Transactions/Operations, and Settings/Profile).
-7. Simulated Database: At least 3 tables with realistic mock data, sorting, pagination, and CSV export.
-8. Schema Relationships: Explain table linkages clearly.
-9. User Roles (e.g. Admin, Operator, Supervisor).
-10. Permissions: Conditional UI view based on active role selection.
-11. Dashboard KPIs with high data density (using tabular-nums).
-12. Reports & Summaries: Exportable tables with search/filter features.
-13. Notifications: simulated Real-time toast alerts via SweetAlert2.
-14. Mandatory Print & Export Actions (MUST BE FULLY IMPLEMENTED): Fully working frontend buttons to (A) **Cetak PDF (Print PDF)** which triggers browser print with custom CSS rules ('@media print') hiding sidebars/headers and formatting reports cleanly, and (B) **Import/Export to Excel/CSV** which extracts current data from tables and downloads it as a CSV file in the browser with interactive SweetAlert2 success notifications.
-15. Advanced Search & Filtering: Global search + multi-select filters.
-16. AI Features (Simulated): AI Recommendations or automated insights box.
-17. Mobile Responsiveness: Desktop sidebar vs mobile bottom nav.
-18. Enterprise UI Standards: Solid flat borders, minimal padding, high contrast.
-19. Clean Coding Standards: Write clean, SOLID-compliant, reusable code.
-20. Performance Optimization: DOM caching, transition handling, clean state persistence.
-
----
-
-# UI REQUIREMENTS
-The application UI must resemble real-world commercial enterprise systems such as:
-- SAP PM / IBM Maximo (for maintenance, plant, and asset tracking)
-- Honeywell Forge / ABB Ability (for operations and field monitoring)
-- Oracle ERP / Microsoft Dynamics / ServiceNow (for business process workflows)
-
-Strictly avoid looking like:
-- Simple tutorial dashboards or basic Bootstrap/AdminLTE templates
-- Unrealistic Dribbble concepts or standard marketing landing pages
-
-Specific Design Style: "${style.name}" (${style.type}). Color palette accents: ${c1} and ${c2}. Design attributes to implement: ${style.desc}.
-Visual Enhancements:
-- Immersive Hero Background: A beautiful, modern header banner utilizing abstract CSS glassmorphism blobs, gradient meshes, or layered SVGs.
-- Parallax Scrolling: Subtle parallax scrolling effects on page headers to give depth.
-
----
-
-# DASHBOARD & KANBAN REQUIREMENTS
-Every page must contain meaningful business information. Never create charts or cards just to fill space. Every component must answer a business question and support decision making.
-Every page should contain:
-- Executive Summary & KPI Widgets (high data density, tabular-nums)
-- Operational Status & Risk Summaries
-- Recent Activity Logs & Priority Action Tasks
-- Smart Recommendations Panel (AI-simulated suggestions)
-- Interactive Kanban Board Dashboard: Integrated workflow board featuring columns (Backlog, To Do, In Progress, Done) holding task cards with task titles, descriptions, due dates, priority tags (Low/Medium/High/Urgent), checklist completion stats, and assigned member avatars. Include simulated drag-and-drop or status-change logic with visual feedback.
-- Data Table with filters, quick actions, and reports.
-- Explanatory design spec at the top of the file.
-
----
-
-# ANALYTICS & REPORTS REQUIREMENTS (INTERACTIVE)
-The Analytics & Reports page must NOT be a simple or plain static page. It must be highly professional and interactive:
-- Dynamic Data Visualization: Implement multiple responsive charts (using Chart.js or interactive SVGs) showing business trends, KPIs, and metric distributions.
-- Hierarchical Sub-Folder Directory: Implement a fully interactive foldered workspace. It must show a directory grid of folders (e.g. Workshop fabrication, Preventative maintenance, Safety records). Clicking/opening a folder must reveal its sub-folders or nested files/reports with detailed file metadata (file size, type, creation date, status).
-- Sub-folder Navigation: Users must be able to go back to the parent directory level easily, with smooth CSS transitions.
-- Filter and Search: Search bar inside the folder view to filter nested files by name or division.
-
----
-
-# DATABASE REQUIREMENTS
-Simulate a backend database with high fidelity:
-- Normalize database, avoid duplicate tables, and build a scalable schema.
-- Explain relationships.
-- Use proper naming conventions and prepare for future expansion.
-- Every table must include loading, empty, error, and success states.
-
----
-
-# CODING REQUIREMENTS
-- Think before coding and explain architecture internally.
-- Build reusable components and write clean code following SOLID principles where applicable.
-- Keep UI modular, optimize performance, avoid duplicate code, and build a maintainable codebase.
-
----
-
-# ⚡ MANDATORY RESPONSIVE NAVIGATION
-- DESKTOP MODE (width >= 768px):
-  - PERSISTENT LEFT SIDEBAR: Width 220-260px. Contains Company Logo, Company Name, collapsible grouped navigation menus, active state indicators (accent color + left border), user profile footer with avatar, name, role, and watermark footer.
-  - Sticky full-height (100vh). Main content fills remaining space.
-- SMARTPHONE/MOBILE MODE (width < 768px):
-  - FIXED BOTTOM NAVIGATION BAR: Height 56-64px. Contains 4-5 icon-based navigation items (Dashboard, Analytics, Data, Settings, Profile) with active state highlights.
-  - Compact top header bar with hamburger menu trigger, which opens a slide-in drawer from the left.
-  - Sidebar hidden on mobile. Content area has bottom padding.
-
----
-
-# ⚡ MANDATORY SETTINGS PAGE (CRITICAL)
-A dedicated settings page/panel that MUST be fully interactive. It MUST include:
-a) COLOR / THEME PICKER: Predefined swatches + custom color picker inputs updating CSS variables ('--primary', '--accent', '--bg', etc.) live, updating visual accent colors across the app instantly, and saving to localStorage.
-b) LOGO UPLOAD: File input using FileReader to preview and store base64 custom logo to localStorage, with reset option.
-c) COMPANY IDENTITY: Text input updating pt/company names across header/footer, saving to localStorage.
-d) USER SETTINGS: Editable username, email, full name, role, and avatar, updating sidebar profile in real-time, saving to localStorage.
-e) WATERMARK: Must include "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>" in the persistent Left Sidebar (Desktop) and Footer (Mobile).
-
----
-
-# OUTPUT FORMAT
-Output the complete HTML code within a single markdown code block. Do NOT use placeholders; write the full implementation with complete CSS and JS.`;
+# CODING STANDARDS & OUTPUT FORMAT
+- Write 100% complete, executable, clean code without placeholder comments (e.g. DO NOT write "// add rest of code here").
+- Include all necessary HTML structure, CSS custom properties, and JavaScript event logic in a single markdown code block (\`\`\`html ... \`\`\`).
+- Use Tailwind CSS CDN, FontAwesome 6 icons, and SweetAlert2 for notifications.`;
     }
 
     function copyBulkPrompts() {
