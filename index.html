@@ -1969,40 +1969,242 @@
         ).join('');
     }
 
+    /* ==================== WEBAPP TAXONOMY (CATEGORIES & SUBTYPES) ==================== */
+    const WEBAPP_TAXONOMY = {
+        website: {
+            id: 'website',
+            label: 'Website',
+            badge: 'Informasi & Branding',
+            icon: 'fa-solid fa-globe',
+            color: '#38BDF8',
+            desc: 'Website untuk menampilkan informasi, memperkenalkan produk/jasa, membangun branding, atau memberikan informasi kepada pengunjung. Biasanya tidak berfokus pada proses operasional internal.',
+            subtypes: [
+                { id: 'landing_page', name: 'Landing Page', desc: 'Halaman satu halaman yang fokus memperkenalkan produk, layanan, campaign, atau mengarahkan pengunjung melakukan action tertentu.' },
+                { id: 'company_profile', name: 'Company Profile', desc: 'Website untuk memperkenalkan perusahaan, profil, visi misi, layanan, proyek, dan informasi kontak.' },
+                { id: 'corporate_website', name: 'Corporate Website', desc: 'Website perusahaan dengan struktur informasi yang lebih lengkap, biasanya mencakup berbagai halaman dan kebutuhan komunikasi perusahaan.' },
+                { id: 'business_website', name: 'Business Website', desc: 'Website untuk memperkenalkan bisnis, layanan, produk, lokasi, dan informasi yang dibutuhkan calon customer.' },
+                { id: 'product_website', name: 'Product Website', desc: 'Website yang fokus menjelaskan satu atau beberapa produk secara detail.' },
+                { id: 'product_showcase', name: 'Product Showcase', desc: 'Website yang fokus menampilkan katalog atau koleksi produk secara visual.' },
+                { id: 'portfolio', name: 'Portfolio', desc: 'Website untuk menampilkan hasil pekerjaan, project, karya, pengalaman, atau case study.' },
+                { id: 'personal_website', name: 'Personal Website', desc: 'Website pribadi untuk memperkenalkan profil, pengalaman, keahlian, atau aktivitas seseorang.' },
+                { id: 'agency_website', name: 'Agency Website', desc: 'Website untuk perusahaan atau agency yang menawarkan jasa profesional kepada customer.' },
+                { id: 'startup_website', name: 'Startup Website', desc: 'Website untuk memperkenalkan startup, produk digital, value proposition, dan layanan.' },
+                { id: 'event_website', name: 'Event Website', desc: 'Website khusus untuk sebuah event, seminar, workshop, konferensi, atau kegiatan tertentu.' },
+                { id: 'conference_website', name: 'Conference Website', desc: 'Website untuk konferensi dengan informasi agenda, speaker, venue, registrasi, dan jadwal.' },
+                { id: 'campaign_website', name: 'Campaign Website', desc: 'Website yang dibuat untuk campaign atau program tertentu dalam periode tertentu.' },
+                { id: 'marketing_website', name: 'Marketing Website', desc: 'Website yang fokus pada pemasaran, lead generation, conversion, dan campaign.' },
+                { id: 'blog', name: 'Blog', desc: 'Website yang fokus pada artikel, tulisan, berita, atau konten yang dipublikasikan secara berkala.' },
+                { id: 'magazine', name: 'Magazine', desc: 'Website dengan format publikasi konten yang lebih kompleks seperti kategori, artikel, author, dan featured content.' },
+                { id: 'news_website', name: 'News Website', desc: 'Website untuk publikasi berita dan informasi secara berkala.' },
+                { id: 'documentation_website', name: 'Documentation Website', desc: 'Website untuk menyediakan dokumentasi produk, software, API, atau panduan penggunaan.' },
+                { id: 'knowledge_base', name: 'Knowledge Base', desc: 'Website yang berisi kumpulan informasi, panduan, FAQ, dan solusi yang dapat dicari oleh user.' },
+                { id: 'community_website', name: 'Community Website', desc: 'Website yang menjadi tempat komunitas berbagi informasi, diskusi, atau aktivitas.' },
+                { id: 'educational_website', name: 'Educational Website', desc: 'Website yang berfokus pada informasi dan materi pendidikan.' },
+                { id: 'school_website', name: 'School Website', desc: 'Website untuk sekolah yang menampilkan informasi sekolah, berita, program, guru, dan kegiatan.' },
+                { id: 'university_website', name: 'University Website', desc: 'Website untuk universitas dengan informasi akademik, fakultas, program studi, dan informasi mahasiswa.' },
+                { id: 'course_website', name: 'Course Website', desc: 'Website yang menyediakan informasi atau materi kursus/pembelajaran.' },
+                { id: 'restaurant_website', name: 'Restaurant Website', desc: 'Website restoran untuk menampilkan menu, lokasi, informasi restoran, dan reservasi apabila diperlukan.' },
+                { id: 'hotel_website', name: 'Hotel Website', desc: 'Website hotel untuk menampilkan kamar, fasilitas, lokasi, informasi hotel, dan booking apabila diperlukan.' },
+                { id: 'travel_website', name: 'Travel Website', desc: 'Website untuk informasi destinasi, paket perjalanan, itinerary, atau layanan travel.' },
+                { id: 'real_estate_website', name: 'Real Estate Website', desc: 'Website untuk menampilkan properti yang tersedia untuk dijual atau disewa.' },
+                { id: 'property_showcase', name: 'Property Showcase', desc: 'Website yang fokus pada katalog dan presentasi properti secara visual.' },
+                { id: 'service_website', name: 'Service Website', desc: 'Website untuk memperkenalkan jasa atau layanan profesional.' },
+                { id: 'non_profit_website', name: 'Non-Profit Website', desc: 'Website untuk organisasi sosial, yayasan, atau kegiatan non-profit.' },
+                { id: 'government_website', name: 'Government Website', desc: 'Website untuk instansi pemerintah dan penyediaan informasi publik.' },
+                { id: 'job_career_website', name: 'Job / Career Website', desc: 'Website untuk menampilkan lowongan pekerjaan dan informasi karier.' },
+                { id: 'recruitment_website', name: 'Recruitment Website', desc: 'Website yang fokus pada informasi dan proses rekrutmen.' },
+                { id: 'coming_soon_page', name: 'Coming Soon Page', desc: 'Halaman sementara untuk produk atau website yang belum diluncurkan.' },
+                { id: 'link_in_bio_website', name: 'Link-in-Bio Website', desc: 'Halaman sederhana yang mengumpulkan berbagai link penting dalam satu tempat.' },
+                { id: 'custom_website', name: 'Custom Website', desc: 'Website dengan kebutuhan khusus yang tidak sesuai dengan kategori lainnya.' }
+            ]
+        },
+        management: {
+            id: 'management',
+            label: 'Management WebApp',
+            badge: 'Operasional & Workflow',
+            icon: 'fa-solid fa-list-check',
+            color: '#818CF8',
+            desc: 'Aplikasi untuk mengelola data, pekerjaan, aktivitas, proses bisnis, dan workflow. Biasanya memiliki login, database, dashboard, CRUD, role, dan reporting.',
+            subtypes: [
+                { id: 'maintenance_management', name: 'Maintenance Management', desc: 'Mengelola aktivitas maintenance seperti equipment, work order, preventive maintenance, breakdown, service, dan maintenance history.' },
+                { id: 'cmms', name: 'CMMS', desc: 'Sistem khusus untuk mengelola maintenance, work order, preventive maintenance, sparepart, asset, dan maintenance history.' },
+                { id: 'asset_management', name: 'Asset Management', desc: 'Mengelola data asset, lokasi, status, ownership, lifecycle, dan histori asset.' },
+                { id: 'equipment_management', name: 'Equipment Management', desc: 'Mengelola unit atau equipment beserta status, HM/KM, histori, dan aktivitasnya.' },
+                { id: 'fleet_management', name: 'Fleet Management', desc: 'Mengelola kendaraan atau fleet, termasuk unit, penggunaan, maintenance, dan monitoring.' },
+                { id: 'inventory_management', name: 'Inventory Management', desc: 'Mengelola item, stock, receiving, issue, transfer, adjustment, dan stock history.' },
+                { id: 'warehouse_management', name: 'Warehouse Management', desc: 'Mengelola aktivitas gudang, lokasi penyimpanan, stock movement, receiving, picking, dan issuing.' },
+                { id: 'sparepart_management', name: 'Sparepart Management', desc: 'Mengelola sparepart, stock, part number, compatibility, usage, dan replenishment.' },
+                { id: 'procurement_management', name: 'Procurement Management', desc: 'Mengelola proses pengadaan dari request hingga purchasing.' },
+                { id: 'purchasing_management', name: 'Purchasing Management', desc: 'Mengelola proses pembelian, supplier, purchase order, dan status pembelian.' },
+                { id: 'vendor_management', name: 'Vendor Management', desc: 'Mengelola data vendor, dokumen, performance, kontrak, dan histori transaksi.' },
+                { id: 'supplier_management', name: 'Supplier Management', desc: 'Mengelola supplier dan informasi terkait supply barang atau jasa.' },
+                { id: 'contract_management', name: 'Contract Management', desc: 'Mengelola kontrak, periode, nilai, dokumen, status, dan renewal.' },
+                { id: 'project_management', name: 'Project Management', desc: 'Mengelola project, task, timeline, milestone, team, progress, dan status.' },
+                { id: 'task_management', name: 'Task Management', desc: 'Mengelola pekerjaan atau task, assignment, priority, deadline, dan progress.' },
+                { id: 'document_management', name: 'Document Management', desc: 'Mengelola dokumen, kategori, versioning, approval, dan akses user.' },
+                { id: 'employee_management', name: 'Employee Management', desc: 'Mengelola data karyawan, posisi, departemen, dan informasi terkait.' },
+                { id: 'hr_management', name: 'HR Management', desc: 'Mengelola proses HR seperti employee, attendance, leave, recruitment, performance, dan training.' },
+                { id: 'recruitment_management', name: 'Recruitment Management', desc: 'Mengelola lowongan, kandidat, interview, assessment, dan proses recruitment.' },
+                { id: 'attendance_management', name: 'Attendance Management', desc: 'Mengelola kehadiran, clock-in/out, shift, dan attendance report.' },
+                { id: 'leave_management', name: 'Leave Management', desc: 'Mengelola pengajuan, approval, dan histori cuti.' },
+                { id: 'training_management', name: 'Training Management', desc: 'Mengelola training, peserta, jadwal, sertifikasi, dan histori training.' },
+                { id: 'performance_management', name: 'Performance Management', desc: 'Mengelola KPI, performance review, target, dan evaluasi karyawan.' },
+                { id: 'hse_management', name: 'HSE Management', desc: 'Mengelola aktivitas Health, Safety & Environment.' },
+                { id: 'safety_management', name: 'Safety Management', desc: 'Mengelola safety observation, inspection, hazard, dan tindakan perbaikan.' },
+                { id: 'incident_management', name: 'Incident Management', desc: 'Mengelola laporan incident, investigation, corrective action, dan closure.' },
+                { id: 'inspection_management', name: 'Inspection Management', desc: 'Mengelola inspection, checklist, findings, dan follow-up.' },
+                { id: 'permit_management', name: 'Permit Management', desc: 'Mengelola permit, approval, validity, dan status permit.' },
+                { id: 'production_management', name: 'Production Management', desc: 'Mengelola aktivitas produksi, target, actual, output, dan monitoring.' },
+                { id: 'operations_management', name: 'Operations Management', desc: 'Mengelola aktivitas operasional harian dan workflow pekerjaan.' },
+                { id: 'sales_management', name: 'Sales Management', desc: 'Mengelola aktivitas sales, customer, quotation, order, dan sales pipeline.' },
+                { id: 'customer_management_crm', name: 'Customer Management / CRM', desc: 'Mengelola customer, interaction, history, service, dan relationship.' },
+                { id: 'service_management', name: 'Service Management', desc: 'Mengelola permintaan service, assignment, status pekerjaan, dan service history.' },
+                { id: 'ticket_helpdesk_management', name: 'Ticket / Helpdesk Management', desc: 'Mengelola ticket atau permintaan bantuan dari user sampai penyelesaian.' },
+                { id: 'complaint_management', name: 'Complaint Management', desc: 'Mengelola keluhan, investigation, response, dan resolution.' },
+                { id: 'expense_management', name: 'Expense Management', desc: 'Mengelola pengajuan dan approval biaya.' },
+                { id: 'budget_management', name: 'Budget Management', desc: 'Mengelola budget, allocation, actual, dan variance.' },
+                { id: 'finance_management', name: 'Finance Management', desc: 'Mengelola proses keuangan sesuai kebutuhan aplikasi.' },
+                { id: 'accounting_management', name: 'Accounting Management', desc: 'Mengelola transaksi dan data accounting.' },
+                { id: 'invoice_management', name: 'Invoice Management', desc: 'Mengelola invoice, status, approval, dan payment tracking.' },
+                { id: 'payroll_management', name: 'Payroll Management', desc: 'Mengelola perhitungan dan administrasi payroll.' },
+                { id: 'logistics_management', name: 'Logistics Management', desc: 'Mengelola pengiriman, shipment, delivery, dan logistics process.' },
+                { id: 'delivery_management', name: 'Delivery Management', desc: 'Mengelola delivery order, driver, status pengiriman, dan delivery tracking.' },
+                { id: 'visitor_management', name: 'Visitor Management', desc: 'Mengelola data dan aktivitas kunjungan ke lokasi.' },
+                { id: 'membership_management', name: 'Membership Management', desc: 'Mengelola member, status membership, benefit, dan histori.' },
+                { id: 'content_management', name: 'Content Management', desc: 'Mengelola konten yang digunakan dalam suatu website atau aplikasi.' },
+                { id: 'workflow_management', name: 'Workflow Management', desc: 'Mengelola proses pekerjaan yang memiliki tahapan dan status tertentu.' },
+                { id: 'approval_management', name: 'Approval Management', desc: 'Mengelola proses approval dan authorization.' },
+                { id: 'reporting_management', name: 'Reporting Management', desc: 'Mengelola pembuatan dan penyajian laporan.' },
+                { id: 'custom_management_app', name: 'Custom Management App', desc: 'Aplikasi management dengan kebutuhan khusus yang tidak sesuai dengan kategori lainnya.' }
+            ]
+        },
+        transaction: {
+            id: 'transaction',
+            label: 'Transaction WebApp',
+            badge: 'Order & Transaksi',
+            icon: 'fa-solid fa-cart-shopping',
+            color: '#10B981',
+            desc: 'Aplikasi yang fokus pada proses transaksi antara customer, user, vendor, atau pihak lain seperti order, booking, pembayaran, rental, dan fulfillment.',
+            subtypes: [
+                { id: 'e_commerce', name: 'E-Commerce', desc: 'Aplikasi untuk menjual produk secara online dari katalog hingga checkout dan pembayaran.' },
+                { id: 'online_store', name: 'Online Store', desc: 'Toko online milik satu bisnis untuk menjual produk atau jasa secara digital.' },
+                { id: 'marketplace', name: 'Marketplace', desc: 'Platform yang mempertemukan banyak seller dengan buyer dalam satu sistem.' },
+                { id: 'b2b_marketplace', name: 'B2B Marketplace', desc: 'Marketplace yang fokus pada transaksi antar bisnis.' },
+                { id: 'b2c_marketplace', name: 'B2C Marketplace', desc: 'Marketplace yang menghubungkan bisnis dengan customer.' },
+                { id: 'booking_system', name: 'Booking System', desc: 'Sistem untuk melakukan pemesanan produk, layanan, tempat, atau fasilitas.' },
+                { id: 'reservation_system', name: 'Reservation System', desc: 'Sistem untuk reservasi jadwal, tempat, kamar, meja, atau fasilitas.' },
+                { id: 'appointment_system', name: 'Appointment System', desc: 'Sistem untuk membuat dan mengelola janji atau jadwal layanan.' },
+                { id: 'rental_system', name: 'Rental System', desc: 'Sistem untuk menyewakan barang, kendaraan, alat, properti, atau fasilitas.' },
+                { id: 'equipment_rental', name: 'Equipment Rental', desc: 'Sistem khusus untuk transaksi penyewaan equipment.' },
+                { id: 'vehicle_rental', name: 'Vehicle Rental', desc: 'Sistem untuk transaksi penyewaan kendaraan.' },
+                { id: 'property_rental', name: 'Property Rental', desc: 'Sistem untuk transaksi penyewaan properti.' },
+                { id: 'ticketing_system', name: 'Ticketing System', desc: 'Sistem untuk pembelian dan pengelolaan tiket.' },
+                { id: 'event_ticketing', name: 'Event Ticketing', desc: 'Sistem penjualan tiket untuk event atau kegiatan.' },
+                { id: 'travel_booking', name: 'Travel Booking', desc: 'Sistem pemesanan perjalanan, paket wisata, atau layanan travel.' },
+                { id: 'hotel_booking', name: 'Hotel Booking', desc: 'Sistem pemesanan kamar hotel.' },
+                { id: 'flight_booking', name: 'Flight Booking', desc: 'Sistem pemesanan penerbangan.' },
+                { id: 'restaurant_booking', name: 'Restaurant Booking', desc: 'Sistem reservasi meja atau layanan restoran.' },
+                { id: 'service_booking', name: 'Service Booking', desc: 'Sistem pemesanan jasa atau layanan.' },
+                { id: 'sales_order_system', name: 'Sales Order System', desc: 'Sistem untuk membuat, memproses, dan memonitor sales order.' },
+                { id: 'purchase_order_system', name: 'Purchase Order System', desc: 'Sistem untuk membuat dan memproses purchase order.' },
+                { id: 'order_management', name: 'Order Management', desc: 'Sistem untuk mengelola order dari pembuatan sampai penyelesaian.' },
+                { id: 'food_ordering', name: 'Food Ordering', desc: 'Sistem pemesanan makanan secara digital.' },
+                { id: 'delivery_ordering', name: 'Delivery Ordering', desc: 'Sistem pemesanan layanan delivery.' },
+                { id: 'subscription_system', name: 'Subscription System', desc: 'Sistem transaksi berbasis langganan.' },
+                { id: 'membership_transaction', name: 'Membership Transaction', desc: 'Sistem transaksi yang berkaitan dengan membership.' },
+                { id: 'payment_system', name: 'Payment System', desc: 'Sistem yang fokus pada proses pembayaran atau transaksi finansial.' },
+                { id: 'billing_system', name: 'Billing System', desc: 'Sistem untuk membuat dan mengelola tagihan.' },
+                { id: 'invoice_transaction', name: 'Invoice Transaction', desc: 'Sistem yang fokus pada transaksi dan proses invoice.' },
+                { id: 'donation_system', name: 'Donation System', desc: 'Sistem untuk menerima dan mengelola donasi.' },
+                { id: 'crowdfunding_platform', name: 'Crowdfunding Platform', desc: 'Platform untuk mengumpulkan dana dari banyak user untuk suatu project atau tujuan.' },
+                { id: 'auction_system', name: 'Auction System', desc: 'Sistem transaksi berbasis lelang.' },
+                { id: 'quotation_system', name: 'Quotation System', desc: 'Sistem untuk membuat dan mengelola quotation sebelum transaksi.' },
+                { id: 'registration_system', name: 'Registration System', desc: 'Sistem untuk proses pendaftaran user atau peserta.' },
+                { id: 'application_system', name: 'Application System', desc: 'Sistem untuk menerima dan memproses pengajuan dari user.' },
+                { id: 'checkout_system', name: 'Checkout System', desc: 'Sistem yang fokus pada proses checkout dan pembayaran.' },
+                { id: 'digital_product_store', name: 'Digital Product Store', desc: 'Toko untuk menjual produk digital seperti template, ebook, atau file.' },
+                { id: 'course_enrollment', name: 'Course Enrollment', desc: 'Sistem pendaftaran dan transaksi untuk mengikuti kursus.' },
+                { id: 'job_application', name: 'Job Application', desc: 'Sistem pengajuan lamaran pekerjaan.' },
+                { id: 'custom_transaction_app', name: 'Custom Transaction App', desc: 'Sistem transaksi dengan kebutuhan khusus yang tidak sesuai kategori lainnya.' }
+            ]
+        }
+    };
+
+    function getSubtypeData(catId, subId) {
+        const cat = WEBAPP_TAXONOMY[catId] || WEBAPP_TAXONOMY.management;
+        const sub = cat.subtypes.find(s => s.id === subId) || cat.subtypes[0];
+        return { cat, sub };
+    }
+
+    function findSubtypeAnywhere(subId) {
+        for (const cKey in WEBAPP_TAXONOMY) {
+            const match = WEBAPP_TAXONOMY[cKey].subtypes.find(s => s.id === subId);
+            if (match) return { cat: WEBAPP_TAXONOMY[cKey], sub: match };
+        }
+        return { cat: WEBAPP_TAXONOMY.management, sub: WEBAPP_TAXONOMY.management.subtypes[0] };
+    }
+
+    /* ==================== DIRECT PROMPT FLOW (UPDATED WEBAPP TYPE SELECTOR) ==================== */
     function generatePromptFromLiveDemo() {
         if(!ldCurrentStyle) return;
         const style = ldCurrentStyle;
         const cols = style.color ? style.color.split(',') : [];
         const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
         const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
-        
+
+        let selectedCat = 'management';
+        let selectedSubtype = 'cmms';
+
         Swal.fire({
             title: '✨ Konfigurasi Prompt AI',
             html: `
                 <div style="text-align:left;font-family:'Inter',sans-serif;">
-                    <p style="color:#8892B0;font-size:12px;margin-bottom:14px;line-height:1.5;">Pilih <strong>Archetype Aplikasi</strong> agar AI menghasilkan tata letak & fitur yang 100% pas (ERP, SOP/Arsip, Landing Page, atau E-Commerce):</p>
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;line-height:1.5;">Pilih <strong>Tipe &amp; Subtype WebApp</strong> agar AI menghasilkan arsitektur &amp; fitur yang 100% pas:</p>
                     
-                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">1. Tipe / Archetype Aplikasi</label>
-                    <select id="swal-app-archetype" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;cursor:pointer;">
-                        <option value="AUTO">🎯 Otomatis (Deteksi dari Kata Kunci & Style)</option>
-                        <option value="ERP_DASHBOARD">🏭 ERP / CMMS Dashboard (High Density Data, Kanban Board, Export PDF/Excel)</option>
-                        <option value="ARCHIVE_SOP">📁 Digital Archive / SOP / DMS (Directory Tree, Breadcrumbs, PDF Viewer Modal)</option>
-                        <option value="LANDING_PAGE">🚀 Marketing Landing Page (GSAP + Lenis Animation, Parallax Hero, CTA Focus)</option>
-                        <option value="ECOMMERCE">🛒 E-Commerce / Storefront (Product Grid Cards, Slide Cart Drawer, Checkout Flow)</option>
+                    <!-- 1. CATEGORY SELECTOR -->
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">1. Kategori WebApp</label>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;" id="swal-cat-buttons">
+                        <button type="button" id="btn-cat-website" onclick="window.swalSelectCat('website')" style="padding:8px 6px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-globe" style="color:#38BDF8;"></i> Website
+                        </button>
+                        <button type="button" id="btn-cat-management" onclick="window.swalSelectCat('management')" style="padding:8px 6px;border-radius:8px;border:1px solid #6366F1;background:rgba(99,102,241,0.18);color:#A5B4FC;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-list-check" style="color:#818CF8;"></i> Management
+                        </button>
+                        <button type="button" id="btn-cat-transaction" onclick="window.swalSelectCat('transaction')" style="padding:8px 6px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-cart-shopping" style="color:#10B981;"></i> Transaction
+                        </button>
+                    </div>
+
+                    <!-- CATEGORY DESCRIPTION BOX -->
+                    <div id="swal-cat-desc-box" style="padding:9px 12px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25);border-radius:8px;margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                            <i class="fa-solid fa-circle-info" style="color:#818CF8;font-size:11px;"></i>
+                            <strong id="swal-cat-title" style="color:#E2E8FF;font-size:11px;">Management WebApp</strong>
+                        </div>
+                        <div id="swal-cat-desc" style="font-size:11px;color:#94A3B8;line-height:1.45;">Aplikasi untuk mengelola data, pekerjaan, aktivitas, proses bisnis, dan workflow. Biasanya memiliki login, database, dashboard, CRUD, role, dan reporting.</div>
+                    </div>
+
+                    <!-- 2. SUBTYPE DROPDOWN -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                        <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;">2. WebApp Subtype</label>
+                        <span id="swal-subtype-count" style="font-size:10px;color:#6B7A9E;font-weight:600;">50 pilihan</span>
+                    </div>
+                    <select id="swal-app-subtype" onchange="window.swalSelectSubtype(this.value)" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:9px 12px;border-radius:8px;outline:none;margin-bottom:8px;cursor:pointer;">
                     </select>
 
-                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">2. Nama Website / Aplikasi</label>
-                    <input id="swal-web-name" type="text" placeholder="Contoh: PT. Maju Bersama - WebApp SOP / ERP Penjualan" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;box-sizing:border-box;">
-
-                    <div style="font-size:11px;color:#8892B0;background:rgba(99,102,241,0.1);padding:10px;border-radius:8px;border:1px solid rgba(99,102,241,0.25);line-height:1.5;">
-                        <i class="fa-solid fa-lightbulb" style="color:#818CF8;margin-right:4px;"></i>
-                        <strong style="color:#CBD5F0;">Petunjuk Hasil Prompt:</strong>
-                        <ul style="margin:4px 0 0 16px;padding:0;font-size:10px;color:#94A3B8;">
-                            <li><strong>Digital Archive/SOP:</strong> Tree Folder Workspace & PDF Viewer Modal. Hapus sales charts.</li>
-                            <li><strong>ERP Dashboard:</strong> Tabular Data, Kanban Board, & Export PDF/CSV. Hapus Hero Blobs.</li>
-                            <li><strong>Landing Page:</strong> Animasi GSAP + Lenis Smooth Scroll & Parallax. Hapus Sidebar ERP.</li>
-                        </ul>
+                    <!-- SUBTYPE DYNAMIC DESCRIPTION CARD -->
+                    <div id="swal-subtype-desc-box" style="padding:10px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;margin-bottom:14px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                            <i class="fa-solid fa-lightbulb" style="color:#F59E0B;font-size:11px;"></i>
+                            <strong id="swal-subtype-name" style="color:#FDE68A;font-size:11px;">CMMS</strong>
+                            <span id="swal-subtype-badge" style="margin-left:auto;font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(99,102,241,0.2);color:#A5B4FC;font-weight:700;">Management</span>
+                        </div>
+                        <div id="swal-subtype-desc" style="font-size:11px;color:#CBD5F0;line-height:1.5;">Sistem khusus untuk mengelola maintenance, work order, preventive maintenance, sparepart, asset, dan maintenance history.</div>
                     </div>
+
+                    <!-- 3. APP NAME -->
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">3. Nama Website / Aplikasi</label>
+                    <input id="swal-web-name" type="text" placeholder="Contoh: PT. Maju Bersama - WebApp Maintenance System" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:6px;box-sizing:border-box;">
                 </div>
             `,
             background: '#111420',
@@ -2015,30 +2217,76 @@
             showCancelButton: true,
             target: document.body,
             customClass: { popup: 'border border-gray-700 rounded-2xl' },
+            didOpen: () => {
+                window.swalSelectCat = function(catKey) {
+                    selectedCat = catKey;
+                    const cat = WEBAPP_TAXONOMY[catKey];
+                    ['website', 'management', 'transaction'].forEach(k => {
+                        const btn = document.getElementById('btn-cat-' + k);
+                        if (!btn) return;
+                        const isCur = k === catKey;
+                        btn.style.border = isCur ? '1px solid #6366F1' : '1px solid #1E2336';
+                        btn.style.background = isCur ? 'rgba(99,102,241,0.18)' : '#1A1E2C';
+                        btn.style.color = isCur ? '#A5B4FC' : '#94A3B8';
+                        btn.style.fontWeight = isCur ? '700' : '600';
+                    });
+
+                    document.getElementById('swal-cat-title').textContent = cat.label;
+                    document.getElementById('swal-cat-desc').textContent = cat.desc;
+                    document.getElementById('swal-subtype-count').textContent = cat.subtypes.length + ' pilihan';
+
+                    const select = document.getElementById('swal-app-subtype');
+                    select.innerHTML = '';
+                    cat.subtypes.forEach((s) => {
+                        const opt = document.createElement('option');
+                        opt.value = s.id;
+                        opt.textContent = `${s.name}`;
+                        select.appendChild(opt);
+                    });
+
+                    selectedSubtype = cat.subtypes[0].id;
+                    window.swalSelectSubtype(selectedSubtype);
+                };
+
+                window.swalSelectSubtype = function(subId) {
+                    selectedSubtype = subId;
+                    const { cat, sub } = getSubtypeData(selectedCat, subId);
+                    document.getElementById('swal-subtype-name').textContent = sub.name;
+                    document.getElementById('swal-subtype-desc').textContent = sub.desc;
+                    document.getElementById('swal-subtype-badge').textContent = cat.label;
+                };
+
+                // Initialize with Management category and CMMS
+                window.swalSelectCat('management');
+                const subSelect = document.getElementById('swal-app-subtype');
+                if (subSelect) {
+                    subSelect.value = 'cmms';
+                    window.swalSelectSubtype('cmms');
+                }
+            },
             preConfirm: () => {
                 const name = document.getElementById('swal-web-name').value;
-                const archetype = document.getElementById('swal-app-archetype').value;
+                const subtype = selectedSubtype;
+                const cat = selectedCat;
                 if (!name || !name.trim()) {
                     Swal.showValidationMessage('Silakan masukkan nama website / aplikasi');
                     return false;
                 }
-                return { name: name.trim(), archetype: archetype };
+                return { name: name.trim(), category: cat, subtype: subtype };
             }
         }).then((nameResult) => {
             if (nameResult.isDismissed || !nameResult.value) return;
             
             const webName = nameResult.value.name;
-            const forcedArchetype = nameResult.value.archetype;
+            const chosenCat = nameResult.value.category;
+            const chosenSubtype = nameResult.value.subtype;
+            const { cat, sub } = getSubtypeData(chosenCat, chosenSubtype);
             
             Swal.fire({
                 title: '📝 Penjelasan Fitur & Tujuan',
-                text: `Jelaskan secara singkat fitur utama untuk "${webName}":`,
+                text: `Jelaskan secara singkat fitur utama untuk "${webName}" (${sub.name}):`,
                 input: 'textarea',
-                inputPlaceholder: forcedArchetype === 'ARCHIVE_SOP'
-                    ? 'Contoh: Repositori dokumen SOP pabrikasi, JSA keselamatan kerja, filter kategori divisi, dan preview PDF.'
-                    : (forcedArchetype === 'LANDING_PAGE'
-                        ? 'Contoh: Landing page promosi SaaS dengan animasi hero GSAP, daftar fitur interaktif, testimoni, dan tombol CTA.'
-                        : 'Contoh: Dashboard ERP inventori dengan KPI real-time, papan Kanban, dan laporan transaksi yang bisa diekspor.'),
+                inputPlaceholder: `Contoh kebutuhan fitur: ${sub.desc}`,
                 background: '#111420',
                 color: '#fff',
                 confirmButtonColor: '#6366F1',
@@ -2051,9 +2299,9 @@
             }).then((descResult) => {
                 if (descResult.isDismissed) return;
                 
-                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern application frontend with essential features';
-                const promptText = buildSinglePrompt(style, webName, webDesc, c1, c2, forcedArchetype);
-                const activeArchetypeLabel = getArchetypeLabel(detectActiveArchetype(style, webName, webDesc, forcedArchetype));
+                const webDesc = descResult.value && descResult.value.trim() ? descResult.value.trim() : sub.desc;
+                const promptText = buildSinglePrompt(style, webName, webDesc, c1, c2, chosenCat, chosenSubtype);
+                const activeArchetypeLabel = `${cat.label} • ${sub.name}`;
                 
                 navigator.clipboard.writeText(promptText).then(() => {
                     Swal.fire({
@@ -2063,7 +2311,7 @@
                                 <span style="padding:4px 12px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
                             </div>
                             <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
-                            <textarea readonly style="width:100%;height:120px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                            <textarea readonly style="width:100%;height:140px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
                             <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Claude, ChatGPT, v0.dev, Gemini, atau AI pilihan Anda.</p>
                         `,
                         icon: 'success',
@@ -2081,7 +2329,7 @@
                             <div style="margin-bottom:10px;">
                                 <span style="padding:4px 12px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
                             </div>
-                            <textarea id="fallback-prompt-text" style="width:100%;height:120px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
+                            <textarea id="fallback-prompt-text" style="width:100%;height:140px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
                             <button onclick="document.getElementById('fallback-prompt-text').select(); document.execCommand('copy'); Swal.fire('Tersalin!', '', 'success');" style="margin-top:10px;padding:6px 16px;background:#6366F1;color:white;border:none;border-radius:6px;font-size:11px;cursor:pointer;">Salin Teks</button>
                         `,
                         background: '#111420',
@@ -2098,27 +2346,61 @@
         });
     }
 
-
-
     /* ==================== BULK GENERATE ALL 60 PROMPTS ==================== */
     function generateAllPrompts() {
+        let selectedBulkCat = 'management';
+        let selectedBulkSubtype = 'cmms';
+
         Swal.fire({
             title: '📝 Bulk 60 Prompts Configuration',
             html: `
                 <div style="text-align:left;font-family:'Inter',sans-serif;">
-                    <p style="color:#8892B0;font-size:12px;margin-bottom:14px;">Membuat 60 Prompt sekaligus untuk semua Design Styles.</p>
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Membuat 60 Prompt sekaligus untuk semua 60 Design Styles.</p>
                     
-                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">1. Target Archetype Aplikasi</label>
-                    <select id="swal-bulk-archetype" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;cursor:pointer;">
-                        <option value="AUTO">🎯 Otomatis (Deteksi dari Nama & Fitur)</option>
-                        <option value="ERP_DASHBOARD">🏭 ERP / CMMS Dashboard System</option>
-                        <option value="ARCHIVE_SOP">📁 Digital Archive / SOP / DMS Management</option>
-                        <option value="LANDING_PAGE">🚀 Marketing Landing Page (GSAP + Lenis)</option>
-                        <option value="ECOMMERCE">🛒 E-Commerce Platform & POS</option>
+                    <!-- 1. CATEGORY SELECTOR -->
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">1. Kategori WebApp</label>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;" id="swal-bulk-cat-buttons">
+                        <button type="button" id="btn-bulk-cat-website" onclick="window.swalBulkSelectCat('website')" style="padding:8px 6px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-globe" style="color:#38BDF8;"></i> Website
+                        </button>
+                        <button type="button" id="btn-bulk-cat-management" onclick="window.swalBulkSelectCat('management')" style="padding:8px 6px;border-radius:8px;border:1px solid #10B981;background:rgba(16,185,129,0.18);color:#6EE7B7;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-list-check" style="color:#10B981;"></i> Management
+                        </button>
+                        <button type="button" id="btn-bulk-cat-transaction" onclick="window.swalBulkSelectCat('transaction')" style="padding:8px 6px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-cart-shopping" style="color:#F59E0B;"></i> Transaction
+                        </button>
+                    </div>
+
+                    <!-- CATEGORY DESCRIPTION BOX -->
+                    <div id="swal-bulk-cat-desc-box" style="padding:9px 12px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:8px;margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                            <i class="fa-solid fa-circle-info" style="color:#10B981;font-size:11px;"></i>
+                            <strong id="swal-bulk-cat-title" style="color:#E2E8FF;font-size:11px;">Management WebApp</strong>
+                        </div>
+                        <div id="swal-bulk-cat-desc" style="font-size:11px;color:#94A3B8;line-height:1.45;">Aplikasi untuk mengelola data, pekerjaan, aktivitas, proses bisnis, dan workflow. Biasanya memiliki login, database, dashboard, CRUD, role, dan reporting.</div>
+                    </div>
+
+                    <!-- 2. SUBTYPE DROPDOWN -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                        <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;">2. WebApp Subtype</label>
+                        <span id="swal-bulk-subtype-count" style="font-size:10px;color:#6B7A9E;font-weight:600;">50 pilihan</span>
+                    </div>
+                    <select id="swal-bulk-app-subtype" onchange="window.swalBulkSelectSubtype(this.value)" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:9px 12px;border-radius:8px;outline:none;margin-bottom:8px;cursor:pointer;">
                     </select>
 
-                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">2. Nama Website / Aplikasi</label>
-                    <input id="swal-bulk-name" type="text" placeholder="Contoh: PT. Maju Bersama - Enterprise System" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:14px;box-sizing:border-box;">
+                    <!-- SUBTYPE DYNAMIC DESCRIPTION CARD -->
+                    <div id="swal-bulk-subtype-desc-box" style="padding:10px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;margin-bottom:14px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                            <i class="fa-solid fa-lightbulb" style="color:#F59E0B;font-size:11px;"></i>
+                            <strong id="swal-bulk-subtype-name" style="color:#FDE68A;font-size:11px;">CMMS</strong>
+                            <span id="swal-bulk-subtype-badge" style="margin-left:auto;font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(16,185,129,0.2);color:#6EE7B7;font-weight:700;">Management</span>
+                        </div>
+                        <div id="swal-bulk-subtype-desc" style="font-size:11px;color:#CBD5F0;line-height:1.5;">Sistem khusus untuk mengelola maintenance, work order, preventive maintenance, sparepart, asset, dan maintenance history.</div>
+                    </div>
+
+                    <!-- 3. APP NAME -->
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">3. Nama Website / Aplikasi</label>
+                    <input id="swal-bulk-name" type="text" placeholder="Contoh: PT. Maju Bersama - Enterprise System" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:6px;box-sizing:border-box;">
                 </div>
             `,
             background: '#111420',
@@ -2129,25 +2411,72 @@
             cancelButtonText: 'Batal',
             showCancelButton: true,
             customClass: { popup: 'border border-gray-700 rounded-2xl' },
+            didOpen: () => {
+                window.swalBulkSelectCat = function(catKey) {
+                    selectedBulkCat = catKey;
+                    const cat = WEBAPP_TAXONOMY[catKey];
+                    ['website', 'management', 'transaction'].forEach(k => {
+                        const btn = document.getElementById('btn-bulk-cat-' + k);
+                        if (!btn) return;
+                        const isCur = k === catKey;
+                        btn.style.border = isCur ? '1px solid #10B981' : '1px solid #1E2336';
+                        btn.style.background = isCur ? 'rgba(16,185,129,0.18)' : '#1A1E2C';
+                        btn.style.color = isCur ? '#6EE7B7' : '#94A3B8';
+                        btn.style.fontWeight = isCur ? '700' : '600';
+                    });
+
+                    document.getElementById('swal-bulk-cat-title').textContent = cat.label;
+                    document.getElementById('swal-bulk-cat-desc').textContent = cat.desc;
+                    document.getElementById('swal-bulk-subtype-count').textContent = cat.subtypes.length + ' pilihan';
+
+                    const select = document.getElementById('swal-bulk-app-subtype');
+                    select.innerHTML = '';
+                    cat.subtypes.forEach((s) => {
+                        const opt = document.createElement('option');
+                        opt.value = s.id;
+                        opt.textContent = `${s.name}`;
+                        select.appendChild(opt);
+                    });
+
+                    selectedBulkSubtype = cat.subtypes[0].id;
+                    window.swalBulkSelectSubtype(selectedBulkSubtype);
+                };
+
+                window.swalBulkSelectSubtype = function(subId) {
+                    selectedBulkSubtype = subId;
+                    const { cat, sub } = getSubtypeData(selectedBulkCat, subId);
+                    document.getElementById('swal-bulk-subtype-name').textContent = sub.name;
+                    document.getElementById('swal-bulk-subtype-desc').textContent = sub.desc;
+                    document.getElementById('swal-bulk-subtype-badge').textContent = cat.label;
+                };
+
+                window.swalBulkSelectCat('management');
+                const subSelect = document.getElementById('swal-bulk-app-subtype');
+                if (subSelect) {
+                    subSelect.value = 'cmms';
+                    window.swalBulkSelectSubtype('cmms');
+                }
+            },
             preConfirm: () => {
                 const name = document.getElementById('swal-bulk-name').value;
-                const archetype = document.getElementById('swal-bulk-archetype').value;
                 if (!name || !name.trim()) {
                     Swal.showValidationMessage('Masukkan nama website / aplikasi');
                     return false;
                 }
-                return { name: name.trim(), archetype: archetype };
+                return { name: name.trim(), category: selectedBulkCat, subtype: selectedBulkSubtype };
             }
         }).then((nameResult) => {
             if (nameResult.isDismissed || !nameResult.value) return;
             const webName = nameResult.value.name;
-            const forcedArchetype = nameResult.value.archetype;
+            const chosenCat = nameResult.value.category;
+            const chosenSubtype = nameResult.value.subtype;
+            const { cat, sub } = getSubtypeData(chosenCat, chosenSubtype);
 
             Swal.fire({
                 title: '📝 Penjelasan Singkat',
-                text: 'Jelaskan secara singkat fitur atau tujuan:',
+                text: `Jelaskan secara singkat fitur atau tujuan untuk "${webName}" (${sub.name}):`,
                 input: 'textarea',
-                inputPlaceholder: 'Contoh: Sistem manajemen dengan dashboard real-time, laporan, dan pengaturan user.',
+                inputPlaceholder: `Contoh kebutuhan: ${sub.desc}`,
                 background: '#111420',
                 color: '#fff',
                 confirmButtonColor: '#10B981',
@@ -2158,7 +2487,7 @@
                 customClass: { popup: 'border border-gray-700 rounded-2xl' }
             }).then((descResult) => {
                 if (descResult.isDismissed) return;
-                const webDesc = descResult.value ? descResult.value.trim() : 'A high-quality modern application layout with essential features';
+                const webDesc = descResult.value && descResult.value.trim() ? descResult.value.trim() : sub.desc;
 
                 // Show loading
                 Swal.fire({
@@ -2178,7 +2507,7 @@
                     const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
                     const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
 
-                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2, forcedArchetype);
+                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2, chosenCat, chosenSubtype);
                     allPrompts += `========== PROMPT #${idx + 1} | ${style.name} (${style.type}) ==========\n\n${prompt}`;
                     if (idx < MOCK_DB.styles.length - 1) allPrompts += separator;
                 });
@@ -2190,8 +2519,8 @@
                     title: '🎉 60 Design Prompts Generated!',
                     html: `
                         <div style="text-align:left;">
-                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Menggunakan Mode Archetype: <strong style="color:#A5B4FC;">${getArchetypeLabel(forcedArchetype)}</strong>.</p>
-                            <textarea id="bulk-prompt-textarea" readonly style="width:100%;height:280px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:10px;color:#CBD5F0;font-size:10px;font-family:'Courier New',monospace;resize:none;outline:none;">${allPrompts.replace(/</g,'<').replace(/>/g,'>')}</textarea>
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Menggunakan Archetype: <strong style="color:#A5B4FC;">${cat.label} • ${sub.name}</strong>.</p>
+                            <textarea id="bulk-prompt-textarea" readonly style="width:100%;height:280px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:10px;color:#CBD5F0;font-size:10px;font-family:'Courier New',monospace;resize:none;outline:none;">${allPrompts.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
                             <div style="display:flex;gap:8px;margin-top:10px;">
                                 <button onclick="copyBulkPrompts()" style="flex:1;padding:10px;background:#6366F1;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
                                     <i class="fa-solid fa-copy" style="margin-right:5px;"></i>Copy All
@@ -2215,94 +2544,68 @@
         });
     }
 
-    function getArchetypeLabel(type) {
-        if (type === 'ARCHIVE_SOP') return '📁 WebApp Digital Archive / SOP';
-        if (type === 'LANDING_PAGE') return '🚀 Marketing Landing Page (GSAP + Lenis)';
-        if (type === 'ECOMMERCE') return '🛒 E-Commerce / Storefront';
-        return '🏭 ERP / CMMS Operational Dashboard';
-    }
-
-    function detectActiveArchetype(style, webName, webDesc, forcedArchetype = 'AUTO') {
-        if (forcedArchetype && forcedArchetype !== 'AUTO') return forcedArchetype;
-        const fullText = (((style && style.name) || '') + ' ' + ((style && style.type) || '') + ' ' + webName + ' ' + webDesc).toLowerCase();
-        if (fullText.includes('arsip') || fullText.includes('sop') || fullText.includes('jsa') || fullText.includes('document') || fullText.includes('archive') || fullText.includes('dms') || fullText.includes('berkas')) {
-            return 'ARCHIVE_SOP';
-        } else if (fullText.includes('landing') || fullText.includes('portfolio') || fullText.includes('showcase') || fullText.includes('company profile') || fullText.includes('promosi') || fullText.includes('marketing') || fullText.includes('hero')) {
-            return 'LANDING_PAGE';
-        } else if (fullText.includes('toko') || fullText.includes('shop') || fullText.includes('e-commerce') || fullText.includes('ecommerce') || fullText.includes('store') || fullText.includes('produk') || fullText.includes('kasir') || fullText.includes('pos')) {
-            return 'ECOMMERCE';
-        }
-        return 'ERP_DASHBOARD';
-    }
-
-    function buildSinglePrompt(style, webName, webDesc, c1, c2, forcedArchetype = 'AUTO') {
-        const archetype = detectActiveArchetype(style, webName, webDesc, forcedArchetype);
+    function buildSinglePrompt(style, webName, webDesc, c1, c2, catId = 'management', subtypeId = 'cmms') {
+        const { cat, sub } = getSubtypeData(catId, subtypeId);
         let archetypeSpec = '';
 
-        if (archetype === 'ARCHIVE_SOP') {
+        if (catId === 'website') {
             archetypeSpec = `
-# 📁 ARCHETYPE: WEBAPP DIGITAL ARCHIVE, SOP & DOCUMENT MANAGEMENT (DMS)
-The requested application is a Document & Archive Management System.
+# 🌐 ARCHETYPE: WEBSITE / SHOWCASE PLATFORM (${sub.name.toUpperCase()})
+- Target Category: ${cat.label}
+- Target Subtype: ${sub.name}
+- Subtype Function & Purpose: ${sub.desc}
 
 ## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Top Breadcrumb Bar + Dual-Pane Tree Navigation Sidebar (Left) + File Workspace & Document Preview Panel (Center/Right).
-- Hierarchical Sub-Folder Directory: Fully interactive foldered workspace. Display directory grid of folders (e.g. Workshop Fabrication SOP, Preventative Maintenance JSA, Safety & Compliance Records, HSE Guidelines).
-- Folder & Sub-Folder Navigation: Clicking a folder opens its nested files/reports with smooth transitions and back-navigation buttons.
-- Document Viewer & PDF Preview Modal: Clicking a file triggers a crisp preview modal displaying file metadata (file size, file type, author, creation date, security classification, version tags) and simulated PDF/document contents.
-- Advanced Search & Filtering: Search bar inside folder view to instantly filter documents by name, division, tag, or status.
-- Document Audit Log & Actions: Support Download, Print PDF, Share link, and Version History timeline.
-- Clean Workspace UI: High-contrast document tree UI, compact list rows, status badges (Approved, Draft, Under Review, Archived).
-- Avoid: Sales/revenue charts or irrelevant marketing hero banners. Focus entirely on document clarity, organization, and access speed.`;
+- Layout: Top Floating/Sticky Navbar -> Hero Section with Value Proposition -> Feature & Information Showcase Grid -> Visual Media / Portfolio Cards -> Interactive Content / Testimonial Section -> Call-to-Action (CTA) Banner -> Structured Footer.
+- Visual & Motion Design:
+  - High-impact typography hierarchy, crisp modern spacing, and aesthetic brand accents.
+  - Implement smooth interactive micro-interactions (hover transformations, subtle shadows, and modal dialogs).
+- Core Features for ${sub.name}:
+  - Content sections tailored specifically for ${sub.name} with realistic mock data, filters, and clear navigation.
+  - Interactive search / category filter for browsing articles, items, services, or showcases.
+- Clean Code Standard: Single-file index.html with HTML structure, Tailwind CSS / Vanilla CSS, and JavaScript interactions.`;
 
-        } else if (archetype === 'LANDING_PAGE') {
+        } else if (catId === 'transaction') {
             archetypeSpec = `
-# 🚀 ARCHETYPE: HIGH-IMPACT MARKETING LANDING PAGE & SHOWCASE
-The requested application is a Marketing Landing Page / Product Showcase.
+# 🛒 ARCHETYPE: TRANSACTION WEBAPP & COMMERCE (${sub.name.toUpperCase()})
+- Target Category: ${cat.label}
+- Target Subtype: ${sub.name}
+- Subtype Function & Purpose: ${sub.desc}
 
 ## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Top Floating Glassmorphism Navbar -> Hero Section -> Social Proof & Client Logos -> Feature Showcase Grid -> Interactive Demo Section -> Testimonial Carousel -> Pricing & Offer Cards -> FAQ Accordion -> Final CTA Banner -> Footer.
-- MANDATORY ANIMATIONS & MOTION LIBRARIES:
-  - Include GSAP (GreenSock) CDN and Lenis Smooth Scroll CDN.
-  - Implement ScrollTrigger animations, smooth scrolling, magnetic button hover effects, and motion typography reveals.
-- Hero Background & Visual Effects:
-  - Abstract CSS/SVG gradient mesh, glowing animated glassmorphism blobs, or interactive canvas particles.
-  - Parallax scrolling effects on section headers.
-- Interactive Features: Interactive feature switcher/tabs, live pricing monthly/yearly toggle, animated counter metrics.
-- Avoid: Persistent ERP left sidebars, mobile bottom navigation bars, Kanban task boards, or backend enterprise settings panels.`;
-
-        } else if (archetype === 'ECOMMERCE') {
-            archetypeSpec = `
-# 🛒 ARCHETYPE: COMMERCIAL E-COMMERCE & MERCHANTS PLATFORM
-The requested application is an E-Commerce / Merchant Platform.
-
-## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Top Search Header with Cart Icon Badge -> Category Pills Filter Bar -> Main Product Cards Grid -> Slide-over Cart Drawer -> Checkout Modal.
-- Product Cards Grid: Cards with high-resolution image container, product title, price tag, discount badge, star ratings, quick view modal button, and "Add to Cart" CTA.
-- Shopping Cart Drawer: Interactive slide-over cart drawer showing selected items, quantity controls (+/-), subtotal calculation, promo code input field, and checkout button.
-- Interactive Checkout Modal: Complete form containing shipping details, payment gateway selection (Credit Card, QRIS, Transfer), order summary, and simulated SweetAlert2 payment confirmation.
-- Filter & Search: Global product search bar, price range slider, category tabs (e.g. All, Trending, Electronics, Apparel), and sorting (Popularity, Price Low/High).`;
+- Layout: Header Navigation with Search Bar + Category Filter Tabs + Cart/Booking Badge -> Main Product/Listing Grid -> Interactive Slide-over Cart / Booking Drawer -> Checkout & Payment Gateway Simulation Modal -> Receipt / Order Summary.
+- Core Transaction Workflow for ${sub.name}:
+  - Listing & Detail Cards: High-quality image containers, pricing badges, status indicators, item specs, and direct "Order / Book / Checkout" action triggers.
+  - Interactive Cart / Booking Drawer: Item quantity (+/-) adjustments, dynamic subtotal calculation, promo code input, and instant total summary.
+  - Checkout & Payment Modal: User details form, shipping / booking schedule selection, payment method choices (Credit Card, QRIS, Virtual Account, Transfer), and SweetAlert2 confirmation receipt.
+- Clean Code Standard: Single-file index.html with complete transaction state handling in JavaScript.`;
 
         } else {
-            // Default: ERP_DASHBOARD
+            // Default: management
             archetypeSpec = `
-# 🏭 ARCHETYPE: ENTERPRISE ERP, CMMS & OPERATIONAL DASHBOARD
-The requested application is an Enterprise-Grade Operational ERP / CMMS System.
+# 🏭 ARCHETYPE: OPERATIONAL MANAGEMENT WEBAPP (${sub.name.toUpperCase()})
+- Target Category: ${cat.label}
+- Target Subtype: ${sub.name}
+- Subtype Function & Purpose: ${sub.desc}
 
 ## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Persistent Left Sidebar (Desktop width 220-260px) vs Fixed Mobile Bottom Navigation Bar (Mobile height 56-64px) + Top Header Bar with User Avatar & Alerts.
-- Multi-Module Navigation: Support 5 client-side view pages (Executive Dashboard, Analytics & KPIs, Master Data, Operational Transactions, and System Settings).
-- Executive Dashboard & High-Density KPIs: High data density KPI cards using 'font-variant-numeric: tabular-nums', operational risk summaries, recent activity logs, and simulated AI recommendation panel.
-- Interactive Kanban Board: Workflow board with status columns (Backlog, To Do, In Progress, Done), task cards with priority tags (Low/Medium/High/Urgent), due dates, assigned avatars, and drag/status update logic.
-- Data Tables & Master Data: Full interactive tables with global search, column sorting, pagination, and multi-select filters.
-- Mandatory Print & Export Actions: Fully working frontend buttons to (A) Cetak PDF (Print PDF via @media print hiding sidebars/headers) and (B) Import/Export Excel/CSV file generation.
-- Enterprise UI Standards: Solid flat borders, high contrast, compact padding, resembling SAP PM, IBM Maximo, or Honeywell Forge. Avoid cluttering marketing hero banners.`;
+- Layout: Persistent Desktop Left Sidebar (width 220-260px) vs Fixed Mobile Bottom Navigation Bar (height 56-64px) + Top Header Bar with Search, User Profile & Alert Notifications.
+- Multi-Module Client-Side Views: Dashboard Overview, Active Records / Master Data, Interactive Kanban / Workflow Operations, Analytics & Reporting, and System Settings.
+- High-Density Data & Operations for ${sub.name}:
+  - Executive KPI cards with 'font-variant-numeric: tabular-nums', trend indicators (↑/↓), and quick status tags.
+  - Interactive Data Tables: Search filter, column sorting, pagination, status badges, and action dropdowns (View, Edit, Delete, Update Status).
+  - Interactive Workflow / Kanban Board: Drag-and-drop or status toggle columns (e.g. Backlog, Pending Approval, In Progress, Completed), priority tags (Low/Med/High/Urgent), and assignment avatars.
+  - Mandatory Print & Export Actions: Fully working frontend buttons for (A) Print PDF (@media print hiding sidebars) and (B) Export CSV/Excel file download.
+- Clean Code Standard: Single-file index.html with comprehensive JavaScript data management and responsive design.`;
         }
 
         return `# ROLE & SYSTEM ARCHITECTURE
 You are the world's best Prompt Engineer, Enterprise Solution Architect, UI/UX Lead, and Senior Full-Stack Frontend Developer.
 Your task is to write a complete, single-file, production-ready, and responsive "index.html" representing a state-of-the-art web application for:
 - App Name: "${webName}"
-- User Specification: ${webDesc}
+- WebApp Category: ${cat.label} (${cat.desc})
+- WebApp Subtype: ${sub.name} - ${sub.desc}
+- User Specification & Features: ${webDesc}
 - Specific Design Style: "${style.name}" (${style.type})
 - Color Palette Accents: Primary Accent ${c1}, Secondary Accent ${c2}
 - Design Style Attributes: ${style.desc}
@@ -2314,7 +2617,7 @@ ${archetypeSpec}
 ---
 
 # ⚡ MANDATORY SETTINGS & WATERMARK PANEL
-Unless building a pure landing page, include a fully functional Settings Panel with:
+Unless building a pure standalone landing page, include a fully functional Settings Panel with:
 1. Live Theme Picker: Swatches + color picker inputs dynamically updating CSS variables ('--primary', '--accent', '--bg') saved to localStorage.
 2. Custom Logo Upload: File input using FileReader to preview and store base64 custom logo to localStorage.
 3. User Settings: Editable profile (username, email, role, avatar) with live UI update.
@@ -2328,35 +2631,6 @@ Unless building a pure landing page, include a fully functional Settings Panel w
 - Write 100% complete, executable, clean code without placeholder comments (e.g. DO NOT write "// add rest of code here").
 - Include all necessary HTML structure, CSS custom properties, and JavaScript event logic in a single markdown code block (\`\`\`html ... \`\`\`).
 - Use Tailwind CSS CDN, FontAwesome 6 icons, and SweetAlert2 for notifications.`;
-    }
-
-    function copyBulkPrompts() {
-        const textarea = document.getElementById('bulk-prompt-textarea');
-        if (textarea) {
-            textarea.select();
-            navigator.clipboard.writeText(textarea.value).then(() => {
-                Swal.fire({ title: 'Tersalin!', text: '60 prompt telah disalin ke clipboard.', icon: 'success', background: '#111420', color: '#fff', confirmButtonColor: '#10B981', timer: 2000, showConfirmButton: false });
-            }).catch(() => {
-                document.execCommand('copy');
-                Swal.fire({ title: 'Tersalin!', text: '60 prompt telah disalin.', icon: 'success', background: '#111420', color: '#fff', confirmButtonColor: '#10B981', timer: 2000, showConfirmButton: false });
-            });
-        }
-    }
-
-    function downloadBulkPrompts() {
-        const textarea = document.getElementById('bulk-prompt-textarea');
-        if (textarea) {
-            const blob = new Blob([textarea.value], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = '60_Design_Prompts.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            Swal.fire({ title: 'Downloaded!', text: '60 Design Prompts berhasil didownload.', icon: 'success', background: '#111420', color: '#fff', confirmButtonColor: '#10B981', timer: 2000, showConfirmButton: false });
-        }
     }
 
     /* ==================== GLOBAL INTERACTIVE DEMO FUNCTIONS ==================== */
