@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — UI/UX Design Catalog</title>
+    <meta name="description" content="Halaman login aman untuk mengakses UI/UX Design Catalog.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --bg-color: #0A0D14;
+            --panel-bg: #111420;
+            --card-bg: #151825;
+            --border-color: #1E2336;
+            --border-hover: #2D3560;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8892B0;
+            --accent: #6366F1;
+            --accent-hover: #4F46E5;
+            --accent-glow: rgba(99, 102, 241, 0.25);
+            --green: #10B981;
+            --yellow: #F59E0B;
+            --pink: #EC4899;
+            --red: #EF4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ============ BACKGROUND DECOR ============ */
+        .bg-decor {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            animation: float-orb 12s ease-in-out infinite;
+        }
+        .orb-1 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, #6366F1 0%, transparent 70%);
+            top: -120px; left: -100px;
+        }
+        .orb-2 {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, #8B5CF6 0%, transparent 70%);
+            bottom: -120px; right: -80px;
+            animation-delay: -4s;
+        }
+        .orb-3 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #EC4899 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.18;
+            animation-delay: -8s;
+        }
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -40px); }
+        }
+        .orb-3 {
+            animation-name: float-orb-center;
+        }
+        @keyframes float-orb-center {
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-40%, -55%); }
+        }
+
+        /* Grid overlay */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+            pointer-events: none;
+        }
+
+        /* ============ LAYOUT ============ */
+        .login-wrapper {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(145deg, rgba(21,24,37,0.92) 0%, rgba(17,20,32,0.96) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 32px 28px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.08);
+            animation: card-in 0.5s ease forwards;
+        }
+        @keyframes card-in {
+            from { opacity: 0; transform: translateY(16px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366F1, #8B5CF6, transparent);
+        }
+        .login-card::after {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ============ LOGO ============ */
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(99,102,241,0.45);
+            animation: logo-pulse 3s ease-in-out infinite;
+        }
+        @keyframes logo-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.45); }
+            50% { box-shadow: 0 0 32px rgba(99,102,241,0.7); }
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #E2E8FF;
+            letter-spacing: -0.4px;
+        }
+        .logo-text .shimmer {
+            background: linear-gradient(90deg, #6366F1 0%, #A5B4FC 40%, #6366F1 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .login-subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            letter-spacing: 0.4px;
+        }
+
+        /* ============ FORM ============ */
+        .field-group {
+            margin-bottom: 18px;
+        }
+        .field-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #8892B0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .field-input-wrap {
+            position: relative;
+        }
+        .field-input {
+            width: 100%;
+            background: rgba(10,13,20,0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 11px;
+            padding: 12px 44px 12px 42px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .field-input::placeholder { color: #4A5578; }
+        .field-input:focus {
+            border-color: rgba(99,102,241,0.6);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+            background: rgba(10,13,20,0.9);
+        }
+        .field-input.error {
+            border-color: rgba(239,68,68,0.6);
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+            animation: shake 0.4s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .field-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4A5578;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .field-input:focus + .field-icon,
+        .field-input-wrap:focus-within .field-icon {
+            color: #6366F1;
+        }
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #4A5578;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .toggle-pass:hover { color: #A5B4FC; }
+
+        /* ============ REMEMBER + FORGOT ============ */
+        .row-aux {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            font-size: 12px;
+        }
+        .check-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #8892B0;
+            user-select: none;
+        }
+        .check-wrap input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--border-hover);
+            border-radius: 4px;
+            background: rgba(10,13,20,0.7);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        .check-wrap input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            border-color: #6366F1;
+        }
+        .check-wrap input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+        }
+        .forgot-link {
+            color: #818CF8;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .forgot-link:hover { color: #A5B4FC; }
+
+        /* ============ SUBMIT ============ */
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            color: white;
+            border: none;
+            border-radius: 11px;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 32px rgba(99,102,241,0.45);
+        }
+        .btn-submit:hover::before { left: 100%; }
+        .btn-submit:active { transform: translateY(0); }
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-submit .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            display: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .btn-submit.loading .btn-text,
+        .btn-submit.loading .btn-icon { display: none; }
+        .btn-submit.loading .spinner { display: block; }
+
+        /* ============ SECURITY BADGE ============ */
+        .security-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 11px;
+            color: #4A5578;
+        }
+        .security-row i { color: var(--green); font-size: 12px; }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 28px 22px 22px;
+                border-radius: 16px;
+            }
+            .logo-text { font-size: 19px; }
+            .logo-icon { width: 38px; height: 38px; }
+            .field-input { padding: 11px 44px 11px 40px; font-size: 13px; }
+            .btn-submit { padding: 12px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background Decor -->
+<div class="bg-decor">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+<div class="grid-overlay"></div>
+
+<!-- Login Wrapper -->
+<div class="login-wrapper">
+    <div class="login-card">
+        <!-- Logo -->
+        <div class="logo-row">
+            <div class="logo-icon">
+                <i class="fa-solid fa-palette" style="color:white; font-size:18px;"></i>
+            </div>
+            <div class="logo-text">Design <span class="shimmer">Catalog</span></div>
+        </div>
+        <div class="login-subtitle">Masuk untuk mengakses katalog UI/UX Design</div>
+
+        <!-- Form -->
+        <form id="login-form" autocomplete="off" onsubmit="handleLogin(event)">
+            <!-- Username -->
+            <div class="field-group">
+                <label class="field-label" for="username">Username</label>
+                <div class="field-input-wrap">
+                    <input type="text" id="username" class="field-input" placeholder="Masukkan username" autocomplete="username" required>
+                    <i class="fa-solid fa-user field-icon"></i>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="field-group">
+                <label class="field-label" for="password">Password</label>
+                <div class="field-input-wrap">
+                    <input type="password" id="password" class="field-input" placeholder="Masukkan password" autocomplete="current-password" required>
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <button type="button" class="toggle-pass" onclick="togglePassword()" aria-label="Tampilkan/Sembunyikan password">
+                        <i class="fa-solid fa-eye" id="toggle-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Aux Row -->
+            <div class="row-aux">
+                <label class="check-wrap">
+                    <input type="checkbox" id="remember">
+                    <span>Ingat saya</span>
+                </label>
+                <a href="#" class="forgot-link" onclick="showForgot(event)">Lupa password?</a>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-submit" id="btn-submit">
+                <i class="fa-solid fa-arrow-right-to-bracket btn-icon"></i>
+                <span class="btn-text">Masuk ke Katalog</span>
+                <div class="spinner"></div>
+            </button>
+        </form>
+
+        <!-- Security Badge -->
+        <div class="security-row">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Koneksi aman · Sesi berakhir saat browser ditutup</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ==================== CONFIG ==================== */
+    const VALID_CREDENTIALS = {
+        username: 'admin',
+        password: 'Minestack123'
+    };
+
+    // Session lifetime (ms) — 8 jam
+    const SESSION_LIFETIME = 8 * 60 * 60 * 1000;
+    const SESSION_KEY = 'uiux_design_session';
+
+    /* ==================== INIT ==================== */
+    window.onload = () => {
+        // Jika sudah login valid, langsung redirect
+        const session = getValidSession();
+        if (session) {
+            window.location.href = 'Index.html';
+            return;
+        }
+
+        // Pre-fill jika "Ingat saya" sebelumnya
+        const savedUser = localStorage.getItem('uiux_remember_user');
+        if (savedUser) {
+            document.getElementById('username').value = savedUser;
+            document.getElementById('remember').checked = true;
+            setTimeout(() => document.getElementById('password').focus(), 100);
+        } else {
+            setTimeout(() => document.getElementById('username').focus(), 100);
+        }
+
+        // Enter key pada username → fokus ke password
+        document.getElementById('username').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+    };
+
+    /* ==================== SESSION ==================== */
+    function getValidSession() {
+        try {
+            const raw = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
+            if (!raw) return null;
+            const data = JSON.parse(raw);
+            // Cek expiry
+            if (data.expiresAt && Date.now() > data.expiresAt) {
+                sessionStorage.removeItem(SESSION_KEY);
+                localStorage.removeItem(SESSION_KEY);
+                return null;
+            }
+            return data;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function createSession(remember) {
+        const data = {
+            user: 'admin',
+            loginAt: Date.now(),
+            expiresAt: Date.now() + SESSION_LIFETIME
+        };
+        // Selalu simpan di sessionStorage (hilang saat tutup tab/browser)
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+        // Jika "Ingat saya", juga simpan di localStorage untuk persist
+        if (remember) {
+            localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+        }
+    }
+
+    /* ==================== HANDLE LOGIN ==================== */
+    function handleLogin(e) {
+        e.preventDefault();
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const remember = document.getElementById('remember').checked;
+        const btn = document.getElementById('btn-submit');
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+
+        // Reset error state
+        usernameInput.classList.remove('error');
+        passwordInput.classList.remove('error');
+
+        // Validasi empty
+        if (!username) {
+            usernameInput.classList.add('error');
+            usernameInput.focus();
+            showToast('Username wajib diisi', 'error');
+            return;
+        }
+        if (!password) {
+            passwordInput.classList.add('error');
+            passwordInput.focus();
+            showToast('Password wajib diisi', 'error');
+            return;
+        }
+
+        // Loading state
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        // Simulasi delay auth
+        setTimeout(() => {
+            if (username === VALID_CREDENTIALS.username && password === VALID_CREDENTIALS.password) {
+                // Simpan username jika "Ingat saya"
+                if (remember) {
+                    localStorage.setItem('uiux_remember_user', username);
+                } else {
+                    localStorage.removeItem('uiux_remember_user');
+                }
+
+                // Buat sesi
+                createSession(remember);
+
+                btn.classList.remove('loading');
+                btn.disabled = false;
+
+                // Sukses
+                Swal.fire({
+                    title: 'Login Berhasil',
+                    text: 'Selamat datang kembali, Admin!',
+                    icon: 'success',
+                    background: '#111420',
+                    color: '#fff',
+                    iconColor: '#10B981',
+                    confirmButtonColor: '#6366F1',
+                    timer: 1400,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    customClass: { popup: 'border border-gray-700 rounded-2xl' }
+                }).then(() => {
+                    window.location.href = 'Index.html';
+                });
+
+                // Fallback redirect jika SweetAlert tidak trigger
+                setTimeout(() => { window.location.href = 'Index.html'; }, 1600);
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+
+                // Cek apa yang salah untuk pesan lebih spesifik
+                if (username !== VALID_CREDENTIALS.username) {
+                    usernameInput.classList.add('error');
+                    showToast('Username tidak ditemukan', 'error');
+                    usernameInput.focus();
+                } else {
+                    passwordInput.classList.add('error');
+                    showToast('Password salah, coba lagi', 'error');
+                    passwordInput.focus();
+                }
+            }
+        }, 650);
+    }
+
+    /* ==================== TOGGLE PASSWORD ==================== */
+    function togglePassword() {
+        const input = document.getElementById('password');
+        const icon = document.getElementById('toggle-icon');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.className = 'fa-solid fa-eye-slash';
+        } else {
+            input.type = 'password';
+            icon.className = 'fa-solid fa-eye';
+        }
+        input.focus();
+    }
+
+    /* ==================== TOAST ==================== */
+    function showToast(message, icon = 'info') {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 2600,
+            timerProgressBar: true,
+            background: '#151825',
+            color: '#fff',
+            customClass: { popup: 'border border-gray-700 rounded-xl' }
+        });
+    }
+
+    /* ==================== FORGOT ==================== */
+    function showForgot(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Lupa Password?',
+            html: '<div style="font-size:13px;color:#8892B0;line-height:1.6;">Hubungi administrator sistem untuk reset password.<br><br>Kredensial default:<br><b style="color:#A5B4FC;">admin / Minestack123</b></div>',
+            icon: 'question',
+            background: '#111420',
+            color: '#fff',
+            iconColor: '#F59E0B',
+            confirmButtonColor: '#6366F1',
+            confirmButtonText: 'Mengerti',
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        });
+    }
+</script>
+
+</body>
+</html>
