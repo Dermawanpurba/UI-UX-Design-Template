@@ -731,9 +731,214 @@
             }
             #ld-demo-frame { min-height: 0; overflow: auto !important; }
         }
+
+        /* ============ AUTH / LOGIN OVERLAY (VERCEL COMPATIBLE) ============ */
+        #auth-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: #0A0D14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        #auth-overlay.auth-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .auth-bg-decor {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .auth-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            animation: auth-float-orb 12s ease-in-out infinite;
+        }
+        .auth-orb-1 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, #6366F1 0%, transparent 70%);
+            top: -120px; left: -100px;
+        }
+        .auth-orb-2 {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, #8B5CF6 0%, transparent 70%);
+            bottom: -120px; right: -80px;
+            animation-delay: -4s;
+        }
+        .auth-orb-3 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #EC4899 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.18;
+            animation-delay: -8s;
+        }
+        @keyframes auth-float-orb {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -40px); }
+        }
+        .auth-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+            pointer-events: none;
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 430px;
+            background: linear-gradient(145deg, rgba(21,24,37,0.95) 0%, rgba(17,20,32,0.98) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 32px 28px;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(99,102,241,0.12);
+            animation: auth-card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes auth-card-in {
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2.5px;
+            background: linear-gradient(90deg, transparent, #6366F1, #8B5CF6, #EC4899, transparent);
+        }
+        .auth-field-input {
+            width: 100%;
+            background: rgba(10,13,20,0.85);
+            border: 1px solid var(--border-color);
+            border-radius: 11px;
+            padding: 12px 44px 12px 42px;
+            color: #fff;
+            font-size: 13.5px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .auth-field-input::placeholder { color: #4A5578; }
+        .auth-field-input:focus {
+            border-color: rgba(99,102,241,0.7);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+            background: rgba(10,13,20,0.95);
+        }
+        .auth-field-input.auth-error {
+            border-color: rgba(239,68,68,0.7);
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+            animation: auth-shake 0.4s ease;
+        }
+        @keyframes auth-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
     </style>
 </head>
 <body>
+
+<!-- ==================== AUTH / LOGIN OVERLAY SCREEN (VERCEL PROTECTED) ==================== -->
+<div id="auth-overlay">
+    <div class="auth-bg-decor">
+        <div class="auth-orb auth-orb-1"></div>
+        <div class="auth-orb auth-orb-2"></div>
+        <div class="auth-orb auth-orb-3"></div>
+    </div>
+    <div class="auth-grid-overlay"></div>
+
+    <div class="auth-card">
+        <!-- Logo -->
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:6px;">
+            <div style="width:44px; height:44px; background:linear-gradient(135deg, #6366F1, #8B5CF6); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(99,102,241,0.45);">
+                <i class="fa-solid fa-palette" style="color:white; font-size:18px;"></i>
+            </div>
+            <div style="font-size:22px; font-weight:800; color:#E2E8FF; letter-spacing:-0.4px;">
+                Design <span style="background:linear-gradient(90deg, #6366F1, #A5B4FC, #6366F1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Catalog</span>
+            </div>
+        </div>
+        <div style="text-align:center; font-size:12px; color:var(--text-secondary); margin-bottom:20px; letter-spacing:0.3px;">
+            Masuk untuk mengakses UI/UX Design Catalog
+        </div>
+
+        <!-- Vercel Credentials Hint Badge -->
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25); border-radius:10px; margin-bottom:18px; font-size:11px;">
+            <div style="color:#C8CFEA;">
+                <i class="fa-solid fa-key" style="color:#F59E0B; margin-right:6px;"></i>
+                Akses: <b style="color:#FFF;">admin</b> | <b style="color:#A5B4FC;">Minestack123</b>
+            </div>
+            <button type="button" onclick="autoFillCredentials()" style="background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.3); color:#A5B4FC; font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px; cursor:pointer;" title="Isi Otomatis">
+                Auto-fill
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="auth-login-form" autocomplete="off" onsubmit="handleAuthLogin(event)">
+            <!-- Username -->
+            <div style="margin-bottom:16px;">
+                <label style="display:block; font-size:11px; font-weight:700; color:#8892B0; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;" for="auth-username">
+                    Username
+                </label>
+                <div style="position:relative;">
+                    <input type="text" id="auth-username" class="auth-field-input" placeholder="Masukkan username (admin)" autocomplete="username" required>
+                    <i class="fa-solid fa-user" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#4A5578; font-size:13px;"></i>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div style="margin-bottom:18px;">
+                <label style="display:block; font-size:11px; font-weight:700; color:#8892B0; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;" for="auth-password">
+                    Password
+                </label>
+                <div style="position:relative;">
+                    <input type="password" id="auth-password" class="auth-field-input" placeholder="Masukkan password" autocomplete="current-password" required>
+                    <i class="fa-solid fa-lock" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#4A5578; font-size:13px;"></i>
+                    <button type="button" onclick="toggleAuthPassword()" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:transparent; border:none; color:#4A5578; cursor:pointer; padding:4px; font-size:13px;" aria-label="Toggle Password">
+                        <i class="fa-solid fa-eye" id="auth-toggle-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Aux Row: Remember Me & Quick Help -->
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; font-size:12px; color:#8892B0;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;">
+                    <input type="checkbox" id="auth-remember" checked style="accent-color:#6366F1; width:15px; height:15px; cursor:pointer;">
+                    <span>Ingat saya</span>
+                </label>
+                <a href="#" onclick="showAuthHelp(event)" style="color:#818CF8; text-decoration:none; font-weight:600; font-size:11px;">Bantuan Login?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="auth-btn-submit" style="width:100%; padding:13px; background:linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color:white; border:none; border-radius:11px; font-size:13.5px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 8px 24px rgba(99,102,241,0.35); transition:all 0.2s ease;">
+                <i class="fa-solid fa-arrow-right-to-bracket" id="auth-btn-icon"></i>
+                <span id="auth-btn-text">Masuk ke Katalog</span>
+            </button>
+        </form>
+
+        <!-- Security Footer Badge -->
+        <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border-color); font-size:11px; color:#4A5578;">
+            <i class="fa-solid fa-shield-halved" style="color:#10B981; font-size:12px;"></i>
+            <span>Vercel Protected App · Sesi aman terenkripsi</span>
+        </div>
+    </div>
+</div>
 <div style="display:flex; height:100vh; overflow:hidden;">
 
     <!-- ==================== SIDEBAR LEFT ==================== -->
@@ -839,9 +1044,9 @@
             <div id="category-nav"></div>
         </div>
 
-        <!-- Bottom Help -->
+        <!-- Bottom Help & Admin Status -->
         <div style="padding:10px;">
-            <div onclick="showFeatureAlert('Pusat Bantuan','Dokumentasi lengkap tersedia. Tim support kami siap membantu Anda 24/7.')" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:rgba(99,102,241,0.07); border:1px solid rgba(99,102,241,0.15); cursor:pointer; transition:all 0.2s;"
+            <div onclick="showFeatureAlert('Pusat Bantuan','Dokumentasi lengkap tersedia. Tim support kami siap membantu Anda 24/7.')" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:rgba(99,102,241,0.07); border:1px solid rgba(99,102,241,0.15); cursor:pointer; transition:all 0.2s; margin-bottom:8px;"
                  onmouseover="this.style.borderColor='rgba(99,102,241,0.35)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.15)'">
                 <div style="width:30px; height:30px; border-radius:8px; background:rgba(99,102,241,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     <i class="fa-solid fa-question" style="color:#6366F1; font-size:12px;"></i>
@@ -850,6 +1055,20 @@
                     <div style="font-size:12px; font-weight:600; color:#C8CFEA;">Butuh Bantuan?</div>
                     <div style="font-size:10px; color:#4A5578;">Lihat panduan lengkap</div>
                 </div>
+            </div>
+
+            <!-- Admin Profile Card with Quick Logout -->
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-color);">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg, #6366F1, #8B5CF6); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:white;">A</div>
+                    <div>
+                        <div style="font-size:11px; font-weight:700; color:#E2E8FF;">admin</div>
+                        <div style="font-size:9px; color:#10B981;">● Online</div>
+                    </div>
+                </div>
+                <button onclick="confirmLogout()" title="Keluar / Logout" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:12px; padding:4px;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#f87171'">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
             </div>
         </div>
     </aside>
@@ -870,7 +1089,11 @@
                             <div style="font-size:18px; font-weight:800;" class="shimmer-text">60+</div>
                             <div style="font-size:10px; color:#4A5578;">Styles</div>
                         </div>
-                        <div class="user-avatar" title="Profile">D</div>
+                        <div class="user-avatar" title="Akun: admin (Klik untuk Logout)" onclick="confirmLogout()">A</div>
+                        <button onclick="confirmLogout()" title="Keluar / Logout" style="padding:6px 12px; border-radius:8px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); color:#f87171; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.1)'">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="hidden sm:inline">Logout</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1221,47 +1444,224 @@
 </div>
 
 <script>
-    /* ==================== SESSION GUARD ==================== */
-    (function () {
-        const SESSION_KEY = 'uiux_design_session';
-        let session = null;
+    /* ==================== VERCEL AUTHENTICATION GUARD (SINGLE FILE) ==================== */
+    const AUTH_CONFIG = {
+        validUsername: 'admin',
+        validPassword: 'Minestack123',
+        sessionKey: 'uiux_design_session',
+        rememberKey: 'uiux_remember_user',
+        sessionLifetime: 8 * 60 * 60 * 1000 // 8 Jam
+    };
+
+    function checkAuthStatus() {
+        const overlay = document.getElementById('auth-overlay');
         try {
-            const raw = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
-            if (raw) session = JSON.parse(raw);
-        } catch (e) { session = null; }
+            const raw = sessionStorage.getItem(AUTH_CONFIG.sessionKey) || localStorage.getItem(AUTH_CONFIG.sessionKey);
+            if (raw) {
+                const session = JSON.parse(raw);
+                if (session && session.user === 'admin' && session.expiresAt && Date.now() < session.expiresAt) {
+                    // Update expiry
+                    session.expiresAt = Date.now() + AUTH_CONFIG.sessionLifetime;
+                    try {
+                        sessionStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(session));
+                        if (localStorage.getItem(AUTH_CONFIG.sessionKey)) {
+                            localStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(session));
+                        }
+                    } catch(e){}
+                    if (overlay) overlay.classList.add('auth-hidden');
+                    return true;
+                }
+            }
+        } catch(e){}
 
-        const valid = session && session.user === 'admin'
-            && session.expiresAt && Date.now() < session.expiresAt;
+        // Not authenticated
+        if (overlay) {
+            overlay.classList.remove('auth-hidden');
+            const savedUser = localStorage.getItem(AUTH_CONFIG.rememberKey);
+            const userInp = document.getElementById('auth-username');
+            const passInp = document.getElementById('auth-password');
+            if (savedUser && userInp) {
+                userInp.value = savedUser;
+                if (passInp) setTimeout(() => passInp.focus(), 150);
+            } else if (userInp) {
+                setTimeout(() => userInp.focus(), 150);
+            }
+        }
+        return false;
+    }
 
-        if (!valid) {
-            // Bersihkan sesi kedaluwarsa
-            try {
-                sessionStorage.removeItem(SESSION_KEY);
-                localStorage.removeItem(SESSION_KEY);
-            } catch (e) {}
-            // Redirect ke login (relatif terhadap lokasi Index.html)
-            window.location.replace('login.html');
+    function handleAuthLogin(e) {
+        if (e) e.preventDefault();
+        const userInp = document.getElementById('auth-username');
+        const passInp = document.getElementById('auth-password');
+        const remInp = document.getElementById('auth-remember');
+        const btn = document.getElementById('auth-btn-submit');
+        const btnText = document.getElementById('auth-btn-text');
+        const btnIcon = document.getElementById('auth-btn-icon');
+
+        const user = (userInp ? userInp.value.trim() : '');
+        const pass = (passInp ? passInp.value : '');
+        const remember = remInp ? remInp.checked : true;
+
+        if (userInp) userInp.classList.remove('auth-error');
+        if (passInp) passInp.classList.remove('auth-error');
+
+        if (!user) {
+            if (userInp) { userInp.classList.add('auth-error'); userInp.focus(); }
+            showToast('Username wajib diisi', 'error');
+            return;
+        }
+        if (!pass) {
+            if (passInp) { passInp.classList.add('auth-error'); passInp.focus(); }
+            showToast('Password wajib diisi', 'error');
             return;
         }
 
-        // Perpanjang sesi 8 jam setiap kali user aktif di halaman
-        session.expiresAt = Date.now() + (8 * 60 * 60 * 1000);
-        try {
-            sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-            if (localStorage.getItem(SESSION_KEY)) {
-                localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-            }
-        } catch (e) {}
+        // Loading UI
+        if (btn) {
+            btn.disabled = true;
+            btn.style.opacity = '0.75';
+        }
+        if (btnText) btnText.textContent = 'Memverifikasi...';
+        if (btnIcon) btnIcon.className = 'fa-solid fa-circle-notch fa-spin';
 
-        // Helper global untuk logout (dipakai tombol logout di UI jika ada)
-        window.logoutDesignCatalog = function () {
-            try {
-                sessionStorage.removeItem(SESSION_KEY);
-                localStorage.removeItem(SESSION_KEY);
-            } catch (e) {}
-            window.location.replace('login.html');
-        };
-    })();
+        setTimeout(() => {
+            if (btn) {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+            if (btnText) btnText.textContent = 'Masuk ke Katalog';
+            if (btnIcon) btnIcon.className = 'fa-solid fa-arrow-right-to-bracket';
+
+            // Verify credentials (user: admin, pass: Minestack123)
+            if (user.toLowerCase() === AUTH_CONFIG.validUsername && pass === AUTH_CONFIG.validPassword) {
+                const sessionData = {
+                    user: 'admin',
+                    loginAt: Date.now(),
+                    expiresAt: Date.now() + AUTH_CONFIG.sessionLifetime
+                };
+
+                sessionStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(sessionData));
+                if (remember) {
+                    localStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(sessionData));
+                    localStorage.setItem(AUTH_CONFIG.rememberKey, user);
+                } else {
+                    localStorage.removeItem(AUTH_CONFIG.sessionKey);
+                    localStorage.removeItem(AUTH_CONFIG.rememberKey);
+                }
+
+                const overlay = document.getElementById('auth-overlay');
+                if (overlay) overlay.classList.add('auth-hidden');
+
+                Swal.fire({
+                    title: 'Login Berhasil',
+                    text: 'Selamat datang di UI/UX Design Catalog!',
+                    icon: 'success',
+                    background: '#111420',
+                    color: '#fff',
+                    iconColor: '#10B981',
+                    timer: 1200,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    customClass: { popup: 'border border-gray-700 rounded-2xl' }
+                });
+            } else {
+                if (user.toLowerCase() !== AUTH_CONFIG.validUsername) {
+                    if (userInp) { userInp.classList.add('auth-error'); userInp.focus(); }
+                    showToast('Username tidak ditemukan', 'error');
+                } else {
+                    if (passInp) { passInp.classList.add('auth-error'); passInp.focus(); }
+                    showToast('Password salah. Gunakan Minestack123', 'error');
+                }
+            }
+        }, 300);
+    }
+
+    function toggleAuthPassword() {
+        const passInp = document.getElementById('auth-password');
+        const icon = document.getElementById('auth-toggle-icon');
+        if (!passInp || !icon) return;
+        if (passInp.type === 'password') {
+            passInp.type = 'text';
+            icon.className = 'fa-solid fa-eye-slash';
+        } else {
+            passInp.type = 'password';
+            icon.className = 'fa-solid fa-eye';
+        }
+        passInp.focus();
+    }
+
+    function autoFillCredentials() {
+        const userInp = document.getElementById('auth-username');
+        const passInp = document.getElementById('auth-password');
+        if (userInp) userInp.value = 'admin';
+        if (passInp) passInp.value = 'Minestack123';
+        showToast('Kredensial otomatis terisi!', 'success');
+    }
+
+    function showAuthHelp(e) {
+        if (e) e.preventDefault();
+        Swal.fire({
+            title: 'Kredensial Akses Vercel',
+            html: `
+                <div style="text-align:left;font-size:12.5px;color:#8892B0;line-height:1.6;">
+                    Gunakan kredensial resmi berikut untuk membuka akses:<br><br>
+                    <div style="background:#151825;padding:12px;border-radius:10px;border:1px solid #1E2336;">
+                        • <b>Username</b>: <span style="color:#38BDF8;font-family:monospace;font-weight:700;">admin</span><br>
+                        • <b>Password</b>: <span style="color:#A5B4FC;font-family:monospace;font-weight:700;">Minestack123</span>
+                    </div>
+                </div>
+            `,
+            icon: 'info',
+            background: '#111420',
+            color: '#fff',
+            iconColor: '#38BDF8',
+            confirmButtonColor: '#6366F1',
+            confirmButtonText: 'Tutup',
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        });
+    }
+
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Konfirmasi Logout',
+            text: 'Apakah Anda yakin ingin keluar dari UI/UX Design Catalog?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#EF4444',
+            cancelButtonColor: '#1E2336',
+            confirmButtonText: '<i class="fa-solid fa-right-from-bracket mr-1"></i> Ya, Keluar',
+            cancelButtonText: 'Batal',
+            background: '#111420',
+            color: '#fff',
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        }).then((res) => {
+            if (res.isConfirmed) {
+                try {
+                    sessionStorage.removeItem(AUTH_CONFIG.sessionKey);
+                    localStorage.removeItem(AUTH_CONFIG.sessionKey);
+                } catch(e){}
+                const passInp = document.getElementById('auth-password');
+                if (passInp) passInp.value = '';
+                const overlay = document.getElementById('auth-overlay');
+                if (overlay) overlay.classList.remove('auth-hidden');
+                showToast('Anda telah berhasil keluar.', 'info');
+                setTimeout(() => {
+                    const userInp = document.getElementById('auth-username');
+                    if (userInp) userInp.focus();
+                }, 200);
+            }
+        });
+    }
+    window.confirmLogout = confirmLogout;
+    window.logoutDesignCatalog = confirmLogout;
+
+    // Check auth on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', checkAuthStatus);
+    } else {
+        checkAuthStatus();
+    }
 
     /* ==================== MOCK DATABASE ==================== */
     const MOCK_DB = {
