@@ -1201,12 +1201,68 @@
                     <i class="fa-solid fa-code"></i> Generate 60 Design Prompts
                 </button>
             </div>
+
+            <!-- LOGOUT -->
+            <div style="margin:10px;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(239,68,68,0.06),rgba(239,68,68,0.02));border:1px solid rgba(239,68,68,0.18);">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <div style="width:22px;height:22px;border-radius:6px;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;">
+                        <i class="fa-solid fa-user-shield" style="color:#f87171;font-size:10px;"></i>
+                    </div>
+                    <span style="font-size:11px;font-weight:700;color:#fca5a5;">Sesi Login</span>
+                </div>
+                <p style="font-size:10px;color:#6B7A9E;line-height:1.5;margin:0 0 10px;">Anda masuk sebagai <strong style="color:#f87171;">admin</strong>. Klik untuk mengakhiri sesi dan kembali ke halaman login.</p>
+                <button onclick="confirmLogout()" style="width:100%;padding:10px;background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.3);border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;" onmouseover="this.style.background='rgba(239,68,68,0.2)';this.style.transform='translateY(-1px)';" onmouseout="this.style.background='rgba(239,68,68,0.12)';this.style.transform='translateY(0)';">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
         </div>
     </aside>
 
 </div>
 
 <script>
+    /* ==================== SESSION GUARD ==================== */
+    (function () {
+        const SESSION_KEY = 'uiux_design_session';
+        let session = null;
+        try {
+            const raw = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
+            if (raw) session = JSON.parse(raw);
+        } catch (e) { session = null; }
+
+        const valid = session && session.user === 'admin'
+            && session.expiresAt && Date.now() < session.expiresAt;
+
+        if (!valid) {
+            // Bersihkan sesi kedaluwarsa
+            try {
+                sessionStorage.removeItem(SESSION_KEY);
+                localStorage.removeItem(SESSION_KEY);
+            } catch (e) {}
+            // Redirect ke login (relatif terhadap lokasi Index.html)
+            window.location.replace('login.html');
+            return;
+        }
+
+        // Perpanjang sesi 8 jam setiap kali user aktif di halaman
+        session.expiresAt = Date.now() + (8 * 60 * 60 * 1000);
+        try {
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+            if (localStorage.getItem(SESSION_KEY)) {
+                localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+            }
+        } catch (e) {}
+
+        // Helper global untuk logout (dipakai tombol logout di UI jika ada)
+        window.logoutDesignCatalog = function () {
+            try {
+                sessionStorage.removeItem(SESSION_KEY);
+                localStorage.removeItem(SESSION_KEY);
+            } catch (e) {}
+            window.location.replace('login.html');
+        };
+    })();
+
     /* ==================== MOCK DATABASE ==================== */
     const MOCK_DB = {
         categories: [
@@ -1612,6 +1668,28 @@
         }
         localStorage.setItem('uiux_favorites', JSON.stringify(favorites));
         updateCounters();
+    }
+
+    /* ==================== LOGOUT CONFIRM ==================== */
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Logout?',
+            text: 'Sesi Anda akan diakhiri dan Anda akan diarahkan ke halaman login.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Logout',
+            cancelButtonText: 'Batal',
+            background: '#111420',
+            color: '#fff',
+            iconColor: '#F59E0B',
+            confirmButtonColor: '#EF4444',
+            cancelButtonColor: '#2D3560',
+            customClass: { popup: 'border border-gray-700 rounded-2xl' }
+        }).then((result) => {
+            if (result.isConfirmed && typeof window.logoutDesignCatalog === 'function') {
+                window.logoutDesignCatalog();
+            }
+        });
     }
 
     /* ==================== MISC ==================== */
@@ -2144,7 +2222,7 @@
         return { cat: WEBAPP_TAXONOMY.management, sub: WEBAPP_TAXONOMY.management.subtypes[0] };
     }
 
-    /* ==================== DIRECT PROMPT FLOW (UPDATED WEBAPP TYPE SELECTOR) ==================== */
+    /* ======    /* ==================== DIRECT PROMPT FLOW (UPDATED WEBAPP TYPE SELECTOR, LIGHT/DARK MODE & MONTHLY FILTER) ==================== */
     function generatePromptFromLiveDemo() {
         if(!ldCurrentStyle) return;
         const style = ldCurrentStyle;
@@ -2154,12 +2232,14 @@
 
         let selectedCat = 'management';
         let selectedSubtype = 'cmms';
+        let selectedMode = 'dark';
+        let selectedFilter = 'monthly';
 
         Swal.fire({
             title: '✨ Konfigurasi Prompt AI',
             html: `
-                <div style="text-align:left;font-family:'Inter',sans-serif;">
-                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;line-height:1.5;">Pilih <strong>Tipe &amp; Subtype WebApp</strong> agar AI menghasilkan arsitektur &amp; fitur yang 100% pas:</p>
+                <div style="text-align:left;font-family:'Inter',sans-serif;max-height:75vh;overflow-y:auto;padding-right:4px;">
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;line-height:1.5;">Pilih <strong>Tipe WebApp</strong>, <strong>Mode Tampilan</strong>, dan <strong>Filter Bulanan</strong> untuk menghasilkan prompt arsitektur yang 100% presisi:</p>
                     
                     <!-- 1. CATEGORY SELECTOR -->
                     <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">1. Kategori WebApp</label>
@@ -2193,7 +2273,7 @@
                     </select>
 
                     <!-- SUBTYPE DYNAMIC DESCRIPTION CARD -->
-                    <div id="swal-subtype-desc-box" style="padding:10px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;margin-bottom:14px;">
+                    <div id="swal-subtype-desc-box" style="padding:10px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;margin-bottom:12px;">
                         <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
                             <i class="fa-solid fa-lightbulb" style="color:#F59E0B;font-size:11px;"></i>
                             <strong id="swal-subtype-name" style="color:#FDE68A;font-size:11px;">CMMS</strong>
@@ -2202,8 +2282,33 @@
                         <div id="swal-subtype-desc" style="font-size:11px;color:#CBD5F0;line-height:1.5;">Sistem khusus untuk mengelola maintenance, work order, preventive maintenance, sparepart, asset, dan maintenance history.</div>
                     </div>
 
-                    <!-- 3. APP NAME -->
-                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">3. Nama Website / Aplikasi</label>
+                    <!-- 3. MODE TAMPILAN (2 PILIHAN: LIGHT & DARK MODE) -->
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">3. Mode Tampilan (Theme Mode)</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;" id="swal-mode-buttons">
+                        <button type="button" id="btn-mode-dark" onclick="window.swalSelectMode('dark')" style="padding:9px 12px;border-radius:8px;border:1px solid #6366F1;background:rgba(99,102,241,0.18);color:#A5B4FC;font-size:11.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-moon" style="color:#818CF8;"></i> Dark Mode (Gelap)
+                        </button>
+                        <button type="button" id="btn-mode-light" onclick="window.swalSelectMode('light')" style="padding:9px 12px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-sun" style="color:#F59E0B;"></i> Light Mode (Terang)
+                        </button>
+                    </div>
+
+                    <!-- 4. FILTER PER MONTHLY UNTUK TYPE WEB APP -->
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">4. Filter Data Bulanan (Monthly Filter)</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;" id="swal-filter-buttons">
+                        <button type="button" id="btn-filter-monthly" onclick="window.swalSelectFilter('monthly')" style="padding:9px 12px;border-radius:8px;border:1px solid #10B981;background:rgba(16,185,129,0.18);color:#34D399;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-calendar-check" style="color:#10B981;"></i> Filter Monthly (Bulanan)
+                        </button>
+                        <button type="button" id="btn-filter-all" onclick="window.swalSelectFilter('all_time')" style="padding:9px 12px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-calendar" style="color:#64748B;"></i> Semua Waktu / Standar
+                        </button>
+                    </div>
+                    <div id="swal-filter-note" style="font-size:10px;color:#8892B0;margin-bottom:12px;padding:6px 10px;background:#151825;border-radius:6px;border:1px solid #1E2336;">
+                        <i class="fa-solid fa-circle-info" style="color:#10B981;margin-right:4px;"></i>Menyertakan filter dropdown Bulan/Tahun, komparasi MoM (Month-over-Month), serta filtering tabel &amp; chart otomatis per bulan.
+                    </div>
+
+                    <!-- 5. APP NAME -->
+                    <label style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">5. Nama Website / Aplikasi</label>
                     <input id="swal-web-name" type="text" placeholder="Contoh: PT. Maju Bersama - WebApp Maintenance System" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:6px;box-sizing:border-box;">
                 </div>
             `,
@@ -2256,8 +2361,73 @@
                     document.getElementById('swal-subtype-badge').textContent = cat.label;
                 };
 
-                // Initialize with Management category and CMMS
+                window.swalSelectMode = function(mode) {
+                    selectedMode = mode;
+                    const btnDark = document.getElementById('btn-mode-dark');
+                    const btnLight = document.getElementById('btn-mode-light');
+                    if (btnDark && btnLight) {
+                        if (mode === 'dark') {
+                            btnDark.style.border = '1px solid #6366F1';
+                            btnDark.style.background = 'rgba(99,102,241,0.18)';
+                            btnDark.style.color = '#A5B4FC';
+                            btnDark.style.fontWeight = '700';
+
+                            btnLight.style.border = '1px solid #1E2336';
+                            btnLight.style.background = '#1A1E2C';
+                            btnLight.style.color = '#94A3B8';
+                            btnLight.style.fontWeight = '600';
+                        } else {
+                            btnLight.style.border = '1px solid #F59E0B';
+                            btnLight.style.background = 'rgba(245,158,11,0.18)';
+                            btnLight.style.color = '#FDE68A';
+                            btnLight.style.fontWeight = '700';
+
+                            btnDark.style.border = '1px solid #1E2336';
+                            btnDark.style.background = '#1A1E2C';
+                            btnDark.style.color = '#94A3B8';
+                            btnDark.style.fontWeight = '600';
+                        }
+                    }
+                };
+
+                window.swalSelectFilter = function(filter) {
+                    selectedFilter = filter;
+                    const btnMon = document.getElementById('btn-filter-monthly');
+                    const btnAll = document.getElementById('btn-filter-all');
+                    const note = document.getElementById('swal-filter-note');
+                    if (btnMon && btnAll) {
+                        if (filter === 'monthly') {
+                            btnMon.style.border = '1px solid #10B981';
+                            btnMon.style.background = 'rgba(16,185,129,0.18)';
+                            btnMon.style.color = '#34D399';
+                            btnMon.style.fontWeight = '700';
+
+                            btnAll.style.border = '1px solid #1E2336';
+                            btnAll.style.background = '#1A1E2C';
+                            btnAll.style.color = '#94A3B8';
+                            btnAll.style.fontWeight = '600';
+
+                            if (note) note.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#10B981;margin-right:4px;"></i>Menyertakan filter dropdown Bulan/Tahun, komparasi MoM (Month-over-Month), serta filtering tabel &amp; chart otomatis per bulan.';
+                        } else {
+                            btnAll.style.border = '1px solid #818CF8';
+                            btnAll.style.background = 'rgba(99,102,241,0.18)';
+                            btnAll.style.color = '#A5B4FC';
+                            btnAll.style.fontWeight = '700';
+
+                            btnMon.style.border = '1px solid #1E2336';
+                            btnMon.style.background = '#1A1E2C';
+                            btnMon.style.color = '#94A3B8';
+                            btnMon.style.fontWeight = '600';
+
+                            if (note) note.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#818CF8;margin-right:4px;"></i>Menampilkan seluruh data secara kumulatif atau dengan rentang tanggal fleksibel.';
+                        }
+                    }
+                };
+
+                // Initialize with Management category, CMMS, Dark Mode & Monthly Filter
                 window.swalSelectCat('management');
+                window.swalSelectMode('dark');
+                window.swalSelectFilter('monthly');
                 const subSelect = document.getElementById('swal-app-subtype');
                 if (subSelect) {
                     subSelect.value = 'cmms';
@@ -2268,11 +2438,13 @@
                 const name = document.getElementById('swal-web-name').value;
                 const subtype = selectedSubtype;
                 const cat = selectedCat;
+                const mode = selectedMode;
+                const filter = selectedFilter;
                 if (!name || !name.trim()) {
                     Swal.showValidationMessage('Silakan masukkan nama website / aplikasi');
                     return false;
                 }
-                return { name: name.trim(), category: cat, subtype: subtype };
+                return { name: name.trim(), category: cat, subtype: subtype, mode: mode, filter: filter };
             }
         }).then((nameResult) => {
             if (nameResult.isDismissed || !nameResult.value) return;
@@ -2280,6 +2452,8 @@
             const webName = nameResult.value.name;
             const chosenCat = nameResult.value.category;
             const chosenSubtype = nameResult.value.subtype;
+            const chosenMode = nameResult.value.mode || 'dark';
+            const chosenFilter = nameResult.value.filter || 'monthly';
             const { cat, sub } = getSubtypeData(chosenCat, chosenSubtype);
             
             Swal.fire({
@@ -2300,19 +2474,23 @@
                 if (descResult.isDismissed) return;
                 
                 const webDesc = descResult.value && descResult.value.trim() ? descResult.value.trim() : sub.desc;
-                const promptText = buildSinglePrompt(style, webName, webDesc, c1, c2, chosenCat, chosenSubtype);
+                const promptText = buildSinglePrompt(style, webName, webDesc, c1, c2, chosenCat, chosenSubtype, chosenMode, chosenFilter);
                 const activeArchetypeLabel = `${cat.label} • ${sub.name}`;
+                const modeBadge = chosenMode === 'light' ? '☀️ Light Mode' : '🌙 Dark Mode';
+                const filterBadge = chosenFilter === 'monthly' ? '📅 Monthly Filter' : '🗓️ All-Time';
                 
                 navigator.clipboard.writeText(promptText).then(() => {
                     Swal.fire({
                         title: '✨ Prompt Berhasil Disalin!',
                         html: `
-                            <div style="margin-bottom:10px;">
-                                <span style="padding:4px 12px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
+                            <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+                                <span style="padding:4px 10px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
+                                <span style="padding:4px 10px;background:rgba(99,102,241,0.15);color:#A5B4FC;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">${modeBadge}</span>
+                                <span style="padding:4px 10px;background:rgba(245,158,11,0.15);color:#FDE68A;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(245,158,11,0.3);">${filterBadge}</span>
                             </div>
-                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk gaya <strong style="color:#A5B4FC;">${style.name}</strong> telah disalin ke clipboard Anda.</p>
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Prompt AI untuk gaya <strong style="color:#A5B4FC;">${style.name}</strong> (${modeBadge}) telah disalin ke clipboard Anda.</p>
                             <textarea readonly style="width:100%;height:140px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
-                            <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Claude, ChatGPT, v0.dev, Gemini, atau AI pilihan Anda.</p>
+                            <p style="color:#5B6A8E;font-size:10px;margin-top:6px;text-align:left;"><i class="fa-solid fa-info-circle"></i> Tempel (Ctrl+V) langsung ke Claude, ChatGPT, v0.dev, Gemini, Cursor, atau Antigravity.</p>
                         `,
                         icon: 'success',
                         background: '#111420',
@@ -2326,8 +2504,10 @@
                     Swal.fire({
                         title: '✨ Prompt Berhasil Dibuat!',
                         html: `
-                            <div style="margin-bottom:10px;">
-                                <span style="padding:4px 12px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
+                            <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+                                <span style="padding:4px 10px;background:rgba(16,185,129,0.15);color:#34D399;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">${activeArchetypeLabel}</span>
+                                <span style="padding:4px 10px;background:rgba(99,102,241,0.15);color:#A5B4FC;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">${modeBadge}</span>
+                                <span style="padding:4px 10px;background:rgba(245,158,11,0.15);color:#FDE68A;font-size:11px;font-weight:700;border-radius:20px;border:1px solid rgba(245,158,11,0.3);">${filterBadge}</span>
                             </div>
                             <textarea id="fallback-prompt-text" style="width:100%;height:140px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:8px;color:#CBD5F0;font-size:11px;font-family:monospace;resize:none;outline:none;">${promptText}</textarea>
                             <button onclick="document.getElementById('fallback-prompt-text').select(); document.execCommand('copy'); Swal.fire('Tersalin!', '', 'success');" style="margin-top:10px;padding:6px 16px;background:#6366F1;color:white;border:none;border-radius:6px;font-size:11px;cursor:pointer;">Salin Teks</button>
@@ -2350,12 +2530,14 @@
     function generateAllPrompts() {
         let selectedBulkCat = 'management';
         let selectedBulkSubtype = 'cmms';
+        let selectedBulkMode = 'dark';
+        let selectedBulkFilter = 'monthly';
 
         Swal.fire({
             title: '📝 Bulk 60 Prompts Configuration',
             html: `
-                <div style="text-align:left;font-family:'Inter',sans-serif;">
-                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Membuat 60 Prompt sekaligus untuk semua 60 Design Styles.</p>
+                <div style="text-align:left;font-family:'Inter',sans-serif;max-height:75vh;overflow-y:auto;padding-right:4px;">
+                    <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Membuat 60 Prompt sekaligus untuk semua 60 Design Styles dengan Tipe, Mode &amp; Filter pilihan.</p>
                     
                     <!-- 1. CATEGORY SELECTOR -->
                     <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">1. Kategori WebApp</label>
@@ -2389,7 +2571,7 @@
                     </select>
 
                     <!-- SUBTYPE DYNAMIC DESCRIPTION CARD -->
-                    <div id="swal-bulk-subtype-desc-box" style="padding:10px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;margin-bottom:14px;">
+                    <div id="swal-bulk-subtype-desc-box" style="padding:10px 12px;background:#151825;border:1px solid #1E2336;border-radius:8px;margin-bottom:12px;">
                         <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
                             <i class="fa-solid fa-lightbulb" style="color:#F59E0B;font-size:11px;"></i>
                             <strong id="swal-bulk-subtype-name" style="color:#FDE68A;font-size:11px;">CMMS</strong>
@@ -2398,8 +2580,33 @@
                         <div id="swal-bulk-subtype-desc" style="font-size:11px;color:#CBD5F0;line-height:1.5;">Sistem khusus untuk mengelola maintenance, work order, preventive maintenance, sparepart, asset, dan maintenance history.</div>
                     </div>
 
-                    <!-- 3. APP NAME -->
-                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">3. Nama Website / Aplikasi</label>
+                    <!-- 3. MODE TAMPILAN -->
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">3. Mode Tampilan (Theme Mode)</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;" id="swal-bulk-mode-buttons">
+                        <button type="button" id="btn-bulk-mode-dark" onclick="window.swalBulkSelectMode('dark')" style="padding:9px 12px;border-radius:8px;border:1px solid #10B981;background:rgba(16,185,129,0.18);color:#6EE7B7;font-size:11.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-moon" style="color:#34D399;"></i> Dark Mode (Gelap)
+                        </button>
+                        <button type="button" id="btn-bulk-mode-light" onclick="window.swalBulkSelectMode('light')" style="padding:9px 12px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-sun" style="color:#F59E0B;"></i> Light Mode (Terang)
+                        </button>
+                    </div>
+
+                    <!-- 4. FILTER PER MONTHLY -->
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px;">4. Filter Data Bulanan (Monthly Filter)</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;" id="swal-bulk-filter-buttons">
+                        <button type="button" id="btn-bulk-filter-monthly" onclick="window.swalBulkSelectFilter('monthly')" style="padding:9px 12px;border-radius:8px;border:1px solid #10B981;background:rgba(16,185,129,0.18);color:#34D399;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-calendar-check" style="color:#10B981;"></i> Filter Monthly (Bulanan)
+                        </button>
+                        <button type="button" id="btn-bulk-filter-all" onclick="window.swalBulkSelectFilter('all_time')" style="padding:9px 12px;border-radius:8px;border:1px solid #1E2336;background:#1A1E2C;color:#94A3B8;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;">
+                            <i class="fa-solid fa-calendar" style="color:#64748B;"></i> Semua Waktu / Standar
+                        </button>
+                    </div>
+                    <div id="swal-bulk-filter-note" style="font-size:10px;color:#8892B0;margin-bottom:12px;padding:6px 10px;background:#151825;border-radius:6px;border:1px solid #1E2336;">
+                        <i class="fa-solid fa-circle-info" style="color:#10B981;margin-right:4px;"></i>Menyertakan filter dropdown Bulan/Tahun, komparasi MoM (Month-over-Month), serta filtering tabel &amp; chart otomatis per bulan.
+                    </div>
+
+                    <!-- 5. APP NAME -->
+                    <label style="font-size:11px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:4px;">5. Nama Website / Aplikasi</label>
                     <input id="swal-bulk-name" type="text" placeholder="Contoh: PT. Maju Bersama - Enterprise System" style="width:100%;background:#1A1E2C;border:1px solid #1E2336;color:#FFF;font-size:12px;padding:10px;border-radius:8px;outline:none;margin-bottom:6px;box-sizing:border-box;">
                 </div>
             `,
@@ -2450,7 +2657,72 @@
                     document.getElementById('swal-bulk-subtype-badge').textContent = cat.label;
                 };
 
+                window.swalBulkSelectMode = function(mode) {
+                    selectedBulkMode = mode;
+                    const btnDark = document.getElementById('btn-bulk-mode-dark');
+                    const btnLight = document.getElementById('btn-bulk-mode-light');
+                    if (btnDark && btnLight) {
+                        if (mode === 'dark') {
+                            btnDark.style.border = '1px solid #10B981';
+                            btnDark.style.background = 'rgba(16,185,129,0.18)';
+                            btnDark.style.color = '#6EE7B7';
+                            btnDark.style.fontWeight = '700';
+
+                            btnLight.style.border = '1px solid #1E2336';
+                            btnLight.style.background = '#1A1E2C';
+                            btnLight.style.color = '#94A3B8';
+                            btnLight.style.fontWeight = '600';
+                        } else {
+                            btnLight.style.border = '1px solid #F59E0B';
+                            btnLight.style.background = 'rgba(245,158,11,0.18)';
+                            btnLight.style.color = '#FDE68A';
+                            btnLight.style.fontWeight = '700';
+
+                            btnDark.style.border = '1px solid #1E2336';
+                            btnDark.style.background = '#1A1E2C';
+                            btnDark.style.color = '#94A3B8';
+                            btnDark.style.fontWeight = '600';
+                        }
+                    }
+                };
+
+                window.swalBulkSelectFilter = function(filter) {
+                    selectedBulkFilter = filter;
+                    const btnMon = document.getElementById('btn-bulk-filter-monthly');
+                    const btnAll = document.getElementById('btn-bulk-filter-all');
+                    const note = document.getElementById('swal-bulk-filter-note');
+                    if (btnMon && btnAll) {
+                        if (filter === 'monthly') {
+                            btnMon.style.border = '1px solid #10B981';
+                            btnMon.style.background = 'rgba(16,185,129,0.18)';
+                            btnMon.style.color = '#34D399';
+                            btnMon.style.fontWeight = '700';
+
+                            btnAll.style.border = '1px solid #1E2336';
+                            btnAll.style.background = '#1A1E2C';
+                            btnAll.style.color = '#94A3B8';
+                            btnAll.style.fontWeight = '600';
+
+                            if (note) note.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#10B981;margin-right:4px;"></i>Menyertakan filter dropdown Bulan/Tahun, komparasi MoM (Month-over-Month), serta filtering tabel &amp; chart otomatis per bulan.';
+                        } else {
+                            btnAll.style.border = '1px solid #818CF8';
+                            btnAll.style.background = 'rgba(99,102,241,0.18)';
+                            btnAll.style.color = '#A5B4FC';
+                            btnAll.style.fontWeight = '700';
+
+                            btnMon.style.border = '1px solid #1E2336';
+                            btnMon.style.background = '#1A1E2C';
+                            btnMon.style.color = '#94A3B8';
+                            btnMon.style.fontWeight = '600';
+
+                            if (note) note.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#818CF8;margin-right:4px;"></i>Menampilkan seluruh data secara kumulatif atau dengan rentang tanggal fleksibel.';
+                        }
+                    }
+                };
+
                 window.swalBulkSelectCat('management');
+                window.swalBulkSelectMode('dark');
+                window.swalBulkSelectFilter('monthly');
                 const subSelect = document.getElementById('swal-bulk-app-subtype');
                 if (subSelect) {
                     subSelect.value = 'cmms';
@@ -2463,13 +2735,15 @@
                     Swal.showValidationMessage('Masukkan nama website / aplikasi');
                     return false;
                 }
-                return { name: name.trim(), category: selectedBulkCat, subtype: selectedBulkSubtype };
+                return { name: name.trim(), category: selectedBulkCat, subtype: selectedBulkSubtype, mode: selectedBulkMode, filter: selectedBulkFilter };
             }
         }).then((nameResult) => {
             if (nameResult.isDismissed || !nameResult.value) return;
             const webName = nameResult.value.name;
             const chosenCat = nameResult.value.category;
             const chosenSubtype = nameResult.value.subtype;
+            const chosenMode = nameResult.value.mode || 'dark';
+            const chosenFilter = nameResult.value.filter || 'monthly';
             const { cat, sub } = getSubtypeData(chosenCat, chosenSubtype);
 
             Swal.fire({
@@ -2507,8 +2781,8 @@
                     const c1 = cols[0] ? '#' + cols[0] : '#6366f1';
                     const c2 = cols[1] ? '#' + cols[1] : '#a855f7';
 
-                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2, chosenCat, chosenSubtype);
-                    allPrompts += `========== PROMPT #${idx + 1} | ${style.name} (${style.type}) ==========\n\n${prompt}`;
+                    const prompt = buildSinglePrompt(style, webName, webDesc, c1, c2, chosenCat, chosenSubtype, chosenMode, chosenFilter);
+                    allPrompts += `========== PROMPT #${idx + 1} | ${style.name} (${style.type}) [${chosenMode.toUpperCase()} MODE] ==========\n\n${prompt}`;
                     if (idx < MOCK_DB.styles.length - 1) allPrompts += separator;
                 });
 
@@ -2519,7 +2793,7 @@
                     title: '🎉 60 Design Prompts Generated!',
                     html: `
                         <div style="text-align:left;">
-                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Menggunakan Archetype: <strong style="color:#A5B4FC;">${cat.label} • ${sub.name}</strong>.</p>
+                            <p style="color:#8892B0;font-size:12px;margin-bottom:12px;">Berhasil membuat <strong style="color:#10B981;">60 prompt AI</strong> untuk semua design styles. Archetype: <strong style="color:#A5B4FC;">${cat.label} • ${sub.name}</strong> | Mode: <strong style="color:#FDE68A;">${chosenMode.toUpperCase()}</strong> | Filter: <strong style="color:#34D399;">${chosenFilter === 'monthly' ? 'MONTHLY' : 'ALL-TIME'}</strong>.</p>
                             <textarea id="bulk-prompt-textarea" readonly style="width:100%;height:280px;background:#1A1E2C;border:1px solid #1E2336;border-radius:8px;padding:10px;color:#CBD5F0;font-size:10px;font-family:'Courier New',monospace;resize:none;outline:none;">${allPrompts.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
                             <div style="display:flex;gap:8px;margin-top:10px;">
                                 <button onclick="copyBulkPrompts()" style="flex:1;padding:10px;background:#6366F1;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
@@ -2544,8 +2818,10 @@
         });
     }
 
-    function buildSinglePrompt(style, webName, webDesc, c1, c2, catId = 'management', subtypeId = 'cmms') {
+    function buildSinglePrompt(style, webName, webDesc, c1, c2, catId = 'management', subtypeId = 'cmms', mode = 'dark', filterPeriod = 'monthly') {
         const { cat, sub } = getSubtypeData(catId, subtypeId);
+        const isLight = mode === 'light';
+        const isMonthly = filterPeriod === 'monthly';
         let archetypeSpec = '';
 
         if (catId === 'website') {
@@ -2563,6 +2839,8 @@
 - Core Features for ${sub.name}:
   - Content sections tailored specifically for ${sub.name} with realistic mock data, filters, and clear navigation.
   - Interactive search / category filter for browsing articles, items, services, or showcases.
+${isMonthly ? `  - Monthly Content Archive / Events Filter: Dropdown pilihan bulan/tahun untuk memfilter arsip publikasi, event, atau showcase berkala.` : ''}
+- Mode Pratinjau: Pastikan ada mode pratinjau interaktif untuk seluruh komponen, cards, navigasi, dan efek animasi.
 - Clean Code Standard: Single-file index.html with HTML structure, Tailwind CSS / Vanilla CSS, and JavaScript interactions.`;
 
         } else if (catId === 'transaction') {
@@ -2578,6 +2856,8 @@
   - Listing & Detail Cards: High-quality image containers, pricing badges, status indicators, item specs, and direct "Order / Book / Checkout" action triggers.
   - Interactive Cart / Booking Drawer: Item quantity (+/-) adjustments, dynamic subtotal calculation, promo code input, and instant total summary.
   - Checkout & Payment Modal: User details form, shipping / booking schedule selection, payment method choices (Credit Card, QRIS, Virtual Account, Transfer), and SweetAlert2 confirmation receipt.
+${isMonthly ? `  - Monthly Transaction History & Filter: Sediakan filter transaksi per bulan (Jan-Des + Tahun) dengan kalkulasi Total Pengeluaran/Pemasukan Bulanan dan ringkasan order per bulan.` : ''}
+- Mode Pratinjau: Pastikan ada mode pratinjau interaktif untuk simulasi katalog transaksi, cart drawer, checkout modal, dan receipt.
 - Clean Code Standard: Single-file index.html with complete transaction state handling in JavaScript.`;
 
         } else {
@@ -2589,15 +2869,58 @@
 - Subtype Function & Purpose: ${sub.desc}
 
 ## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Persistent Desktop Left Sidebar (width 220-260px) vs Fixed Mobile Bottom Navigation Bar (height 56-64px) + Top Header Bar with Search, User Profile & Alert Notifications.
+- Layout: Persistent Desktop Left Sidebar (width 220-260px) vs Fixed Mobile Bottom Navigation Bar (height 56-64px) + Top Header Bar with Search, User Profile, Notification Bell, and Monthly Filter Bar.
 - Multi-Module Client-Side Views: Dashboard Overview, Active Records / Master Data, Interactive Kanban / Workflow Operations, Analytics & Reporting, and System Settings.
 - High-Density Data & Operations for ${sub.name}:
   - Executive KPI cards with 'font-variant-numeric: tabular-nums', trend indicators (↑/↓), and quick status tags.
   - Interactive Data Tables: Search filter, column sorting, pagination, status badges, and action dropdowns (View, Edit, Delete, Update Status).
   - Interactive Workflow / Kanban Board: Drag-and-drop or status toggle columns (e.g. Backlog, Pending Approval, In Progress, Completed), priority tags (Low/Med/High/Urgent), and assignment avatars.
   - Mandatory Print & Export Actions: Fully working frontend buttons for (A) Print PDF (@media print hiding sidebars) and (B) Export CSV/Excel file download.
+- Mode Pratinjau: Pastikan ada mode pratinjau interaktif untuk simulasi data dashboard, tabel data CRUD, kanban workflow, dan modal print PDF.
 - Clean Code Standard: Single-file index.html with comprehensive JavaScript data management and responsive design.`;
         }
+
+        const themeSpec = isLight ? `
+# ☀️ MODE TAMPILAN: LIGHT MODE (TERANG)
+- **Base Canvas Theme**: LIGHT MODE MURNI (Di luar tema UI/UX, seluruh background dan container utama menggunakan palet terang).
+- **Color Tokens & Palette**:
+  - Background Utama (Body/Page): \`#F8FAFC\` (Slate 50) atau \`#FFFFFF\`.
+  - Card & Container Surface: \`#FFFFFF\` murni dengan border tipis \`#E2E8F0\` (Slate 200) dan shadow lembut (\`box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)\`).
+  - Sidebar & Topbar Surface: \`#FFFFFF\` atau \`#F1F5F9\` dengan border separator \`#E2E8F0\`.
+  - Primary Text: \`#0F172A\` (Slate 900) untuk heading, title, dan nilai metrik agar memiliki keterbacaan tinggi.
+  - Secondary / Muted Text: \`#64748B\` (Slate 500) untuk label form, tanggal, deskripsi, dan metadata.
+  - Accent Color Integration: Terapkan Primary Accent ${c1} dan Secondary Accent ${c2} pada active tabs, CTA buttons, active status pills, dan progress bars.
+  - Input & Form Fields: Background \`#F8FAFC\`, border \`#CBD5E1\`, focus border \`${c1}\`, text \`#0F172A\`.
+- **UI/UX Style Translation**: Terapkan estetika gaya "${style.name}" (${style.type}) dengan karakteristik (${style.desc}) secara presisi dalam palet Light Mode yang bersih dan profesional.` : `
+# 🌙 MODE TAMPILAN: DARK MODE (GELAP)
+- **Base Canvas Theme**: DARK MODE PREMIUM (Di luar tema UI/UX, seluruh background dan container utama menggunakan palet gelap modern).
+- **Color Tokens & Palette**:
+  - Background Utama (Body/Page): \`#0A0D14\` (Deep Obsidian) atau \`#0F172A\` (Dark Slate).
+  - Card & Container Surface: \`#151825\` / \`#1E2336\` dengan border kontras \`#1E2336\` / \`#2D3560\` dan subtle ambient shadow.
+  - Sidebar & Topbar Surface: \`#111420\` atau \`#0D111D\` dengan border separator \`#1E2336\`.
+  - Primary Text: \`#FFFFFF\` murni / \`#F8FAFC\` untuk heading, title, dan nilai angka KPI.
+  - Secondary / Muted Text: \`#8892B0\` / \`#94A3B8\` untuk label, deskripsi, dan info pelengkap.
+  - Accent Color Integration: Terapkan Primary Accent ${c1} dan Secondary Accent ${c2} lengkap dengan subtle glow shadow (\`0 0 14px ${c1}33\`).
+  - Input & Form Fields: Background \`#1A1E2C\`, border \`#1E2336\`, focus border \`${c1}\`, text \`#FFFFFF\`.
+- **UI/UX Style Translation**: Terapkan estetika gaya "${style.name}" (${style.type}) dengan karakteristik (${style.desc}) secara presisi dalam nuansa Dark Mode yang futuristik dan elegan.`;
+
+        const filterMonthlySpec = isMonthly ? `
+# 📅 FITUR WAJIB: FILTER DATA PER BULAN (MONTHLY FILTER & MoM TRENDS)
+- **Komponen Monthly Filter Bar (Header / Topbar / Dashboard)**:
+  - Sediakan UI kontrol Filter Bulanan yang interaktif dan mudah diakses:
+    1. **Dropdown Pilihan Bulan** (Januari s/d Desember) dan **Tahun** (e.g. 2025, 2026).
+    2. **Quick Navigation**: Tombol cepat \`❮ Bulan Lalu\` dan \`Bulan Depan ❯\` atau Tab Segmented Bar Bulan.
+    3. **Bulan Berjalan (Default Active)**: Saat aplikasi pertama kali dibuka, otomatis memilih dan memuat data Bulan & Tahun saat ini.
+- **Dampak Reaktif Filter Bulanan**:
+  - Saat pengguna mengganti pilihan bulan, seluruh komponen dashboard dan data **otomatis terfilter secara instan (real-time)**:
+    1. **Executive KPI Cards**: Nilai metrik (Total Records, Revenue/Biaya, Selesai, Pending, Active) terkalkulasi khusus untuk bulan terpilih.
+    2. **Indikator Tren MoM (Month-over-Month)**: Menampilkan persentase komparasi terhadap bulan sebelumnya (e.g. \`↑ +12.5% vs bulan lalu\` warna hijau, atau \`↓ -4.2%\` warna merah).
+    3. **Grafik / Chart Bulanan**: Menampilkan distribusi tren harian atau mingguan khusus di dalam bulan yang dipilih.
+    4. **Tabel Data & Kanban Workflow**: Hanya menampilkan baris data atau tiket transaksi yang berada di bulan tersebut.
+- **Export Laporan Bulanan (PDF & Excel)**:
+  - Tombol aksi "Cetak Laporan Bulanan (PDF)" dan "Export Excel Bulanan" yang mengekspor data yang sedang difilter pada bulan tersebut secara rapi.` : `
+# 🗓️ FILTER DATA: ALL-TIME / FLEXIBLE RANGE
+- Sediakan search bar dan filter data umum untuk eksplorasi seluruh rekaman data secara fleksibel.`;
 
         return `# ROLE & SYSTEM ARCHITECTURE
 You are the world's best Prompt Engineer, Enterprise Solution Architect, UI/UX Lead, and Senior Full-Stack Frontend Developer.
@@ -2605,6 +2928,8 @@ Your task is to write a complete, single-file, production-ready, and responsive 
 - App Name: "${webName}"
 - WebApp Category: ${cat.label} (${cat.desc})
 - WebApp Subtype: ${sub.name} - ${sub.desc}
+- Mode Tampilan: ${isLight ? '☀️ LIGHT MODE' : '🌙 DARK MODE'}
+- Data Filter Period: ${isMonthly ? '📅 MONTHLY FILTER (Filter Per Bulan & MoM Analytics)' : '🗓️ ALL-TIME / CUSTOM'}
 - User Specification & Features: ${webDesc}
 - Specific Design Style: "${style.name}" (${style.type})
 - Color Palette Accents: Primary Accent ${c1}, Secondary Accent ${c2}
@@ -2612,13 +2937,27 @@ Your task is to write a complete, single-file, production-ready, and responsive 
 
 ---
 
+${themeSpec}
+
+---
+
+${filterMonthlySpec}
+
+---
+
 ${archetypeSpec}
+
+---
+
+# 👁️ MODE PRATINJAU (PREVIEW MODE)
+- **Pastikan ada mode pratinjau** (Live Preview / Interactive Simulation Mode) yang fungsional pada aplikasi untuk melihat simulasi data, visualisasi antarmuka secara interaktif, modal preview, dan responsivitas komponen secara langsung tanpa perlu backend server nyata.
+- Sediakan tombol atau status badge "Mode Pratinjau Aktif" dan mock data interaktif sehingga seluruh fitur (dashboard, form, tabel, modal, filter bulanan) dapat langsung diuji dan didemokan secara instan di browser.
 
 ---
 
 # ⚡ MANDATORY SETTINGS & WATERMARK PANEL
 Unless building a pure standalone landing page, include a fully functional Settings Panel with:
-1. Live Theme Picker: Swatches + color picker inputs dynamically updating CSS variables ('--primary', '--accent', '--bg') saved to localStorage.
+1. Live Theme & Mode Toggle: Switcher untuk Light/Dark mode dan color picker inputs yang memperbarui CSS variables ('--primary', '--accent', '--bg') dan tersimpan di localStorage.
 2. Custom Logo Upload: File input using FileReader to preview and store base64 custom logo to localStorage.
 3. User Settings: Editable profile (username, email, role, avatar) with live UI update.
 4. Mandatory Watermark: Must include:
@@ -2630,6 +2969,7 @@ Unless building a pure standalone landing page, include a fully functional Setti
 # CODING STANDARDS & OUTPUT FORMAT
 - Write 100% complete, executable, clean code without placeholder comments (e.g. DO NOT write "// add rest of code here").
 - Include all necessary HTML structure, CSS custom properties, and JavaScript event logic in a single markdown code block (\`\`\`html ... \`\`\`).
+- Pastikan ada mode pratinjau dan filter bulanan yang siap jalan secara mandiri (standalone) di browser.
 - Use Tailwind CSS CDN, FontAwesome 6 icons, and SweetAlert2 for notifications.`;
     }
 
