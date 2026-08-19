@@ -732,213 +732,10 @@
             #ld-demo-frame { min-height: 0; overflow: auto !important; }
         }
 
-        /* ============ AUTH / LOGIN OVERLAY (VERCEL COMPATIBLE) ============ */
-        #auth-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 999999;
-            background: #0A0D14;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        #auth-overlay.auth-hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .auth-bg-decor {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .auth-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.35;
-            animation: auth-float-orb 12s ease-in-out infinite;
-        }
-        .auth-orb-1 {
-            width: 420px; height: 420px;
-            background: radial-gradient(circle, #6366F1 0%, transparent 70%);
-            top: -120px; left: -100px;
-        }
-        .auth-orb-2 {
-            width: 380px; height: 380px;
-            background: radial-gradient(circle, #8B5CF6 0%, transparent 70%);
-            bottom: -120px; right: -80px;
-            animation-delay: -4s;
-        }
-        .auth-orb-3 {
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, #EC4899 0%, transparent 70%);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.18;
-            animation-delay: -8s;
-        }
-        @keyframes auth-float-orb {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -40px); }
-        }
-        .auth-grid-overlay {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-            pointer-events: none;
-        }
-        .auth-card {
-            width: 100%;
-            max-width: 430px;
-            background: linear-gradient(145deg, rgba(21,24,37,0.95) 0%, rgba(17,20,32,0.98) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 36px 32px 28px;
-            position: relative;
-            z-index: 10;
-            overflow: hidden;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(99,102,241,0.12);
-            animation: auth-card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes auth-card-in {
-            from { opacity: 0; transform: translateY(20px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .auth-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2.5px;
-            background: linear-gradient(90deg, transparent, #6366F1, #8B5CF6, #EC4899, transparent);
-        }
-        .auth-field-input {
-            width: 100%;
-            background: rgba(10,13,20,0.85);
-            border: 1px solid var(--border-color);
-            border-radius: 11px;
-            padding: 12px 44px 12px 42px;
-            color: #fff;
-            font-size: 13.5px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-        .auth-field-input::placeholder { color: #4A5578; }
-        .auth-field-input:focus {
-            border-color: rgba(99,102,241,0.7);
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
-            background: rgba(10,13,20,0.95);
-        }
-        .auth-field-input.auth-error {
-            border-color: rgba(239,68,68,0.7);
-            box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
-            animation: auth-shake 0.4s ease;
-        }
-        @keyframes auth-shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
-        }
     </style>
 </head>
 <body>
 
-<!-- ==================== AUTH / LOGIN OVERLAY SCREEN (VERCEL PROTECTED) ==================== -->
-<div id="auth-overlay">
-    <div class="auth-bg-decor">
-        <div class="auth-orb auth-orb-1"></div>
-        <div class="auth-orb auth-orb-2"></div>
-        <div class="auth-orb auth-orb-3"></div>
-    </div>
-    <div class="auth-grid-overlay"></div>
-
-    <div class="auth-card">
-        <!-- Logo -->
-        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:6px;">
-            <div style="width:44px; height:44px; background:linear-gradient(135deg, #6366F1, #8B5CF6); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(99,102,241,0.45);">
-                <i class="fa-solid fa-palette" style="color:white; font-size:18px;"></i>
-            </div>
-            <div style="font-size:22px; font-weight:800; color:#E2E8FF; letter-spacing:-0.4px;">
-                Design <span style="background:linear-gradient(90deg, #6366F1, #A5B4FC, #6366F1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Catalog</span>
-            </div>
-        </div>
-        <div style="text-align:center; font-size:12px; color:var(--text-secondary); margin-bottom:20px; letter-spacing:0.3px;">
-            Masuk untuk mengakses UI/UX Design Catalog
-        </div>
-
-        <!-- Vercel Credentials Hint Badge -->
-        <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25); border-radius:10px; margin-bottom:18px; font-size:11px;">
-            <div style="color:#C8CFEA;">
-                <i class="fa-solid fa-key" style="color:#F59E0B; margin-right:6px;"></i>
-                Akses: <b style="color:#FFF;">admin</b> | <b style="color:#A5B4FC;">Minestack123</b>
-            </div>
-            <button type="button" onclick="autoFillCredentials()" style="background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.3); color:#A5B4FC; font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px; cursor:pointer;" title="Isi Otomatis">
-                Auto-fill
-            </button>
-        </div>
-
-        <!-- Form -->
-        <form id="auth-login-form" autocomplete="off" onsubmit="handleAuthLogin(event)">
-            <!-- Username -->
-            <div style="margin-bottom:16px;">
-                <label style="display:block; font-size:11px; font-weight:700; color:#8892B0; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;" for="auth-username">
-                    Username
-                </label>
-                <div style="position:relative;">
-                    <input type="text" id="auth-username" class="auth-field-input" placeholder="Masukkan username (admin)" autocomplete="username" required>
-                    <i class="fa-solid fa-user" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#4A5578; font-size:13px;"></i>
-                </div>
-            </div>
-
-            <!-- Password -->
-            <div style="margin-bottom:18px;">
-                <label style="display:block; font-size:11px; font-weight:700; color:#8892B0; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;" for="auth-password">
-                    Password
-                </label>
-                <div style="position:relative;">
-                    <input type="password" id="auth-password" class="auth-field-input" placeholder="Masukkan password" autocomplete="current-password" required>
-                    <i class="fa-solid fa-lock" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#4A5578; font-size:13px;"></i>
-                    <button type="button" onclick="toggleAuthPassword()" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:transparent; border:none; color:#4A5578; cursor:pointer; padding:4px; font-size:13px;" aria-label="Toggle Password">
-                        <i class="fa-solid fa-eye" id="auth-toggle-icon"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Aux Row: Remember Me & Quick Help -->
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; font-size:12px; color:#8892B0;">
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;">
-                    <input type="checkbox" id="auth-remember" checked style="accent-color:#6366F1; width:15px; height:15px; cursor:pointer;">
-                    <span>Ingat saya</span>
-                </label>
-                <a href="#" onclick="showAuthHelp(event)" style="color:#818CF8; text-decoration:none; font-weight:600; font-size:11px;">Bantuan Login?</a>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" id="auth-btn-submit" style="width:100%; padding:13px; background:linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color:white; border:none; border-radius:11px; font-size:13.5px; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 8px 24px rgba(99,102,241,0.35); transition:all 0.2s ease;">
-                <i class="fa-solid fa-arrow-right-to-bracket" id="auth-btn-icon"></i>
-                <span id="auth-btn-text">Masuk ke Katalog</span>
-            </button>
-        </form>
-
-        <!-- Security Footer Badge -->
-        <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border-color); font-size:11px; color:#4A5578;">
-            <i class="fa-solid fa-shield-halved" style="color:#10B981; font-size:12px;"></i>
-            <span>Vercel Protected App · Sesi aman terenkripsi</span>
-        </div>
-    </div>
-</div>
 <div style="display:flex; height:100vh; overflow:hidden;">
 
     <!-- ==================== SIDEBAR LEFT ==================== -->
@@ -1058,18 +855,7 @@
             </div>
 
             <!-- Admin Profile Card with Quick Logout -->
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-color);">
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <div style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg, #6366F1, #8B5CF6); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:white;">A</div>
-                    <div>
-                        <div style="font-size:11px; font-weight:700; color:#E2E8FF;">admin</div>
-                        <div style="font-size:9px; color:#10B981;">● Online</div>
-                    </div>
-                </div>
-                <button onclick="confirmLogout()" title="Keluar / Logout" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:12px; padding:4px;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#f87171'">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
-            </div>
+
         </div>
     </aside>
 
@@ -1089,11 +875,6 @@
                             <div style="font-size:18px; font-weight:800;" class="shimmer-text">60+</div>
                             <div style="font-size:10px; color:#4A5578;">Styles</div>
                         </div>
-                        <div class="user-avatar" title="Akun: admin (Klik untuk Logout)" onclick="confirmLogout()">A</div>
-                        <button onclick="confirmLogout()" title="Keluar / Logout" style="padding:6px 12px; border-radius:8px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); color:#f87171; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.1)'">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            <span class="hidden sm:inline">Logout</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1425,245 +1206,15 @@
                 </button>
             </div>
 
-            <!-- LOGOUT -->
-            <div style="margin:10px;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(239,68,68,0.06),rgba(239,68,68,0.02));border:1px solid rgba(239,68,68,0.18);">
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-                    <div style="width:22px;height:22px;border-radius:6px;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;">
-                        <i class="fa-solid fa-user-shield" style="color:#f87171;font-size:10px;"></i>
-                    </div>
-                    <span style="font-size:11px;font-weight:700;color:#fca5a5;">Sesi Login</span>
-                </div>
-                <p style="font-size:10px;color:#6B7A9E;line-height:1.5;margin:0 0 10px;">Anda masuk sebagai <strong style="color:#f87171;">admin</strong>. Klik untuk mengakhiri sesi dan kembali ke halaman login.</p>
-                <button onclick="confirmLogout()" style="width:100%;padding:10px;background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.3);border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;" onmouseover="this.style.background='rgba(239,68,68,0.2)';this.style.transform='translateY(-1px)';" onmouseout="this.style.background='rgba(239,68,68,0.12)';this.style.transform='translateY(0)';">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                </button>
-            </div>
+
         </div>
     </aside>
 
 </div>
 
 <script>
-    /* ==================== VERCEL AUTHENTICATION GUARD (SINGLE FILE) ==================== */
-    const AUTH_CONFIG = {
-        validUsername: 'admin',
-        validPassword: 'Minestack123',
-        sessionKey: 'uiux_design_session',
-        rememberKey: 'uiux_remember_user',
-        sessionLifetime: 8 * 60 * 60 * 1000 // 8 Jam
-    };
-
-    function checkAuthStatus() {
-        const overlay = document.getElementById('auth-overlay');
-        try {
-            const raw = sessionStorage.getItem(AUTH_CONFIG.sessionKey) || localStorage.getItem(AUTH_CONFIG.sessionKey);
-            if (raw) {
-                const session = JSON.parse(raw);
-                if (session && session.user === 'admin' && session.expiresAt && Date.now() < session.expiresAt) {
-                    // Update expiry
-                    session.expiresAt = Date.now() + AUTH_CONFIG.sessionLifetime;
-                    try {
-                        sessionStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(session));
-                        if (localStorage.getItem(AUTH_CONFIG.sessionKey)) {
-                            localStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(session));
-                        }
-                    } catch(e){}
-                    if (overlay) overlay.classList.add('auth-hidden');
-                    return true;
-                }
-            }
-        } catch(e){}
-
-        // Not authenticated
-        if (overlay) {
-            overlay.classList.remove('auth-hidden');
-            const savedUser = localStorage.getItem(AUTH_CONFIG.rememberKey);
-            const userInp = document.getElementById('auth-username');
-            const passInp = document.getElementById('auth-password');
-            if (savedUser && userInp) {
-                userInp.value = savedUser;
-                if (passInp) setTimeout(() => passInp.focus(), 150);
-            } else if (userInp) {
-                setTimeout(() => userInp.focus(), 150);
-            }
-        }
-        return false;
-    }
-
-    function handleAuthLogin(e) {
-        if (e) e.preventDefault();
-        const userInp = document.getElementById('auth-username');
-        const passInp = document.getElementById('auth-password');
-        const remInp = document.getElementById('auth-remember');
-        const btn = document.getElementById('auth-btn-submit');
-        const btnText = document.getElementById('auth-btn-text');
-        const btnIcon = document.getElementById('auth-btn-icon');
-
-        const user = (userInp ? userInp.value.trim() : '');
-        const pass = (passInp ? passInp.value : '');
-        const remember = remInp ? remInp.checked : true;
-
-        if (userInp) userInp.classList.remove('auth-error');
-        if (passInp) passInp.classList.remove('auth-error');
-
-        if (!user) {
-            if (userInp) { userInp.classList.add('auth-error'); userInp.focus(); }
-            showToast('Username wajib diisi', 'error');
-            return;
-        }
-        if (!pass) {
-            if (passInp) { passInp.classList.add('auth-error'); passInp.focus(); }
-            showToast('Password wajib diisi', 'error');
-            return;
-        }
-
-        // Loading UI
-        if (btn) {
-            btn.disabled = true;
-            btn.style.opacity = '0.75';
-        }
-        if (btnText) btnText.textContent = 'Memverifikasi...';
-        if (btnIcon) btnIcon.className = 'fa-solid fa-circle-notch fa-spin';
-
-        setTimeout(() => {
-            if (btn) {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-            }
-            if (btnText) btnText.textContent = 'Masuk ke Katalog';
-            if (btnIcon) btnIcon.className = 'fa-solid fa-arrow-right-to-bracket';
-
-            // Verify credentials (user: admin, pass: Minestack123)
-            if (user.toLowerCase() === AUTH_CONFIG.validUsername && pass === AUTH_CONFIG.validPassword) {
-                const sessionData = {
-                    user: 'admin',
-                    loginAt: Date.now(),
-                    expiresAt: Date.now() + AUTH_CONFIG.sessionLifetime
-                };
-
-                sessionStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(sessionData));
-                if (remember) {
-                    localStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(sessionData));
-                    localStorage.setItem(AUTH_CONFIG.rememberKey, user);
-                } else {
-                    localStorage.removeItem(AUTH_CONFIG.sessionKey);
-                    localStorage.removeItem(AUTH_CONFIG.rememberKey);
-                }
-
-                const overlay = document.getElementById('auth-overlay');
-                if (overlay) overlay.classList.add('auth-hidden');
-
-                Swal.fire({
-                    title: 'Login Berhasil',
-                    text: 'Selamat datang di UI/UX Design Catalog!',
-                    icon: 'success',
-                    background: '#111420',
-                    color: '#fff',
-                    iconColor: '#10B981',
-                    timer: 1200,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                    customClass: { popup: 'border border-gray-700 rounded-2xl' }
-                });
-            } else {
-                if (user.toLowerCase() !== AUTH_CONFIG.validUsername) {
-                    if (userInp) { userInp.classList.add('auth-error'); userInp.focus(); }
-                    showToast('Username tidak ditemukan', 'error');
-                } else {
-                    if (passInp) { passInp.classList.add('auth-error'); passInp.focus(); }
-                    showToast('Password salah. Gunakan Minestack123', 'error');
-                }
-            }
-        }, 300);
-    }
-
-    function toggleAuthPassword() {
-        const passInp = document.getElementById('auth-password');
-        const icon = document.getElementById('auth-toggle-icon');
-        if (!passInp || !icon) return;
-        if (passInp.type === 'password') {
-            passInp.type = 'text';
-            icon.className = 'fa-solid fa-eye-slash';
-        } else {
-            passInp.type = 'password';
-            icon.className = 'fa-solid fa-eye';
-        }
-        passInp.focus();
-    }
-
-    function autoFillCredentials() {
-        const userInp = document.getElementById('auth-username');
-        const passInp = document.getElementById('auth-password');
-        if (userInp) userInp.value = 'admin';
-        if (passInp) passInp.value = 'Minestack123';
-        showToast('Kredensial otomatis terisi!', 'success');
-    }
-
-    function showAuthHelp(e) {
-        if (e) e.preventDefault();
-        Swal.fire({
-            title: 'Kredensial Akses Vercel',
-            html: `
-                <div style="text-align:left;font-size:12.5px;color:#8892B0;line-height:1.6;">
-                    Gunakan kredensial resmi berikut untuk membuka akses:<br><br>
-                    <div style="background:#151825;padding:12px;border-radius:10px;border:1px solid #1E2336;">
-                        • <b>Username</b>: <span style="color:#38BDF8;font-family:monospace;font-weight:700;">admin</span><br>
-                        • <b>Password</b>: <span style="color:#A5B4FC;font-family:monospace;font-weight:700;">Minestack123</span>
-                    </div>
-                </div>
-            `,
-            icon: 'info',
-            background: '#111420',
-            color: '#fff',
-            iconColor: '#38BDF8',
-            confirmButtonColor: '#6366F1',
-            confirmButtonText: 'Tutup',
-            customClass: { popup: 'border border-gray-700 rounded-2xl' }
-        });
-    }
-
-    function confirmLogout() {
-        Swal.fire({
-            title: 'Konfirmasi Logout',
-            text: 'Apakah Anda yakin ingin keluar dari UI/UX Design Catalog?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#EF4444',
-            cancelButtonColor: '#1E2336',
-            confirmButtonText: '<i class="fa-solid fa-right-from-bracket mr-1"></i> Ya, Keluar',
-            cancelButtonText: 'Batal',
-            background: '#111420',
-            color: '#fff',
-            customClass: { popup: 'border border-gray-700 rounded-2xl' }
-        }).then((res) => {
-            if (res.isConfirmed) {
-                try {
-                    sessionStorage.removeItem(AUTH_CONFIG.sessionKey);
-                    localStorage.removeItem(AUTH_CONFIG.sessionKey);
-                } catch(e){}
-                const passInp = document.getElementById('auth-password');
-                if (passInp) passInp.value = '';
-                const overlay = document.getElementById('auth-overlay');
-                if (overlay) overlay.classList.remove('auth-hidden');
-                showToast('Anda telah berhasil keluar.', 'info');
-                setTimeout(() => {
-                    const userInp = document.getElementById('auth-username');
-                    if (userInp) userInp.focus();
-                }, 200);
-            }
-        });
-    }
-    window.confirmLogout = confirmLogout;
-    window.logoutDesignCatalog = confirmLogout;
-
-    // Check auth on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', checkAuthStatus);
-    } else {
-        checkAuthStatus();
-    }
-
     /* ==================== MOCK DATABASE ==================== */
+
     const MOCK_DB = {
         categories: [
             { id:'all', name:'Semua Style', count:'60', icon:'fa-solid fa-border-all', type:'all' },
@@ -2070,27 +1621,7 @@
         updateCounters();
     }
 
-    /* ==================== LOGOUT CONFIRM ==================== */
-    function confirmLogout() {
-        Swal.fire({
-            title: 'Logout?',
-            text: 'Sesi Anda akan diakhiri dan Anda akan diarahkan ke halaman login.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Logout',
-            cancelButtonText: 'Batal',
-            background: '#111420',
-            color: '#fff',
-            iconColor: '#F59E0B',
-            confirmButtonColor: '#EF4444',
-            cancelButtonColor: '#2D3560',
-            customClass: { popup: 'border border-gray-700 rounded-2xl' }
-        }).then((result) => {
-            if (result.isConfirmed && typeof window.logoutDesignCatalog === 'function') {
-                window.logoutDesignCatalog();
-            }
-        });
-    }
+
 
     /* ==================== MISC ==================== */
     function showFeatureAlert(title, message) {
@@ -3141,17 +2672,44 @@
 - Target Subtype: ${sub.name}
 - Subtype Function & Purpose: ${sub.desc}
 
-## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Top Floating/Sticky Navbar -> Hero Section with Value Proposition -> Feature & Information Showcase Grid -> Visual Media / Portfolio Cards -> Interactive Content / Testimonial Section -> Call-to-Action (CTA) Banner -> Structured Footer.
-- Visual & Motion Design:
-  - High-impact typography hierarchy, crisp modern spacing, and aesthetic brand accents.
-  - Implement smooth interactive micro-interactions (hover transformations, subtle shadows, and modal dialogs).
-- Core Features for ${sub.name}:
-  - Content sections tailored specifically for ${sub.name} with realistic mock data, filters, and clear navigation.
-  - Interactive search / category filter for browsing articles, items, services, or showcases.
-${isMonthly ? `  - Monthly Content Archive / Events Filter: Dropdown pilihan bulan/tahun untuk memfilter arsip publikasi, event, atau showcase berkala.` : ''}
-- Mode Pratinjau: Pastikan ada mode pratinjau interaktif untuk seluruh komponen, cards, navigasi, dan efek animasi.
-- Clean Code Standard: Single-file index.html with HTML structure, Tailwind CSS / Vanilla CSS, and JavaScript interactions.`;
+## DEFINITION — WHAT IS A WEBSITE?
+A Website is a public-facing platform whose **sole purpose** is to inform, present, and attract visitors.
+It does NOT manage internal data, workflows, or business operations.
+It does NOT have an admin dashboard, CRUD tables, KPI cards, analytics charts, Kanban boards, or role-based login.
+
+## ARCHITECTURE & LAYOUT (WEBSITE ONLY)
+- Top Floating / Sticky Navbar → Hero Section with strong Value Proposition → Feature / Information Showcase Grid → Visual Media / Portfolio / Article Cards → Testimonial / CTA Banner → Structured Footer.
+- All sections use public-facing content only. No internal operational panels.
+
+## VISUAL & MOTION DESIGN
+- High-impact typography hierarchy with crisp modern spacing and brand accents.
+- Smooth micro-interactions: hover card lifts, parallax hero, scroll-triggered fade-in sections, animated CTA buttons.
+- NO sidebar, NO top filter bar with date pickers, NO KPI metric cards, NO data tables, NO Kanban, NO charts or graphs of any kind.
+
+## CORE FEATURES FOR ${sub.name}
+- Content sections tailored specifically for ${sub.name} with realistic, editorial-quality mock data.
+- Interactive search / category filter for browsing articles, services, portfolio items, or showcases (simple client-side filtering, NOT an admin data filter).
+${isMonthly ? `- Archive / Events Calendar Filter: A simple month/year dropdown for browsing publication archives or event schedules by period — purely for content navigation, not operational reporting.` : ''}
+- Contact / Inquiry form with frontend validation (no backend required, use SweetAlert2 for submission confirmation).
+- Call-to-Action (CTA) sections with clear visual emphasis and button hierarchy.
+- Clean responsive layout tested on mobile, tablet, and desktop breakpoints.
+
+## STRICT EXCLUSIONS (DO NOT INCLUDE)
+❌ NO login / authentication screens  
+❌ NO admin dashboard or internal management panels  
+❌ NO KPI cards with metrics (revenue, total orders, etc.)  
+❌ NO Chart.js, ApexCharts, or any analytics/reporting graphs  
+❌ NO data tables with CRUD operations (add/edit/delete rows)  
+❌ NO Kanban boards or workflow pipeline stages  
+❌ NO Export CSV / Cetak Laporan buttons  
+❌ NO Month-over-Month (MoM) trend indicators  
+❌ NO Settings Panel with theme switcher or role/user management  
+❌ NO persistent sidebar navigation (use top navbar only)  
+
+## CODE STANDARD
+- Single-file index.html. HTML + Tailwind CSS CDN + vanilla JavaScript for interactions.
+- FontAwesome 6 icons for UI elements.
+- SweetAlert2 for contact form success confirmations.`;
 
         } else if (catId === 'transaction') {
             archetypeSpec = `
@@ -3160,15 +2718,37 @@ ${isMonthly ? `  - Monthly Content Archive / Events Filter: Dropdown pilihan bul
 - Target Subtype: ${sub.name}
 - Subtype Function & Purpose: ${sub.desc}
 
-## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Header Navigation with Search Bar + Category Filter Tabs + Cart/Booking Badge -> Main Product/Listing Grid -> Interactive Slide-over Cart / Booking Drawer -> Checkout & Payment Gateway Simulation Modal -> Receipt / Order Summary.
-- Core Transaction Workflow for ${sub.name}:
-  - Listing & Detail Cards: High-quality image containers, pricing badges, status indicators, item specs, and direct "Order / Book / Checkout" action triggers.
-  - Interactive Cart / Booking Drawer: Item quantity (+/-) adjustments, dynamic subtotal calculation, promo code input, and instant total summary.
-  - Checkout & Payment Modal: User details form, shipping / booking schedule selection, payment method choices (Credit Card, QRIS, Virtual Account, Transfer), and SweetAlert2 confirmation receipt.
-${isMonthly ? `  - Monthly Transaction History & Filter: Sediakan filter transaksi per bulan (Jan-Des + Tahun) dengan kalkulasi Total Pengeluaran/Pemasukan Bulanan dan ringkasan order per bulan.` : ''}
-- Mode Pratinjau: Pastikan ada mode pratinjau interaktif untuk simulasi katalog transaksi, cart drawer, checkout modal, dan receipt.
-- Clean Code Standard: Single-file index.html with complete transaction state handling in JavaScript.`;
+## DEFINITION — WHAT IS A TRANSACTION WEBAPP?
+A Transaction WebApp is a customer/user-facing application focused entirely on completing a **transaction flow**: browse → select → checkout → confirm → receipt.
+It is NOT a back-office management system. It does NOT show internal analytics dashboards, operational KPI charts, or workflow Kanbans.
+
+## ARCHITECTURE & LAYOUT (TRANSACTION FLOW)
+- Header: Search Bar + Category Filter Tabs + Cart / Booking Badge counter.
+- Main Body: Product / Service Listing Grid (high-quality image cards, pricing, status, quick-add).
+- Slide-over Cart / Booking Drawer: Item quantity adjustments (+/-), dynamic subtotal, promo code input, instant total summary.
+- Checkout & Payment Modal: Customer details form, delivery/schedule selection, payment method choices (Credit Card, QRIS, Virtual Account, Bank Transfer), SweetAlert2 order confirmation.
+- Receipt / Invoice Modal (Print-Ready): Official-format receipt with order details, PPN 11% calculation, promo discount, and window.print() button.
+${isMonthly ? `- My Orders / Transaction History: Personal order history filterable by month (Jan–Des + Year) with monthly spend summary — this is the CUSTOMER's own history view, NOT an internal analytics dashboard.` : ''}
+
+## CORE UX PRINCIPLES
+- Every screen must serve a step in the customer transaction journey.
+- Pricing must be clearly displayed at all times (no hidden costs until checkout).
+- Cart state persists in JavaScript (no page reloads break the cart).
+- Use realistic mock product/service data with varied statuses (available, limited, sold out).
+
+## STRICT EXCLUSIONS (DO NOT INCLUDE)
+❌ NO internal management KPI dashboard cards  
+❌ NO Chart.js / ApexCharts analytics or reporting graphs  
+❌ NO Kanban workflow boards  
+❌ NO CRUD admin data tables  
+❌ NO role-based access control or admin login  
+❌ NO Export CSV / Cetak Laporan Bulanan for internal reporting  
+❌ NO persistent left sidebar (use top navigation only)  
+❌ NO MoM analytics trend indicators (↑↓ vs bulan lalu)  
+
+## CODE STANDARD
+- Single-file index.html with complete transaction state management in JavaScript.
+- Tailwind CSS CDN + FontAwesome 6 + SweetAlert2.`;
 
         } else {
             // Default: management
@@ -3178,17 +2758,70 @@ ${isMonthly ? `  - Monthly Transaction History & Filter: Sediakan filter transak
 - Target Subtype: ${sub.name}
 - Subtype Function & Purpose: ${sub.desc}
 
-## ARCHITECTURE & LAYOUT REQUIREMENTS
-- Layout: Persistent Desktop Left Sidebar (width 220-260px) vs Fixed Mobile Bottom Navigation Bar (height 56-64px) + Top Header Bar with Search, User Profile, Notification Bell, and Monthly Filter Bar.
-- Multi-Module Client-Side Views: Dashboard Overview, Active Records / Master Data, Interactive Kanban / Workflow Operations, Analytics & Reporting, and System Settings.
-- High-Density Data & Operations for ${sub.name}:
-  - Executive KPI cards with 'font-variant-numeric: tabular-nums', trend indicators (↑/↓), and quick status tags.
-  - Interactive Data Tables: Search filter, column sorting, pagination, status badges, and action dropdowns (View, Edit, Delete, Update Status).
-  - Interactive Workflow / Kanban Board: Drag-and-drop or status toggle columns (e.g. Backlog, Pending Approval, In Progress, Completed), priority tags (Low/Med/High/Urgent), and assignment avatars.
-  - Mandatory Print & Export Actions: Fully working frontend buttons for (A) Print PDF (@media print hiding sidebars) and (B) Export CSV/Excel file download.
-- Mode Pratinjau: Pastikan ada mode pratinjau interaktif untuk simulasi data dashboard, tabel data CRUD, kanban workflow, dan modal print PDF.
-- Clean Code Standard: Single-file index.html with comprehensive JavaScript data management and responsive design.`;
+## DEFINITION — WHAT IS A MANAGEMENT WEBAPP?
+A Management WebApp is an **internal operations system** for staff, managers, and admins.
+It manages data, workflows, and business processes. It requires login, role-based access, CRUD tables, a dashboard with KPIs, and reporting.
+
+## ARCHITECTURE & LAYOUT (MANAGEMENT SYSTEM)
+- Persistent Desktop Left Sidebar (220–260px) with module navigation + logo + user profile footer.
+- Fixed Mobile Bottom Navigation Bar (56–64px) that replaces the sidebar on small screens.
+- Top Header Bar: Search input, Notification Bell badge, User Avatar dropdown, and Monthly Filter Bar.
+- Multi-Module Client-Side Views (switchable via sidebar links):
+  1. **Dashboard Overview** — the analytics hub.
+  2. **Active Records / Master Data** — primary CRUD data table.
+  3. **Workflow / Kanban Board** — operational pipeline.
+  4. **Analytics & Reporting** — charts and MoM deep analysis.
+  5. **System Settings** — theme, logo, user profile, roles.
+
+## HIGH-DENSITY DATA & OPERATIONS FOR ${sub.name}
+- **Executive KPI Cards**: Metric values with 'font-variant-numeric: tabular-nums', real-time MoM trend indicators (↑ +12.5% warna hijau / ↓ -4.2% warna merah), quick status tags.
+- **Interactive Data Tables**: Search filter, column sorting (Asc/Desc dengan ikon), pagination (10/25/50 rows), status badges, quick Approve/Reject actions, tombol konversi transaksi downstream (misal PR ➔ PO, Request ➔ Work Order).
+- **Chart.js Analytics (MANDATORY for Management)**:
+  - Line/Bar chart untuk tren bulanan (agregasi data aktual, DILARANG hardcode static array).
+  - Donut/Pie chart untuk distribusi status atau kategori.
+  - Toggle view button pada grafik (misal: [Mingguan] vs [Per Departemen]).
+- **Modal Dokumen Resmi Cetak (Print-Ready)**: Invoice / PO / SPK dengan kop perusahaan formal, nomor dokumen, rincian biaya, PPN 11%, blok tanda tangan otorisasi, dan tombol window.print().
+- **Interactive Kanban Board (5 tahap)**: SortableJS drag-and-drop DAN tombol 1-Click Stage Advancement ('Next ❯'), visual milestone progress bar (20%→100%), Delay Alert Badge jika target jadwal terlewati.
+- **Mandatory Export Actions**: (A) Print PDF (via @media print hiding sidebars) and (B) Export CSV/Excel file download — BOTH must be fully functional buttons.
+
+## SETTINGS PANEL (MANDATORY FOR MANAGEMENT)
+Include a fully functional Settings Panel accessible from the sidebar:
+1. Live Theme & Mode Toggle: Light/Dark switcher + color picker updating CSS variables ('--primary', '--accent', '--bg') saved to localStorage.
+2. Custom Logo Upload: FileReader for base64 logo preview + localStorage persistence.
+3. User Profile Settings: Editable name, email, role, avatar with live UI update.
+4. Mandatory Watermark (sidebar footer + mobile footer):
+   "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>"
+
+## CODE STANDARD
+- Single-file index.html with comprehensive JavaScript data management.
+- Tailwind CSS CDN + FontAwesome 6 + Chart.js + SortableJS + SweetAlert2.
+- Responsive design: sidebar on desktop, bottom nav on mobile.`;
         }
+
+        const filterMonthlySpec = catId === 'management' && isMonthly ? `
+# 📅 FITUR WAJIB: FILTER DATA PER BULAN — MANAGEMENT (MONTHLY FILTER & MoM TRENDS)
+- **Monthly Filter Bar (Header / Topbar)**:
+  1. Dropdown Pilihan Bulan (Jan–Des) + Tahun (2024–2027).
+  2. Quick nav tombol ❮ Bulan Lalu / Bulan Depan ❯.
+  3. Default: Bulan & Tahun saat ini saat aplikasi pertama dibuka.
+- **Reactive Filter — seluruh komponen dashboard update real-time saat bulan diganti**:
+  1. KPI Cards: nilai metrik dikalkulasi khusus untuk bulan terpilih.
+  2. Tren MoM: persentase komparasi vs bulan sebelumnya (↑ hijau / ↓ merah).
+  3. Chart.js Grafik Bulanan: WAJIB mengagregasi dari data aktual bulan aktif (DILARANG array statis hardcoded). Partisi per minggu (tgl 1-7, 8-14, 15-21, 22-31), per kategori/departemen, distribusi status donat.
+  4. MoM Deep Analytics: Lead Time rata-rata, Cost Savings, SLA Pemenuhan (%) — dihitung matematis dari data bulan aktif vs bulan lalu.
+  5. Tabel Data & Kanban: hanya tampilkan baris / tiket di bulan yang aktif.
+- **Export Laporan Bulanan**: Tombol "Cetak Laporan PDF" dan "Export Excel" mengekspor data bulan terpilih.` :
+        catId === 'transaction' && isMonthly ? `
+# 📅 FILTER RIWAYAT TRANSAKSI PER BULAN — TRANSACTION (CUSTOMER-FACING ONLY)
+- Sediakan halaman/tab "Riwayat Pesanan" dengan filter bulan (Jan–Des + Tahun) agar customer dapat melihat pesanan mereka per periode.
+- Tampilkan ringkasan total pengeluaran bulan terpilih dan daftar order dengan status badge.
+- INI ADALAH histori personal customer, BUKAN dashboard analitik internal. Tidak ada KPI card, tidak ada grafik MoM, tidak ada tabel CRUD.` :
+        catId === 'website' && isMonthly ? `
+# 📅 ARSIP KONTEN / EVENT FILTER — WEBSITE (NAVIGASI PUBLIK SAJA)
+- Sediakan dropdown bulan/tahun sederhana untuk memfilter arsip artikel, event, atau galeri publikasi berkala.
+- Ini adalah navigasi konten publik, BUKAN filter operasional. Tidak ada KPI, tidak ada grafik, tidak ada data tabel.` : `
+# 🗓️ FILTER DATA: GENERAL SEARCH & FLEXIBLE FILTER
+- Sediakan search bar dan filter tag/kategori untuk eksplorasi konten atau layanan secara fleksibel.`;
 
         const themeSpec = isLight ? `
 # ☀️ MODE TAMPILAN: LIGHT MODE (TERANG)
@@ -3213,24 +2846,6 @@ ${isMonthly ? `  - Monthly Transaction History & Filter: Sediakan filter transak
   - Accent Color Integration: Terapkan Primary Accent ${c1} dan Secondary Accent ${c2} lengkap dengan subtle glow shadow (\`0 0 14px ${c1}33\`).
   - Input & Form Fields: Background \`#1A1E2C\`, border \`#1E2336\`, focus border \`${c1}\`, text \`#FFFFFF\`.
 - **UI/UX Style Translation**: Terapkan estetika gaya "${style.name}" (${style.type}) dengan karakteristik (${style.desc}) secara presisi dalam nuansa Dark Mode yang futuristik dan elegan.`;
-
-        const filterMonthlySpec = isMonthly ? `
-# 📅 FITUR WAJIB: FILTER DATA PER BULAN (MONTHLY FILTER & MoM TRENDS)
-- **Komponen Monthly Filter Bar (Header / Topbar / Dashboard)**:
-  - Sediakan UI kontrol Filter Bulanan yang interaktif dan mudah diakses:
-    1. **Dropdown Pilihan Bulan** (Januari s/d Desember) dan **Tahun** (e.g. 2025, 2026).
-    2. **Quick Navigation**: Tombol cepat \`❮ Bulan Lalu\` dan \`Bulan Depan ❯\` atau Tab Segmented Bar Bulan.
-    3. **Bulan Berjalan (Default Active)**: Saat aplikasi pertama kali dibuka, otomatis memilih dan memuat data Bulan & Tahun saat ini.
-- **Dampak Reaktif Filter Bulanan**:
-  - Saat pengguna mengganti pilihan bulan, seluruh komponen dashboard dan data **otomatis terfilter secara instan (real-time)**:
-    1. **Executive KPI Cards**: Nilai metrik (Total Records, Revenue/Biaya, Selesai, Pending, Active) terkalkulasi khusus untuk bulan terpilih.
-    2. **Indikator Tren MoM (Month-over-Month)**: Menampilkan persentase komparasi terhadap bulan sebelumnya (e.g. \`↑ +12.5% vs bulan lalu\` warna hijau, atau \`↓ -4.2%\` warna merah).
-    3. **Grafik / Chart Bulanan**: Menampilkan distribusi tren harian atau mingguan khusus di dalam bulan yang dipilih.
-    4. **Tabel Data & Kanban Workflow**: Hanya menampilkan baris data atau tiket transaksi yang berada di bulan tersebut.
-- **Export Laporan Bulanan (PDF & Excel)**:
-  - Tombol aksi "Cetak Laporan Bulanan (PDF)" dan "Export Excel Bulanan" yang mengekspor data yang sedang difilter pada bulan tersebut secara rapi.` : `
-# 🗓️ FILTER DATA: ALL-TIME / FLEXIBLE RANGE
-- Sediakan search bar dan filter data umum untuk eksplorasi seluruh rekaman data secara fleksibel.`;
 
         return `# ROLE & SYSTEM ARCHITECTURE
 You are the world's best Prompt Engineer, Enterprise Solution Architect, UI/UX Lead, and Senior Full-Stack Frontend Developer.
@@ -3261,26 +2876,21 @@ ${archetypeSpec}
 
 # 👁️ MODE PRATINJAU (PREVIEW MODE)
 - **Pastikan ada mode pratinjau** (Live Preview / Interactive Simulation Mode) yang fungsional pada aplikasi untuk melihat simulasi data, visualisasi antarmuka secara interaktif, modal preview, dan responsivitas komponen secara langsung tanpa perlu backend server nyata.
-- Sediakan tombol atau status badge "Mode Pratinjau Aktif" dan mock data interaktif sehingga seluruh fitur (dashboard, form, tabel, modal, filter bulanan) dapat langsung diuji dan didemokan secara instan di browser.
-
----
-
-# ⚡ MANDATORY SETTINGS & WATERMARK PANEL
-Unless building a pure standalone landing page, include a fully functional Settings Panel with:
-1. Live Theme & Mode Toggle: Switcher untuk Light/Dark mode dan color picker inputs yang memperbarui CSS variables ('--primary', '--accent', '--bg') dan tersimpan di localStorage.
-2. Custom Logo Upload: File input using FileReader to preview and store base64 custom logo to localStorage.
-3. User Settings: Editable profile (username, email, role, avatar) with live UI update.
-4. Mandatory Watermark: Must include:
-   "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>"
-   in the Left Sidebar footer (Desktop) and Page Footer (Mobile).
+- Sediakan tombol atau status badge "Mode Pratinjau Aktif" dan pre-seeded mock dataset multi-bulan (2024-2027) sehingga seluruh fitur (dashboard, form, tabel, modal, filter bulanan) dapat langsung diuji dan didemokan secara instan di browser.
+${catId === 'management' ? '- Management: mock dataset multi-bulan (2024–2027) wajib tersedia agar Monthly Filter, Chart.js, Kanban, dan Tabel semua berfungsi langsung.' : ''}
+${catId === 'transaction' ? '- Transaction: mock product/service catalog dengan varied statuses (available, limited, sold out) dan simulasi cart/checkout flow yang lengkap.' : ''}
+${catId === 'website' ? '- Website: mock artikel/portfolio/listing content dengan interactive filter/search agar semua section dapat dilihat langsung oleh pengunjung.' : ''}
 
 ---
 
 # CODING STANDARDS & OUTPUT FORMAT
-- Write 100% complete, executable, clean code without placeholder comments (e.g. DO NOT write "// add rest of code here").
-- Include all necessary HTML structure, CSS custom properties, and JavaScript event logic in a single markdown code block (\`\`\`html ... \`\`\`).
-- Pastikan ada mode pratinjau dan filter bulanan yang siap jalan secara mandiri (standalone) di browser.
-- Use Tailwind CSS CDN, FontAwesome 6 icons, and SweetAlert2 for notifications.`;
+- Write 100% complete, executable, clean code without placeholder comments (DO NOT write "// add rest of code here").
+- Single markdown code block (\`\`\`html ... \`\`\`).
+- Use Tailwind CSS CDN + FontAwesome 6 icons + SweetAlert2.
+${catId === 'management' ? '- Management ONLY: also include Chart.js CDN and SortableJS CDN.' : '- Website & Transaction: DO NOT include Chart.js or SortableJS — those are for Management only.'}
+- Pastikan seluruh fitur sesuai kategori "${cat.label}" dapat langsung diuji di browser secara standalone.
+- Mandatory Watermark (${catId === 'management' ? 'sidebar footer + mobile page footer' : 'page footer'}):
+  "<div style='text-align:center; font-size:12px; margin:20px 0; color:#888;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#888; text-decoration:none;'>LinkedIn</a></div>"`;
     }
 
     /* ==================== GLOBAL INTERACTIVE DEMO FUNCTIONS ==================== */
