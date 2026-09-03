@@ -1339,26 +1339,46 @@
                         <!-- dynamic desc -->
                     </div>
 
-                    <!-- 3. APP NAME -->
-                    <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:4px;">3. Nama Aplikasi / Proyek</label>
+                    <!-- 3. CREATIVE ENGINEERING ARCHETYPE -->
+                    <div style="margin-bottom:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <label style="font-size:11px; font-weight:700; color:#38BDF8; text-transform:uppercase; letter-spacing:0.8px;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="margin-right:4px;"></i> 3. Creative Engineering Archetype (Awwwards / FWA Standard)
+                            </label>
+                            <span id="archetype-badge" style="font-size:10px; color:#93C5FD; background:rgba(56,189,248,0.15); padding:1px 6px; border-radius:10px; font-weight:700;">Auto-Adaptive</span>
+                        </div>
+                        <select id="modal-archetype-select" onchange="updateArchetypeBadge()" style="width:100%; background:#1A2234; border:1px solid #1E293B; color:#FFF; font-size:12px; padding:10px 12px; border-radius:8px; outline:none; cursor:pointer;">
+                            <option value="auto">✨ Auto-Detect Berdasarkan Kategori &amp; Subtipe</option>
+                            <option value="adaptive_studio">🏛️ The Adaptive Studio Grid (Lumora: Lenis, REM Grid 0.833vw, Liquid Brush Canvas)</option>
+                            <option value="product_3d">🥤 The 3D Product Theater (Soda: Model-Viewer, Mouse Tilt, Repulsion Physics, 720° Spin)</option>
+                            <option value="cinematic_webgl">⚡ The WebGL Cinematic Scroll (Laocoön: Three.js, Custom GLSL Shader, 450 Sparks, 900vh Orbit)</option>
+                            <option value="editorial_club">🎾 The Luxury Editorial Club (Baseline: Lenis, Ghost Typo Parallax, Descender Masking)</option>
+                            <option value="minimalist_hero">🌀 The Minimalist High-Impact Hero (Loopstack: Zero-Scroll, Dual-LERP Cursor, Video Bleed)</option>
+                            <option value="enterprise_dashboard">🏭 The Enterprise Precision Dashboard (100dvh, Master CRUD, Print SPK/PO, Mock DB)</option>
+                            <option value="transaction_store">🛒 The Transactional Commerce Engine (Catalog, Cart Drawer, Checkout, Official Receipt)</option>
+                        </select>
+                    </div>
+
+                    <!-- 4. APP NAME -->
+                    <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:4px;">4. Nama Aplikasi / Proyek</label>
                     <input id="modal-app-name" type="text" placeholder="Contoh: PT. Surya Saga Utama - Fleet &amp; Maintenance Management System" style="width:100%; background:#1A2234; border:1px solid #1E293B; color:#FFF; font-size:12px; padding:10px; border-radius:8px; outline:none; margin-bottom:12px;">
 
-                    <!-- 4. MANUAL USER REQUIREMENTS (PROMINENT & MANDATORY) -->
+                    <!-- 5. MANUAL USER REQUIREMENTS (PROMINENT & MANDATORY) -->
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                         <label style="font-size:11px; font-weight:700; color:#F59E0B; text-transform:uppercase; letter-spacing:0.8px;">
-                            <i class="fa-solid fa-pen-nib" style="margin-right:4px;"></i> 4. Detail Kebutuhan Manual dari User / Klien (Bebas AI Slop)
+                            <i class="fa-solid fa-pen-nib" style="margin-right:4px;"></i> 5. Detail Kebutuhan Manual dari User / Klien (Bebas AI Slop)
                         </label>
                     </div>
                     <textarea id="modal-manual-details" rows="4" placeholder="Tuliskan spesifikasi manual, alur kerja bisnis, entitas data khusus, validasi, rumus kalkulasi, atau catatan spesifik klien di sini...&#10;&#10;Contoh:&#10;- Wajib integrasi barcode scan sparepart dan P2H inspeksi mekanik lapangan&#10;- Cetak SPK perbaikan otomatis format surat resmi PT SSU&#10;- Perhitungan biaya bahan bakar per HM/KM dan log alert breakdown" style="width:100%; background:#1A2234; border:1px solid rgba(245,158,11,0.3); color:#FFF; font-size:11.5px; padding:10px; border-radius:8px; outline:none; font-family:'Inter',sans-serif; line-height:1.5; resize:vertical; margin-bottom:10px;"></textarea>
                     
                     <div style="font-size:10px; color:#64748B; margin-bottom:6px;">
-                        <i class="fa-solid fa-circle-info" style="color:#6366F1; margin-right:4px;"></i>Input manual Anda akan dianyam langsung secara presisi ke dalam Master 1-Shot Prompt index.html mandiri.
+                        <i class="fa-solid fa-circle-info" style="color:#6366F1; margin-right:4px;"></i>Input manual Anda akan dianyam langsung secara presisi ke dalam Master 1-Shot Prompt index.html mandiri 7-Layer.
                     </div>
                 </div>
             `,
             background: '#0D111A',
             color: '#fff',
-            width: '680px',
+            width: '700px',
             showCancelButton: true,
             confirmButtonColor: '#6366F1',
             confirmButtonText: '🚀 Generate Master index.html Prompt',
@@ -1368,19 +1388,35 @@
             didOpen: () => {
                 activeSelectedCat = 'management';
                 populateSubtypesForCategory('management');
+                updateArchetypeBadge();
             }
         }).then((result) => {
             if (!result.isConfirmed) return;
 
             const appName = document.getElementById('modal-app-name').value.trim() || 'Aplikasi Web Mandiri Terpadu';
             const subtypeId = document.getElementById('modal-subtype-select').value;
+            const selectedArchetype = document.getElementById('modal-archetype-select') ? document.getElementById('modal-archetype-select').value : 'auto';
             const manualDetails = document.getElementById('modal-manual-details').value.trim();
             const cat = FULL_TAXONOMY[activeSelectedCat];
             const sub = cat.subtypes.find(s => s.id === subtypeId) || cat.subtypes[0];
 
-            const masterPrompt = generateWorldClassFrontendPrompt(style, appName, cat, sub, manualDetails);
+            const masterPrompt = generateWorldClassFrontendPrompt(style, appName, cat, sub, manualDetails, selectedArchetype);
             showGeneratedPromptModal(appName, style, sub, masterPrompt);
         });
+    }
+
+    function updateArchetypeBadge() {
+        const archSelect = document.getElementById('modal-archetype-select');
+        const badge = document.getElementById('archetype-badge');
+        if (!archSelect || !badge) return;
+        const val = archSelect.value;
+        if (val === 'auto') {
+            badge.textContent = activeSelectedCat === 'website' ? 'Studio / 3D' : (activeSelectedCat === 'transaction' ? 'Commerce' : 'Dashboard');
+            badge.style.color = '#93C5FD';
+        } else {
+            badge.textContent = 'Manual: ' + val.split('_')[0].toUpperCase();
+            badge.style.color = '#34D399';
+        }
     }
 
     function switchModalTaxonomyCategory(catKey) {
@@ -1395,6 +1431,7 @@
             btn.style.fontWeight = isCur ? '700' : '600';
         });
         populateSubtypesForCategory(catKey);
+        updateArchetypeBadge();
     }
 
     function populateSubtypesForCategory(catKey) {
@@ -1425,134 +1462,364 @@
         descBox.innerHTML = `<strong style="color:#C7D2FE;">${sub.name}:</strong> ${sub.desc}`;
     }
 
-    /* ==================== WORLD-CLASS FRONTEND index.html PROMPT GENERATOR ==================== */
-    function generateWorldClassFrontendPrompt(style, name, cat, sub, manualNotes) {
+    /* ==================== WORLD-CLASS 7-LAYER MASTER FRONTEND PROMPT GENERATOR ==================== */
+    function resolveArchetype(cat, sub, name, manualNotes, selectedArchetype) {
+        if (selectedArchetype && selectedArchetype !== 'auto') {
+            return selectedArchetype;
+        }
+        const text = ((name || '') + ' ' + (sub ? sub.name + ' ' + sub.desc : '') + ' ' + (manualNotes || '')).toLowerCase();
+        if (text.includes('3d') || text.includes('model-viewer') || text.includes('minuman') || text.includes('soda') || text.includes('can') || text.includes('produk fisik') || text.includes('beverage') || text.includes('botol')) {
+            return 'product_3d';
+        }
+        if (text.includes('webgl') || text.includes('three.js') || text.includes('glsl') || text.includes('patung') || text.includes('sculpture') || text.includes('museum') || text.includes('bronze') || text.includes('horse') || text.includes('sparks')) {
+            return 'cinematic_webgl';
+        }
+        if (text.includes('tennis') || text.includes('club') || text.includes('academy') || text.includes('golf') || text.includes('luxury') || text.includes('editorial') || text.includes('coach') || text.includes('court')) {
+            return 'editorial_club';
+        }
+        if (text.includes('loop') || text.includes('video') || text.includes('audio') || text.includes('minimalist') || text.includes('zero scroll') || text.includes('single screen') || text.includes('coming soon')) {
+            return 'minimalist_hero';
+        }
+        if (cat.id === 'website') {
+            return 'adaptive_studio';
+        }
+        if (cat.id === 'transaction') {
+            return 'transaction_store';
+        }
+        return 'enterprise_dashboard';
+    }
+
+    function generateWorldClassFrontendPrompt(style, name, cat, sub, manualNotes, selectedArchetype) {
         const cols = style.color.split(',');
         const c1 = '#' + (cols[0] || '6366f1');
         const c2 = '#' + (cols[1] || 'a855f7');
-        const isWeb = cat.id === 'website';
-        const isMgmt = cat.id === 'management';
-        const isTrx = cat.id === 'transaction';
+        const archetype = resolveArchetype(cat, sub, name, manualNotes, selectedArchetype);
 
-        let domainArchitectureSpec = '';
+        let archetypeTitle = '';
+        let signatureLibraries = '';
+        let signatureMechanics = '';
+        let signatureSection = '';
 
-        if (isWeb) {
-            domainArchitectureSpec = `
-# 🌐 ARCHETYPE SPECIFICATION: WEBSITE / SHOWCASE (${sub.name.toUpperCase()})
-- **Category**: ${cat.label}
-- **Subtype**: ${sub.name} - ${sub.desc}
-- **Primary Goal**: Build strong brand authority, present products/services with high visual impact, engage visitors, and convert through clear Call-to-Action (CTA).
-- **Core IA & Sections**:
-  1. **Sticky Transparent/Frosted Header**: Logo, smooth navigation anchors (#hero, #features, #showcase, #testimonials, #contact), CTA button.
-  2. **Hero Section**: Sharp value proposition headline, clear subheadline, dual action buttons (Primary CTA + Secondary Explore), client/trust badges.
-  3. **Interactive Bento Solution Grid**: Visual feature cards with icons and smooth micro-interactions.
-  4. **Visual Showcase / Portfolio Carousel**: Project cards with interactive tag filter.
-  5. **Client Testimonials & Impact Stats**: Ratings, quotes, and impact numbers.
-  6. **Interactive Lead Capture Form**: Clean form (Name, Email/WhatsApp, Subject, Message) with client-side validation and SweetAlert2 success modal.
-  7. **Footer**: Quick links, social icons, copyright, and developer watermark.
-- **Strict Exclusions**: DO NOT include admin dashboard panels, CRUD tables, Chart.js graphs, Kanban boards, or login screens.`;
-        } else if (isTrx) {
-            domainArchitectureSpec = `
-# 🛒 ARCHETYPE SPECIFICATION: TRANSACTION WEBAPP (${sub.name.toUpperCase()})
-- **Category**: ${cat.label}
-- **Subtype**: ${sub.name} - ${sub.desc}
-- **Primary Goal**: Frictionless customer transaction journey: browse catalog → select options → slide cart drawer → checkout → print-ready receipt/invoice.
-- **Core User Flow & Modules**:
-  1. **Interactive Catalog & Multi-Facet Filtering**: Category tabs, real-time search, price/status badges (Ready, Limited, Pre-Order).
-  2. **Product / Service Detail Modal**: Dynamic image preview, specs, quantity selector, add-to-cart & buy-now triggers.
-  3. **Slide-Over Cart Drawer**: Quantity adjustment (+/-), discount coupon voucher calculation, PPN 11%, live subtotal.
-  4. **Multi-Step Checkout Modal**: Customer contact details, delivery/schedule options, payment method choices (QRIS, Virtual Account, Credit Card, Bank Transfer).
-  5. **Official Print-Ready Receipt / Invoice Modal**: Standard invoice with document number, itemized billing, PPN 11%, barcode/QR, and window.print() button.
-  6. **Customer Order History Tracking**: Status lifecycle (Pending -> Paid -> Processing -> Shipped -> Completed).
-- **Strict Exclusions**: Keep customer-facing. DO NOT clutter the main view with internal staff admin dashboards.`;
+        if (archetype === 'adaptive_studio') {
+            archetypeTitle = 'THE ADAPTIVE STUDIO GRID (Lumora Style)';
+            signatureLibraries = `
+<script type="importmap">
+{
+  "imports": {
+    "lenis": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm"
+  }
+}
+<\/script>`;
+            signatureMechanics = `
+- **Lenis Smooth Scrolling**: \`const lenis = new Lenis({ duration: 1.2, smoothWheel: true }); function raf(t) { lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);\`
+- **Liquid Canvas Reveal**: Dark overlay canvas covering hero showcase image. When user moves cursor, draw soft brush with \`ctx.globalCompositeOperation = 'destination-out'\` erasing dark mask to reveal vibrant visual underneath. Brush radius 60px with radial gradient falloff.
+- **Spring Reveal Motion**: Critically damped spring physics for cards and badges (\`tension: 210, friction: 26\`).
+- **Live Local Time Chip**: Fixed status badge in top-right displaying real-time clock (WIB/UTC) updating every second.`;
+            signatureSection = `
+### Signature Experience: Adaptive Canvas & Bento Grid
+1. **Liquid Scratch / Reveal Hero Canvas**: Underneath hero typography, full-width canvas where mouse movement creates transparent brush trails revealing high-resolution showcase artwork.
+2. **Interactive Bento Grid**: 4 to 6 asymmetrical cards with optical border highlights, hover lift \`-translate-y-1\`, and tag pills.
+3. **Narrative Word-by-Word Reveal**: Paragraph text with words wrapped in \`<span>\`, lighting up sequentially as the user scrolls into view.
+4. **Interactive Request / Contact Modal**: Slide-up modal triggered by "Start a Project" button, field validation, and SweetAlert2 success feedback.
+5. **Fullscreen Navigation Overlay**: Smooth curtain reveal when burger icon is clicked with staggered link entrance.`;
+        } else if (archetype === 'product_3d') {
+            archetypeTitle = 'THE 3D PRODUCT THEATER (Soda Style)';
+            signatureLibraries = `
+<!-- Google model-viewer 3D Engine -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"><\/script>
+<!-- GSAP Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"><\/script>`;
+            signatureMechanics = `
+- **Model-Viewer 3D Camera Tilt**: \`<model-viewer src="..." camera-controls touch-action="pan-y" auto-rotate disable-zoom style="width:100%; height:75vh;">\` with cursor parallax tilt:
+  \`window.addEventListener('mousemove', (e) => { const x = (e.clientX/window.innerWidth - 0.5)*30; const y = (e.clientY/window.innerHeight - 0.5)*15; modelViewer.cameraOrbit = \`\${x}deg \${75 + y}deg 105%\`; });\`
+- **Magnetic Force-Field Repulsion**: Floating visual chips (cherries, mint leaves, ingredients) with distance calculation pushing elements away from mouse cursor: \`dist < 180px -> push out via Math.atan2(dy, dx)\`.
+- **Flavor Switcher 720° Spin Animation**: Switching flavor radio buttons triggers a 720deg spin on Y-axis with shader texture swap, background color transition, and warm-up pulse.
+- **Floating Bubble Particle Generator**: Pure canvas or lightweight DOM bubbles rising with random sinusoidal horizontal wobble.`;
+            signatureSection = `
+### Signature Experience: 3D Product Theater
+1. **Center Stage 3D Showcase**: Hero dominated by interactive 3D can/product with real-time mouse orbit and metallic lighting.
+2. **Dynamic Flavor Carousel**: Floating flavor selectors (e.g. Classic, Black Cherry, Lime Mint) with instant CSS background color-shift and product rotation.
+3. **Interactive Specs Drawer / Nutrition Sheet**: Sliding overlay showing ingredients, zero sugar badge, and lab test results.
+4. **Magnetic Purchase Action**: Sticky high-contrast pill CTA button with glowing radial blur following cursor coordinates.`;
+        } else if (archetype === 'cinematic_webgl') {
+            archetypeTitle = 'THE WEBGL CINEMATIC SCROLL (Laocoön Style)';
+            signatureLibraries = `
+<!-- Three.js r0.160 & GLTFLoader -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+<\/script>`;
+            signatureMechanics = `
+- **Three.js Scene with Virtual 900vh Scroll**: Fixed full-viewport WebGL canvas with background height set to 900vh. Scroll position drives camera orbit \`camera.position.x = Math.sin(scrollProgress * Math.PI * 2) * radius\`.
+- **GLSL Liquid Wave Shader**: Custom fragment shader on camera plane creating liquid ripples or heat haze with time uniform \`u_time\` and mouse coordinates \`u_mouse\`.
+- **450 Forge Sparks Particle Cloud**: Additive blending particle system (\`THREE.AdditiveBlending\`) with individual particle lifespans, gravity, and turbulence drift.
+- **3-Point Chiaroscuro Lighting**: Key light warm gold (\`#F59E0B\`), Fill light deep indigo (\`#1E1B4B\`), and strong Rim light grazing edges for dramatic museum depth.
+- **Per-Character Kinetic Blur-Up**: Headline letters split into \`<span class="char">\` staggering in from \`filter: blur(16px); opacity: 0; transform: translateY(60px)\` to crisp text on scroll.`;
+            signatureSection = `
+### Signature Experience: 900vh Cinematic WebGL Journey
+1. **Full-Viewport 3D Canvas**: Bronze statue / geometric artifact slowly turning in atmospheric forge sparks.
+2. **Scroll-Driven Narrative Chapters**: 4 distinct narrative stops as user scrolls down: "The Awakening", "The Crucible", "The Masterpiece", and "Immortal Legacy".
+3. **Curator Audio Toggle**: Ambient sound simulation toggle (plays subtle Web Audio API brown noise / synth drone with visual soundwave bars).
+4. **High-Res Macro Zoom Trigger**: Clicking artifact triggers smooth Three.js camera dolly-in to inspect surface patina.`;
+        } else if (archetype === 'editorial_club') {
+            archetypeTitle = 'THE LUXURY EDITORIAL CLUB (Baseline Style)';
+            signatureLibraries = `
+<script type="importmap">
+{
+  "imports": {
+    "lenis": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm"
+  }
+}
+<\/script>`;
+            signatureMechanics = `
+- **Lenis Smooth-Scroll**: Inertial fluid scrolling through long editorial pages.
+- **Stacked Kinetic Line Masking**: All large headlines split into lines wrapped in \`<div class="line-mask"><span class="line-inner">\` with \`padding-bottom: 0.14em; margin-bottom: -0.14em;\` to guarantee descenders are never clipped.
+- **Oversized Ghost Typography Parallax**: Giant background typography (e.g. "BASELINE", "HERITAGE") moving horizontally at -0.25 scroll velocity across the viewport.
+- **Coach / Roster Photo Crossfading**: Interactive team/coach slider where hovering coach cards instantly crossfades the full-bleed background hero imagery.`;
+            signatureSection = `
+### Signature Experience: Editorial Club & Academy
+1. **Monochrome / Deep Navy Frameless Cards**: High-end editorial magazine layout with generous negative space and micro-borders (\`rgba(255,255,255,0.08)\`).
+2. **Court / Facility Horizontal Showcase**: Drag-and-flick slider displaying court facilities, surface types (Clay, Hard, Grass), and booking slots.
+3. **Curated Membership Tier Table**: Three luxury tier cards (Club, Master, Championship) with feature checklist and instant application modal.
+4. **Court Reservation Modal**: Interactive day/time selector with calendar date picker and booking confirmation toast.`;
+        } else if (archetype === 'minimalist_hero') {
+            archetypeTitle = 'THE MINIMALIST HIGH-IMPACT HERO (Loopstack Style)';
+            signatureLibraries = ``;
+            signatureMechanics = `
+- **Single-Screen Zero-Scroll Architecture**: 100vh / 100dvh layout, \`overflow: hidden;\`. Entire user journey is navigated through reactive modals and tabbed drawers without vertical scrolling.
+- **Looping Video / Canvas Bleed**: Background ambient video or looping fluid canvas seamlessly blended using a top-offset radial SVG mask:
+  \`mask-image: radial-gradient(circle at center, black 40%, transparent 85%);\`
+- **Dual-LERP Custom Cursor**: Two cursor elements:
+  1. Instant tracking ring (\`x += (target - x) * 0.35\`) with subtle border.
+  2. Lagging glass pill (\`x += (target - x) * 0.08\`) with \`backdrop-filter: blur(8px); background: rgba(255,255,255,0.06);\`.
+- **Pulsing Neon Live Status Dot**: Status badge with double-ring ping animation (\`animate-ping\` + solid emerald dot) indicating operational status.`;
+            signatureSection = `
+### Signature Experience: Minimalist Single-Screen Experience
+1. **Immersive Centered Hero**: High-contrast headline with 20px blur-up letter reveals, floating over the dark video/canvas canvas.
+2. **Interactive Live Demo Drawer**: Slide-up or expand-in drawer previewing the core workflow with interactive toggle controls.
+3. **Instant Waitlist / Access Form**: Floating input pill with single-click email submission and dynamic checkmark transformation.
+4. **Bottom Micro-Dock**: Sleek floating glass dock at bottom of screen with icons for Audio, Theme, Info, and Fullscreen.`;
+        } else if (archetype === 'transaction_store') {
+            archetypeTitle = 'THE TRANSACTIONAL COMMERCE ENGINE';
+            signatureLibraries = `
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"><\/script>`;
+            signatureMechanics = `
+- **Reactive Local Cart State**: Pure Vanilla JS cart state persisted in \`localStorage\` with item counts, quantity modifications (+/-), and coupon calculation.
+- **Slide-Over Cart Drawer**: Off-canvas cart sliding smoothly from right with backdrop blur, itemized list, PPN 11% automatic calculation, and live checkout total.
+- **Multi-Facet Catalog Filter**: Real-time category pills, price range slider, and text search filtering items instantly without page reload.
+- **Official Print-Ready Receipt Modal**: Complete fiscal receipt format with order number, barcode generator, timestamp, payment method, and \`window.print()\` button.`;
+            signatureSection = `
+### Signature Experience: Frictionless Commerce Journey
+1. **Catalog Showcase Grid**: Rich product cards with dynamic discount badges, hover image zoom, stock indicator, and 1-click "Add to Cart".
+2. **Product Detail Quickview Modal**: Photo thumbnail gallery, variant selector (Size/Color), and detailed specifications table.
+3. **Multi-Step Checkout Modal**: Customer delivery address, delivery method (Express/Standard), payment gateway choice (QRIS, VA, CC), and live validation.
+4. **Order Confirmation & Thermal Invoice**: Receipt modal with download and print options.`;
         } else {
-            domainArchitectureSpec = `
-# 🏭 ARCHETYPE SPECIFICATION: OPERATIONAL MANAGEMENT WEBAPP (${sub.name.toUpperCase()})
-- **Category**: ${cat.label}
-- **Subtype**: ${sub.name} - ${sub.desc}
-- **Primary Goal**: Enterprise-grade internal operations: data management, workflow control, role-based access (RBAC simulation), and executive reporting.
-- **Core Architecture & Modules**:
-  1. **Persistent Desktop Left Sidebar (240px)**: Collapsible module navigation (Dashboard, Master Data, Operations/Workflow, Reports, Settings) + user profile footer.
-  2. **Mobile Bottom Navigation Bar (56-64px)**: Replacing sidebar on mobile screens with safe viewport padding (\`pb-28 md:pb-12\`).
-  3. **Executive KPI Metric Cards**: Counters with tabular numbers, dynamic status badges, and quick summary alerts.
-  4. **Master Data CRUD Interactive Table**: Search filter, column header sorting (Asc/Desc), pagination (10/25/50 rows), status badges, add/edit modal, and export to CSV.
-  5. **Workflow / Kanban / Action Center**: Stage pipeline management with 1-click advancement.
-  6. **Official Print-Ready Document Modal (SPK / PO / Surat Jalan / Invoice)**: Formal company letterhead, document number, itemized costs, signature blocks, and window.print().
-  7. **Standalone Reactive Mock Database**: LocalStorage / memory dataset with complete pre-seeded records for testing.`;
+            archetypeTitle = 'THE ENTERPRISE PRECISION DASHBOARD';
+            signatureLibraries = `
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"><\/script>`;
+            signatureMechanics = `
+- **100dvh Anti-Overlap Layout**: Responsive shell with 240px collapsible left sidebar for desktop and fixed bottom navigation bar on mobile with \`pb-28 md:pb-12\` safe-area padding.
+- **Master Data CRUD Reactive Table**: Real-time search query, multi-column sorting (ascending/descending), pagination (10/25/50 rows), status badge filters, and CSV export.
+- **Official Print-Ready Document Modal (SPK / PO / Surat Jalan)**: Standard formal company letterhead, document number, table of items/tasks, signature approval blocks, and \`window.print()\`.
+- **Pre-Seeded Mock Database**: Realistic initial dataset (minimum 8-10 rows) stored in \`localStorage\` with add, edit, and delete capability.`;
+            signatureSection = `
+### Signature Experience: Operational Control Center
+1. **Executive KPI Stat Cards**: 4 key metric cards with tabular numbers, month-over-month percentage changes, and status indicators.
+2. **Interactive Master Data Table**: Paginated records with checkbox selection, batch action bar, search highlight, and action buttons (View, Edit, Print, Delete).
+3. **Document Generator Modal (SPK / Work Order / PO)**: Complete company document layout formatted for A4 printing.
+4. **System Backup Engine (ZIP Simulation)**: 1-click backup button with progress spinner and download simulation.`;
         }
 
         const manualNotesBlock = manualNotes ? `
-# 📋 USER SPECIFIC MANUAL REQUIREMENTS & DOMAIN LOGIC (CRITICAL)
+## 📋 USER MANUAL REQUIREMENTS & BUSINESS LOGIC (MANDATORY VERBATIM)
 ${manualNotes}
 ` : `
-# 📋 USER SPECIFIC MANUAL REQUIREMENTS
-- Implement comprehensive real-world business logic and concrete mock datasets tailored directly to ${sub.name}.
+## 📋 USER MANUAL REQUIREMENTS
+- Implement rich, authentic mock data, concrete field names, and complete business workflows tailored specifically to ${sub.name}.
 `;
 
-        return `# ROLE & MANDATORY DIRECTIVE
-You are a Principal Software Architect, Senior Fullstack Engineer, and Master UI/UX Designer.
-Your task is to write a 100% COMPLETE, SINGLE-FILE, STANDALONE, AND PRODUCTION-READY "index.html" representing a state-of-the-art web application for:
+        return `# Recreate this site as a single HTML file: ${name} — ${archetypeTitle}
 
-- **Application Name**: "${name}"
-- **WebApp Archetype**: ${cat.label}
-- **WebApp Subtype**: ${sub.name}
-- **Design Theme Aesthetic**: "${style.name}" (${style.type})
-- **Curated Palette Tokens**: Primary Accent \`${c1}\`, Secondary Accent \`${c2}\`
-- **Design Style Attributes**: ${style.desc}
+You are an expert creative front-end developer and UI/UX engineer. Produce a **single self-contained \`index.html\`** that reproduces the project below **exactly** — layout, sections, visuals, motion, and interaction. Pure HTML/CSS/JS in one file: no build step, no framework, no bundler. Use ES modules with a CDN importmap for any external libraries. Hardcode every design token and copy value given here. All the CSS below lives in one \`<style>\` block in \`<head>\`; the JS in one \`<script type="module">\` block before \`</body>\`.
 
 ---
 
-${domainArchitectureSpec}
+## 1. DIRECTING & ARCHITECTURAL GUARDRAILS
+- **Application Target**: "${name}"
+- **Domain Category**: ${cat.label} / ${sub.name}
+- **Archetype**: ${archetypeTitle}
+- **Format**: Single-file \`index.html\` only. Zero backend setup required.
+- **Dependencies & Importmap**:
+${signatureLibraries}
+- **Responsive Standard**: Strict \`100dvh\` / \`100vh\` viewport handling with zero scrollbar bugs and no mobile navigation overlap.
+- **Code Completeness**: Write 100% COMPLETE, EXECUTABLE CODE. ZERO placeholder comments ("// TODO", "// implement later").
 
 ---
+
+## 2. SENSORY NARRATIVE & CREATIVE IDENTITY
+- **Visual Theme Aesthetic**: "${style.name}" (${style.type.toUpperCase()})
+- **Design Philosophy**: ${style.desc}
+- **Atmospheric Palette**: Primary Accent \`${c1}\`, Secondary Accent \`${c2}\`
+- **Emotional Mood**: High precision, state-of-the-art craftsmanship, tactile responsiveness, and cinematic polish.
+- **Typography Tone**: Modern Google Fonts — **Outfit** (Heading Display, tracking tight, 700-900), **Inter** (Body text, 400-500, leading relaxed), and **JetBrains Mono** (Badges, tabular metrics, codes).
+
+---
+
+## 3. SHELL, CDNS & MATHEMATICAL GRID
+The layout scales proportionally across viewports using an adaptive REM grid system:
+\`\`\`css
+/* Scale-DOWN Breakpoints (Base 1920) */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+@media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+@media (max-width: 1024px) { html { font-size: 1.5625vw;   } }
+@media (max-width: 640px)  { html { font-size: 4.444444vw; } }
+\`\`\`
+\`\`\`js
+/* Scale-UP above 1920px (Runtime JS Damped Growth) */
+function applyAdaptiveGrid() {
+  const FONT_BASE = 16, BASE_W = 1920, COEF = 0.6666;
+  const w = window.innerWidth;
+  const widthReduction = ((BASE_W - w) / BASE_W) * 100;
+  const size = FONT_BASE - (FONT_BASE * (widthReduction * COEF)) / 100;
+  if (size > FONT_BASE) {
+    document.documentElement.style.fontSize = size + 'px';
+  } else {
+    document.documentElement.style.removeProperty('font-size');
+  }
+}
+applyAdaptiveGrid();
+window.addEventListener('resize', applyAdaptiveGrid);
+\`\`\`
+
+---
+
+## 4. DETERMINISTIC TOKENS & COLOR SYSTEM (60-30-10 RULE)
+\`\`\`css
+:root {
+  /* 60% Dominant Canvas */
+  --color-background: #080B11;
+  --color-foreground: #F8FAFC;
+
+  /* 30% Structural Panels & Cards */
+  --color-card: #0F1523;
+  --color-card-foreground: #E2E8F0;
+  --color-card-border: rgba(255, 255, 255, 0.08);
+
+  /* 10% High-Impact Accents */
+  --color-primary: ${c1};
+  --color-on-primary: #FFFFFF;
+  --color-secondary: ${c2};
+  --color-accent: ${c1};
+
+  /* UI Tokens */
+  --color-muted: #64748B;
+  --color-muted-foreground: #94A3B8;
+  --color-border: #1E293B;
+  --color-ring: ${c1};
+  --radius-pill: 9999px;
+  --radius-card: 16px;
+  --radius-control: 8px;
+}
+\`\`\`
+
+---
+
+## 5. MOTION PHYSICS & SEQUENCE GATING
+${signatureMechanics}
+
+- **Spring Physics Integrator**:
+  \`accel = tension * (target - x) - friction * v\`
+  - Entrance: \`{ tension: 210, friction: 26 }\` (~ \`cubic-bezier(0.22, 1, 0.36, 1)\`)
+  - Hover: \`{ tension: 320, friction: 18 }\` (~ \`cubic-bezier(0.2, 0.8, 0.2, 1)\`)
+  - Smooth LERP: \`x += (target - x) * 0.08\`
+
+- **Descender-Safe Kinetic Line Masking**:
+  All headline text reveals must wrap lines in overflow clips with descender compensation:
+  \`\`\`css
+  .line-mask {
+    overflow: hidden;
+    display: block;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+  .line-inner {
+    display: block;
+    transform: translateY(115%);
+    opacity: 0;
+    transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.9s ease;
+  }
+  .in-view .line-inner {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  \`\`\`
+
+- **PageLoader Sequence Gating**:
+  - Full-screen dark curtain overlay with tabular counter \`000\` to \`100\` over 1300ms using \`easeInOutCubic\`.
+  - While loading, page scroll is locked (\`scrollLock = true\`).
+  - Upon reaching \`100\`, curtain translates up (\`translateY(-100%)\`), \`scrollLock\` releases, and hero entrance reveals are triggered via \`ready = true\`.
+
+---
+
+## 6. SECTION-BY-SECTION ENGINEERING BREAKDOWN
+${signatureSection}
 
 ${manualNotesBlock}
 
 ---
 
-# 🎨 UI/UX & TECHNICAL STANDARDS FOR index.html
-1. **Design System & Aesthetics**:
-   - Masterfully apply the "${style.name}" visual language (gradients, typography hierarchy, border treatments, surface depths).
-   - Use Google Fonts (Outfit for headings, Inter for body, JetBrains Mono for codes/numbers).
-   - Smooth micro-interactions, responsive touch states, and accessible color contrast.
-2. **Safe Viewport Layout (100dvh)**:
-   - Ensure mobile navigation does not overlap contents using safe bottom padding (\`pb-28 md:pb-12\`).
-3. **Pure Single-File Frontend (Zero Backend Setup Needed)**:
-   - All HTML, CSS, and JavaScript must reside within a SINGLE \`index.html\` file.
-   - Use Tailwind CSS CDN + FontAwesome 6 icons + SweetAlert2.
-   - Use JavaScript reactive state management with localStorage persistence for user actions, carts, favorites, and records.
-   - Ready to run directly in any browser, XAMPP, Live Server, or Google Apps Script.
-4. **Code Completeness**:
-   - Write 100% COMPLETE, EXECUTABLE CODE without placeholders, "// TODO", or truncated functions.
+## 7. ZERO-TOLERANCE ANTI-SLOP LAWS (NON-NEGOTIABLE)
+1. **NO Emojis as UI Icons**: NEVER use emojis (🚀, 📊, ⚙️, 🔔) as icons. Always use inline SVG icons (Lucide/Heroicons SVG) with \`width="18" height="18" fill="none" stroke="currentColor"\`.
+2. **NO Generic AI Gradients**: Never use arbitrary purple-pink gradients. Strictly adhere to the tokens defined in \`:root\`.
+3. **NO Unstyled Native Inputs**: Every input, select, and textarea MUST have custom background, border, padding, and \`:focus-visible\` ring.
+4. **NO Raw Unformatted Data**: Format all currency (\`Rp 1.500.000\` / \`$1,500.00\`), dates (\`29 Agu 2026, 10:58\`), and numbers with separators.
+5. **NO Missing Component States**: Every interactive element MUST have visible \`:hover\`, \`:active\`, \`:focus-visible\`, and \`:disabled\` states.
+6. **NO Blank Tables / Lists**: Every list or table MUST include an empty state with custom SVG illustration and CTA button.
 
-# MANDATORY DEVELOPER WATERMARK:
-"<div style='text-align:center; font-size:12px; margin:24px 0 16px; color:#64748B;'>develop by : dermawan.prb@gmail.com | <a href='https://www.linkedin.com/in/dermawan-purba-5b69241a9' target='_blank' style='color:#818CF8; text-decoration:none;'>LinkedIn</a></div>"
+---
+
+## MANDATORY DEVELOPER WATERMARK:
+\`<div style="text-align:center; font-size:12px; margin:40px 0 20px; color:#64748B;">developed by : dermawan.prb@gmail.com | <a href="https://www.linkedin.com/in/dermawan-purba-5b69241a9" target="_blank" style="color:#818CF8; text-decoration:none;">LinkedIn</a></div>\`
 `;
     }
 
     /* ==================== MODAL RESULT DISPLAY ==================== */
     function showGeneratedPromptModal(name, style, sub, promptText) {
+        const lineCount = promptText.split('\n').length;
         Swal.fire({
             title: `✨ Master Frontend index.html Prompt`,
             html: `
                 <div style="text-align:left; font-family:'Inter',sans-serif;">
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-                        <span style="padding:3px 8px; border-radius:6px; background:rgba(99,102,241,0.2); color:#A5B4FC; font-size:11px; font-weight:700;">${sub.name}</span>
-                        <span style="padding:3px 8px; border-radius:6px; background:rgba(16,185,129,0.2); color:#34D399; font-size:11px; font-weight:700;">${style.name}</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="padding:3px 8px; border-radius:6px; background:rgba(99,102,241,0.2); color:#A5B4FC; font-size:11px; font-weight:700;">${sub.name}</span>
+                            <span style="padding:3px 8px; border-radius:6px; background:rgba(16,185,129,0.2); color:#34D399; font-size:11px; font-weight:700;">${style.name}</span>
+                        </div>
+                        <span style="font-size:11px; color:#94A3B8; font-weight:600;"><i class="fa-solid fa-code" style="color:#6366F1; margin-right:4px;"></i>${lineCount} Baris Spesifikasi</span>
                     </div>
-                    <p style="color:#94A3B8; font-size:12px; margin-bottom:10px;">Prompt AI master telah dianyam lengkap dengan kebutuhan manual Anda:</p>
-                    <textarea id="prompt-output-box" readonly style="width:100%; height:260px; background:#07090E; border:1px solid #1E293B; border-radius:8px; padding:10px; color:#CBD5E1; font-size:10.5px; font-family:'JetBrains Mono',monospace; resize:none; line-height:1.5;">${promptText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+                    <p style="color:#94A3B8; font-size:11.5px; margin-bottom:8px;">Prompt 7-Layer Awwwards-tier telah selesai dianyam dengan rumus matematis &amp; fisika gerak:</p>
+                    <textarea id="prompt-output-box" readonly style="width:100%; height:340px; background:#07090E; border:1px solid #1E293B; border-radius:8px; padding:12px; color:#CBD5E1; font-size:11px; font-family:'JetBrains Mono',monospace; resize:none; line-height:1.5;">${promptText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
                     <div style="display:flex; gap:8px; margin-top:12px;">
-                        <button onclick="copyGeneratedPromptText()" style="flex:1; padding:10px; background:#6366F1; color:white; border:none; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">
-                            <i class="fa-regular fa-copy" style="margin-right:5px;"></i> Salin Prompt (Ctrl+C)
+                        <button onclick="copyGeneratedPromptText()" style="flex:1; padding:11px; background:#6366F1; color:white; border:none; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                            <i class="fa-regular fa-copy"></i> Salin Prompt (Ctrl+C)
                         </button>
-                        <button onclick="downloadPromptAsTxt('${name}', '${style.name}')" style="padding:10px 16px; background:#10B981; color:white; border:none; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">
-                            <i class="fa-solid fa-download" style="margin-right:5px;"></i> Unduh .TXT
+                        <button onclick="downloadPromptAsTxt('${name}', '${style.name}')" style="padding:11px 18px; background:#10B981; color:white; border:none; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                            <i class="fa-solid fa-download"></i> Unduh .TXT
                         </button>
                     </div>
                 </div>
             `,
-            width: '720px',
+            width: '780px',
             background: '#0D111A',
             color: '#fff',
             showConfirmButton: false,
@@ -1570,7 +1837,7 @@ ${manualNotesBlock}
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'Prompt berhasil disalin ke clipboard!',
+                title: 'Prompt 7-Layer berhasil disalin ke clipboard!',
                 showConfirmButton: false,
                 timer: 2000,
                 background: '#111420',
@@ -1594,8 +1861,8 @@ ${manualNotesBlock}
     /* ==================== BULK 60 PROMPTS ==================== */
     function bulkGenerateAllPromptsModal() {
         Swal.fire({
-            title: '⚡ Bulk Generate 60 Prompts',
-            text: 'Membuat paket prompt frontend index.html untuk semua 60 gaya desain sekaligus.',
+            title: '⚡ Bulk Generate 60 World-Class Prompts',
+            text: 'Membuat paket prompt frontend index.html 7-Layer untuk seluruh 60 gaya desain sekaligus.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#10B981',
@@ -1606,15 +1873,12 @@ ${manualNotesBlock}
             color: '#fff'
         }).then((res) => {
             if (!res.isConfirmed) return;
-            let output = '=== 60 UI/UX DESIGN FRONTEND index.html PROMPTS BUNDLE ===\n\n';
+            let output = '=== 60 UI/UX DESIGN WORLD-CLASS FRONTEND index.html PROMPTS BUNDLE (7-LAYER FORMULA) ===\n\n';
             MOCK_DB.styles.forEach((s, idx) => {
-                const cols = s.color.split(',');
-                const c1 = '#' + (cols[0] || '6366f1');
-                const c2 = '#' + (cols[1] || 'a855f7');
                 output += `================================================================================\n`;
                 output += `PROMPT #${idx + 1}: ${s.name} (${s.type.toUpperCase()})\n`;
                 output += `================================================================================\n`;
-                output += generateWorldClassFrontendPrompt(s, `Enterprise Solution - ${s.name}`, FULL_TAXONOMY.management, FULL_TAXONOMY.management.subtypes[0], '');
+                output += generateWorldClassFrontendPrompt(s, `Enterprise Solution - ${s.name}`, FULL_TAXONOMY.management, FULL_TAXONOMY.management.subtypes[0], '', 'auto');
                 output += `\n\n`;
             });
 
@@ -1622,7 +1886,7 @@ ${manualNotesBlock}
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = '60_UIUX_Frontend_Prompts.txt';
+            a.download = '60_UIUX_WorldClass_Frontend_Prompts.txt';
             a.click();
             URL.revokeObjectURL(url);
         });
