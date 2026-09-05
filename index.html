@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI/UX Design Catalog &amp; Frontend index.html Prompt Studio</title>
-    <meta name="description" content="Katalog 60 Gaya Desain UI/UX Modern, Taksonomi 125+ Subtipe WebApp, Input Kebutuhan Manual, dan Generator Prompt Frontend index.html Mandiri Kelas Dunia.">
+    <title>UI/UX Design Catalog &amp; Frontend index.html Prompt Studio - 6 Pilar Taksonomi</title>
+    <meta name="description" content="Katalog 60 Gaya Desain UI/UX Modern, Taksonomi 6 Pilar Utama (Landing Page, Company Profile, Mobile App UI, E-Commerce, Dashboard, Blog / Content), Input Kebutuhan Manual, dan Generator Frontend Mandiri.">
     
     <!-- Google Fonts: Inter & Outfit & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -374,6 +374,338 @@
         .view { display: none; flex-direction: column; flex: 1; overflow: hidden; }
         .view.active { display: flex; }
 
+        /* ============ STUDIO FLOW STYLES ============ */
+        .studio-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .studio-stepper-track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px 20px;
+        }
+
+        .stepper-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+
+        .stepper-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1A2234;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .stepper-step.active .stepper-circle {
+            background: #6366F1;
+            border-color: #818CF8;
+            color: #FFFFFF;
+            box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
+        }
+
+        .stepper-step.completed .stepper-circle {
+            background: #10B981;
+            border-color: #34D399;
+            color: #FFFFFF;
+        }
+
+        .stepper-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stepper-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+        }
+
+        .stepper-step.active .stepper-label {
+            color: #A5B4FC;
+        }
+
+        .stepper-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .stepper-step.active .stepper-title {
+            color: #FFFFFF;
+        }
+
+        .stepper-divider {
+            flex: 1;
+            height: 2px;
+            background: #1E293B;
+            margin: 0 12px;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .stepper-divider.active {
+            background: linear-gradient(90deg, #6366F1 0%, #A855F7 100%);
+        }
+
+        /* Studio Step Card Panels */
+        .studio-card-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 24px;
+        }
+
+        /* 6 Pillar Cards Grid matching user screenshot */
+        .studio-pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .studio-pillar-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 14px 6px;
+            border-radius: 14px;
+            background: #F1F5F9;
+            border: 1px solid #E2E8F0;
+            color: #0F172A;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .studio-pillar-btn i {
+            font-size: 18px;
+            color: #0F172A;
+            transition: transform 0.2s;
+        }
+
+        .studio-pillar-btn span {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+        }
+
+        .studio-pillar-btn:hover {
+            transform: translateY(-2px);
+            background: #E2E8F0;
+        }
+
+        .studio-pillar-btn.active {
+            background: #0B0F19 !important;
+            border-color: #334155 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        }
+
+        .studio-pillar-btn.active i {
+            color: #FFFFFF !important;
+            transform: scale(1.1);
+        }
+
+        .studio-pillar-btn.active span {
+            color: #FFFFFF !important;
+        }
+
+        /* Subtypes Grid */
+        .studio-subtypes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 10px;
+            margin-bottom: 16px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .studio-subtype-card {
+            background: #0B0E17;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .studio-subtype-card:hover {
+            border-color: rgba(99,102,241,0.4);
+            background: #101625;
+            transform: translateY(-2px);
+        }
+
+        .studio-subtype-card.selected {
+            background: rgba(99,102,241,0.14);
+            border-color: #6366F1;
+            box-shadow: 0 0 16px rgba(99,102,241,0.2);
+        }
+
+        .studio-subtype-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            color: #818CF8;
+            font-weight: 900;
+            font-size: 13px;
+        }
+
+        /* Studio Theme Grid in Step 3 */
+        .studio-themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 16px;
+        }
+
+        .studio-theme-card {
+            background: #0B0E17;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .studio-theme-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99,102,241,0.45);
+            background: #111726;
+        }
+
+        .studio-theme-card.selected {
+            border-color: #6366F1 !important;
+            box-shadow: 0 0 20px rgba(99,102,241,0.3), 0 8px 24px rgba(0,0,0,0.5);
+            background: #131B2E !important;
+        }
+
+        .studio-theme-card.selected::before {
+            content: '✓ Dipilih';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #6366F1;
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            z-index: 5;
+        }
+
+        /* Studio Navigation Buttons */
+        .btn-studio-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+            color: #FFFFFF;
+            font-size: 13px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(99,102,241,0.3);
+        }
+        .btn-studio-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99,102,241,0.45);
+        }
+
+        .btn-studio-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: #1A2234;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-studio-secondary:hover {
+            background: #242E45;
+            color: #FFFFFF;
+        }
+
+        .btn-studio-accent {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: #FFFFFF;
+            font-size: 13.5px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(16,185,129,0.35);
+        }
+        .btn-studio-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16,185,129,0.5);
+        }
+
+        @media (max-width: 900px) {
+            .studio-pillar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .studio-stepper-track {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .stepper-divider {
+                display: none;
+            }
+        }
+
         /* ============ EMPTY STATE ============ */
         .empty-state {
             flex: 1;
@@ -458,7 +790,12 @@
         <!-- Main Navigation -->
         <div class="nav-section" style="margin-top:6px;">
             <div class="nav-label">Menu Utama</div>
-            <button class="nav-item active" id="menu-catalog" onclick="switchView('catalog')">
+            <button class="nav-item active" id="menu-studio" onclick="switchView('studio')">
+                <i class="fa-solid fa-wand-magic-sparkles nav-icon" style="color:#818CF8;"></i>
+                <span>Studio Flow</span>
+                <span class="nav-badge" style="background:#6366F1; color:white; font-weight:800;">Flow</span>
+            </button>
+            <button class="nav-item" id="menu-catalog" onclick="switchView('catalog')">
                 <i class="fa-solid fa-layer-group nav-icon"></i>
                 <span>Katalog 60 Style</span>
                 <span class="nav-badge">60</span>
@@ -506,28 +843,310 @@
     <main class="main-content">
         <!-- Topbar -->
         <header class="topbar">
-            <div style="display:flex; align-items:center; gap:14px;">
-                <div class="search-box">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <div class="search-box" style="flex:1;">
                     <input type="text" id="search-input" placeholder="Cari nama style (misal: Bento, Neobrutalism, Cyberpunk, Frutiger)..." oninput="onSearch(this.value)">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-secondary);">
-                    <i class="fa-solid fa-filter" style="color:#6366F1; font-size:11px;"></i>
-                    <span id="result-count" style="font-weight:700; color:#E2E8FF;">60 styles</span>
-                </div>
-            </div>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <button onclick="bulkGenerateAllPromptsModal()" style="padding:8px 14px; background:linear-gradient(135deg, #10B981 0%, #059669 100%); color:white; border:none; border-radius:10px; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:7px; box-shadow:0 3px 12px rgba(16,185,129,0.3); transition:all 0.2s;" onmouseover="this.style.transform='translateY(-1px)';" onmouseout="this.style.transform='translateY(0)';">
-                    <i class="fa-solid fa-bolt"></i> Bulk 60 Prompts
-                </button>
             </div>
         </header>
 
         <!-- Category Tabs -->
         <div class="tab-filter" id="tab-filter"></div>
 
+        <!-- VIEW: STUDIO FLOW (GUIDED 4-STEP STUDIO WIZARD) -->
+        <div class="view active" id="view-studio">
+            <div class="studio-container">
+                <!-- Stepper Progress Header -->
+                <div class="studio-stepper-track">
+                    <div class="stepper-step active" id="stepper-step-1" onclick="goToStudioStep(1)">
+                        <div class="stepper-circle" id="stepper-circle-1">1</div>
+                        <div class="stepper-info">
+                            <span class="stepper-label">Langkah 1</span>
+                            <span class="stepper-title">Mau Buat Apa</span>
+                        </div>
+                    </div>
+                    <div class="stepper-divider" id="stepper-divider-1"></div>
+                    <div class="stepper-step" id="stepper-step-2" onclick="goToStudioStep(2)">
+                        <div class="stepper-circle" id="stepper-circle-2">2</div>
+                        <div class="stepper-info">
+                            <span class="stepper-label">Langkah 2</span>
+                            <span class="stepper-title">Pilar Taksonomi</span>
+                        </div>
+                    </div>
+                    <div class="stepper-divider" id="stepper-divider-2"></div>
+                    <div class="stepper-step" id="stepper-step-3" onclick="goToStudioStep(3)">
+                        <div class="stepper-circle" id="stepper-circle-3">3</div>
+                        <div class="stepper-info">
+                            <span class="stepper-label">Langkah 3</span>
+                            <span class="stepper-title">Pilih Style UI/UX</span>
+                        </div>
+                    </div>
+                    <div class="stepper-divider" id="stepper-divider-3"></div>
+                    <div class="stepper-step" id="stepper-step-4" onclick="goToStudioStep(4)">
+                        <div class="stepper-circle" id="stepper-circle-4">4</div>
+                        <div class="stepper-info">
+                            <span class="stepper-label">Langkah 4</span>
+                            <span class="stepper-title">Hasil Master Prompt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 1 PANEL: Masukkan Mau Buat Apa -->
+                <div class="studio-card-panel fade-up" id="studio-panel-1">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+                        <div style="width:40px; height:40px; border-radius:12px; background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.3); display:flex; align-items:center; justify-content:center; color:#818CF8; font-size:18px;">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-outfit" style="font-size:18px; font-weight:800; color:#FFFFFF; margin:0;">Langkah 1: Masukkan Mau Buat Apa</h2>
+                            <p style="font-size:12px; color:var(--text-secondary); margin:2px 0 0;">Definisikan nama proyek, target kebutuhan, dan catatan manual arsitektur yang diinginkan.</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:16px;">
+                        <!-- Input Nama Aplikasi -->
+                        <div>
+                            <label style="display:block; font-size:12px; font-weight:700; color:#E2E8FF; margin-bottom:6px;">
+                                Nama Aplikasi / Proyek <span style="color:#EC4899;">*</span>
+                            </label>
+                            <input type="text" id="studio-app-name" placeholder="Misal: Dashboard Operasional Tambang Nikel, Toko Thrifting Vintage, Aplikasi Mobile FitLife..." 
+                                style="width:100%; padding:12px 16px; border-radius:12px; background:#07090E; border:1px solid var(--border-color); color:#F8FAFC; font-size:13px; font-weight:500; outline:none; transition:border 0.2s;"
+                                onfocus="this.style.borderColor='#6366F1'" onblur="this.style.borderColor='var(--border-color)'">
+                            
+                            <!-- Quick Chips Suggestions -->
+                            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
+                                <span style="font-size:11px; color:var(--text-muted); align-self:center; margin-right:4px;">Inspirasi cepat:</span>
+                                <button type="button" onclick="setStudioPreset('Dashboard Operasional Tambang Nikel', 'dashboard', 'Sistem ERP Tambang dengan monitoring alat berat, rekap ritase harian, filter shift kerja, dan modul cetak SPK Surat Perintah Kerja A4.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                                    <i class="fa-solid fa-chart-line" style="color:#6366F1; margin-right:4px;"></i> Dashboard ERP Tambang
+                                </button>
+                                <button type="button" onclick="setStudioPreset('SaaS AI Prompt Studio', 'landing_page', 'Landing page interaktif dengan hero bento grid, showcase generator prompt, kartu harga bulanan/tahunan, testimoni pengguna, dan modal registrasi waitlist.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                                    <i class="fa-solid fa-rocket" style="color:#10B981; margin-right:4px;"></i> Landing Page SaaS AI
+                                </button>
+                                <button type="button" onclick="setStudioPreset('Urban Streetwear Store', 'e_commerce', 'Toko online streetwear dengan slide-over keranjang belanja, kalkulasi PPN 11%, diskon voucher otomatis, varian ukuran/warna, dan struk belanja QRIS.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                                    <i class="fa-solid fa-bag-shopping" style="color:#F59E0B; margin-right:4px;"></i> E-Commerce Streetwear
+                                </button>
+                                <button type="button" onclick="setStudioPreset('Blog Majalah Digital', 'blog_content', 'Blog editorial modern dengan layout bento grid artikel, sistem kategori tag, highlight penulis, dan pembaca progress indicator per artikel.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                                    <i class="fa-solid fa-newspaper" style="color:#A78BFA; margin-right:4px;"></i> Blog Majalah Digital
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Textarea Kebutuhan Manual -->
+                        <div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                <label style="font-size:12px; font-weight:700; color:#E2E8FF;">
+                                    Kebutuhan Spesifik / Catatan Klien (Manual Notes)
+                                </label>
+                                <span style="font-size:11px; color:var(--text-muted);">Bebas &bull; Opsional tapi sangat disarankan</span>
+                            </div>
+                            <textarea id="studio-manual-notes" rows="5" placeholder="Tuliskan fitur kunci yang wajib ada. Contoh:&#10;- Wajib ada tabel SPK dengan tombol Cetak A4&#10;- Fitur Drawer Keranjang belanja dengan hitungan PPN 11%&#10;- Filter status aktif/non-aktif dengan badge warna&#10;- Integrasi data realistis minimum 10 baris di LocalStorage&#10;- Fitur Ekspor CSV dan backup zip modal" 
+                                style="width:100%; padding:12px 16px; border-radius:12px; background:#07090E; border:1px solid var(--border-color); color:#F8FAFC; font-size:12px; font-family:'Inter',sans-serif; line-height:1.6; resize:vertical; outline:none; transition:border 0.2s;"
+                                onfocus="this.style.borderColor='#6366F1'" onblur="this.style.borderColor='var(--border-color)'"></textarea>
+                        </div>
+
+                        <!-- Action Bar Step 1 -->
+                        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:8px; padding-top:14px; border-top:1px solid var(--border-color);">
+                            <button type="button" class="btn-studio-primary" onclick="nextStudioStep(1)">
+                                <span>Lanjut: Pilih Pilar Taksonomi</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 PANEL: Pilih Pilar Taksonomi & Subtipe -->
+                <div class="studio-card-panel fade-up" id="studio-panel-2" style="display:none;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+                        <div style="width:40px; height:40px; border-radius:12px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); display:flex; align-items:center; justify-content:center; color:#34D399; font-size:18px;">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-outfit" style="font-size:18px; font-weight:800; color:#FFFFFF; margin:0;">Langkah 2: Pilih Pilar Taksonomi & Subtipe</h2>
+                            <p style="font-size:12px; color:var(--text-secondary); margin:2px 0 0;">Pilih 1 dari 6 pilar arsitektur dan tentukan subtipe aplikasi yang paling relevan.</p>
+                        </div>
+                    </div>
+
+                    <!-- 6 Pilar Cards matching User Screenshot -->
+                    <div class="studio-pillar-grid" id="studio-pillar-container">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Subtipe Grid Header -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin:16px 0 10px;">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:12.5px; font-weight:700; color:#F8FAFC;" id="studio-selected-pillar-label">Subtipe Terkurasi:</span>
+                            <span class="nav-badge" id="studio-subtypes-count" style="background:rgba(99,102,241,0.2); color:#A5B4FC;">8 Pilihan</span>
+                        </div>
+                        <input type="text" id="studio-subtype-search" placeholder="Cari subtipe..." oninput="filterStudioSubtypes(this.value)"
+                            style="padding:6px 12px; border-radius:8px; background:#07090E; border:1px solid var(--border-color); color:#E2E8FF; font-size:11px; outline:none; width:180px;">
+                    </div>
+
+                    <!-- Subtypes Interactive Grid -->
+                    <div class="studio-subtypes-grid" id="studio-subtypes-grid">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Archetype Fine-tuning Selector -->
+                    <div style="background:#07090E; border:1px solid var(--border-color); border-radius:12px; padding:14px; margin-top:12px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                            <div style="font-size:12px; font-weight:700; color:#E2E8FF;">
+                                <i class="fa-solid fa-sliders" style="color:#6366F1; margin-right:6px;"></i> Mode Arsitektur Interaksi (Archetype Engine)
+                            </div>
+                            <span id="studio-archetype-badge" style="font-size:10.5px; color:#10B981; font-weight:600;"><i class="fa-solid fa-circle-check" style="margin-right:4px;"></i>Auto-Tuned by Taxonomy</span>
+                        </div>
+                        <select id="studio-archetype-select" style="width:100%; padding:9px 12px; border-radius:8px; background:#0D111A; border:1px solid var(--border-color); color:#CBD5E1; font-size:12px; outline:none;">
+                            <option value="auto">✨ Otomatis Deteksi Sesuai Pilar & Subtipe (Rekomendasi Terbaik)</option>
+                            <option value="enterprise_dashboard">🏢 The Enterprise Precision Dashboard (100dvh Shell, Table CRUD, SPK A4 Print)</option>
+                            <option value="transaction_store">🛒 The Transactional Commerce Engine (Slide-Over Cart, PPN 11%, QRIS Thermal Receipt)</option>
+                            <option value="adaptive_studio">🎨 The Adaptive Studio Grid (Lenis Smooth-Scroll, Scratch Reveal, Bento Layout)</option>
+                            <option value="editorial_club">🏛️ The Luxury Editorial Club (Kinetic Line Masking, Giant Typography, Booking Modal)</option>
+                            <option value="product_3d">💎 The 3D Product Theater (Three.js/Model-Viewer Orbit, Flavor Switcher, Magnetic CTA)</option>
+                            <option value="minimalist_hero">⚡ The Minimalist High-Impact Hero (100vh Zero-Scroll, Ambient Canvas, LERP Cursor)</option>
+                            <option value="cinematic_webgl">🎬 The WebGL Cinematic Scroll (900vh Chapter Scroll, Liquid Wave Shader, Forge Sparks)</option>
+                            <option value="interactive_game">🎮 The Interactive Web Game Arena (60FPS Canvas Loop, Web Audio API Synth, Touch D-Pad)</option>
+                        </select>
+                    </div>
+
+                    <!-- Action Bar Step 2 -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:14px; border-top:1px solid var(--border-color);">
+                        <button type="button" class="btn-studio-secondary" onclick="prevStudioStep(2)">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Kembali ke Langkah 1</span>
+                        </button>
+                        <button type="button" class="btn-studio-primary" onclick="nextStudioStep(2)">
+                            <span>Lanjut: Pilih Style UI/UX</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 PANEL: Pilih Style Desain UI/UX -->
+                <div class="studio-card-panel fade-up" id="studio-panel-3" style="display:none;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="width:40px; height:40px; border-radius:12px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); display:flex; align-items:center; justify-content:center; color:#FBBF24; font-size:18px;">
+                                <i class="fa-solid fa-palette"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-outfit" style="font-size:18px; font-weight:800; color:#FFFFFF; margin:0;">Langkah 3: Pilih Style Desain UI/UX</h2>
+                                <p style="font-size:12px; color:var(--text-secondary); margin:2px 0 0;">Pilih 1 dari 60 kurasi visual style untuk menentukan bahasa estetika & CSS tokens.</p>
+                            </div>
+                        </div>
+
+                        <!-- Quick Search Style in Step 3 -->
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <input type="text" id="studio-style-search" placeholder="Cari style (misal: Bento, Dark, Neo)..." oninput="filterStudioThemes()"
+                                style="padding:8px 14px; border-radius:10px; background:#07090E; border:1px solid var(--border-color); color:#F8FAFC; font-size:12px; outline:none; width:220px;">
+                        </div>
+                    </div>
+
+                    <!-- Category Filter Tabs in Step 3 -->
+                    <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px;" id="studio-theme-cat-filter">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- 60 Themes Visual Cards Grid -->
+                    <div class="studio-themes-grid" id="studio-themes-grid">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Selected Theme Preview Pill -->
+                    <div id="studio-selected-theme-preview" style="background:#07090E; border:1px solid #1E293B; border-radius:12px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div id="studio-preview-swatch" style="width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg, #6366F1, #EC4899); border:1px solid rgba(255,255,255,0.2);"></div>
+                            <div>
+                                <div style="font-size:12px; font-weight:700; color:#FFFFFF;" id="studio-preview-name">Bento Grid (Default)</div>
+                                <div style="font-size:10.5px; color:#94A3B8;" id="studio-preview-desc">Layout modular asimetris dengan glassmorphism</div>
+                            </div>
+                        </div>
+                        <span style="font-size:11px; font-weight:700; color:#10B981; background:rgba(16,185,129,0.15); padding:4px 10px; border-radius:20px; border:1px solid rgba(16,185,129,0.3);">
+                            ✓ Style Siap Diterapkan
+                        </span>
+                    </div>
+
+                    <!-- Action Bar Step 3 -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--border-color);">
+                        <button type="button" class="btn-studio-secondary" onclick="prevStudioStep(3)">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Kembali ke Taksonomi</span>
+                        </button>
+                        <button type="button" class="btn-studio-accent" onclick="goToStudioStep(4)">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Hasilkan Master Prompt & Blueprint</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 4 PANEL: Hasil Master Prompt & Blueprint -->
+                <div class="studio-card-panel fade-up" id="studio-panel-4" style="display:none;">
+                    <!-- Visual Summary Banner -->
+                    <div style="background:linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%); border:1px solid #312E81; border-radius:16px; padding:18px 22px; margin-bottom:18px; position:relative; overflow:hidden;">
+                        <div style="position:absolute; right:-20px; top:-20px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%); pointer-events:none;"></div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; position:relative; z-index:1;">
+                            <div>
+                                <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                                    <span style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; background:#6366F1; color:white; padding:2px 8px; border-radius:6px;">PROYEK TERKONFIGURASI</span>
+                                    <span style="font-size:11px; color:#94A3B8;" id="studio-summary-timestamp">Hari ini</span>
+                                </div>
+                                <h1 class="font-outfit" style="font-size:22px; font-weight:800; color:#FFFFFF; margin:4px 0 8px;" id="studio-summary-app-name">Nama Aplikasi</h1>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+                                    <span class="nav-badge" style="background:#1E293B; color:#E2E8FF; font-size:11px; padding:4px 10px;" id="studio-summary-pillar"><i class="fa-solid fa-layer-group" style="margin-right:5px; color:#6366F1;"></i>Landing Page</span>
+                                    <span class="nav-badge" style="background:rgba(99,102,241,0.2); color:#A5B4FC; font-size:11px; padding:4px 10px;" id="studio-summary-subtype"><i class="fa-solid fa-check" style="margin-right:5px;"></i>SaaS & AI Tool Showcase</span>
+                                    <span class="nav-badge" style="background:rgba(16,185,129,0.2); color:#34D399; font-size:11px; padding:4px 10px;" id="studio-summary-style"><i class="fa-solid fa-palette" style="margin-right:5px;"></i>Bento Grid</span>
+                                    <span class="nav-badge" style="background:rgba(245,158,11,0.2); color:#FCD34D; font-size:11px; padding:4px 10px;" id="studio-summary-archetype"><i class="fa-solid fa-cubes" style="margin-right:5px;"></i>Adaptive Studio</span>
+                                </div>
+                            </div>
+
+                            <!-- Action Quick Buttons -->
+                            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+                                <button type="button" class="btn-studio-primary" onclick="copyStudioPrompt()" style="padding:10px 18px; font-size:12.5px;">
+                                    <i class="fa-regular fa-copy"></i>
+                                    <span>Salin Master Prompt</span>
+                                </button>
+                                <button type="button" class="btn-studio-secondary" onclick="downloadStudioPromptTxt()" style="padding:10px 16px; font-size:12.5px; background:rgba(16,185,129,0.15); border-color:rgba(16,185,129,0.3); color:#34D399;">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>Unduh .TXT</span>
+                                </button>
+                                <button type="button" class="btn-studio-secondary" onclick="resetStudioFlow()" style="padding:10px 14px; font-size:12.5px;">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                    <span>Desain Baru</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Prompt Textarea Card -->
+                    <div style="background:#07090E; border:1px solid var(--border-color); border-radius:14px; padding:16px; margin-bottom:16px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div style="width:10px; height:10px; border-radius:50%; background:#EF4444;"></div>
+                                <div style="width:10px; height:10px; border-radius:50%; background:#F59E0B;"></div>
+                                <div style="width:10px; height:10px; border-radius:50%; background:#10B981;"></div>
+                                <span style="font-size:11.5px; font-family:'JetBrains Mono',monospace; color:#94A3B8; margin-left:6px;">frontend-prompt.md &bull; 7 Layers Awwwards Architecture</span>
+                            </div>
+                            <span style="font-size:11px; color:#A5B4FC; font-weight:700;" id="studio-output-lines">0 Baris</span>
+                        </div>
+                        <textarea id="studio-master-prompt-box" readonly style="width:100%; height:400px; background:#05070B; border:1px solid #1E293B; border-radius:10px; padding:16px; color:#CBD5E1; font-size:11.5px; font-family:'JetBrains Mono',monospace; resize:vertical; line-height:1.6; outline:none;"></textarea>
+                    </div>
+
+                    <!-- Navigation back -->
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <button type="button" class="btn-studio-secondary" onclick="prevStudioStep(4)">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Kembali Ubah Style Desain</span>
+                        </button>
+                        <button type="button" class="btn-studio-primary" onclick="copyStudioPrompt()">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Salin ke Clipboard (Siap Pakai di Claude / GPT / Cursor)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- VIEW: KATALOG STYLES -->
-        <div class="view active" id="view-catalog">
+        <div class="view" id="view-catalog">
             <div class="grid-scroll">
                 <div id="style-grid"></div>
             </div>
@@ -579,7 +1198,7 @@
         <footer class="status-bar">
             <div style="display:flex; align-items:center;">
                 <span class="status-dot"></span>
-                <span>System Ready &bull; 60 Handcrafted Themes &bull; 125+ WebApp Taxonomies &bull; Zero AI Slop</span>
+                <span>System Ready &bull; 60 Handcrafted Themes &bull; 6 Pilar Taksonomi WebApp &bull; Zero AI Slop</span>
             </div>
             <div>
                 <span>develop by : dermawan.prb@gmail.com</span>
@@ -587,304 +1206,155 @@
         </footer>
     </main>
 
-    <!-- ==================== SIDEBAR RIGHT ==================== -->
-    <aside class="sidebar-right">
-        <!-- Explorer Progress -->
-        <div class="rp-section">
-            <div class="rp-title"><i class="fa-solid fa-compass" style="color:#6366F1;"></i> Progres Eksplorasi</div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:11px;">
-                <span style="color:var(--text-secondary);">Styles dibuka</span>
-                <span style="color:#818CF8; font-weight:700;" id="prog-text">0 / 60</span>
-            </div>
-            <div style="height:6px; background:rgba(255,255,255,0.06); border-radius:10px; overflow:hidden;">
-                <div id="prog-bar" style="height:100%; width:0%; background:linear-gradient(90deg, #6366F1, #EC4899); transition:width 0.4s ease;"></div>
-            </div>
-        </div>
 
-        <!-- 4 Core Archetypes Taxonomies -->
-        <div class="rp-section">
-            <div class="rp-title"><i class="fa-solid fa-cubes" style="color:#F59E0B;"></i> Taksonomi 162+ Subtipe</div>
-            <div style="font-size:11px; color:#CBD5E1; line-height:1.55; display:flex; flex-direction:column; gap:8px;">
-                <div style="padding:8px 10px; background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.2); border-radius:8px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <strong style="color:#38BDF8;">Website / Showcase</strong>
-                        <span style="font-size:10px; background:rgba(56,189,248,0.2); color:#38BDF8; font-weight:700; padding:1px 6px; border-radius:10px;">37 Subtipe</span>
-                    </div>
-                    <div style="font-size:10px; color:#94A3B8; margin-top:2px;">Hero, Value Prop, Bento Grid, 3D Theater, Portfolio.</div>
-                </div>
-                <div style="padding:8px 10px; background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.2); border-radius:8px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <strong style="color:#818CF8;">Management &amp; AI Hub</strong>
-                        <span style="font-size:10px; background:rgba(99,102,241,0.2); color:#A5B4FC; font-weight:700; padding:1px 6px; border-radius:10px;">50 Subtipe</span>
-                    </div>
-                    <div style="font-size:10px; color:#94A3B8; margin-top:2px;">AI Agent, DevTools, IoT, CMMS, ERP, Master CRUD, Print SPK.</div>
-                </div>
-                <div style="padding:8px 10px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:8px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <strong style="color:#F59E0B;">Game &amp; Interaktif</strong>
-                        <span style="font-size:10px; background:rgba(245,158,11,0.2); color:#FCD34D; font-weight:700; padding:1px 6px; border-radius:10px;">35 Subtipe</span>
-                    </div>
-                    <div style="font-size:10px; color:#94A3B8; margin-top:2px;">HTML5 Canvas, Puzzle, Arcade, WebGL 3D, Synth Audio, High Score.</div>
-                </div>
-                <div style="padding:8px 10px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); border-radius:8px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <strong style="color:#34D399;">Transaction &amp; Order</strong>
-                        <span style="font-size:10px; background:rgba(16,185,129,0.2); color:#34D399; font-weight:700; padding:1px 6px; border-radius:10px;">40 Subtipe</span>
-                    </div>
-                    <div style="font-size:10px; color:#94A3B8; margin-top:2px;">Katalog, Slide Cart Drawer, Multi-Step Checkout, Cetak Kwitansi.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Standar Frontend index.html Mandiri -->
-        <div style="padding:14px 16px; margin-top:auto;">
-            <div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Standar Frontend Mandiri</div>
-            <div style="font-size:11px; color:#CBD5E1; line-height:1.5;">
-                <strong>Single-File index.html</strong> &bull; Zero Backend Dependency &bull; Tailwind CDN &bull; Vanilla JS Reactive State.
-            </div>
-        </div>
-    </aside>
 
 </div>
 
 <script>
-    /* ==================== 162+ WEBAPP TAXONOMY (FULL & ACCURATE FROM AIUNTUKSEMUA) ==================== */
+    /* ==================== 6 CORE TAXONOMY PILLARS (LANDING, COMPANY, MOBILE, E-COMMERCE, DASHBOARD, BLOG) ==================== */
     const FULL_TAXONOMY = {
-        website: {
-            id: 'website',
-            label: 'Website / Showcase',
-            badge: 'Informasi & Branding',
-            icon: 'fa-solid fa-globe',
+        landing_page: {
+            id: 'landing_page',
+            label: 'Landing Page',
+            badge: 'Konversi & Lead Gen',
+            icon: 'fa-solid fa-bolt',
+            color: '#6366F1',
+            desc: 'Halaman web konversi tinggi berfokus pada pengenalan produk, penangkapan prospek (lead generation), promosi campaign, dan call-to-action (CTA) utama.',
+            subtypes: [
+                { id: 'lp_saas_launch',       archetype: 'adaptive_studio',   name: 'SaaS Product Launch Landing Page',          desc: 'Halaman peluncuran produk software/SaaS dengan hero interaktif, value proposition, kalkulator harga bertingkat, dan ajakan coba gratis.' },
+                { id: 'lp_lead_funnel',       archetype: 'adaptive_studio',   name: 'Lead Generation & Sales Funnel Page',        desc: 'Halaman penangkap kontak calon klien dengan penawaran magnet prospek, testimoni otoritas, formulir instan, dan garansi risiko nol.' },
+                { id: 'lp_event_conf',        archetype: 'adaptive_studio',   name: 'Event, Conference & Webinar Registration',   desc: 'Halaman acara konferensi atau seminar daring dengan jadwal agenda sesi, profil pembicara (keynote), lokasi peta, dan registrasi tiket.' },
+                { id: 'lp_waitlist',          archetype: 'minimalist_hero',   name: 'Campaign & Pre-Order Waitlist Page',         desc: 'Halaman pra-peluncuran produk dengan hitung mundur (countdown), teaser visual eksklusif, dan formulir antrean pendaftaran VIP.' },
+                { id: 'lp_coming_soon',       archetype: 'minimalist_hero',   name: 'Coming Soon & Teaser Showcase',              desc: 'Halaman penahan peluncuran dengan visual sinematik animasi, bocoran fitur, dan kotak langganan email notifikasi peluncuran.' },
+                { id: 'lp_portfolio',         archetype: 'editorial_club',    name: 'Agency / Freelancer Portfolio One-Pager',    desc: 'Halaman portofolio satu halaman memamerkan studi kasus karya terbaik, klien ternama, video showreel, dan formulir konsultasi.' },
+                { id: 'lp_personal_brand',    archetype: 'editorial_club',    name: 'Personal Branding & Speaker Profile Page',   desc: 'Halaman personal brand profesional atau tokoh publik dengan headline kuat, video profil, testimonial klien, dan tautan sesi booking.' },
+                { id: 'lp_product_3d',        archetype: 'product_3d',        name: '3D Product Showcase Landing Page',            desc: 'Halaman pemasaran produk fisik premium dengan tampilan 3D interaktif 360°, animasi scroll, dan CTA pembelian instan.' },
+                { id: 'lp_app_promo',         archetype: 'minimalist_hero',   name: 'Mobile App Promotion Landing Page',          desc: 'Halaman promosi aplikasi mobile dengan mockup bingkai perangkat, fitur unggulan, tombol unduh App Store/Play Store, dan QR Code scan.' },
+                { id: 'lp_link_bio',          archetype: 'minimalist_hero',   name: 'Link-in-Bio & Social Tree Page',             desc: 'Halaman kartu tautan ringkas untuk bio media sosial merangkum portofolio, kanal YouTube, kontak WhatsApp, dan etalase produk.' },
+                { id: 'lp_ngo_cause',         archetype: 'adaptive_studio',   name: 'NGO, Charity & Social Cause Campaign Page',  desc: 'Halaman kampanye donasi dan gerakan sosial dengan counter donasi real-time, galeri dampak program, dan formulir donasi QRIS.' },
+                { id: 'lp_real_estate',       archetype: 'product_3d',        name: 'Real Estate & Property Showcase Page',       desc: 'Halaman pemasaran properti dengan galeri virtual tour 360°, tabel cicilan KPR kalkulasi, peta lokasi interaktif, dan formulir booking.' },
+                { id: 'lp_mining_services',   archetype: 'adaptive_studio',   name: '⛏ Mining Services & Contractor Tender Page', desc: 'Halaman pemasaran jasa kontraktor pertambangan: showcase fleet alat berat, rekam jejak proyek tambang, kalkulator estimasi biaya penawaran (cost per BCM/MT), dan formulir RFQ tender proyek.' },
+                { id: 'lp_webgl_immersive',   archetype: 'cinematic_webgl',   name: 'WebGL Immersive Brand Experience Page',      desc: 'Halaman brand experience sinematik menggunakan Three.js / WebGL dengan animasi scroll orbit, partikel, dan shader kustom.' },
+                { id: 'lp_game_launch',       archetype: 'interactive_game',  name: 'Game Launch & Interactive Teaser Page',      desc: 'Halaman peluncuran game dengan mini-interaksi playable, trailer video hero, leaderboard pendaftar awal, dan countdown server.' }
+            ]
+        },
+
+        company_profile: {
+            id: 'company_profile',
+            label: 'Company Profile',
+            badge: 'Branding & Kredibilitas',
+            icon: 'fa-solid fa-building',
             color: '#38BDF8',
-            desc: 'Platform publik untuk menampilkan informasi, memperkenalkan profil bisnis/jasa, membangun branding, atau menarik calon customer. Berorientasi pada presentasi dan konversi pengunjung.',
+            desc: 'Website representasi resmi perusahaan untuk membangun reputasi profesional, memaparkan lini bisnis, tim pimpinan, portofolio, dan legalitas perusahaan.',
             subtypes: [
-                { id: 'landing_page', name: 'Landing Page', desc: 'Halaman satu halaman yang fokus memperkenalkan produk, layanan, campaign, atau mengarahkan aksi konversi pengunjung.' },
-                { id: 'company_profile', name: 'Company Profile', desc: 'Website memperkenalkan profil perusahaan, sejarah, visi misi, jajaran tim, layanan unggulan, portofolio, dan kontak resmi.' },
-                { id: 'corporate_website', name: 'Corporate Website', desc: 'Website perusahaan multi-halaman dengan struktur informasi enterprise lengkap mencakup hubungan investor, karir, dan press release.' },
-                { id: 'business_website', name: 'Business Website', desc: 'Website memperkenalkan bisnis komersial, layanan, paket harga, lokasi cabang, dan media komunikasi customer.' },
-                { id: 'product_website', name: 'Product Website', desc: 'Website yang fokus mengulas detail satu produk spesifik, keunggulan teknis, fitur interaktif, dan ulasan pengguna.' },
-                { id: 'product_showcase', name: 'Product Showcase', desc: 'Website galeri visual yang memamerkan katalog koleksi produk dengan resolusi tinggi dan filter kategori interaktif.' },
-                { id: 'portfolio', name: 'Portfolio', desc: 'Website untuk menampilkan hasil karya, project case study, klien ternama, dan keahlian profesional.' },
-                { id: 'personal_website', name: 'Personal Website', desc: 'Website personal branding untuk mempublikasikan biodata, tulisan, riset, pencapaian, dan tautan sosial media.' },
-                { id: 'agency_website', name: 'Agency Website', desc: 'Website untuk digital agency, konsultan, atau studio kreatif yang menawarkan jasa profesional dan paket kolaborasi.' },
-                { id: 'startup_website', name: 'Startup Website', desc: 'Website teknologi modern memperkenalkan startup, value proposition, roadmap produk, dan ajakan mencoba demo/beta.' },
-                { id: 'event_website', name: 'Event Website', desc: 'Website khusus untuk promosi acara tertentu seperti seminar, workshop, festival, expo, atau perayaan.' },
-                { id: 'conference_website', name: 'Conference Website', desc: 'Website konferensi dengan agenda sesi, profil pembicara (keynote speakers), lokasi venue, jadwal, dan pendaftaran.' },
-                { id: 'campaign_website', name: 'Campaign Website', desc: 'Website publikasi khusus untuk campaign pemasaran, advokasi sosial, atau peluncuran produk musiman.' },
-                { id: 'marketing_website', name: 'Marketing Website', desc: 'Website yang dioptimasi untuk lead generation, sales funnel, conversion capture, dan integrasi tracking analitik.' },
-                { id: 'blog', name: 'Blog', desc: 'Platform publikasi artikel, opini, panduan praktis, dan catatan berkala dengan kategorisasi tag dan fitur komentar.' },
-                { id: 'magazine', name: 'Magazine', desc: 'Media publikasi berita dan artikel bergaya majalah editorial dengan featured story, kolom redaksi, dan multi-kategori.' },
-                { id: 'news_website', name: 'News Website', desc: 'Portal berita daring terkini dengan feed breaking news, kategori topik, liputan mendalam, dan pencarian arsip berita.' },
-                { id: 'documentation_website', name: 'Documentation Website', desc: 'Website panduan teknis, dokumentasi software, API reference dengan syntax highlighting, dan search bar cepat.' },
-                { id: 'knowledge_base', name: 'Knowledge Base', desc: 'Pusat bantuan mandiri berisi artikel FAQ, tutorial cara penggunaan, panduan perbaikan kendala, dan kolom pencarian.' },
-                { id: 'community_website', name: 'Community Website', desc: 'Portal komunitas untuk berbagi agenda meetup, forum diskusi, berita anggota, dan kegiatan bersama.' },
-                { id: 'educational_website', name: 'Educational Website', desc: 'Website institusi pendidikan yang menyediakan informasi akademik, kurikulum, silabus, dan materi belajar terbuka.' },
-                { id: 'school_website', name: 'School Website', desc: 'Website resmi sekolah yang menampilkan profil, program ekstrakurikuler, kalender akademik, guru, dan pengumuman.' },
-                { id: 'university_website', name: 'University Website', desc: 'Website perguruan tinggi mencakup informasi fakultas, program studi, admisi mahasiswa baru, dan riset ilmiah.' },
-                { id: 'course_website', name: 'Course Website', desc: 'Website penyedia informasi kursus pelatihan, materi silabus, instruktur, jadwal kelas, dan testimoni alumni.' },
-                { id: 'restaurant_website', name: 'Restaurant Website', desc: 'Website restoran & kafe menampilkan buku menu visual, daftar harga, lokasi peta, jam operasional, dan galeri suasana.' },
-                { id: 'hotel_website', name: 'Hotel Website', desc: 'Website hotel & resort menampilkan tipe kamar, fasilitas kolam/spa, lokasi wisata terdekat, dan informasi kontak.' },
-                { id: 'travel_website', name: 'Travel Website', desc: 'Website agen perjalanan yang menyajikan paket tur wisata, rekomendasi destinasi populer, itinerary perjalanan, dan tips.' },
-                { id: 'real_estate_website', name: 'Real Estate Website', desc: 'Website agen properti untuk listing rumah, apartemen, tanah dengan filter lokasi, luas, spesifikasi, dan virtual tour.' },
-                { id: 'property_showcase', name: 'Property Showcase', desc: 'Website presentasi eksklusif untuk proyek perumahan atau gedung baru lengkap dengan masterplan dan brosur.' },
-                { id: 'service_website', name: 'Service Website', desc: 'Website penyedia jasa spesialis (hukum, medis, desain, perbaikan) memaparkan cakupan layanan dan konsultasi.' },
-                { id: 'non_profit_website', name: 'Non-Profit Website', desc: 'Website lembaga nirlaba, yayasan sosial, atau program kemanusiaan memaparkan misi, dampak, dan laporan donasi.' },
-                { id: 'government_website', name: 'Government Website', desc: 'Website instansi pemerintah untuk transparansi publik, layanan perizinan terpadu, regulasi resmi, dan berita daerah.' },
-                { id: 'job_career_website', name: 'Job / Career Website', desc: 'Portal informasi lowongan karir perusahaan, budaya kerja, benefit karyawan, dan formulir resume.' },
-                { id: 'recruitment_website', name: 'Recruitment Website', desc: 'Website agensi perekrutan tenaga kerja untuk menghubungkan talenta profesional dengan lowongan klien mitra.' },
-                { id: 'coming_soon_page', name: 'Coming Soon Page', desc: 'Halaman penahan peluncuran produk dengan countdown timer, teaser visual, dan formulir waitlist.' },
-                { id: 'link_in_bio_website', name: 'Link-in-Bio Website', desc: 'Halaman ringkas yang merangkum seluruh tautan penting, portofolio, dan kontak dalam satu URL.' },
-                { id: 'custom_website', name: 'Custom Website', desc: 'Website publik dengan kebutuhan khusus, desain artistik non-standar, atau format presentasi khusus.' }
+                { id: 'cp_corporate',         archetype: 'editorial_club',    name: 'Corporate Enterprise Website',               desc: 'Profil perusahaan skala besar mencakup sejarah, visi-misi, tata kelola (GCG), hubungan investor, dan siaran pers resmi.' },
+                { id: 'cp_creative_agency',   archetype: 'adaptive_studio',   name: 'Creative Agency & Design Studio Profile',    desc: 'Profil studio desain dan agensi periklanan dengan tata letak visual artistik, filosofi desain, dan penghargaan internasional.' },
+                { id: 'cp_b2b_industrial',    archetype: 'editorial_club',    name: 'B2B Industrial, Heavy Equipment & Mining',   desc: 'Profil perusahaan kontraktor tambang, alat berat, atau manufaktur industri dengan daftar armada unit, sertifikasi ISO, dan kontak RFQ.' },
+                { id: 'cp_tech_startup',      archetype: 'adaptive_studio',   name: 'Tech Startup & Scale-up Profile',            desc: 'Profil perusahaan rintisan teknologi memaparkan visi pendiri, solusi inovasi industri, budaya kerja tim, dan lowongan karir terbuka.' },
+                { id: 'cp_architecture',      archetype: 'editorial_club',    name: 'Architecture, Interior & Construction Firm', desc: 'Profil biro arsitektur dan konstruksi dengan galeri foto proyek resolusi tinggi, denah blueprint, dan form konsultasi rancang bangun.' },
+                { id: 'cp_law_firm',          archetype: 'editorial_club',    name: 'Law Firm, Notary & Legal Services',          desc: 'Profil kantor hukum dan notariat dengan bidang spesialisasi perkara, kredensial advokat senior, dan sistem janji temu konsultasi.' },
+                { id: 'cp_healthcare',        archetype: 'editorial_club',    name: 'Healthcare Clinic & Specialist Center',      desc: 'Profil klinik kesehatan dan rumah sakit spesialis dengan profil dokter, jadwal praktik, fasilitas rawat, dan kontak darurat.' },
+                { id: 'cp_education',         archetype: 'editorial_club',    name: 'School, University & Academic Institution',  desc: 'Profil lembaga pendidikan resmi memaparkan fakultas/jurusan, kalender akademik, fasilitas laboratorium, dan admisi siswa baru.' },
+                { id: 'cp_hospitality',       archetype: 'product_3d',        name: 'Hotel, Resort & Luxury Villa Showcase',      desc: 'Profil resort dan vila mewah menyajikan galeri kamar, fasilitas kolam/spa, pengalaman kuliner, dan panduan lokasi wisata.' },
+                { id: 'cp_restaurant',        archetype: 'editorial_club',    name: 'Restaurant, Cafe & F&B Establishment',       desc: 'Profil restoran dan kedai kuliner menampilkan buku menu digital, profil koki (chef), suasana interior, dan reservasi meja.' },
+                { id: 'cp_logistics',         archetype: 'editorial_club',    name: 'Logistics, Shipping & Freight Forwarder',    desc: 'Profil perusahaan logistik dan ekspedisi dengan rute pelayanan armada, kalkulator tarif pengiriman, dan pelacak resi.' },
+                { id: 'cp_nonprofit',         archetype: 'adaptive_studio',   name: 'NGO, Foundation & Social Organization',      desc: 'Profil organisasi nirlaba dan yayasan dengan laporan dampak program, galeri kegiatan, dan transparansi keuangan donasi.' },
+                { id: 'cp_energy_mining',     archetype: 'editorial_club',    name: 'Energy, Mining & Natural Resources Company', desc: 'Profil perusahaan energi dan pertambangan dengan peta konsesi lahan, kapasitas produksi, sertifikasi AMDAL, dan kontak investor.' },
+                { id: 'cp_coal_mining',       archetype: 'editorial_club',    name: '⛏ Coal Mining Company Profile (PKP2B/IUP)',  desc: 'Profil perusahaan tambang batubara PKP2B/IUP dengan peta konsesi Kalimantan/Sumatera, laporan produksi tahunan (MT), spesifikasi kualitas produk batubara (GCV/TS), sertifikasi ESDM, dan investor relations.' },
+                { id: 'cp_nickel_smelter',    archetype: 'editorial_club',    name: '⚙ Nickel Mining & Smelting Company Profile',  desc: 'Profil perusahaan tambang dan pengolahan nikel dengan kapasitas produksi NPI/FeNi/MHP, peta blok ore Sulawesi/Maluku, RKEF line facility, sertifikasi PROPER Hijau, dan milestone ekspor.' },
+                { id: 'cp_mining_contractor', archetype: 'editorial_club',    name: '🚛 Mining Contractor & Earthwork Services',   desc: 'Profil kontraktor pertambangan dan earthwork dengan daftar fleet alat berat (DT/HD/Excavator/Dozer), rekam jejak proyek, sertifikasi ISO 9001/14001/45001, dan formulir tender RFQ.' },
+                { id: 'cp_portfolio_studio',  archetype: 'cinematic_webgl',   name: 'Portfolio Studio – WebGL Immersive Branding', desc: 'Profil studio kreatif premium dengan pengalaman scrolling sinematik WebGL, karya dalam 3D canvas, dan cursor interaktif.' }
             ]
         },
 
-        management: {
-            id: 'management',
-            label: 'Management WebApp',
-            badge: 'Operasional & Workflow',
-            icon: 'fa-solid fa-list-check',
-            color: '#818CF8',
-            desc: 'Aplikasi internal untuk mengelola operasional, database master, alur kerja (workflow), tugas tim, KPI eksekutif, dan laporan periodik. Memiliki peran (role-based access), autentikasi, dashboard, tabel data CRUD, dan reporting.',
-            subtypes: [
-                // AI & Intelligent Automation
-                { id: 'ai_agent', name: 'AI Agent & Autonomous Workflow Hub', desc: 'Platform AI Agent otonom berbasis penalaran LLM, otomatisasi posting media sosial (FB/IG), chatbot interaktif, dan integrasi API lokal.' },
-                { id: 'automation_engine', name: 'Automation & Bot Hub', desc: 'Sistem otomasi webhook, cron scheduling, scraping/crawling, dan integrasi multi-channel bot mandiri.' },
-                { id: 'ai_content_studio', name: 'AI Content & Media Studio', desc: 'Studio pembuatan konten artikel, copywriting, transkripsi suara, dan gambar berbasis AI multi-model.' },
-                { id: 'chatbot_assistant', name: 'Smart Chatbot & Knowledge Hub', desc: 'Chatbot asisten AI interaktif dengan memori kontekstual multi-turn, integrasi basis pengetahuan, dan webhook multi-platform.' },
-
-                // Developer Tools & API Studio
-                { id: 'developer_tools', name: 'Developer Tools & API Studio', desc: 'Studio pengujian API, prompt sandbox, webhook inspector, dan manajemen token kredensial mandiri.' },
-                { id: 'api_studio', name: 'API Testing & Mock Server Studio', desc: 'Platform pengujian REST/GraphQL API, generator mock response, inspeksi payload webhook, dan dokumentasi interaktif.' },
-                { id: 'database_gui', name: 'Database Explorer & Query Studio', desc: 'Antarmuka web manajemen basis data SQLite/MySQL, query builder interaktif, skema visualizer, dan ekspor data.' },
-                { id: 'code_sandbox', name: 'Online Code Sandbox & Playground', desc: 'Lingkungan eksekusi kode terisolasi di browser untuk uji coba snippet bahasa pemrograman, regex, dan algoritma.' },
-                { id: 'scraper_crawler', name: 'Web Scraper & Data Extractor Hub', desc: 'Sistem ekstraksi data web terjadwal, parsing HTML, monitoring perubahan konten situs, dan ekspor JSON/CSV.' },
-
-                // Community, Forum & Social Platform
-                { id: 'community_forum', name: 'Community Forum & Q&A Platform', desc: 'Platform diskusi komunitas terstruktur dengan thread topik, sistem voting up/down, moderasi konten, dan lencana reputasi.' },
-                { id: 'social_network', name: 'Social Feed & Creator Platform', desc: 'Platform jejaring sosial dengan feed linimasa, sistem pertemanan/follow, postingan media interaktif, dan notifikasi.' },
-                { id: 'streaming_media', name: 'Audio/Video Streaming & Podcast Hub', desc: 'Platform pemutaran konten multimedia, manajemen katalog podcast/video, playlist interaktif, dan analitik pendengar.' },
-
-                // Education & E-Learning (LMS / EdTech)
-                { id: 'lms_learning', name: 'LMS (Learning Management System)', desc: 'Platform pembelajaran digital terstruktur dengan kurikulum modul, tracking progres siswa, penugasan, dan sertifikat kelulusan.' },
-                { id: 'quiz_exam_portal', name: 'CBT Exam & Quiz Portal', desc: 'Sistem ujian online berbasis komputer (CBT) dengan timer otomatis, acak soal, anti-kecurangan, dan rekap nilai instan.' },
-                { id: 'course_portal', name: 'Online Video Course Dashboard', desc: 'Portal kursus video interaktif dengan bab materi, forum tanya jawab per materi, lampiran modul unduh, dan rating ulasan.' },
-
-                // Finance, FinTech, POS & Accounting
-                { id: 'pos_cashier', name: 'POS (Point of Sale) & Cashier Hub', desc: 'Sistem kasir penjualan toko fisik dengan barcode scanner, cetak struk termal, manajemen kas laci, dan split payment.' },
-                { id: 'crypto_web3', name: 'Web3 Wallet & Crypto Asset Tracker', desc: 'Platform pelacakan portofolio aset kripto, monitor harga realtime, integrasi smart contract, dan riwayat on-chain.' },
-
-                // IoT & Smart Telemetry
-                { id: 'iot_monitoring', name: 'IoT Telemetry & Realtime Sensor Hub', desc: 'Dashboard monitoring sensor IoT realtime (suhu, kelembapan, tegangan, GPS), alert ambang batas, dan visualisasi grafik live.' },
-                { id: 'smart_home_hub', name: 'Smart Device Automation Controller', desc: 'Pusat kendali otomatisasi perangkat pintar rumah/gedung dengan penjadwalan waktu, skenario otomatis, dan switch kendali.' },
-
-                // Operations & Core ERP
-                { id: 'cmms', name: 'CMMS (Computerized Maintenance Management)', desc: 'Sistem komprehensif manajemen maintenance aset pabrik/alat berat, inventory sparepart, jadwal servis berkala, dan tracking MTBF/MTTR.' },
-                { id: 'maintenance_management', name: 'Maintenance Management', desc: 'Mengelola aktivitas pemeliharaan unit/aset, work order, jadwal preventive maintenance, corrective breakdown, dan histori perbaikan.' },
-                { id: 'asset_management', name: 'Asset Management', desc: 'Mengelola siklus hidup aset perusahaan dari pengadaan, mutasi lokasi, penanggung jawab, jadwal depresiasi nilai, hingga disposal.' },
-                { id: 'equipment_management', name: 'Equipment Management', desc: 'Memantau kesiapan operasional alat kerja, hour meter (HM) / kilometer (KM), histori servis, dan status ketersediaan unit.' },
-                { id: 'fleet_management', name: 'Fleet Management', desc: 'Manajemen armada kendaraan operasional, penugasan pengemudi, monitoring BBM, jadwal uji KIR, dan histori rute perjalanan.' },
-                { id: 'inventory_management', name: 'Inventory Management', desc: 'Mengelola stok barang, batas minimum stok (safety stock), penerimaan (receiving), pengeluaran (issuing), dan audit stock opname.' },
-                { id: 'warehouse_management', name: 'Warehouse Management (WMS)', desc: 'Mengatur operasional gudang, tata letak rak (bin location), proses inbound receiving, picking, packing, dan transfer antargudang.' },
-                { id: 'sparepart_management', name: 'Sparepart Management', desc: 'Manajemen katalog suku cadang, part number cross-reference, fast/slow moving analysis, dan pengadaan ulang otomatis.' },
-                { id: 'procurement_management', name: 'Procurement Management', desc: 'Mengelola proses pengadaan barang dan jasa dari Purchase Requisition (PR), Request for Quotation (RFQ), hingga Purchase Order (PO).' },
-                { id: 'purchasing_management', name: 'Purchasing Management', desc: 'Manajemen order pembelian, verifikasi tagihan vendor, tracking status pengiriman barang, dan rekonsiliasi tiga arah (3-way match).' },
-                { id: 'vendor_management', name: 'Vendor Management', desc: 'Database rekanan vendor, evaluasi performa supplier, verifikasi dokumen legalitas (SIUP/NPWP), dan rekam jejak pengiriman.' },
-                { id: 'supplier_management', name: 'Supplier Management', desc: 'Manajemen rantai pasok dari pemasok utama, evaluasi harga pasaran, kapasitas pasokan, dan negosiasi kontrak berkala.' },
-                { id: 'contract_management', name: 'Contract Management', desc: 'Mengelola kontrak bisnis & vendor, masa berlaku, milestone pembayaran, klausul amandemen, dan notifikasi perpanjangan otomatis.' },
-                { id: 'project_management', name: 'Project Management', desc: 'Perencanaan proyek, alokasi tim, estimasi anggaran, milestone timeline Gantt chart, tracking isu, dan persentase progres aktual.' },
-                { id: 'task_management', name: 'Task Management', desc: 'Distribusi penugasan harian anggota tim, prioritas pekerjaan, tenggat waktu (deadline), checklist sub-tugas, dan papan Kanban.' },
-                { id: 'document_management', name: 'Document Management (DMS)', desc: 'Penyimpanan arsip dokumen digital terpusat, pengindeksan metadata, kontrol versi file (versioning), dan hak akses rahasia.' },
-                { id: 'employee_management', name: 'Employee Management', desc: 'Pangkalan data karyawan perusahaan, riwayat jabatan, penempatan divisi, dokumen pribadi, dan histori karir internal.' },
-                { id: 'hr_management', name: 'HR Management (HRIS)', desc: 'Sistem terpadu HR mengelola data karyawan, absensi, cuti, klaim kesehatan, penilaian performa, hingga penggajian.' },
-                { id: 'recruitment_management', name: 'Recruitment Management (ATS)', desc: 'Pelacakan proses rekrutmen kandidat dari lamaran masuk, screening berkas, jadwal wawancara, tes kompetensi, hingga offering.' },
-                { id: 'attendance_management', name: 'Attendance Management', desc: 'Pencatatan presensi kehadiran karyawan, absensi berbasis lokasi/foto, pengaturan jadwal shift kerja, dan rekapitulasi lembur.' },
-                { id: 'leave_management', name: 'Leave Management', desc: 'Sistem pengajuan izin & cuti online, kuota saldo cuti tahunan, alur persetujuan bertingkat, dan kalender ketersediaan staf.' },
-                { id: 'training_management', name: 'Training Management', desc: 'Perencanaan program pelatihan skill karyawan, pendaftaran peserta, materi pembelajaran, evaluasi pre/post test, dan sertifikasi.' },
-                { id: 'performance_management', name: 'Performance Management (KPI / OKR)', desc: 'Penyusunan target Key Performance Indicators (KPI) & OKR, evaluasi kinerja 360 derajat, dan kalkulasi bonus prestasi.' },
-                { id: 'hse_management', name: 'HSE Management (K3LH)', desc: 'Pengelolaan keselamatan kerja (Health, Safety & Environment), pelaporan temuan hazard (unsafe act/condition), dan audit lingkungan.' },
-                { id: 'safety_management', name: 'Safety Management', desc: 'Sistem observasi keselamatan kerja, safety talk harian, kepatuhan APD, dan dokumentasi inspeksi berkala.' },
-                { id: 'incident_management', name: 'Incident Management', desc: 'Pelaporan insiden kecelakaan kerja atau kerusakan aset, investigasi akar masalah (Root Cause), dan tindakan perbaikan (CAPA).' },
-                { id: 'inspection_management', name: 'Inspection Management', desc: 'Formulir inspeksi kelayakan peralatan (P2H), checklist kepatuhan standar, pencatatan deviasi, dan histori inspektur.' },
-                { id: 'permit_management', name: 'Permit Management (Surat Izin Kerja)', desc: 'Pengajuan dan otorisasi Izin Kerja Aman (JSA / Permit to Work - Hot Work, Working at Height, Confined Space).' },
-                { id: 'production_management', name: 'Production Management', desc: 'Perencanaan jadwal produksi pabrik, Bill of Materials (BOM), monitoring output aktual vs target harian, dan analisis OEE.' },
-                { id: 'operations_management', name: 'Operations Management', desc: 'Pengendalian alur kerja operasional harian, koordinasi antar divisi, monitoring SLA, dan penanganan hambatan operasional.' },
-                { id: 'sales_management', name: 'Sales Management', desc: 'Monitoring pipeline penjualan tim sales, target kuota berkala, konversi peluang (leads), dan rekonsiliasi komisi penjualan.' },
-                { id: 'customer_management_crm', name: 'Customer Management / CRM', desc: 'Penyimpanan database klien pelanggan, log interaksi komunikasi, follow-up prospek, dan histori transaksi pelanggan.' },
-                { id: 'service_management', name: 'Service Management', desc: 'Manajemen permintaan layanan purna jual, penugasan teknisi lapangan, Service Level Agreement (SLA), dan berita acara servis.' },
-                { id: 'ticket_helpdesk_management', name: 'Ticket / Helpdesk Management', desc: 'Sistem antrean tiket keluhan pengguna, eskalasi penanganan masalah IT/layanan, prioritas kendala, dan survey kepuasan.' },
-                { id: 'complaint_management', name: 'Complaint Management', desc: 'Pencatatan komplain pelanggan atau internal, alokasi tim investigasi, histori penyelesaian, dan pencegahan masalah berulang.' },
-                { id: 'expense_management', name: 'Expense Management', desc: 'Pengajuan klaim penggantian biaya operasional (reimbursement), unggah bukti struk, dan persetujuan pengeluaran dana.' },
-                { id: 'budget_management', name: 'Budget Management', desc: 'Penyusunan anggaran belanja tahunan per divisi (CAPEX/OPEX), pemantauan realisasi penyerapan dana, dan kontrol over-budget.' },
-                { id: 'finance_management', name: 'Finance Management', desc: 'Manajemen arus kas operasional (cash flow), pencatatan akun bank, rekonsiliasi mutasi rekening, dan laporan neraca keuangan.' },
-                { id: 'accounting_management', name: 'Accounting Management', desc: 'Sistem pembukuan akuntansi ganda (double-entry), bagan akun (Chart of Accounts), jurnal umum, buku besar, dan neraca lajur.' },
-                { id: 'invoice_management', name: 'Invoice Management', desc: 'Pembuatan faktur penagihan resmi ke klien, penghitungan PPN/PPh, tracking status jatuh tempo pembayaran, dan reminder otomatis.' },
-                { id: 'payroll_management', name: 'Payroll Management', desc: 'Perhitungan gaji bersih karyawan, tunjangan jabatan, potongan BPJS/Pph 21, lembur, dan pencetakan slip gaji digital resmi.' },
-                { id: 'logistics_management', name: 'Logistics Management', desc: 'Manajemen pergerakan pengiriman barang kargo, pemilihan moda transportasi, surat jalan resmi, dan tracking status shipment.' },
-                { id: 'delivery_management', name: 'Delivery Management', desc: 'Pengaturan penugasan kurir pengantar, optimasi urutan rute antar, bukti terima barang (Proof of Delivery), dan monitoring armada.' },
-                { id: 'visitor_management', name: 'Visitor Management', desc: 'Registrasi tamu kunjungan gedung/pabrik, cetak badge tamu identitas, pencatatan waktu masuk/keluar, dan verifikasi tuan rumah.' },
-                { id: 'membership_management', name: 'Membership Management', desc: 'Database anggota organisasi/klub, status keaktifan masa berlaku, tingkatan tier benefit keanggotaan, dan kartu anggota digital.' },
-                { id: 'content_management', name: 'Content Management (CMS)', desc: 'Pengelolaan konten artikel, banner pengumuman, media galeri, dan publikasi informasi untuk portal internal.' },
-                { id: 'workflow_management', name: 'Workflow Management', desc: 'Perancangan alur kerja otomatis multi-tahap, penentuan kondisi percabangan logika, dan monitoring kelancaran proses bisnis.' },
-                { id: 'approval_management', name: 'Approval Management', desc: 'Pusat otorisasi dokumen terpadu dari berbagai divisi dengan tanda tangan digital dan histori jejak audit (audit trail).' },
-                { id: 'reporting_management', name: 'Reporting Management', desc: 'Pusat pembuatan laporan operasional berkala, kustomisasi parameter filter data, dan ekspor instan ke format PDF / Excel.' },
-                { id: 'custom_management_app', name: 'Custom Management App', desc: 'Aplikasi pengelolaan proses bisnis unik dengan aturan kerja spesifik yang menggabungkan berbagai modul kustom.' }
-            ]
-        },
-
-        game: {
-            id: 'game',
-            label: 'Game WebApp',
-            badge: 'Game & Interaktif',
-            icon: 'fa-solid fa-gamepad',
-            color: '#F59E0B',
-            desc: 'Aplikasi berbasis web yang berfokus pada pengalaman bermain, kompetisi, dan hiburan interaktif. Mencakup game browser HTML5 Canvas/WebGL, game multiplayer, simulasi, puzzle, edugame, dan dashboard skor.',
-            subtypes: [
-                { id: 'browser_game', name: 'Browser Game (HTML5)', desc: 'Game yang dimainkan langsung di browser tanpa instalasi, menggunakan HTML5 Canvas/WebGL untuk rendering 2D/3D yang responsif.' },
-                { id: 'puzzle_game', name: 'Puzzle Game', desc: 'Game teka-teki berbasis logika, pola, kata, atau angka yang menantang kemampuan berpikir pemain secara bertahap.' },
-                { id: 'arcade_game', name: 'Arcade Game', desc: 'Game aksi cepat bergaya arkade klasik dengan sistem poin, nyawa, dan tingkat kesulitan yang terus meningkat.' },
-                { id: 'word_game', name: 'Word & Trivia Game', desc: 'Game berbasis kata, kuis, teka-teki bahasa, atau trivia pengetahuan umum dengan timer dan sistem skor.' },
-                { id: 'card_game', name: 'Card & Board Game', desc: 'Permainan kartu atau papan digital seperti solitaire, uno, catur, atau domino yang dapat dimainkan solo/multiplayer.' },
-                { id: 'casual_game', name: 'Casual Game', desc: 'Game santai berdurasi pendek yang mudah dimainkan oleh semua usia, dengan mekanik sederhana dan feedback instan.' },
-                { id: 'idle_clicker_game', name: 'Idle / Clicker Game', desc: 'Game inkremental di mana pemain mengakumulasi sumber daya secara pasif atau dengan klik berulang dan upgrade otomatis.' },
-                { id: 'strategy_game', name: 'Strategy Game', desc: 'Game taktik dan perencanaan jangka panjang yang melibatkan pengelolaan sumber daya, pasukan, atau wilayah.' },
-                { id: 'simulation_game', name: 'Simulation Game', desc: 'Game simulasi kehidupan, bisnis, kota, atau profesional yang mereplikasi aktivitas nyata dalam lingkungan virtual.' },
-                { id: 'rpg_game', name: 'RPG (Role-Playing Game)', desc: 'Game peran dengan sistem karakter, level up, skill tree, cerita bercabang, dan eksplorasi dunia yang mendalam.' },
-                { id: 'adventure_game', name: 'Adventure Game', desc: 'Game petualangan dengan narasi kuat, eksplorasi peta, teka-teki lingkungan, dan dialog pilihan yang mempengaruhi cerita.' },
-                { id: 'platformer_game', name: 'Platformer Game', desc: 'Game lompat-lompat (side-scroller atau vertikal) dengan rintangan, koleksi item, dan boss fight di setiap level.' },
-                { id: 'tower_defense_game', name: 'Tower Defense Game', desc: 'Game strategi di mana pemain menempatkan menara pertahanan untuk menghentikan gelombang musuh yang terus menguat.' },
-                { id: 'racing_game', name: 'Racing Game', desc: 'Game balap kendaraan atau karakter dengan jalur, kecepatan, drift, upgrade, dan mode time-trial maupun multiplayer.' },
-                { id: 'sports_game', name: 'Sports Game', desc: 'Simulasi olahraga seperti sepak bola, basket, atau tenis dengan kontrol realistis, mode liga, dan statistik pemain.' },
-                { id: 'fighting_game', name: 'Fighting Game', desc: 'Game pertarungan satu lawan satu atau tim dengan combo skill, health bar, dan karakter unik yang dapat di-unlock.' },
-                { id: 'shooter_game', name: 'Shooter Game', desc: 'Game tembak-tembakan perspektif orang pertama atau atas (top-down) dengan sistem aim, amunisi, dan cover.' },
-                { id: 'horror_game', name: 'Horror & Survival Game', desc: 'Game bertemakan ketakutan dan kelangsungan hidup dengan atmosfer mencekam, manajemen resource terbatas, dan event acak.' },
-                { id: 'multiplayer_game', name: 'Multiplayer Online Game', desc: 'Game yang dimainkan bersama banyak pemain secara real-time melalui WebSocket, dengan room, matchmaking, dan chat.' },
-                { id: 'turn_based_game', name: 'Turn-Based Game', desc: 'Game berbasis giliran di mana setiap pemain/AI melakukan aksi bergantian, meliputi strategi, RPG, dan board game.' },
-                { id: 'educational_game', name: 'Educational Game (Edugame)', desc: 'Game edukatif yang mengintegrasikan pembelajaran kurikulum ke dalam mekanik permainan yang menyenangkan dan efektif.' },
-                { id: 'quiz_game_platform', name: 'Quiz Game Platform', desc: 'Platform kuis interaktif berbasis gamifikasi seperti Kahoot! untuk kelas atau event dengan live leaderboard.' },
-                { id: 'memory_game', name: 'Memory & Cognitive Game', desc: 'Game melatih memori, konsentrasi, dan kecepatan respons dengan pola, urutan warna, atau pasangan kartu.' },
-                { id: 'math_game', name: 'Math & Logic Game', desc: 'Game berbasis matematika, logika, atau komputasi untuk melatih kemampuan numerik dengan sistem reward berjenjang.' },
-                { id: 'language_game', name: 'Language Learning Game', desc: 'Game pembelajaran bahasa (seperti Duolingo) dengan streak harian, vocabulary building, dan tantangan grammar.' },
-                { id: 'clicker_adventure', name: 'Clicker Adventure (Story-RPG)', desc: 'Perpaduan idle clicker dengan narasi RPG: pemain klik untuk maju dalam cerita, upgrade hero, dan buka chapter baru.' },
-                { id: 'sandbox_game', name: 'Sandbox / Creative Game', desc: 'Game berbasis dunia terbuka di mana pemain bebas membangun, berkreasi, atau bereksperimen tanpa tujuan linear.' },
-                { id: 'escape_room_game', name: 'Escape Room Game', desc: 'Game teka-teki berbasis ruangan virtual di mana pemain memecahkan clue untuk "melarikan diri" dalam batas waktu.' },
-                { id: 'gacha_game', name: 'Gacha / Collection Game', desc: 'Game koleksi karakter atau item berbasis random draw dengan sistem pull, rarity tier, dan battle menggunakan koleksi.' },
-                { id: 'mmo_rpg', name: 'MMO / Massif Multiplayer Browser', desc: 'Game multipemain masif berbasis browser dengan dunia persisten, guild, crafting, PvP, dan ekonomi in-game.' },
-                { id: 'farming_game', name: 'Farming & Life Simulation', desc: 'Simulasi pertanian, berkebun, atau kehidupan desa dengan siklus musim, hewan peliharaan, dan komunitas NPC.' },
-                { id: 'esports_platform', name: 'eSports Tournament Platform', desc: 'Platform kompetisi gaming dengan bracket tournament, live score, registrasi tim, dan streaming highlights.' },
-                { id: 'game_dashboard', name: 'Game Hub & Dashboard', desc: 'Platform manajemen game yang menampilkan statistik pemain, achievement, leaderboard global, dan riwayat match.' },
-                { id: 'game_marketplace', name: 'Game Marketplace & Distribution', desc: 'Platform distribusi game indie dengan toko, review sistem, pembelian lisensi, unduhan, dan wishlist.' },
-                { id: 'custom_game_app', name: 'Custom Game WebApp', desc: 'Aplikasi game web dengan mekanik unik, genre hybrid, atau gameplay eksperimental yang tidak masuk kategori standar.' }
-            ]
-        },
-
-        transaction: {
-            id: 'transaction',
-            label: 'Transaction WebApp',
-            badge: 'Order & Transaksi',
+        e_commerce: {
+            id: 'e_commerce',
+            label: 'E-Commerce',
+            badge: 'Katalog, Cart & Transaksi',
             icon: 'fa-solid fa-cart-shopping',
             color: '#10B981',
-            desc: 'Aplikasi yang berorientasi pada proses transaksi keuangan & layanan antara pembeli/pelanggan dan penyedia. Berfokus pada alur belanja: eksplorasi katalog → keranjang (cart) → checkout → pembayaran → invoice/receipt.',
+            desc: 'Aplikasi transaksi perdagangan komersial lengkap dari etalase katalog barang, keranjang belanja (cart drawer), checkout multi-metode, hingga invoice dan kwitansi resmi.',
             subtypes: [
-                { id: 'e_commerce', name: 'E-Commerce', desc: 'Platform toko daring retail lengkap dari etalase produk, keranjang belanja, kalkulator ongkir kurir, payment gateway, hingga nomor resi.' },
-                { id: 'online_store', name: 'Online Store (Direct-to-Consumer)', desc: 'Toko online resmi satu brand untuk menjual produk fisik atau jasa langsung ke customer tanpa perantara pihak ketiga.' },
-                { id: 'marketplace', name: 'Marketplace Multi-Vendor', desc: 'Platform yang mempertemukan banyak penjual independen dengan ribuan pembeli dengan sistem rekening bersama (escrow).' },
-                { id: 'b2b_marketplace', name: 'B2B Marketplace', desc: 'Marketplace khusus transaksi grosir antar bisnis dengan fitur minimum order quantity (MOQ), penawaran harga, dan termin tempo.' },
-                { id: 'b2c_marketplace', name: 'B2C Marketplace', desc: 'Marketplace komersial yang memfasilitasi transaksi langsung dari mitra distributor/toko resmi ke konsumen retail.' },
-                { id: 'booking_system', name: 'Booking System', desc: 'Sistem pemesanan layanan atau fasilitas dengan pemilihan slot waktu luang, konfirmasi otomatis, dan deposit pembayaran.' },
-                { id: 'reservation_system', name: 'Reservation System', desc: 'Sistem reservasi meja makan, ruangan VIP, atau tempat duduk acara dengan denah interaktif dan verifikasi DP.' },
-                { id: 'appointment_system', name: 'Appointment System', desc: 'Sistem penjadwalan janji temu konsultasi dokter/profesional, sinkronisasi kalender, dan reminder WhatsApp.' },
-                { id: 'rental_system', name: 'Rental System', desc: 'Sistem persewaan barang/fasilitas dengan perhitungan durasi sewa harian/bulanan, uang jaminan (deposit), dan denda keterlambatan.' },
-                { id: 'equipment_rental', name: 'Equipment Rental', desc: 'Sistem khusus transaksi penyewaan alat berat atau perkakas kerja proyek dengan kontrak sewa, mobilisasi unit, dan log HM.' },
-                { id: 'vehicle_rental', name: 'Vehicle Rental', desc: 'Sistem rental mobil/motor dengan opsi lepas kunci atau sopir, verifikasi SIM/KTP, jadwal ketersediaan, dan asuransi.' },
-                { id: 'property_rental', name: 'Property Rental', desc: 'Platform sewa hunian/kantor (indekos, vila, apartemen) dengan sistem sewa bulanan, tagihan utilitas berkala, dan deposit.' },
-                { id: 'ticketing_system', name: 'Ticketing System', desc: 'Sistem penjualan tiket masuk tempat wisata, hiburan, atau transportasi dengan penerbitan e-ticket ber-QR Code resmi.' },
-                { id: 'event_ticketing', name: 'Event Ticketing', desc: 'Penjualan tiket konser musik, seminar, atau pameran dengan variasi tier kategori (VIP/Festival), kuota kursi, dan gerbang scan.' },
-                { id: 'travel_booking', name: 'Travel Booking', desc: 'Sistem pemesanan paket perjalanan tur komprehensif mencakup akomodasi, transportasi, pemandu wisata, dan jadwal perjalanan.' },
-                { id: 'hotel_booking', name: 'Hotel Booking', desc: 'Sistem reservasi kamar hotel dengan pemilihan tanggal check-in/out, opsi sarapan, tipe tempat tidur, dan cetak voucher.' },
-                { id: 'flight_booking', name: 'Flight Booking', desc: 'Sistem reservasi tiket penerbangan dengan pemilihan rute asal-tujuan, nomor kursi, bagasi tambahan, dan paspor.' },
-                { id: 'restaurant_booking', name: 'Restaurant Booking', desc: 'Sistem reservasi meja restoran dengan opsi pre-order menu makanan, area (indoor/outdoor), dan konfirmasi SMS/WA.' },
-                { id: 'service_booking', name: 'Service Booking', desc: 'Sistem pemesanan jasa reparasi/kebersihan/kecantikan di lokasi pelanggan dengan pemilihan tanggal dan spesialis layanan.' },
-                { id: 'sales_order_system', name: 'Sales Order System', desc: 'Sistem pembuatan dan konfirmasi sales order oleh pelanggan dengan pemilihan metode pembayaran dan syarat pengiriman.' },
-                { id: 'purchase_order_system', name: 'Purchase Order System', desc: 'Sistem transaksi pengajuan PO resmi dari pembeli komersial lengkap dengan spesifikasi teknis dan termin pembayaran.' },
-                { id: 'order_management', name: 'Order Management (OMS)', desc: 'Pengelolaan siklus order customer dari status pembayaran diterima, proses packing, pengiriman ekspedisi, hingga selesai.' },
-                { id: 'food_ordering', name: 'Food Ordering', desc: 'Sistem pemesanan makanan online dengan opsi pesan antar (delivery) atau ambil sendiri (takeaway) dan tracking status masak.' },
-                { id: 'delivery_ordering', name: 'Delivery Ordering', desc: 'Sistem pemesanan layanan pengiriman barang instan/same-day dengan kalkulator ongkos kirim berbasis jarak peta GPS.' },
-                { id: 'subscription_system', name: 'Subscription System', desc: 'Sistem transaksi tagihan langganan berkala (SaaS / membership) dengan debet otomatis dan manajemen paket upgrade/downgrade.' },
-                { id: 'membership_transaction', name: 'Membership Transaction', desc: 'Sistem transaksi pembayaran perpanjangan keanggotaan klub, akses fasilitas eksklusif, dan penukaran poin reward.' },
-                { id: 'payment_system', name: 'Payment System (Gateway Hub)', desc: 'Gerbang pemrosesan pembayaran multi-metode (Virtual Account, QRIS, Kartu Kredit, E-Wallet) dengan webhook notifikasi instan.' },
-                { id: 'billing_system', name: 'Billing System', desc: 'Sistem pencatatan dan penagihan pemakaian utilitas (listrik, air, internet) dengan kalkulasi tarif meteran dan histori.' },
-                { id: 'invoice_transaction', name: 'Invoice Transaction', desc: 'Sistem penerbitan invoice transaksi dagang resmi dengan tautan bayar online langsung (direct payment link) dan cetak kwitansi.' },
-                { id: 'donation_system', name: 'Donation System', desc: 'Platform penerimaan donasi sosial daring dengan opsi donatur anonim, pesan doa, integrasi QRIS, dan transparansi penyaluran.' },
-                { id: 'crowdfunding_platform', name: 'Crowdfunding Platform', desc: 'Platform penggalangan dana proyek kreatif/sosial dengan target dana (funding goal), batas waktu, dan reward paket pendukung.' },
-                { id: 'auction_system', name: 'Auction System', desc: 'Sistem lelang barang daring dengan penawaran harga real-time (bidding), timer hitung mundur, dan verifikasi deposit penawar.' },
-                { id: 'quotation_system', name: 'Quotation System', desc: 'Sistem pembuatan surat penawaran harga interaktif (quotation) yang dapat disetujui langsung oleh calon pembeli secara digital.' },
-                { id: 'registration_system', name: 'Registration System', desc: 'Sistem registrasi pendaftaran peserta lomba, ujian, atau program berbayar dengan verifikasi dokumen dan pembayaran tiket.' },
-                { id: 'application_system', name: 'Application System', desc: 'Sistem penerimaan dan pembayaran biaya administrasi pengajuan visa, sertifikasi keahlian, atau perizinan resmi.' },
-                { id: 'checkout_system', name: 'Checkout System (Quick Checkout)', desc: 'Alur proses pembayaran checkout instan 1-halaman (one-page checkout) dioptimasi untuk rasio konversi tinggi tanpa friksi.' },
-                { id: 'digital_product_store', name: 'Digital Product Store', desc: 'Toko penjualan produk digital (e-book, template kode, lisensi software) dengan pengiriman tautan unduh instan terenkripsi.' },
-                { id: 'course_enrollment', name: 'Course Enrollment', desc: 'Sistem pendaftaran dan pembayaran kelas pelatihan online dengan aktivasi otomatis ke modul materi belajar.' },
-                { id: 'job_application', name: 'Job Application (Paid Portal)', desc: 'Portal pendaftaran lamaran kerja profesional dengan fitur verifikasi keahlian berbayar dan tes asesmen mandiri.' },
-                { id: 'custom_transaction_app', name: 'Custom Transaction App', desc: 'Aplikasi transaksi komersial khusus dengan skema pembayaran bertahap (termin/milestone) atau logika bisnis unik.' }
+                { id: 'ec_d2c_store',         archetype: 'transaction_store', name: 'Direct-to-Consumer (D2C) Retail Store',      desc: 'Toko online resmi brand mandiri dengan etalase visual mewah, ulasan pembeli terverifikasi, dan alur beli instan.' },
+                { id: 'ec_marketplace',       archetype: 'transaction_store', name: 'Multi-Vendor Marketplace Platform',          desc: 'Platform jual beli menghubungkan banyak merchant dengan lapak toko mandiri, perbandingan harga, dan rekening penengah escrow.' },
+                { id: 'ec_b2b_wholesale',     archetype: 'enterprise_dashboard', name: 'B2B Wholesale & Bulk Purchase Portal',    desc: 'Portal grosir antar bisnis dengan harga berjenjang kuantitas (MOQ), pengajuan faktur tempo (term of payment), dan negosiasi penawaran.' },
+                { id: 'ec_digital_downloads', archetype: 'transaction_store', name: 'Digital Products & Assets Download Store',   desc: 'Toko penjualan file digital (source code, ebook, preset desain) dengan tautan unduhan otomatis terenkripsi pasca-pembayaran.' },
+                { id: 'ec_booking',           archetype: 'enterprise_dashboard', name: 'Service & Facility Booking System',       desc: 'Sistem reservasi slot jadwal konsultasi atau sewa lapangan/ruangan dengan kalender ketersediaan langsung dan uang muka (DP).' },
+                { id: 'ec_ticketing',         archetype: 'transaction_store', name: 'Event Ticketing & Pass Registration',        desc: 'Sistem penjualan tiket konser musik atau festival dengan pemilihan kategori kursi (VIP/Festival) dan tiket elektronik QR Code.' },
+                { id: 'ec_subscription',      archetype: 'enterprise_dashboard', name: 'Subscription & Recurring Membership Portal', desc: 'Sistem langganan paket keanggotaan berkala dengan penagihan otomatis, manajemen upgrade paket, dan histori pembayaran.' },
+                { id: 'ec_rental',            archetype: 'enterprise_dashboard', name: 'Equipment & Vehicle Rental System',       desc: 'Sistem transaksi persewaan mobil, alat kerja, atau unit proyek dengan kalkulator durasi sewa harian dan dana jaminan deposit.' },
+                { id: 'ec_grocery',           archetype: 'transaction_store', name: 'Supermarket & Grocery Ordering System',      desc: 'Sistem belanja kebutuhan harian supermarket dengan kategori rak pangan, satuan timbangan, dan pemilihan jam slot pengantaran.' },
+                { id: 'ec_quick_checkout',    archetype: 'transaction_store', name: 'One-Page Quick Checkout Funnel',             desc: 'Halaman checkout kilat satu langkah yang dioptimasi tanpa friksi dengan integrasi pembayaran QRIS dan transfer instan.' },
+                { id: 'ec_fashion_luxury',    archetype: 'editorial_club',    name: 'Fashion, Luxury & Couture E-Boutique',       desc: 'Butik online mode mewah dengan lookbook editorial visual, galeri koleksi musiman, dan alur pembelian eksklusif bermerek.' },
+                { id: 'ec_food_delivery',     archetype: 'transaction_store', name: 'Online Food Delivery & Restaurant Order',    desc: 'Sistem pesan antar kuliner dengan menu kategori, pilihan varian saus/topping, hitung ongkir zona, dan status masak real-time.' },
+                { id: 'ec_auction',           archetype: 'enterprise_dashboard', name: 'Live Auction & Bidding Platform',         desc: 'Platform lelang online dengan countdown penawaran real-time, riwayat bidder, sertifikat digital pemenang, dan integrasi pembayaran.' },
+                { id: 'ec_property',          archetype: 'enterprise_dashboard', name: 'Property Listing & Real Estate Portal',   desc: 'Portal properti dengan filter lokasi/tipe/harga, galeri foto + virtual tour, kalkulator cicilan KPR, dan form inquiry agen.' }
+            ]
+        },
+
+        dashboard: {
+            id: 'dashboard',
+            label: 'Dashboard',
+            badge: 'Operasional & Master CRUD',
+            icon: 'fa-solid fa-chart-column',
+            color: '#818CF8',
+            desc: 'Sistem operasional terpadu untuk pengendalian proses bisnis, manajemen database master, pemantauan metrik KPI, alur kerja approval, dan cetak dokumen resmi.',
+            subtypes: [
+                { id: 'db_cmms',              archetype: 'enterprise_dashboard', name: 'CMMS & Heavy Equipment Maintenance',       desc: 'Dashboard perawatan armada & alat berat, status unit RFU/Breakdown, siklus Work Order, inspeksi harian P2H, dan cetak SPK servis.' },
+                { id: 'db_erp',               archetype: 'enterprise_dashboard', name: 'Enterprise ERP & Operations Command Center', desc: 'Pusat kendali operasional perusahaan mengintegrasikan purchasing, stok bahan baku, jadwal operasional, dan matriks approval.' },
+                { id: 'db_hris',              archetype: 'enterprise_dashboard', name: 'HRIS, Attendance, Leave & Payroll Dashboard', desc: 'Dashboard personalia mengelola master data karyawan, pencatatan absensi shift, pengajuan cuti, dan pencetakan slip gaji resmi.' },
+                { id: 'db_crm',               archetype: 'enterprise_dashboard', name: 'CRM & Sales Opportunity Pipeline',           desc: 'Dashboard pelacakan prospek pelanggan, papan Kanban tahap penjualan (deal stages), target penjualan, dan histori interaksi.' },
+                { id: 'db_wms',               archetype: 'enterprise_dashboard', name: 'Warehouse & Inventory Management (WMS)',     desc: 'Dashboard gudang mengelola stok minimum (safety stock), lokasi rak penyimpanan (bin location), proses barang masuk/keluar, dan opname.' },
+                { id: 'db_fleet',             archetype: 'enterprise_dashboard', name: 'Fleet Tracking & Logistics Dispatch',        desc: 'Dashboard pemantauan armada angkutan logistik, pencatatan konsumsi BBM, surat jalan pengiriman, dan penugasan pengemudi.' },
+                { id: 'db_finance',           archetype: 'enterprise_dashboard', name: 'Financial Accounting & Cash Flow Dashboard', desc: 'Dashboard pembukuan akuntansi, buku besar umum, laporan laba rugi (P&L), arus kas kasir, dan penagihan faktur piutang.' },
+                { id: 'db_project',           archetype: 'enterprise_dashboard', name: 'Project & Task Management Dashboard',        desc: 'Dashboard proyek tim dengan papan tugas Kanban, jadwal tonggak waktu Gantt chart, alokasi kapasitas tim, dan persentase progres.' },
+                { id: 'db_hse',               archetype: 'enterprise_dashboard', name: 'HSE, K3LH, Safety & P2H Inspection',        desc: 'Dashboard kepatuhan keselamatan kerja (K3), pelaporan temuan bahaya hazard, investigasi akar masalah insiden (CAPA), dan audit.' },
+                { id: 'db_helpdesk',          archetype: 'enterprise_dashboard', name: 'IT Helpdesk & Customer Support Ticket',      desc: 'Dashboard antrean tiket keluhan pengguna, SLA penanganan kendala IT, penugasan teknisi, dan evaluasi skor kepuasan.' },
+                { id: 'db_pos',               archetype: 'enterprise_dashboard', name: 'Point-of-Sale (POS) & Kasir Retail',         desc: 'Sistem kasir retail dengan input barcode produk, kalkulasi kembalian, cetak struk termal A58mm, manajemen shift, dan laporan harian.' },
+                { id: 'db_analytics',         archetype: 'enterprise_dashboard', name: 'Business Intelligence & Data Analytics',    desc: 'Dashboard BI dengan chart waterfall MoM, funnel konversi, drill-down segmen, dan ekspor laporan Excel/PDF terjadwal.' },
+                { id: 'db_school',            archetype: 'enterprise_dashboard', name: 'School Management Information System (SIMRS)', desc: 'Sistem informasi sekolah mengelola data siswa, nilai raport, absensi, jadwal pelajaran, dan komunikasi wali murid.' },
+                { id: 'db_clinic',            archetype: 'enterprise_dashboard', name: 'Clinic / Hospital Management Dashboard',    desc: 'Sistem manajemen klinik dengan antrian pasien, rekam medis SOAP, resep obat, jadwal dokter, dan tagihan BPJS/umum.' },
+                { id: 'db_procurement',       archetype: 'enterprise_dashboard', name: 'Procurement & Purchase Order Management',   desc: 'Dashboard pengadaan barang dengan siklus PR→PO→GR, perbandingan vendor, approval berjenjang, dan cetak PO resmi perusahaan.' },
+
+                // ─── INDUSTRI PERTAMBANGAN BATUBARA & NIKEL (HULU KE HILIR) ───
+                { id: 'db_mine_exploration',  archetype: 'enterprise_dashboard', name: '⛏ Eksplorasi & Geologi Tambang',             desc: 'Dashboard data eksplorasi tambang: peta sebaran titik bor (drilling), log litologi, estimasi sumber daya cadangan (JORC/KCMI), dan progres kegiatan eksplorasi per konsesi IUP.' },
+                { id: 'db_drill_blast',       archetype: 'enterprise_dashboard', name: '💣 Rencana Bor & Peledakan (Drill & Blast)',  desc: 'Sistem perencanaan bor dan peledakan (blasting) tambang: desain pola lubang bor, konsumsi ANFO/emulsion, cetak ijin peledak KP3, jadwal blasting per pit, dan rekap fragmen batuan.' },
+                { id: 'db_mine_planning',     archetype: 'enterprise_dashboard', name: '🗺 Mine Planning & Geometri Pit',             desc: 'Dashboard perencanaan tambang (mine plan): target strip ratio OB vs batubara, desain geometri pit sequence, progres tambang vs rencana Jangka Pendek/Panjang (JATAM), dan void management.' },
+                { id: 'db_production_ritase', archetype: 'enterprise_dashboard', name: '🚛 Produksi Tambang & Ritase Harian',          desc: 'Dashboard produksi tambang real-time: rekap ritase HD/DT per shift, volume OB & ore per jam, target vs realisasi tonase, produktivitas alat gali-muat, dan cetak laporan produksi harian PDF.' },
+                { id: 'db_fuel_bbm',          archetype: 'enterprise_dashboard', name: '⛽ Manajemen BBM & Konsumsi Bahan Bakar',     desc: 'Sistem manajemen bahan bakar tambang: pencatatan pengisian BBM per unit alat berat (HM/Liter), RFID fuel dispenser, kalkulasi Fuel Ratio, alert konsumsi abnormal, dan rekap tagihan BBM kontraktor.' },
+                { id: 'db_hauling_road',      archetype: 'enterprise_dashboard', name: '🛣 Hauling Road & Infrastruktur Tambang',      desc: 'Dashboard pemantauan jalan angkut (hauling road): kondisi jalan per segmen, progres grading & compaction, status jembatan timbang (weight bridge), rekap tonase hauling harian, dan perawatan jalan.' },
+                { id: 'db_stockpile',         archetype: 'enterprise_dashboard', name: '🏔 Stockpile Management & Coal Blending',      desc: 'Sistem manajemen stockpile batubara: peta ROM & product stockpile per seam, inventory tonase real-time, blending target GCV/TM/Ash, cetak Delivery Order batubara, dan rekonsiliasi losses.' },
+                { id: 'db_lab_quality',       archetype: 'enterprise_dashboard', name: '🔬 Laboratorium & Quality Control (QC)',       desc: 'Dashboard lab analisis batubara/nikel: input hasil uji proksimate (GCV/TM/IM/Ash/VM/FC/TS), trace element, plot tren kualitas per pit/seam, cetak CoA (Certificate of Analysis), dan laporan QC ke buyer.' },
+                { id: 'db_hse_mining',        archetype: 'enterprise_dashboard', name: '🦺 HSE Tambang & Inspeksi K3 Pertambangan',   desc: 'Dashboard K3 pertambangan khusus: laporan kecelakaan (LTI/LTIIF/LTIFR), inspeksi harian P2H alat berat, pemantauan dust & noise lingkungan kerja, permit to work (PTW), dan laporan KPI HSE ke ESDM.' },
+                { id: 'db_environment',       archetype: 'enterprise_dashboard', name: '🌿 Monitoring Lingkungan & AMDAL Tambang',     desc: 'Sistem pemantauan lingkungan hidup tambang: kualitas air settling pond (pH/TSS/BOD/COD), reklamasi lahan (Ha/tahun), penanaman revegetasi, laporan RKL-RPL semester ke Dinas LHK, dan audit PROPER.' },
+                { id: 'db_rkef_smelter',      archetype: 'enterprise_dashboard', name: '🏭 RKEF Smelter & Proses Pengolahan Nikel',    desc: 'Dashboard proses smelting nikel (RKEF/Blast Furnace): input data saprolit/limonit ore feed, monitor suhu elektroda, kadar NPI/FeNi output, konsumsi kokas & elektroda, dan OEE (Overall Equipment Effectiveness) line produksi.' },
+                { id: 'db_ore_getting',       archetype: 'enterprise_dashboard', name: '⚒ Ore Getting & Grade Control Nikel',         desc: 'Sistem pengendalian kadar bijih nikel: peta blok model ore, sampling channel cut, grade control per bench, pemisahan ore/waste berdasarkan cut-off grade Ni%, dan rekap ore getting per shift.' },
+                { id: 'db_port_shipping',     archetype: 'enterprise_dashboard', name: '⚓ Port Operations & Pengapalan Batubara',    desc: 'Dashboard operasional pelabuhan: jadwal dan realisasi vessel loading, rekap tonase per kapal (MT), laytime & despatch/demurrage kalkulasi, dokumen B/L (Bill of Lading), dan laporan shipper ke trader/buyer.' },
+                { id: 'db_contractor_mgmt',   archetype: 'enterprise_dashboard', name: '🤝 Kontraktor Mining & Manajemen Subkon',      desc: 'Sistem manajemen kontraktor tambang: data kontrak pekerjaan (BoQ/RAB), progress billing aktual vs rencana, approval invoice tagihan subkon, retensi jaminan pelaksanaan, dan evaluasi kinerja vendor.' },
+                { id: 'db_weigh_bridge',      archetype: 'enterprise_dashboard', name: '⚖ Jembatan Timbang & Ticketing Batubara',    desc: 'Sistem timbangan batubara (weight bridge): input timbangan masuk/keluar truk hauling, kalkulasi netto tonase per ritase, cetak tiket timbang, rekonsiliasi data stockpile, dan laporan tonase ke manajemen.' }
+            ]
+        },
+
+        blog_content: {
+            id: 'blog_content',
+            label: 'Blog / Content',
+            badge: 'Editorial & Publikasi',
+            icon: 'fa-solid fa-pen-to-square',
+            color: '#F59E0B',
+            desc: 'Platform penerbitan artikel, media editorial, dokumentasi pengetahuan, dan kurasi konten dengan tipografi nyaman baca, kategorisasi tag, dan arsip pencarian.',
+            subtypes: [
+                { id: 'bc_news_portal',       archetype: 'editorial_club',    name: 'Online News & Breaking Media Portal',        desc: 'Portal berita berkala dengan pita kabar terkini (running text), multi-kanal rubrik berita, artikel terpopuler, dan liputan khusus.' },
+                { id: 'bc_magazine',          archetype: 'editorial_club',    name: 'Magazine Editorial & Lifestyle Publication', desc: 'Media publikasi artikel bergaya majalah editorial dengan cerita sampul (cover story), kolom opini penulis, dan mode baca fokus.' },
+                { id: 'bc_tech_docs',         archetype: 'enterprise_dashboard', name: 'Technical Documentation & API Reference',  desc: 'Portal dokumentasi teknis dan panduan pemrograman dengan pohon topik hirarkis, blok sintaksis kode, dan search bar kilat.' },
+                { id: 'bc_knowledge_base',    archetype: 'enterprise_dashboard', name: 'Help Center, Knowledge Base & FAQ Hub',    desc: 'Pusat bantuan mandiri pengguna menyajikan kartu solusi kendala umum, tombol voting artikel bermanfaat, dan kolom pencarian solusi.' },
+                { id: 'bc_personal_blog',     archetype: 'editorial_club',    name: 'Personal Thought Leadership & Tech Blog',    desc: 'Blog personal profesional dengan estimasi waktu baca (read time), kategori tag topik, langganan buletin newsletter, dan profil penulis.' },
+                { id: 'bc_podcast',           archetype: 'adaptive_studio',   name: 'Audio Podcast & Video Streaming Catalog',    desc: 'Katalog kurasi siaran podcast dan rekaman video edukasi lengkap dengan pemutar audio web, catatan episode, dan transkrip teks.' },
+                { id: 'bc_forum',             archetype: 'enterprise_dashboard', name: 'Community Forum & Q&A Discussion Board',   desc: 'Forum diskusi komunitas berbasis utas (thread) tanya-jawab, voting respon terbaik, penanda solusi terverifikasi, dan reputasi anggota.' },
+                { id: 'bc_academic',          archetype: 'editorial_club',    name: 'Academic, Research & Journal Archive',       desc: 'Repositori publikasi karya ilmiah dan jurnal riset dengan penampil abstrak, metadata kutipan referensi, dan unduh berkas PDF.' },
+                { id: 'bc_newsletter',        archetype: 'editorial_club',    name: 'Newsletter Archive & Email Digest Hub',      desc: 'Arsip newsletter email premium dengan preview edisi, CTA berlangganan, pencarian edisi lama, dan rating konten.' },
+                { id: 'bc_tutorial',          archetype: 'adaptive_studio',   name: 'Tutorial, Course & Learning Path Platform',  desc: 'Platform kursus online mandiri dengan daftar modul terurut, progress bar per pelajaran, kuis interaktif, dan sertifikat penyelesaian.' },
+                { id: 'bc_recipe',            archetype: 'editorial_club',    name: 'Recipe, Food Blog & Culinary Guide',         desc: 'Blog kuliner dan resep masakan dengan filter bahan/waktu masak, rating bintang, video demo memasak, dan print-friendly mode.' },
+                { id: 'bc_travel',            archetype: 'adaptive_studio',   name: 'Travel Diary, Guide & Itinerary Blog',       desc: 'Blog perjalanan wisata dengan galeri foto destinasi, peta rute perjalanan, kalkulator biaya trip, dan tips lokal eksklusif.' }
             ]
         }
     };
@@ -970,17 +1440,515 @@
     let historyData = JSON.parse(localStorage.getItem('uiux_history') || '[]');
     let viewedSet = new Set(historyData.map(h => h.id));
 
+    /* ==================== STUDIO FLOW STATE & CONTROLLER ==================== */
+    let currentStudioStep = 1;
+    let studioData = {
+        appName: '',
+        manualNotes: '',
+        pillarKey: 'landing_page',
+        subtypeId: 'lp_saas',
+        subtypeObj: null,
+        archetype: 'auto',
+        styleId: 2, // Bento Grid default
+        styleObj: null,
+        lastGeneratedPrompt: ''
+    };
+
+    const STUDIO_PILLARS = [
+        { key: 'landing_page',    name: 'Landing Page',     icon: 'fa-rocket',            desc: 'High Conversion & Hero Showcase' },
+        { key: 'company_profile', name: 'Company Profile',  icon: 'fa-building-columns',  desc: 'Trust, Prestige & Corporate Story' },
+        { key: 'e_commerce',      name: 'E-Commerce',       icon: 'fa-bag-shopping',      desc: 'Catalog, Cart & Checkout Hub' },
+        { key: 'dashboard',       name: 'Dashboard',        icon: 'fa-chart-pie',         desc: 'Control Center & Master CRUD' },
+        { key: 'blog_content',    name: 'Blog / Content',   icon: 'fa-newspaper',         desc: 'Editorial Magazine & Reader' }
+    ];
+
+    function initStudioFlow() {
+        renderStudioPillars();
+        renderStudioSubtypes('landing_page');
+        renderStudioThemeCatFilter();
+        renderStudioThemes('all', '');
+        
+        // Auto select default style Bento Grid
+        const bentoStyle = MOCK_DB.styles.find(s => s.id === 2) || MOCK_DB.styles[0];
+        if (bentoStyle) {
+            selectStudioTheme(bentoStyle.id, false);
+        }
+    }
+
+    function setStudioPreset(name, pillar, notes) {
+        const nameInput = document.getElementById('studio-app-name');
+        const notesInput = document.getElementById('studio-manual-notes');
+        if (nameInput) nameInput.value = name;
+        if (notesInput) notesInput.value = notes;
+        studioData.appName = name;
+        studioData.manualNotes = notes;
+        if (pillar && FULL_TAXONOMY[pillar]) {
+            selectStudioPillar(pillar);
+        }
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'info',
+            title: `Preset diterapkan: ${name}`,
+            showConfirmButton: false,
+            timer: 2000,
+            background: '#0D111A',
+            color: '#F8FAFC'
+        });
+    }
+
+    function renderStudioPillars() {
+        const container = document.getElementById('studio-pillar-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        STUDIO_PILLARS.forEach(p => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'studio-pillar-btn' + (p.key === studioData.pillarKey ? ' active' : '');
+            btn.id = `pillar-btn-${p.key}`;
+            btn.onclick = () => selectStudioPillar(p.key);
+            btn.innerHTML = `
+                <i class="fa-solid ${p.icon}"></i>
+                <span>${p.name}</span>
+            `;
+            container.appendChild(btn);
+        });
+    }
+
+    function selectStudioPillar(key) {
+        if (!FULL_TAXONOMY[key]) return;
+        studioData.pillarKey = key;
+
+        // update active class on buttons
+        STUDIO_PILLARS.forEach(p => {
+            const el = document.getElementById(`pillar-btn-${p.key}`);
+            if (el) {
+                if (p.key === key) el.classList.add('active');
+                else el.classList.remove('active');
+            }
+        });
+
+        // update label
+        const pillarObj = FULL_TAXONOMY[key];
+        const labelEl = document.getElementById('studio-selected-pillar-label');
+        if (labelEl) labelEl.textContent = `Subtipe Terkurasi (${pillarObj.label}):`;
+
+        renderStudioSubtypes(key);
+    }
+
+    let currentSubtypeFilter = '';
+    function filterStudioSubtypes(query) {
+        currentSubtypeFilter = (query || '').toLowerCase().trim();
+        renderStudioSubtypes(studioData.pillarKey);
+    }
+
+    function renderStudioSubtypes(pillarKey) {
+        const container = document.getElementById('studio-subtypes-grid');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const pillarObj = FULL_TAXONOMY[pillarKey] || FULL_TAXONOMY.landing_page;
+        let subtypes = pillarObj.subtypes || [];
+
+        if (currentSubtypeFilter) {
+            subtypes = subtypes.filter(s => 
+                s.name.toLowerCase().includes(currentSubtypeFilter) || 
+                (s.desc && s.desc.toLowerCase().includes(currentSubtypeFilter))
+            );
+        }
+
+        const countBadge = document.getElementById('studio-subtypes-count');
+        if (countBadge) countBadge.textContent = `${subtypes.length} Pilihan`;
+
+        // If no subtype selected or selected doesn't exist in new list, pick first
+        if (!subtypes.some(s => s.id === studioData.subtypeId) && subtypes.length > 0) {
+            studioData.subtypeId = subtypes[0].id;
+            studioData.subtypeObj = subtypes[0];
+        }
+
+        subtypes.forEach(s => {
+            const isSelected = s.id === studioData.subtypeId;
+            if (isSelected) studioData.subtypeObj = s;
+
+            const card = document.createElement('div');
+            card.className = 'studio-subtype-card' + (isSelected ? ' selected' : '');
+            card.id = `subtype-card-${s.id}`;
+            card.onclick = () => selectStudioSubtype(s.id);
+
+            const archeBadge = s.archetype ? `<span style="font-size:9.5px; padding:2px 6px; border-radius:4px; background:rgba(99,102,241,0.18); color:#A5B4FC; font-weight:700;">${s.archetype}</span>` : '';
+
+            card.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; padding-right:16px;">
+                    <div style="font-size:12.5px; font-weight:700; color:#FFFFFF;">${s.name}</div>
+                </div>
+                <div style="font-size:11px; color:#94A3B8; line-height:1.4; margin-bottom:8px;">${s.desc || 'Optimasi struktur landing & interaksi modern.'}</div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                    ${archeBadge}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function selectStudioSubtype(subId) {
+        studioData.subtypeId = subId;
+        const pillarObj = FULL_TAXONOMY[studioData.pillarKey] || FULL_TAXONOMY.landing_page;
+        studioData.subtypeObj = pillarObj.subtypes.find(s => s.id === subId) || pillarObj.subtypes[0];
+
+        // Update selected card highlight
+        const cards = document.querySelectorAll('.studio-subtype-card');
+        cards.forEach(c => c.classList.remove('selected'));
+        const selectedCard = document.getElementById(`subtype-card-${subId}`);
+        if (selectedCard) selectedCard.classList.add('selected');
+
+        // Auto-update Archetype Engine dropdown based on subtype's embedded archetype
+        const archetypeSelect = document.getElementById('studio-archetype-select');
+        const archetypeBadge = document.getElementById('studio-archetype-badge');
+        if (archetypeSelect && studioData.subtypeObj) {
+            const subtypeArchetype = studioData.subtypeObj.archetype;
+            if (subtypeArchetype) {
+                archetypeSelect.value = subtypeArchetype;
+            } else {
+                archetypeSelect.value = 'auto';
+            }
+            // Update badge label
+            if (archetypeBadge) {
+                const labelMap = {
+                    adaptive_studio:     'Adaptive Studio',
+                    product_3d:          '3D Product Theater',
+                    cinematic_webgl:     'WebGL Cinematic',
+                    editorial_club:      'Editorial Club',
+                    minimalist_hero:     'Minimalist Hero',
+                    enterprise_dashboard:'Enterprise Dashboard',
+                    transaction_store:   'Commerce Engine',
+                    interactive_game:    'Game Arena'
+                };
+                const selectedVal = archetypeSelect.value;
+                archetypeBadge.textContent = selectedVal === 'auto'
+                    ? 'Auto-Tuned by Taxonomy'
+                    : '⚡ ' + (labelMap[selectedVal] || selectedVal);
+                archetypeBadge.style.color = selectedVal === 'auto' ? '#10B981' : '#818CF8';
+            }
+        }
+    }
+
+    /* STEP 3: STYLE SELECTION LOGIC */
+    let currentStudioThemeCat = 'all';
+    function renderStudioThemeCatFilter() {
+        const filterContainer = document.getElementById('studio-theme-cat-filter');
+        if (!filterContainer) return;
+        filterContainer.innerHTML = '';
+
+        MOCK_DB.categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'tab-btn' + (cat.type === currentStudioThemeCat ? ' active' : '');
+            btn.textContent = `${cat.name} (${cat.count})`;
+            btn.onclick = () => {
+                currentStudioThemeCat = cat.type;
+                renderStudioThemeCatFilter();
+                filterStudioThemes();
+            };
+            filterContainer.appendChild(btn);
+        });
+    }
+
+    function filterStudioThemes() {
+        const searchInput = document.getElementById('studio-style-search');
+        const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+        renderStudioThemes(currentStudioThemeCat, query);
+    }
+
+    function renderStudioThemes(catFilter, query) {
+        const container = document.getElementById('studio-themes-grid');
+        if (!container) return;
+        container.innerHTML = '';
+
+        let list = MOCK_DB.styles;
+        if (catFilter && catFilter !== 'all') {
+            list = list.filter(s => String(s.type).toLowerCase() === catFilter.toLowerCase());
+        }
+        if (query) {
+            list = list.filter(s => s.name.toLowerCase().includes(query) || s.desc.toLowerCase().includes(query));
+        }
+
+        list.forEach(style => {
+            const isSelected = style.id === studioData.styleId;
+            const cols = style.color.split(',');
+            const c1 = '#' + (cols[0] || '6366f1');
+            const c2 = '#' + (cols[1] || 'a855f7');
+
+            const card = document.createElement('div');
+            card.className = 'studio-theme-card' + (isSelected ? ' selected' : '');
+            card.id = `studio-theme-${style.id}`;
+            card.onclick = () => selectStudioTheme(style.id, true);
+
+            // Generate clean artisan mini visual SVG
+            const svgPreview = generateArtisanSvg(style);
+
+            card.innerHTML = `
+                <div style="height:100px; border-radius:8px; overflow:hidden; margin-bottom:8px; background:#07090E; border:1px solid rgba(255,255,255,0.06);">
+                    <img src="${svgPreview}" alt="${style.name}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                    <div style="font-size:12.5px; font-weight:700; color:#FFFFFF;">${style.name}</div>
+                    <div style="display:flex; gap:3px;">
+                        <span style="width:10px; height:10px; border-radius:50%; background:${c1}; display:inline-block;"></span>
+                        <span style="width:10px; height:10px; border-radius:50%; background:${c2}; display:inline-block;"></span>
+                    </div>
+                </div>
+                <div style="font-size:11px; color:#94A3B8; line-height:1.4; flex:1; margin-bottom:6px;">${style.desc}</div>
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:10px; color:var(--text-muted);">
+                    <span style="text-transform:uppercase; letter-spacing:0.5px; font-weight:700; color:#818CF8;">${style.type}</span>
+                    <span>#${style.id}</span>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function selectStudioTheme(styleId, updatePreview) {
+        studioData.styleId = styleId;
+        const styleObj = MOCK_DB.styles.find(s => s.id === styleId) || MOCK_DB.styles[0];
+        studioData.styleObj = styleObj;
+
+        // update UI selected class
+        const cards = document.querySelectorAll('.studio-theme-card');
+        cards.forEach(c => c.classList.remove('selected'));
+        const activeCard = document.getElementById(`studio-theme-${styleId}`);
+        if (activeCard) activeCard.classList.add('selected');
+
+        // update bottom preview pill
+        const nameEl = document.getElementById('studio-preview-name');
+        const descEl = document.getElementById('studio-preview-desc');
+        const swatchEl = document.getElementById('studio-preview-swatch');
+
+        if (nameEl) nameEl.textContent = `${styleObj.name} (${styleObj.type.toUpperCase()})`;
+        if (descEl) descEl.textContent = styleObj.desc;
+        if (swatchEl) {
+            const cols = styleObj.color.split(',');
+            const c1 = '#' + (cols[0] || '6366f1');
+            const c2 = '#' + (cols[1] || 'a855f7');
+            swatchEl.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+        }
+    }
+
+    /* STEP WIZARD NAVIGATION */
+    function goToStudioStep(step) {
+        if (step < 1 || step > 4) return;
+
+        // Validation for step 1
+        if (step > 1 && currentStudioStep === 1) {
+            const nameInput = document.getElementById('studio-app-name');
+            let val = nameInput ? nameInput.value.trim() : '';
+            if (!val) {
+                val = 'Modern WebApp Solution';
+                if (nameInput) nameInput.value = val;
+            }
+            studioData.appName = val;
+            const notesInput = document.getElementById('studio-manual-notes');
+            studioData.manualNotes = notesInput ? notesInput.value.trim() : '';
+        }
+
+        currentStudioStep = step;
+
+        // Update stepper track UI
+        for (let i = 1; i <= 4; i++) {
+            const stepEl = document.getElementById(`stepper-step-${i}`);
+            const circleEl = document.getElementById(`stepper-circle-${i}`);
+            const panelEl = document.getElementById(`studio-panel-${i}`);
+            const dividerEl = document.getElementById(`stepper-divider-${i}`);
+
+            if (panelEl) {
+                if (i === step) {
+                    panelEl.style.display = 'block';
+                    panelEl.classList.remove('fade-up');
+                    void panelEl.offsetWidth; // trigger reflow
+                    panelEl.classList.add('fade-up');
+                } else {
+                    panelEl.style.display = 'none';
+                }
+            }
+
+            if (stepEl && circleEl) {
+                stepEl.classList.remove('active', 'completed');
+                if (i < step) {
+                    stepEl.classList.add('completed');
+                    circleEl.innerHTML = '<i class="fa-solid fa-check" style="font-size:11px;"></i>';
+                } else if (i === step) {
+                    stepEl.classList.add('active');
+                    circleEl.textContent = i;
+                } else {
+                    circleEl.textContent = i;
+                }
+            }
+
+            if (dividerEl) {
+                if (i < step) dividerEl.classList.add('active');
+                else dividerEl.classList.remove('active');
+            }
+        }
+
+        // Auto-scroll studio container to top on step change
+        const studioContainer = document.querySelector('.studio-container');
+        if (studioContainer) studioContainer.scrollTop = 0;
+
+        // Trigger generate when landing on Step 4
+        if (step === 4) {
+            generateStudioMasterOutput();
+        }
+    }
+
+    function nextStudioStep(fromStep) {
+        goToStudioStep(fromStep + 1);
+    }
+
+    function prevStudioStep(fromStep) {
+        goToStudioStep(fromStep - 1);
+    }
+
+    /* STEP 4: MASTER PROMPT GENERATOR */
+    function generateStudioMasterOutput() {
+        // Collect latest form values
+        const nameInput = document.getElementById('studio-app-name');
+        const notesInput = document.getElementById('studio-manual-notes');
+        const archSelect = document.getElementById('studio-archetype-select');
+
+        studioData.appName = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : 'Modern WebApp Solution';
+        studioData.manualNotes = notesInput ? notesInput.value.trim() : '';
+        studioData.archetype = archSelect ? archSelect.value : 'auto';
+
+        const pillar = FULL_TAXONOMY[studioData.pillarKey] || FULL_TAXONOMY.landing_page;
+        let subtype = studioData.subtypeObj;
+        if (!subtype) {
+            subtype = (pillar.subtypes && pillar.subtypes.length > 0) ? pillar.subtypes[0] : { id: 'default', name: pillar.label };
+            studioData.subtypeObj = subtype;
+        }
+
+        let style = studioData.styleObj;
+        if (!style) {
+            style = MOCK_DB.styles.find(s => s.id === studioData.styleId) || MOCK_DB.styles[0];
+            studioData.styleObj = style;
+        }
+
+        // Generate the 7-Layer World Class Prompt!
+        const promptResult = generateWorldClassFrontendPrompt(
+            style,
+            studioData.appName,
+            pillar,
+            subtype,
+            studioData.manualNotes,
+            studioData.archetype
+        );
+        studioData.lastGeneratedPrompt = promptResult;
+
+        // Update Step 4 Visual Summary
+        const summaryName = document.getElementById('studio-summary-app-name');
+        const summaryPillar = document.getElementById('studio-summary-pillar');
+        const summarySubtype = document.getElementById('studio-summary-subtype');
+        const summaryStyle = document.getElementById('studio-summary-style');
+        const summaryArche = document.getElementById('studio-summary-archetype');
+        const summaryTime = document.getElementById('studio-summary-timestamp');
+        const promptBox = document.getElementById('studio-master-prompt-box');
+        const linesCount = document.getElementById('studio-output-lines');
+
+        if (summaryName) summaryName.textContent = studioData.appName;
+        if (summaryPillar) summaryPillar.innerHTML = `<i class="fa-solid fa-layer-group" style="margin-right:5px; color:#6366F1;"></i>${pillar.label}`;
+        if (summarySubtype) summarySubtype.innerHTML = `<i class="fa-solid fa-check" style="margin-right:5px;"></i>${subtype.name}`;
+        if (summaryStyle) summaryStyle.innerHTML = `<i class="fa-solid fa-palette" style="margin-right:5px;"></i>${style.name}`;
+        
+        const resolvedArchetypeKey = resolveArchetype(pillar, subtype, studioData.appName, studioData.manualNotes, studioData.archetype);
+        if (summaryArche) summaryArche.innerHTML = `<i class="fa-solid fa-cubes" style="margin-right:5px;"></i>${resolvedArchetypeKey.replace(/_/g, ' ').toUpperCase()}`;
+
+        if (summaryTime) {
+            const now = new Date();
+            summaryTime.textContent = now.toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+        }
+
+        if (promptBox) promptBox.value = promptResult;
+        if (linesCount) linesCount.textContent = `${promptResult.split('\n').length} Baris Spesifikasi`;
+
+        // Record to history safely
+        if (typeof addToHistory === 'function') {
+            addToHistory(style);
+        }
+    }
+
+    function copyStudioPrompt() {
+        const promptBox = document.getElementById('studio-master-prompt-box');
+        const text = promptBox ? promptBox.value : studioData.lastGeneratedPrompt;
+        if (!text) return;
+
+        navigator.clipboard.writeText(text).then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Master Prompt Berhasil Disalin!',
+                text: 'Tempelkan langsung ke Claude 3.7 Sonnet, ChatGPT-4o, Cursor, v0, atau Gemini untuk membangun single-file index.html mandiri.',
+                background: '#0D111A',
+                color: '#F8FAFC',
+                confirmButtonColor: '#6366F1',
+                timer: 3000
+            });
+        }).catch(() => {
+            if (promptBox) {
+                promptBox.select();
+                document.execCommand('copy');
+            }
+            Swal.fire({
+                icon: 'success',
+                title: 'Prompt Tersalin ke Clipboard!',
+                background: '#0D111A',
+                color: '#F8FAFC',
+                confirmButtonColor: '#6366F1'
+            });
+        });
+    }
+
+    function downloadStudioPromptTxt() {
+        const text = studioData.lastGeneratedPrompt || (document.getElementById('studio-master-prompt-box') ? document.getElementById('studio-master-prompt-box').value : '');
+        if (!text) return;
+
+        const cleanName = (studioData.appName || 'WEBAPP').replace(/[^a-zA-Z0-9_-]/g, '_').toUpperCase();
+        const styleName = (studioData.styleObj ? studioData.styleObj.name : 'THEME').replace(/[^a-zA-Z0-9_-]/g, '_').toUpperCase();
+        const filename = `PROMPT_${cleanName}_${styleName}.txt`;
+
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function resetStudioFlow() {
+        const nameInput = document.getElementById('studio-app-name');
+        const notesInput = document.getElementById('studio-manual-notes');
+        if (nameInput) nameInput.value = '';
+        if (notesInput) notesInput.value = '';
+        studioData.appName = '';
+        studioData.manualNotes = '';
+        studioData.pillarKey = 'landing_page';
+        selectStudioPillar('landing_page');
+        goToStudioStep(1);
+    }
+
     /* ==================== INITIALIZATION ==================== */
     window.onload = () => {
+        initStudioFlow();
         renderCategories();
         renderTabFilter();
         filterCategory('all');
         updateCounters();
+        switchView('studio');
     };
 
     /* ==================== VIEW SWITCHER ==================== */
     function switchView(viewName) {
-        ['catalog','favorit','riwayat'].forEach(v => {
+        ['studio','catalog','favorit','riwayat'].forEach(v => {
             const viewEl = document.getElementById('view-' + v);
             const menuEl = document.getElementById('menu-' + v);
             if (viewEl) viewEl.classList.remove('active');
@@ -990,6 +1958,12 @@
         const activeMenu = document.getElementById('menu-' + viewName);
         if (activeView) activeView.classList.add('active');
         if (activeMenu) activeMenu.classList.add('active');
+
+        // Hide tab-filter on topbar if on studio view, show on catalog view
+        const tabFilterEl = document.getElementById('tab-filter');
+        if (tabFilterEl) {
+            tabFilterEl.style.display = (viewName === 'catalog') ? 'flex' : 'none';
+        }
 
         if (viewName === 'favorit') renderFavorites();
         if (viewName === 'riwayat') renderHistoryView();
@@ -1362,11 +2336,10 @@
     function updateCounters() {
         const fc = favorites.length;
         const hc = historyData.length;
-        const prog = Math.round((viewedSet.size / 60) * 100);
-        document.getElementById('fav-count-badge').textContent = fc;
-        document.getElementById('hist-count-badge').textContent = hc;
-        document.getElementById('prog-text').textContent = viewedSet.size + ' / 60';
-        document.getElementById('prog-bar').style.width = prog + '%';
+        const fcBadge = document.getElementById('fav-count-badge');
+        const hcBadge = document.getElementById('hist-count-badge');
+        if (fcBadge) fcBadge.textContent = fc;
+        if (hcBadge) hcBadge.textContent = hc;
     }
 
     /* ==================== FRONTEND index.html PROMPT STUDIO (MODAL) ==================== */
@@ -1401,29 +2374,37 @@
                         </div>
                     </div>
 
-                    <!-- 1. CATEGORY SELECTOR -->
-                    <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:6px;">1. Kategori WebApp (Pilih Archetype)</label>
-                    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:10px;">
-                        <button type="button" id="btn-cat-website" onclick="switchModalTaxonomyCategory('website')" style="padding:9px 4px; border-radius:8px; border:1px solid #1E293B; background:#1A2234; color:#94A3B8; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
-                            <i class="fa-solid fa-globe" style="color:#38BDF8;"></i> Website (37)
+                    <!-- 1. CATEGORY SELECTOR (6 PILARS MATCHING SCREENSHOT) -->
+                    <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:8px;">1. Kategori WebApp (Pilih Pilar Utama)</label>
+                    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:12px;">
+                        <button type="button" id="btn-cat-landing_page" onclick="switchModalTaxonomyCategory('landing_page')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#0B0F19; border:1px solid #334155; color:#FFFFFF; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+                            <i class="fa-solid fa-bolt" style="font-size:16px; color:#FFFFFF;"></i>
+                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Landing Page</span>
                         </button>
-                        <button type="button" id="btn-cat-management" onclick="switchModalTaxonomyCategory('management')" style="padding:9px 4px; border-radius:8px; border:1px solid #6366F1; background:rgba(99,102,241,0.25); color:#C7D2FE; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
-                            <i class="fa-solid fa-list-check" style="color:#818CF8;"></i> Management (50)
+                        <button type="button" id="btn-cat-company_profile" onclick="switchModalTaxonomyCategory('company_profile')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-building" style="font-size:16px; color:#0F172A;"></i>
+                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Company Profile</span>
                         </button>
-                        <button type="button" id="btn-cat-game" onclick="switchModalTaxonomyCategory('game')" style="padding:9px 4px; border-radius:8px; border:1px solid #1E293B; background:#1A2234; color:#94A3B8; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
-                            <i class="fa-solid fa-gamepad" style="color:#F59E0B;"></i> Game (35)
+                        <button type="button" id="btn-cat-e_commerce" onclick="switchModalTaxonomyCategory('e_commerce')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-cart-shopping" style="font-size:16px; color:#0F172A;"></i>
+                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">E-Commerce</span>
                         </button>
-                        <button type="button" id="btn-cat-transaction" onclick="switchModalTaxonomyCategory('transaction')" style="padding:9px 4px; border-radius:8px; border:1px solid #1E293B; background:#1A2234; color:#94A3B8; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
-                            <i class="fa-solid fa-cart-shopping" style="color:#10B981;"></i> Transaction (40)
+                        <button type="button" id="btn-cat-dashboard" onclick="switchModalTaxonomyCategory('dashboard')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-chart-column" style="font-size:16px; color:#0F172A;"></i>
+                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Dashboard</span>
+                        </button>
+                        <button type="button" id="btn-cat-blog_content" onclick="switchModalTaxonomyCategory('blog_content')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-pen-to-square" style="font-size:16px; color:#0F172A;"></i>
+                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Blog / Content</span>
                         </button>
                     </div>
 
                     <!-- 2. SUBTYPE DROPDOWN WITH INSTANT SEARCH & DESCRIPTION -->
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                         <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px;">2. Subtipe Aplikasi (Taksonomi Lengkap)</label>
-                        <span id="subtype-counter" style="font-size:10px; color:#64748B; font-weight:600;">50 subtipe tersedia</span>
+                        <span id="subtype-counter" style="font-size:10px; color:#64748B; font-weight:600;">8 subtipe tersedia</span>
                     </div>
-                    <select id="modal-subtype-select" onchange="updateSubtypeDescription()" style="width:100%; background:#1A2234; border:1px solid #1E293B; color:#FFF; font-size:12px; padding:10px 12px; border-radius:8px; outline:none; margin-bottom:6px; cursor:pointer;">
+                    <select id="modal-subtype-select" onchange="updateSubtypeDescription(); updateArchetypeBadge();" style="width:100%; background:#1A2234; border:1px solid #1E293B; color:#FFF; font-size:12px; padding:10px 12px; border-radius:8px; outline:none; margin-bottom:6px; cursor:pointer;">
                     </select>
                     <div id="subtype-desc-box" style="padding:8px 10px; background:#0B0E17; border:1px solid #1E293B; border-radius:6px; font-size:11px; color:#94A3B8; line-height:1.45; margin-bottom:12px;">
                         <!-- dynamic desc -->
@@ -1467,7 +2448,7 @@
                     </div>
                 </div>
             `,
-            width: '680px',
+            width: '740px',
             background: '#0F172A',
             showCancelButton: true,
             confirmButtonColor: '#6366F1',
@@ -1475,8 +2456,8 @@
             confirmButtonText: '<i class="fa-solid fa-bolt" style="margin-right:6px;"></i> Generate Master index.html Prompt',
             cancelButtonText: 'Batal',
             didOpen: () => {
-                activeSelectedCat = 'management';
-                populateSubtypesForCategory('management');
+                activeSelectedCat = 'landing_page';
+                populateSubtypesForCategory('landing_page');
                 updateArchetypeBadge();
             }
         }).then((result) => {
@@ -1486,7 +2467,7 @@
             const subtypeId = document.getElementById('modal-subtype-select').value;
             const selectedArchetype = document.getElementById('modal-archetype-select') ? document.getElementById('modal-archetype-select').value : 'auto';
             const manualDetails = document.getElementById('modal-manual-details').value.trim();
-            const cat = FULL_TAXONOMY[activeSelectedCat];
+            const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.landing_page;
             const sub = cat.subtypes.find(s => s.id === subtypeId) || cat.subtypes[0];
 
             const masterPrompt = generateWorldClassFrontendPrompt(style, appName, cat, sub, manualDetails, selectedArchetype);
@@ -1500,34 +2481,40 @@
         if (!archSelect || !badge) return;
         const val = archSelect.value;
         if (val === 'auto') {
-            if (activeSelectedCat === 'website') badge.textContent = 'Studio / 3D';
-            else if (activeSelectedCat === 'game') badge.textContent = 'Game Arena';
-            else if (activeSelectedCat === 'transaction') badge.textContent = 'Commerce';
-            else badge.textContent = 'Dashboard';
+            // Resolve based on current selected subtype
+            const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.landing_page;
+            const subtypeSelect = document.getElementById('modal-subtype-select');
+            const subId = subtypeSelect ? subtypeSelect.value : null;
+            const sub = subId ? cat.subtypes.find(s => s.id === subId) : cat.subtypes[0];
+            const resolved = resolveArchetype(cat, sub, '', '', 'auto');
+            badge.textContent = (ARCHETYPE_LABELS[resolved] || 'Auto') + ' (Auto)';
             badge.style.color = '#93C5FD';
         } else {
-            badge.textContent = 'Manual: ' + val.split('_')[0].toUpperCase();
+            badge.textContent = (ARCHETYPE_LABELS[val] || val) + ' (Manual)';
             badge.style.color = '#34D399';
         }
     }
 
     function switchModalTaxonomyCategory(catKey) {
         activeSelectedCat = catKey;
-        ['website', 'management', 'game', 'transaction'].forEach(k => {
+        const categories = ['landing_page', 'company_profile', 'e_commerce', 'dashboard', 'blog_content'];
+        categories.forEach(k => {
             const btn = document.getElementById('btn-cat-' + k);
             if (!btn) return;
             const isCur = k === catKey;
-            btn.style.border = isCur ? '1px solid #6366F1' : '1px solid #1E293B';
-            btn.style.background = isCur ? 'rgba(99,102,241,0.25)' : '#1A2234';
-            btn.style.color = isCur ? '#C7D2FE' : '#94A3B8';
-            btn.style.fontWeight = isCur ? '700' : '600';
+            btn.style.border = isCur ? '1px solid #334155' : '1px solid #E2E8F0';
+            btn.style.background = isCur ? '#0B0F19' : '#F1F5F9';
+            btn.style.color = isCur ? '#FFFFFF' : '#0F172A';
+            btn.style.boxShadow = isCur ? '0 4px 12px rgba(0,0,0,0.3)' : 'none';
+            const icon = btn.querySelector('i');
+            if (icon) icon.style.color = isCur ? '#FFFFFF' : '#0F172A';
         });
         populateSubtypesForCategory(catKey);
         updateArchetypeBadge();
     }
 
     function populateSubtypesForCategory(catKey) {
-        const cat = FULL_TAXONOMY[catKey] || FULL_TAXONOMY.management;
+        const cat = FULL_TAXONOMY[catKey] || FULL_TAXONOMY.landing_page;
         const select = document.getElementById('modal-subtype-select');
         const counter = document.getElementById('subtype-counter');
         if (!select) return;
@@ -1549,7 +2536,7 @@
         const descBox = document.getElementById('subtype-desc-box');
         if (!select || !descBox) return;
 
-        const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.management;
+        const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.landing_page;
         const sub = cat.subtypes.find(s => s.id === select.value) || cat.subtypes[0];
         descBox.innerHTML = `<strong style="color:#C7D2FE;">${sub.name}:</strong> ${sub.desc}`;
     }
@@ -1559,30 +2546,43 @@
         if (selectedArchetype && selectedArchetype !== 'auto') {
             return selectedArchetype;
         }
-        const text = ((name || '') + ' ' + (sub ? sub.name + ' ' + sub.desc : '') + ' ' + (manualNotes || '')).toLowerCase();
-        if (cat.id === 'game' || text.includes('game') || text.includes('arcade') || text.includes('puzzle') || text.includes('canvas game') || text.includes('skor') || text.includes('leaderboard')) {
-            return 'interactive_game';
+
+        // Priority 1: Use archetype embedded in the subtype object (new enriched taxonomy)
+        if (sub && sub.archetype) {
+            return sub.archetype;
         }
-        if (text.includes('3d') || text.includes('model-viewer') || text.includes('minuman') || text.includes('soda') || text.includes('can') || text.includes('produk fisik') || text.includes('beverage') || text.includes('botol')) {
+
+        // Priority 2: Text-based detection for manual notes keywords
+        const text = ((name || '') + ' ' + (sub ? sub.name + ' ' + sub.desc : '') + ' ' + (manualNotes || '')).toLowerCase();
+        if (text.includes('3d') || text.includes('model-viewer') || text.includes('produk fisik') || text.includes('beverage') || text.includes('botol') || text.includes('property') || text.includes('villa') || text.includes('resort')) {
             return 'product_3d';
         }
-        if (text.includes('webgl') || text.includes('three.js') || text.includes('glsl') || text.includes('patung') || text.includes('sculpture') || text.includes('museum') || text.includes('bronze') || text.includes('horse') || text.includes('sparks')) {
+        if (text.includes('webgl') || text.includes('three.js') || text.includes('glsl') || text.includes('shader') || text.includes('cinematic') || text.includes('immersive')) {
             return 'cinematic_webgl';
         }
-        if (text.includes('tennis') || text.includes('club') || text.includes('academy') || text.includes('golf') || text.includes('luxury') || text.includes('editorial') || text.includes('coach') || text.includes('court')) {
-            return 'editorial_club';
+        if (text.includes('game') || text.includes('interactive') || text.includes('canvas 60fps') || text.includes('arcade')) {
+            return 'interactive_game';
         }
-        if (text.includes('loop') || text.includes('video') || text.includes('audio') || text.includes('minimalist') || text.includes('zero scroll') || text.includes('single screen') || text.includes('coming soon')) {
-            return 'minimalist_hero';
-        }
-        if (cat.id === 'website') {
-            return 'adaptive_studio';
-        }
-        if (cat.id === 'transaction') {
-            return 'transaction_store';
-        }
+
+        // Priority 3: Category-level fallback
+        if (cat.id === 'company_profile' || cat.id === 'blog_content') return 'editorial_club';
+        if (cat.id === 'landing_page') return 'adaptive_studio';
+        if (cat.id === 'e_commerce') return 'transaction_store';
+        if (cat.id === 'dashboard') return 'enterprise_dashboard';
         return 'enterprise_dashboard';
     }
+
+    // Archetype label map for badge display
+    const ARCHETYPE_LABELS = {
+        adaptive_studio:     'Studio / Hero',
+        product_3d:          '3D Product',
+        cinematic_webgl:     'WebGL Cinematic',
+        editorial_club:      'Editorial / Bento',
+        minimalist_hero:     'Minimalist Hero',
+        interactive_game:    'Game / Interactive',
+        enterprise_dashboard:'Enterprise Dashboard',
+        transaction_store:   'Commerce Engine'
+    };
 
     function generateWorldClassFrontendPrompt(style, name, cat, sub, manualNotes, selectedArchetype) {
         const cols = style.color.split(',');
@@ -1995,7 +2995,7 @@ ${manualNotesBlock}
                 output += `================================================================================\n`;
                 output += `PROMPT #${idx + 1}: ${s.name} (${s.type.toUpperCase()})\n`;
                 output += `================================================================================\n`;
-                output += generateWorldClassFrontendPrompt(s, `Enterprise Solution - ${s.name}`, FULL_TAXONOMY.management, FULL_TAXONOMY.management.subtypes[0], '', 'auto');
+                output += generateWorldClassFrontendPrompt(s, `Enterprise Solution - ${s.name}`, FULL_TAXONOMY.dashboard, FULL_TAXONOMY.dashboard.subtypes[0], '', 'auto');
                 output += `\n\n`;
             });
 
