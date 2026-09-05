@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI/UX Design Catalog &amp; Frontend index.html Prompt Studio - 6 Pilar Taksonomi</title>
-    <meta name="description" content="Katalog 60 Gaya Desain UI/UX Modern, Taksonomi 6 Pilar Utama (Landing Page, Company Profile, Mobile App UI, E-Commerce, Dashboard, Blog / Content), Input Kebutuhan Manual, dan Generator Frontend Mandiri.">
+    <title>UI/UX Design Catalog &amp; Frontend index.html Prompt Studio - 5 Pilar Taksonomi</title>
+    <meta name="description" content="Katalog 60 Gaya Desain UI/UX Modern, Taksonomi 5 Pilar Utama (Landing Page, Company Profile, E-Commerce B2B, Dashboard ERP, Blog / Content), Input Kebutuhan Manual, dan Generator Frontend Mandiri.">
     
     <!-- Google Fonts: Inter & Outfit & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,24 +61,7 @@
         ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-        /* ============ SIDEBAR LEFT ============ */
-        .sidebar-left {
-            width: 260px;
-            min-width: 260px;
-            background: var(--panel-bg);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .sidebar-logo {
-            padding: 18px 16px 14px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
+        /* ============ LOGO & TOPBAR ============ */
         .logo-icon {
             width: 38px;
             height: 38px;
@@ -88,36 +71,31 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 20px rgba(99,102,241,0.4);
+            flex-shrink: 0;
         }
 
-        /* ============ MENU NAV ============ */
-        .nav-section { padding: 12px 10px 0; }
-        .nav-label {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            padding: 0 8px 6px;
+        /* ============ TOP NAVIGATION ============ */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 9px 12px;
+            gap: 8px;
+            padding: 8px 14px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12.5px;
+            font-weight: 600;
             color: var(--text-secondary);
             transition: all 0.2s ease;
-            position: relative;
-            margin-bottom: 2px;
             border: 1px solid transparent;
             background: transparent;
-            width: 100%;
             text-align: left;
+            white-space: nowrap;
         }
         .nav-item:hover {
             color: #FFFFFF;
@@ -125,23 +103,28 @@
             border-color: rgba(99,102,241,0.15);
         }
         .nav-item.active {
-            background: linear-gradient(90deg, rgba(99,102,241,0.2) 0%, rgba(99,102,241,0.05) 100%);
-            color: #A5B4FC;
-            border-color: rgba(99,102,241,0.3);
-            border-left: 3px solid #6366F1;
+            background: rgba(99,102,241,0.18);
+            color: #C7D2FE;
+            border-color: rgba(99,102,241,0.35);
+            box-shadow: 0 0 14px rgba(99,102,241,0.2);
         }
         .nav-item.active .nav-icon { color: #818CF8; }
-        .nav-icon { width: 18px; text-align: center; font-size: 13px; }
+        .nav-icon { width: 16px; text-align: center; font-size: 13px; }
         
         .nav-badge {
-            margin-left: auto;
+            margin-left: 4px;
             background: rgba(99,102,241,0.18);
             color: #A5B4FC;
             font-size: 10px;
             font-weight: 700;
-            padding: 1px 7px;
+            padding: 2px 7px;
             border-radius: 20px;
             border: 1px solid rgba(99,102,241,0.3);
+        }
+        .nav-badge.green {
+            background: rgba(16,185,129,0.18);
+            color: #6EE7B7;
+            border-color: rgba(16,185,129,0.3);
         }
 
         /* ============ CATEGORIES ============ */
@@ -237,11 +220,9 @@
         /* ============ TAB FILTER ============ */
         .tab-filter {
             display: flex;
-            gap: 6px;
-            padding: 10px 24px;
-            border-bottom: 1px solid var(--border-color);
-            overflow-x: auto;
-            background: rgba(13,17,26,0.6);
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .tab-btn {
             flex-shrink: 0;
@@ -484,11 +465,11 @@
             margin-bottom: 24px;
         }
 
-        /* 6 Pillar Cards Grid matching user screenshot */
+        /* 5 Pillar Cards Grid matching user requirements */
         .studio-pillar-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
             margin-bottom: 16px;
         }
 
@@ -756,14 +737,16 @@
             box-shadow: 0 0 8px rgba(16,185,129,0.7);
         }
 
-        /* ============ MOBILE RESPONSIVE ============ */
+        /* ============ RESPONSIVE NAVIGATION ============ */
+        @media (max-width: 1024px) {
+            .topbar { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
+            .top-nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; }
+            .search-box { width: 100%; max-width: 100%; }
+        }
         @media (max-width: 860px) {
             body { height: auto; min-height: 100dvh; overflow: auto; }
             body > div { display: block !important; height: auto !important; min-height: 100dvh; }
-            .sidebar-left, .sidebar-right { display: none; }
             .main-content { width: 100%; min-height: 100dvh; }
-            .topbar { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
-            .search-box { width: 100%; }
             #style-grid, #fav-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
         }
     </style>
@@ -772,87 +755,61 @@
 
 <div style="display:flex; height:100vh; overflow:hidden;">
 
-    <!-- ==================== SIDEBAR LEFT ==================== -->
-    <aside class="sidebar-left">
-        <!-- Logo -->
-        <div class="sidebar-logo">
-            <div style="display:flex; align-items:center; gap:10px;">
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <main class="main-content">
+        <!-- Topbar / Top Navigation Header -->
+        <header class="topbar">
+            <!-- Brand Logo -->
+            <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
                 <div class="logo-icon">
                     <i class="fa-solid fa-shapes" style="color:white; font-size:16px;"></i>
                 </div>
                 <div>
                     <div class="font-outfit" style="font-weight:800; font-size:15px; color:#F8FAFC; line-height:1.2;">UI/UX Studio</div>
-                    <div class="shimmer-text" style="font-size:11px; font-weight:700;">60 Themes &bull; 125+ Taxonomies</div>
+                    <div class="shimmer-text" style="font-size:10.5px; font-weight:700;">60 Themes &bull; 125+ Taxonomies</div>
                 </div>
             </div>
-        </div>
 
-        <!-- Main Navigation -->
-        <div class="nav-section" style="margin-top:6px;">
-            <div class="nav-label">Menu Utama</div>
-            <button class="nav-item active" id="menu-studio" onclick="switchView('studio')">
-                <i class="fa-solid fa-wand-magic-sparkles nav-icon" style="color:#818CF8;"></i>
-                <span>Studio Flow</span>
-                <span class="nav-badge" style="background:#6366F1; color:white; font-weight:800;">Flow</span>
-            </button>
-            <button class="nav-item" id="menu-catalog" onclick="switchView('catalog')">
-                <i class="fa-solid fa-layer-group nav-icon"></i>
-                <span>Katalog 60 Style</span>
-                <span class="nav-badge">60</span>
-            </button>
-            <button class="nav-item" id="menu-favorit" onclick="switchView('favorit')">
-                <i class="fa-solid fa-heart nav-icon" style="color:#EC4899;"></i>
-                <span>Favorit</span>
-                <span class="nav-badge" id="fav-count-badge">0</span>
-            </button>
-            <button class="nav-item" id="menu-riwayat" onclick="switchView('riwayat')">
-                <i class="fa-solid fa-clock-rotate-left nav-icon" style="color:#10B981;"></i>
-                <span>Riwayat</span>
-                <span class="nav-badge green" id="hist-count-badge">0</span>
-            </button>
-            <button class="nav-item" id="menu-compare" onclick="openComparisonModal()">
-                <i class="fa-solid fa-code-compare nav-icon" style="color:#F59E0B;"></i>
-                <span>Komparasi A vs B</span>
-            </button>
-        </div>
+            <!-- Top Navigation Menu -->
+            <nav class="top-nav">
+                <button class="nav-item active" id="menu-studio" onclick="switchView('studio')">
+                    <i class="fa-solid fa-wand-magic-sparkles nav-icon" style="color:#818CF8;"></i>
+                    <span>Studio Flow</span>
+                    <span class="nav-badge" style="background:#6366F1; color:white; font-weight:800;">Flow</span>
+                </button>
+                <button class="nav-item" id="menu-catalog" onclick="switchView('catalog')">
+                    <i class="fa-solid fa-layer-group nav-icon"></i>
+                    <span>Katalog 60 Style</span>
+                    <span class="nav-badge">60</span>
+                </button>
+                <button class="nav-item" id="menu-favorit" onclick="switchView('favorit')">
+                    <i class="fa-solid fa-heart nav-icon" style="color:#EC4899;"></i>
+                    <span>Favorit</span>
+                    <span class="nav-badge" id="fav-count-badge">0</span>
+                </button>
+                <button class="nav-item" id="menu-riwayat" onclick="switchView('riwayat')">
+                    <i class="fa-solid fa-clock-rotate-left nav-icon" style="color:#10B981;"></i>
+                    <span>Riwayat</span>
+                    <span class="nav-badge green" id="hist-count-badge">0</span>
+                </button>
+                <button class="nav-item" id="menu-compare" onclick="openComparisonModal()">
+                    <i class="fa-solid fa-code-compare nav-icon" style="color:#F59E0B;"></i>
+                    <span>Komparasi A vs B</span>
+                </button>
+            </nav>
 
-        <!-- Divider -->
-        <div style="height:1px; background:var(--border-color); margin:12px 14px;"></div>
-
-        <!-- Style Categories -->
-        <div class="nav-section" style="flex:1; overflow-y:auto; padding-bottom:8px;">
-            <div class="nav-label">Kategori Desain</div>
-            <div id="category-nav"></div>
-        </div>
-
-        <!-- Bottom Guide -->
-        <div style="padding:12px;">
-            <div onclick="openFrontendGuideAlert()" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.2); cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(99,102,241,0.45)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.2)'">
-                <div style="width:32px; height:32px; border-radius:8px; background:rgba(99,102,241,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                    <i class="fa-solid fa-code" style="color:#818CF8; font-size:13px;"></i>
-                </div>
-                <div>
-                    <div style="font-size:11px; font-weight:700; color:#E2E8FF;">Standar index.html</div>
-                    <div style="font-size:10px; color:#94A3B8;">Frontend Mandiri &bull; 1-Shot</div>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <!-- ==================== MAIN CONTENT AREA ==================== -->
-    <main class="main-content">
-        <!-- Topbar -->
-        <header class="topbar">
-            <div style="display:flex; align-items:center; gap:14px; width:100%;">
-                <div class="search-box" style="flex:1;">
-                    <input type="text" id="search-input" placeholder="Cari nama style (misal: Bento, Neobrutalism, Cyberpunk, Frutiger)..." oninput="onSearch(this.value)">
+            <!-- Search Box & Guide Button -->
+            <div style="display:flex; align-items:center; gap:10px; margin-left:auto;">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Cari nama style (misal: Bento, Neobrutalism)..." oninput="onSearch(this.value)">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
+                <button onclick="openFrontendGuideAlert()" title="Standar Frontend Mandiri" style="display:flex; align-items:center; gap:6px; padding:7px 11px; border-radius:10px; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.25); color:#C7D2FE; font-size:11.5px; font-weight:700; cursor:pointer; white-space:nowrap; transition:all 0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.2)'" onmouseout="this.style.background='rgba(99,102,241,0.1)'">
+                    <i class="fa-solid fa-code" style="color:#818CF8;"></i>
+                    <span>Standar index.html</span>
+                </button>
             </div>
         </header>
-
-        <!-- Category Tabs -->
-        <div class="tab-filter" id="tab-filter"></div>
 
         <!-- VIEW: STUDIO FLOW (GUIDED 4-STEP STUDIO WIZARD) -->
         <div class="view active" id="view-studio">
@@ -910,25 +867,121 @@
                             <label style="display:block; font-size:12px; font-weight:700; color:#E2E8FF; margin-bottom:6px;">
                                 Nama Aplikasi / Proyek <span style="color:#EC4899;">*</span>
                             </label>
-                            <input type="text" id="studio-app-name" placeholder="Misal: Dashboard Operasional Tambang Nikel, Toko Thrifting Vintage, Aplikasi Mobile FitLife..." 
+                            <input type="text" id="studio-app-name" placeholder="Misal: Dashboard Operasional Tambang Batubara Pit-to-Port, Smelter Nikel RKEF & HPAL EV Battery, Refinery Emas Dore Bullion 99.99%..." 
                                 style="width:100%; padding:12px 16px; border-radius:12px; background:#07090E; border:1px solid var(--border-color); color:#F8FAFC; font-size:13px; font-weight:500; outline:none; transition:border 0.2s;"
                                 onfocus="this.style.borderColor='#6366F1'" onblur="this.style.borderColor='var(--border-color)'">
                             
-                            <!-- Quick Chips Suggestions -->
-                            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
-                                <span style="font-size:11px; color:var(--text-muted); align-self:center; margin-right:4px;">Inspirasi cepat:</span>
-                                <button type="button" onclick="setStudioPreset('Dashboard Operasional Tambang Nikel', 'dashboard', 'Sistem ERP Tambang dengan monitoring alat berat, rekap ritase harian, filter shift kerja, dan modul cetak SPK Surat Perintah Kerja A4.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-                                    <i class="fa-solid fa-chart-line" style="color:#6366F1; margin-right:4px;"></i> Dashboard ERP Tambang
-                                </button>
-                                <button type="button" onclick="setStudioPreset('SaaS AI Prompt Studio', 'landing_page', 'Landing page interaktif dengan hero bento grid, showcase generator prompt, kartu harga bulanan/tahunan, testimoni pengguna, dan modal registrasi waitlist.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-                                    <i class="fa-solid fa-rocket" style="color:#10B981; margin-right:4px;"></i> Landing Page SaaS AI
-                                </button>
-                                <button type="button" onclick="setStudioPreset('Urban Streetwear Store', 'e_commerce', 'Toko online streetwear dengan slide-over keranjang belanja, kalkulasi PPN 11%, diskon voucher otomatis, varian ukuran/warna, dan struk belanja QRIS.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-                                    <i class="fa-solid fa-bag-shopping" style="color:#F59E0B; margin-right:4px;"></i> E-Commerce Streetwear
-                                </button>
-                                <button type="button" onclick="setStudioPreset('Blog Majalah Digital', 'blog_content', 'Blog editorial modern dengan layout bento grid artikel, sistem kategori tag, highlight penulis, dan pembaca progress indicator per artikel.')" style="padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; font-size:11px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-                                    <i class="fa-solid fa-newspaper" style="color:#A78BFA; margin-right:4px;"></i> Blog Majalah Digital
-                                </button>
+                            <!-- Quick Chips Suggestions (Hulu ke Hilir Nikel, Batubara & Emas) -->
+                            <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between;">
+                                    <span style="font-size:11px; font-weight:700; color:#A5B4FC; display:flex; align-items:center; gap:6px;">
+                                        <i class="fa-solid fa-gem" style="color:#F59E0B;"></i> Inspirasi Cepat: Industri Hulu ke Hilir Tambang Nikel, Batubara &amp; Emas
+                                    </span>
+                                    <span style="font-size:10px; color:var(--text-muted);">1-Klik auto-configure seluruh step &amp; taksonomi</span>
+                                </div>
+                                <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                                    <!-- Operasional Inti & Komoditas -->
+                                    <button type="button" onclick="setStudioPreset('Dashboard ERP Tambang Batubara Terpadu (Pit-to-Port)', 'dashboard', 'Pusat kendali operasional hulu-hilir tambang batubara: monitoring ritase HD/DT pit ke stockpile, jembatan timbang terintegrasi RFID, ROM stockpile coal blending otomatis (GCV, TM, Ash, TS), crushing plant, overland conveyor, hingga barge loading tongkang dan integrasi data SIMBARA Ditjen Minerba ESDM.', 'db_coal_pit_to_port')" style="padding:5px 11px; border-radius:8px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.25); color:#E2E8FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#6366F1'; this.style.background='rgba(99,102,241,0.2)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.25)'; this.style.background='rgba(99,102,241,0.12)'">
+                                        <i class="fa-solid fa-truck-monster" style="color:#818CF8;"></i> ⛏️ Batubara Pit-to-Port
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Sistem Kendali Smelter Pirometalurgi Nikel RKEF', 'dashboard', 'Sistem kendali proses pengolahan bijih nikel laterit pirometalurgi RKEF: monitoring rotary dryer kadar air, rotary kiln kalsinasi reduksi, electric arc furnace (SAF), suhu elektroda, tapping terak slag, efisiensi OEE, dan cetak laporan produksi harian NPI / Feronikel.', 'db_rkef_smelter_pyro')" style="padding:5px 11px; border-radius:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.25); color:#E2E8FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#10B981'; this.style.background='rgba(16,185,129,0.2)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.25)'; this.style.background='rgba(16,185,129,0.12)'">
+                                        <i class="fa-solid fa-industry" style="color:#34D399;"></i> ⚙️ Smelter Nikel RKEF
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Pabrik Hidrometalurgi Nikel HPAL (Bahan Baterai EV)', 'dashboard', 'Dashboard monitoring hidrometalurgi nikel limonit: kontrol suhu & tekanan tinggi autoklaf HPAL (High Pressure Acid Leach), konsumsi asam sulfat pekat H2SO4, netralisasi, presipitasi MHP (Mixed Hydroxide Precipitate), kristalisasi nikel/kobalt sulfat, dan dry stacking tailing.', 'db_hpal_smelter_hydro')" style="padding:5px 11px; border-radius:8px; background:rgba(6,182,212,0.12); border:1px solid rgba(6,182,212,0.25); color:#E2E8FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#06B6D4'; this.style.background='rgba(6,182,212,0.2)'" onmouseout="this.style.borderColor='rgba(6,182,212,0.25)'; this.style.background='rgba(6,182,212,0.12)'">
+                                        <i class="fa-solid fa-car-battery" style="color:#22D3EE;"></i> 🔋 Smelter Nikel HPAL
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Command Center Tambang Emas Terpadu (Open Pit & Underground)', 'dashboard', 'Sistem operasional tambang emas terpadu: monitoring penambangan open pit benching, tambang bawah tanah (underground shaft & decline ramp), pemantauan ventilasi udara, dewatering tambang dalam, grade control kadar assay Au g/t, dan pencegahan ore dilution.', 'db_gold_openpit_underground')" style="padding:5px 11px; border-radius:8px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.25); color:#E2E8FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#F59E0B'; this.style.background='rgba(245,158,11,0.2)'" onmouseout="this.style.borderColor='rgba(245,158,11,0.25)'; this.style.background='rgba(245,158,11,0.12)'">
+                                        <i class="fa-solid fa-coins" style="color:#FBBF24;"></i> 🟡 Tambang Emas Pit-UG
+                                    </button>
+
+                                    <!-- Plant, Workshop & Maintenance -->
+                                    <button type="button" onclick="setStudioPreset('Plant Maintenance & Workshop CMMS Terpadu', 'dashboard', 'Sistem kendali Departemen Plant alat berat: penjadwalan Periodic Service (PS 250, 500, 1000, 2000 Jam), backlog management parts & labor, Work Order (WO) mekanik, tracking SOS ppm wear metals (Fe, Cu, Cr, Si), status RFU/Breakdown/Standby, dan cetak SPK bengkel.', 'db_cmms_heavy_fleet')" style="padding:5px 11px; border-radius:8px; background:rgba(234,179,8,0.12); border:1px solid rgba(234,179,8,0.25); color:#FEF08A; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#EAB308'; this.style.background='rgba(234,179,8,0.2)'" onmouseout="this.style.borderColor='rgba(234,179,8,0.25)'; this.style.background='rgba(234,179,8,0.12)'">
+                                        <i class="fa-solid fa-screwdriver-wrench" style="color:#FACC15;"></i> 🔧 Plant Workshop & CMMS
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Plant SOS (Scheduled Oil Sampling) & Keausan Komponen', 'dashboard', 'Sistem pemantauan pelumas & oli alat berat (SOS LIMS): tracking ppm wear metals (Fe, Cu, Cr, Al, Pb, Si), kontaminasi jelaga (soot), fuel dilution %, viskositas cSt 100°C, dan rekomendasi dini pencegahan engine blow-by / catastrophic failure.', 'db_plant_sos_oil_sampling')" style="padding:5px 11px; border-radius:8px; background:rgba(234,179,8,0.12); border:1px solid rgba(234,179,8,0.25); color:#FEF08A; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#EAB308'; this.style.background='rgba(234,179,8,0.2)'" onmouseout="this.style.borderColor='rgba(234,179,8,0.25)'; this.style.background='rgba(234,179,8,0.12)'">
+                                        <i class="fa-solid fa-vial-virus" style="color:#FACC15;"></i> 🧪 Plant SOS Oil Sampling
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Tyre OTR (TKPH) & Undercarriage Wear System', 'dashboard', 'Sistem pemeliharaan ban OTR dump truck & rantai undercarriage dozer/excavator: tracking Ton-Kilometer-Per-Hour (TKPH), tekanan angin & suhu ban, rotasi ban, dan pengukuran keausan % track link, bushing & sprocket.', 'db_plant_tyre_undercarriage')" style="padding:5px 11px; border-radius:8px; background:rgba(234,179,8,0.12); border:1px solid rgba(234,179,8,0.25); color:#FEF08A; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#EAB308'; this.style.background='rgba(234,179,8,0.2)'" onmouseout="this.style.borderColor='rgba(234,179,8,0.25)'; this.style.background='rgba(234,179,8,0.12)'">
+                                        <i class="fa-solid fa-ring" style="color:#FACC15;"></i> 🛞 Tyre TKPH & Undercarriage
+                                    </button>
+
+                                    <!-- Nikel Laterit & Blending S/M -->
+                                    <button type="button" onclick="setStudioPreset('Nikel Laterit Blending & Rasio S/M (SiO2/MgO) Smelter', 'dashboard', 'Kalkulator optimasi blending bijih nikel laterit multi-pit: formulasi pencampuran target kadar Ni (min 1.6% / 1.8%), batasan Fe, dan rasio Silica-to-Magnesia (SiO2/MgO target 1.8-2.2) untuk kestabilan peleburan tanur smelter RKEF serta pencegahan penalti buyer.', 'db_laterite_grade_blending_sm')" style="padding:5px 11px; border-radius:8px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); color:#A7F3D0; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px; font-weight:600;" onmouseover="this.style.borderColor='#10B981'; this.style.background='rgba(16,185,129,0.25)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'; this.style.background='rgba(16,185,129,0.15)'">
+                                        <i class="fa-solid fa-flask" style="color:#34D399;"></i> 🧪 Nikel Blending S/M Ratio
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Front Pengeringan Bijih (Sun Drying Yard) & Kontrol Moisture', 'dashboard', 'Sistem pengelolaan front jemur nikel laterit: pemantauan kadar air (Moisture Content MC%) limonit dan saprolit sebelum dimuat, pencegahan fenomena likuifaksi (liquefaction) saat pengapalan tongkang, jadwal pembalikan material (rotasi dozer), dan kesiapan loading.', 'db_laterite_sun_drying_yard')" style="padding:5px 11px; border-radius:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.25); color:#A7F3D0; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#10B981'" onmouseout="this.style.borderColor='rgba(16,185,129,0.25)'">
+                                        <i class="fa-solid fa-sun" style="color:#34D399;"></i> ☀️ Sun Drying Yard (MC%)
+                                    </button>
+
+                                    <!-- MOCO & Produksi -->
+                                    <button type="button" onclick="setStudioPreset('MOCO: Rainfall Analysis, Jam Hujan & Sump Tambang', 'dashboard', 'Pusat kendali cuaca dan pemantauan jam kerja tambang: telemetri curah hujan per jam (mm/hari), analisis jam hujan & jam licin (rain & slippery hours), kalkulasi kehilangan jam kerja produktif (loss time), pemantauan elevasi debit air sump, dan kapasitas pompa dewatering.', 'db_moco_rainfall_weather')" style="padding:5px 11px; border-radius:8px; background:rgba(14,165,233,0.12); border:1px solid rgba(14,165,233,0.3); color:#BAE6FD; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#38BDF8'; this.style.background='rgba(14,165,233,0.25)'" onmouseout="this.style.borderColor='rgba(14,165,233,0.3)'; this.style.background='rgba(14,165,233,0.12)'">
+                                        <i class="fa-solid fa-cloud-showers-heavy" style="color:#38BDF8;"></i> 🌧️ MOCO Rainfall & Slippery
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('MOCO: PA, UA, MA & Fleet Availability Tambang', 'dashboard', 'Pusat kendali ketersediaan armada alat berat tambang: kalkulasi otomatis Physical Availability (PA%), Utilization of Availability (UA%), Mechanical Availability (MA%), Effective Utilization (EU%), MTBF, MTTR, analisis downtime mekanikal vs elektrikal, dan delay standby.', 'db_moco_fleet_pa_ua')" style="padding:5px 11px; border-radius:8px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:#FDE68A; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#F59E0B'; this.style.background='rgba(245,158,11,0.25)'" onmouseout="this.style.borderColor='rgba(245,158,11,0.3)'; this.style.background='rgba(245,158,11,0.12)'">
+                                        <i class="fa-solid fa-gauge-high" style="color:#FBBF24;"></i> 🚜 MOCO PA, UA & Fleet
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('MOCO: Operational Cost Control (Cash Cost/BCM & Fuel)', 'dashboard', 'Dashboard monitoring pengendalian biaya operasional penambangan: tracking cash cost per BCM overburden & per ton komoditas, evaluasi rasio konsumsi bahan bakar (Fuel Ratio L/BCM), blasting cost/BCM, konsumsi ban OTR, dan analisis varians Budget vs Actual bulanan.', 'db_moco_cost_control')" style="padding:5px 11px; border-radius:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#A7F3D0; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#10B981'; this.style.background='rgba(16,185,129,0.25)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'; this.style.background='rgba(16,185,129,0.12)'">
+                                        <i class="fa-solid fa-money-bill-trend-up" style="color:#34D399;"></i> 💵 MOCO Cost Control
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Manajemen Produksi Tambang: Stripping Ratio (SR) & Pit Getting', 'dashboard', 'Dashboard manajemen produksi harian tambang: pemantauan target pengupasan overburden (OB) BCM vs coal/ore getting ton, pencapaian nisbah kupas aktual (Stripping Ratio / SR), match factor excavator-hauler, analisis loss time & delay antrean di pit front, serta laporan shift.', 'db_mine_production_stripping_ratio')" style="padding:5px 11px; border-radius:8px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.3); color:#C7D2FE; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#6366F1'; this.style.background='rgba(99,102,241,0.25)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.3)'; this.style.background='rgba(99,102,241,0.12)'">
+                                        <i class="fa-solid fa-chart-line" style="color:#818CF8;"></i> ⛏️ Produksi & Stripping Ratio
+                                    </button>
+
+                                    <!-- Engineering & Geoteknik -->
+                                    <button type="button" onclick="setStudioPreset('Geoteknik Radar SSR & Perencanaan Peledakan Handak', 'dashboard', 'Sistem kestabilan lereng & pemboran peledakan: integrasi Slope Stability Radar (SSR) deformasi lereng pit wall, pembacaan piezometer tekanan pori, desain geometri burden-spacing, Powder Factor (PF kg/BCM), dan gudang handak P1/P2.', 'db_mine_geotech_slope')" style="padding:5px 11px; border-radius:8px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.3); color:#C7D2FE; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(99,102,241,0.3)'">
+                                        <i class="fa-solid fa-radar" style="color:#818CF8;"></i> 📡 Geoteknik Radar SSR
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Mine Engineering: Pit Design, Mine Plan & Dewatering', 'dashboard', 'Sistem perancangan dan rekayasa tambang: perancangan pit limits akhir, sequence penambangan bulanan/tahunan (Mine Scheduling), desain lereng jenjang (bench & berm), permodelan block model geologi, perancangan saluran drainase banjir, desain kolam sump, dan waste dump.', 'db_mine_engineering_pit_design')" style="padding:5px 11px; border-radius:8px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.3); color:#C7D2FE; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#6366F1'" onmouseout="this.style.borderColor='rgba(99,102,241,0.3)'">
+                                        <i class="fa-solid fa-compass-drafting" style="color:#818CF8;"></i> 📐 Mine Plan & Pit Design
+                                    </button>
+
+                                    <!-- Lab QA/QC -->
+                                    <button type="button" onclick="setStudioPreset('Laboratorium QA/QC Tambang (LIMS, XRF & CoA Surveyor)', 'dashboard', 'Sistem informasi laboratorium tambang: alur preparasi sampel 200 mesh, analisis XRF/AAS bijih nikel laterit (Ni, Fe, Co, SiO2, MgO), proksimat batubara, perbandingan hasil internal vs surveyor independen (Sucofindo/Carsurin), dan penerbitan Certificate of Analysis (CoA) resmi.', 'db_lab_lims_geochem_assay')" style="padding:5px 11px; border-radius:8px; background:rgba(168,85,247,0.12); border:1px solid rgba(168,85,247,0.3); color:#E9D5FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#C084FC'; this.style.background='rgba(168,85,247,0.25)'" onmouseout="this.style.borderColor='rgba(168,85,247,0.3)'; this.style.background='rgba(168,85,247,0.12)'">
+                                        <i class="fa-solid fa-microscope" style="color:#C084FC;"></i> 🔬 Lab LIMS & CoA Surveyor
+                                    </button>
+
+                                    <!-- Jetty & Shipping -->
+                                    <button type="button" onclick="setStudioPreset('Jetty Terminal, Barge Loading & Draught Survey Tongkang', 'dashboard', 'Pusat kendali pelabuhan tambang (Jetty): monitoring kubah dome stockpile port, Barge Loading Conveyor (BLC) TPH, draught survey awal-akhir displacement tongkang 300ft, kalkulasi laytime & demurrage/despatch SOF, dan dokumen Bill of Lading (B/L).', 'db_shipping_draught_survey')" style="padding:5px 11px; border-radius:8px; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); color:#BAE6FD; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#38BDF8'; this.style.background='rgba(56,189,248,0.25)'" onmouseout="this.style.borderColor='rgba(56,189,248,0.3)'; this.style.background='rgba(56,189,248,0.12)'">
+                                        <i class="fa-solid fa-anchor" style="color:#38BDF8;"></i> ⚓ Jetty & Draught Survey
+                                    </button>
+
+                                    <!-- Buyer & SIMBARA -->
+                                    <button type="button" onclick="setStudioPreset('Kontrak Penjualan Buyer & Integrasi SIMBARA Ditjen Minerba', 'dashboard', 'Sistem komersial dan regulasi minerba: kontrak penjualan FOB/CIF, formula indeks harga HPM Nikel & HBA Batubara, integrasi API SIMBARA verifikasi NTPN e-PNBP royalti, LHV surveyor, kuota RKAB tahunan, dan pencairan pembayaran Letter of Credit (L/C).', 'db_buyer_contract_commercial')" style="padding:5px 11px; border-radius:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#A7F3D0; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#10B981'; this.style.background='rgba(16,185,129,0.25)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'; this.style.background='rgba(16,185,129,0.12)'">
+                                        <i class="fa-solid fa-file-contract" style="color:#34D399;"></i> 🤝 Kontrak Buyer & SIMBARA
+                                    </button>
+
+                                    <!-- Owner & Kontraktor -->
+                                    <button type="button" onclick="setStudioPreset('Multi-Tenant Portal: Owner vs Kontraktor Utama vs Subkon', 'dashboard', 'Portal kolaborasi 3 pihak pertambangan: hak akses multi-role (Owner IUP, Main Contractor, Subkontraktor Rental), Berita Acara Pemeriksaan (BAP) joint survey kemajuan tambang BCM & MT, potongan penalti ketersediaan unit PA/MA, dan time sheet alat sewa.', 'db_mining_contractor_multi_tenant')" style="padding:5px 11px; border-radius:8px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.3); color:#C7D2FE; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#6366F1'; this.style.background='rgba(99,102,241,0.25)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.3)'; this.style.background='rgba(99,102,241,0.12)'">
+                                        <i class="fa-solid fa-users-viewfinder" style="color:#818CF8;"></i> 📑 Owner vs Kontraktor vs Subkon
+                                    </button>
+
+                                    <!-- K3LH HSE & HRGA -->
+                                    <button type="button" onclick="setStudioPreset('Portal K3LH Pertambangan, SMKP & Air Asam Tambang', 'dashboard', 'Dashboard kepatuhan K3 pertambangan dan lingkungan hidup: inspeksi keselamatan kerja P2H digital, permit to work (PTW) peledakan/panas, pemantauan sensor pH & TSS settling pond air asam tambang (AAT), neraca limbah B3, dan pelaporan audit SMKP Ditjen Minerba ESDM.', 'db_hse_mining_smkp')" style="padding:5px 11px; border-radius:8px; background:rgba(236,72,153,0.12); border:1px solid rgba(236,72,153,0.25); color:#E2E8FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#EC4899'; this.style.background='rgba(236,72,153,0.2)'" onmouseout="this.style.borderColor='rgba(236,72,153,0.25)'; this.style.background='rgba(236,72,153,0.12)'">
+                                        <i class="fa-solid fa-helmet-safety" style="color:#F472B6;"></i> 🦺 HSE K3LH & SMKP
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('HRIS Tambang Terpadu, Roster Kerja (6:2/8:2) & Payroll Site', 'dashboard', 'Sistem HRIS operasional site tambang: matriks rotasi roster lapangan (6:2, 8:2, 10:2), absensi geofencing & biometric site, kalkulasi lembur (overtime) tambang, tunjangan remote site/insentif produksi, validasi masa berlaku SIMPER/KIMPER, dan cetak slip gaji.', 'db_hris_mining_roster')" style="padding:5px 11px; border-radius:8px; background:rgba(236,72,153,0.12); border:1px solid rgba(236,72,153,0.3); color:#FBCFE8; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#EC4899'; this.style.background='rgba(236,72,153,0.25)'" onmouseout="this.style.borderColor='rgba(236,72,153,0.3)'; this.style.background='rgba(236,72,153,0.12)'">
+                                        <i class="fa-solid fa-users-gear" style="color:#F472B6;"></i> 👥 HRIS & Roster Tambang
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('General Affairs (GA) Tambang: Camp, Mess, Catering & Transport', 'dashboard', 'Pusat operasional umum (GA) site tambang: alokasi kamar mess/camp karyawan & tamu, audit gizi & higienitas katering harian ribuan porsi, jadwal transportasi bus karyawan & booking tiket pesawat roster penerbangan site, sanitasi air bersih, dan perizinan gate pass.', 'db_ga_camp_mess_logistics')" style="padding:5px 11px; border-radius:8px; background:rgba(236,72,153,0.12); border:1px solid rgba(236,72,153,0.3); color:#FBCFE8; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#EC4899'; this.style.background='rgba(236,72,153,0.25)'" onmouseout="this.style.borderColor='rgba(236,72,153,0.3)'; this.style.background='rgba(236,72,153,0.12)'">
+                                        <i class="fa-solid fa-campground" style="color:#F472B6;"></i> 🏕️ GA Camp, Mess & Katering
+                                    </button>
+
+                                    <!-- Supply Chain & Finance -->
+                                    <button type="button" onclick="setStudioPreset('Warehouse Management System (WMS) & Bin Location Tambang', 'dashboard', 'Sistem pergudangan tambang multi-warehouse (Central & Site): penataan rak bin-rack-aisle 3D, penerimaan barang GRN (Goods Receipt Note), putaway, picking list suku cadang, mutasi antar-site, cetak barcode/QR parts, dan Surat Perintah Jalan (SPJ).', 'db_warehouse_management')" style="padding:5px 11px; border-radius:8px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.3); color:#C7D2FE; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#6366F1'; this.style.background='rgba(99,102,241,0.25)'" onmouseout="this.style.borderColor='rgba(99,102,241,0.3)'; this.style.background='rgba(99,102,241,0.12)'">
+                                        <i class="fa-solid fa-warehouse" style="color:#818CF8;"></i> 🏬 Warehouse & WMS
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Budgeting Tambang, Penyusunan RKAB & Capex/Opex Modeling', 'dashboard', 'Perencanaan anggaran pertambangan: penyusunan dokumen RKAB tahunan Ditjen Minerba ESDM, model proyeksi belanja modal (CAPEX unit alat berat baru) & belanja operasional (OPEX), cost per pit modeling, analisis sensitivitas harga komoditas, dan realisasi anggaran bulanan.', 'db_budgeting_rkab_financial')" style="padding:5px 11px; border-radius:8px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:#FDE68A; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px;" onmouseover="this.style.borderColor='#F59E0B'; this.style.background='rgba(245,158,11,0.25)'" onmouseout="this.style.borderColor='rgba(245,158,11,0.3)'; this.style.background='rgba(245,158,11,0.12)'">
+                                        <i class="fa-solid fa-calculator" style="color:#FBBF24;"></i> 💰 Budgeting RKAB Minerba
+                                    </button>
+
+                                    <!-- Karir & Mode Kustom Bebas -->
+                                    <button type="button" onclick="setStudioPreset('ATS Mining CV & Resume Builder (Format Khusus Loker Tambang)', 'dashboard', 'Aplikasi pembuat Curiculum Vitae (CV) & Resume profesional ATS-friendly spesialis industri pertambangan & smelter: input sertifikasi wajib minerba (POP, POM, POU, K3 BNSP, TOT, SIMPER/KIMPER), rekam jejak fleet alat berat, keahlian software tambang (Surpac, Micromine, Minescape, Vulcan), template A4 standar HRD kontraktor/owner tambang, dan ekspor instan ke format PDF/cetak.', 'db_curriculum_vitae_mining_ats')" style="padding:5px 11px; border-radius:8px; background:rgba(168,85,247,0.15); border:1px solid rgba(168,85,247,0.35); color:#E9D5FF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px; font-weight:700;" onmouseover="this.style.borderColor='#C084FC'; this.style.background='rgba(168,85,247,0.3)'" onmouseout="this.style.borderColor='rgba(168,85,247,0.35)'; this.style.background='rgba(168,85,247,0.15)'">
+                                        <i class="fa-solid fa-file-invoice" style="color:#C084FC;"></i> 📄 CV Kerja Tambang (ATS)
+                                    </button>
+                                    <button type="button" onclick="setStudioPreset('Aplikasi Kustom / Modul Bebas Tambang & Energi', 'dashboard', 'Definisikan secara bebas kebutuhan sistem spesifik Anda di kotak catatan ini. Generator akan secara adaptif menyusun arsitektur front-end production-ready sesuai kebutuhan unik yang Anda tuliskan.', 'db_custom_freeform')" style="padding:5px 11px; border-radius:8px; background:rgba(255,255,255,0.08); border:1px dashed rgba(255,255,255,0.3); color:#FFFFFF; font-size:11px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px; font-weight:700;" onmouseover="this.style.borderColor='#38BDF8'; this.style.background='rgba(56,189,248,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.background='rgba(255,255,255,0.08)'">
+                                        <i class="fa-solid fa-wand-magic-sparkles" style="color:#38BDF8;"></i> ✨ Mode Bebas (Custom)
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -936,11 +989,11 @@
                         <div>
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                                 <label style="font-size:12px; font-weight:700; color:#E2E8FF;">
-                                    Kebutuhan Spesifik / Catatan Klien (Manual Notes)
+                                    Kebutuhan Spesifik / Catatan Klien (Manual Notes Tambang &amp; Smelter)
                                 </label>
                                 <span style="font-size:11px; color:var(--text-muted);">Bebas &bull; Opsional tapi sangat disarankan</span>
                             </div>
-                            <textarea id="studio-manual-notes" rows="5" placeholder="Tuliskan fitur kunci yang wajib ada. Contoh:&#10;- Wajib ada tabel SPK dengan tombol Cetak A4&#10;- Fitur Drawer Keranjang belanja dengan hitungan PPN 11%&#10;- Filter status aktif/non-aktif dengan badge warna&#10;- Integrasi data realistis minimum 10 baris di LocalStorage&#10;- Fitur Ekspor CSV dan backup zip modal" 
+                            <textarea id="studio-manual-notes" rows="5" placeholder="Tuliskan fitur kunci operasional hulu-hilir yang wajib ada. Contoh:&#10;- Integrasi alur penambangan pit, hauling road, jembatan timbang, stockpile blending, dan pelabuhan jetty&#10;- Monitoring hilirisasi pabrik: tanur RKEF nikel / autoklaf HPAL MHP / sirkuit sianidasi CIL emas&#10;- Cetak dokumen resmi: SPK Kerja Mekanik A4, Tiket Timbang Bruto-Tarra-Netto, dan CoA Surveyor Resmi&#10;- Kontrol K3LH: checklist inspeksi P2H alat berat harian, telemetri pH/TSS settling pond air asam tambang, dan SMKP Ditjen Minerba ESDM&#10;- Integrasi data realistis minimum 10-15 baris record di LocalStorage dengan filter shift kerja &amp; status unit" 
                                 style="width:100%; padding:12px 16px; border-radius:12px; background:#07090E; border:1px solid var(--border-color); color:#F8FAFC; font-size:12px; font-family:'Inter',sans-serif; line-height:1.6; resize:vertical; outline:none; transition:border 0.2s;"
                                 onfocus="this.style.borderColor='#6366F1'" onblur="this.style.borderColor='var(--border-color)'"></textarea>
                         </div>
@@ -963,24 +1016,27 @@
                         </div>
                         <div>
                             <h2 class="font-outfit" style="font-size:18px; font-weight:800; color:#FFFFFF; margin:0;">Langkah 2: Pilih Pilar Taksonomi & Subtipe</h2>
-                            <p style="font-size:12px; color:var(--text-secondary); margin:2px 0 0;">Pilih 1 dari 6 pilar arsitektur dan tentukan subtipe aplikasi yang paling relevan.</p>
+                            <p style="font-size:12px; color:var(--text-secondary); margin:2px 0 0;">Pilih 1 dari 5 pilar arsitektur dan tentukan subtipe aplikasi yang paling relevan.</p>
                         </div>
                     </div>
 
-                    <!-- 6 Pilar Cards matching User Screenshot -->
+                    <!-- 5 Pilar Cards matching User Requirements -->
                     <div class="studio-pillar-grid" id="studio-pillar-container">
                         <!-- Rendered by JS -->
                     </div>
 
                     <!-- Subtipe Grid Header -->
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin:16px 0 10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin:16px 0 8px; flex-wrap:wrap; gap:10px;">
                         <div style="display:flex; align-items:center; gap:8px;">
                             <span style="font-size:12.5px; font-weight:700; color:#F8FAFC;" id="studio-selected-pillar-label">Subtipe Terkurasi:</span>
-                            <span class="nav-badge" id="studio-subtypes-count" style="background:rgba(99,102,241,0.2); color:#A5B4FC;">8 Pilihan</span>
+                            <span class="nav-badge" id="studio-subtypes-count" style="background:rgba(99,102,241,0.2); color:#A5B4FC;">39 Pilihan</span>
                         </div>
-                        <input type="text" id="studio-subtype-search" placeholder="Cari subtipe..." oninput="filterStudioSubtypes(this.value)"
-                            style="padding:6px 12px; border-radius:8px; background:#07090E; border:1px solid var(--border-color); color:#E2E8FF; font-size:11px; outline:none; width:180px;">
+                        <input type="text" id="studio-subtype-search" placeholder="Cari subtipe (misal: MOCO, HRIS, WMS, CV, Biaya)..." oninput="filterStudioSubtypes(this.value)"
+                            style="padding:6px 14px; border-radius:8px; background:#07090E; border:1px solid var(--border-color); color:#E2E8FF; font-size:11.5px; outline:none; width:260px;">
                     </div>
+
+                    <!-- Interactive Subtype Filter Chips (Khusus Modul Tambang & Enterprise) -->
+                    <div id="studio-subtype-tags-filter" style="display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:12px;"></div>
 
                     <!-- Subtypes Interactive Grid -->
                     <div class="studio-subtypes-grid" id="studio-subtypes-grid">
@@ -1148,6 +1204,10 @@
         <!-- VIEW: KATALOG STYLES -->
         <div class="view" id="view-catalog">
             <div class="grid-scroll">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+                    <div id="tab-filter" class="tab-filter"></div>
+                    <div style="font-size:12px; color:var(--text-secondary); font-weight:600;" id="result-count">60 styles</div>
+                </div>
                 <div id="style-grid"></div>
             </div>
         </div>
@@ -1198,7 +1258,7 @@
         <footer class="status-bar">
             <div style="display:flex; align-items:center;">
                 <span class="status-dot"></span>
-                <span>System Ready &bull; 60 Handcrafted Themes &bull; 6 Pilar Taksonomi WebApp &bull; Zero AI Slop</span>
+                <span>System Ready &bull; 60 Handcrafted Themes &bull; 5 Pilar Taksonomi WebApp &bull; Zero AI Slop</span>
             </div>
             <div>
                 <span>develop by : dermawan.prb@gmail.com</span>
@@ -1211,150 +1271,171 @@
 </div>
 
 <script>
-    /* ==================== 6 CORE TAXONOMY PILLARS (LANDING, COMPANY, MOBILE, E-COMMERCE, DASHBOARD, BLOG) ==================== */
+    /* ==================== 5 CORE TAXONOMY PILLARS (DASHBOARD, LANDING, COMPANY, E-COMMERCE, BLOG) ==================== */
+    /* HULU KE HILIR PERTAMBANGAN NIKEL, BATUBARA & EMAS */
     const FULL_TAXONOMY = {
+        dashboard: {
+            id: 'dashboard',
+            label: 'Dashboard ERP & Control Center',
+            badge: 'Operasional & Kendali Hulu-Hilir',
+            icon: 'fa-solid fa-chart-column',
+            color: '#818CF8',
+            desc: 'Sistem operasional dan pusat kendali terpadu industri pertambangan hulu ke hilir: dari geologi, pit sequencing, ritase armada, jembatan timbang, stockpile blending, crushing & processing, smelting RKEF/HPAL, refinery emas, pengapalan jetty, hingga K3LH/HSE dan integrasi SIMBARA Ditjen Minerba ESDM.',
+            subtypes: [
+                // --- DEPARTEMEN PLANT (MAINTENANCE, WORKSHOP, SOS & OVERHAUL) ---
+                { id: 'db_cmms_heavy_fleet',            tag: 'plant',        archetype: 'enterprise_dashboard', name: '🚜 CMMS Perawatan Alat Berat Tambang & Status RFU/Breakdown', desc: 'Sistem pemeliharaan armada tambang: jadwal servis preventif (PS 250, 500, 1000, 2000 Jam), status kesiapan unit (RFU / Breakdown / Standby), Work Order mekanik, log pergantian spare parts, MTBF / MTTR, dan cetak SPK bengkel tambang.' },
+                { id: 'db_plant_workshop_backlog',      tag: 'plant',        archetype: 'enterprise_dashboard', name: '🔧 Workshop Bay, Backlog Management & Mekanik MPP',           desc: 'Manajemen bengkel central & site: pemantauan antrean workshop bay, backlog suku cadang kritis, monitoring MPP (Manpower Planning) mekanik shift day/night, peminjaman Special Service Tools (SST), dan evaluasi lead-time perbaikan unit.' },
+                { id: 'db_plant_sos_oil_sampling',      tag: 'plant',        archetype: 'enterprise_dashboard', name: '🧪 Plant SOS (Scheduled Oil Sampling) & Keausan Logam Mesin',   desc: 'Sistem pemantauan pelumas & oli alat berat (SOS LIMS): tracking ppm wear metals (Fe, Cu, Cr, Al, Pb, Si), kontaminasi jelaga (soot), fuel dilution %, viskositas cSt 100°C, dan rekomendasi dini pencegahan engine blow-by / catastrophic failure.' },
+                { id: 'db_plant_tyre_undercarriage',    tag: 'plant',        archetype: 'enterprise_dashboard', name: '🛞 Tyre OTR (TKPH) & Undercarriage (UC) Wear Measurement',    desc: 'Pemeliharaan ban raksasa dump truck & rantai undercarriage: monitoring Ton-Kilometer-Per-Hour (TKPH), tekanan angin & suhu ban real-time, jadwal rotasi ban, serta pengukuran keausan % track link, bushing, sprocket, dan roller dozer/excavator.' },
+                { id: 'db_plant_overhaul_pcr',          tag: 'plant',        archetype: 'enterprise_dashboard', name: '⚙️ Overhaul & Component Tracking (Engine, Transmisi & Final Drive)', desc: 'Monitoring jam kerja komponen utama alat berat (Component Hour Meter): proyeksi target umur B10/B50 life, penjadwalan Planned Component Replacement (PCR), manajemen stok komponen rekondisi, dan hasil uji dyno-test pasca-overhaul.' },
+
+                // --- DEPARTEMEN MINE ENGINEERING, GEOTEKNIK & SURVEY ---
+                { id: 'db_mine_engineering_pit_design', tag: 'engineering',  archetype: 'enterprise_dashboard', name: '📐 Mine Engineering: Pit Design, Mine Scheduling & Dewatering Sump', desc: 'Perancangan teknis tambang: perancangan pit limits akhir, sequence penambangan bulanan/tahunan (Mine Scheduling LOM), desain lereng jenjang (bench & berm), permodelan block model geologi, perancangan kolam sump, debit air banjir, dan waste dump.' },
+                { id: 'db_mine_geotech_slope',          tag: 'engineering',  archetype: 'enterprise_dashboard', name: '📡 Geoteknik Kestabilan Lereng Pit & Radar Deformasi Batuan (SSR)', desc: 'Sistem pemantauan geoteknik tambang: integrasi Slope Stability Radar (SSR) real-time, pembacaan piezometer tekanan air pori & extensometer, analisis Faktor Keamanan lereng (FK / FoS), peringatan dini potensi longsor pit wall, dan zonasi risiko.' },
+                { id: 'db_drill_blasting_explosives',   tag: 'engineering',  archetype: 'enterprise_dashboard', name: '💣 Perencanaan Pemboran, Peledakan (Drill & Blast) & Handak', desc: 'Perencanaan bor-peledakan tambang: desain pola geometri burden & spacing, konsumsi bahan peledak bulk emulsion & ANFO, Powder Factor (PF kg/BCM), manajemen gudang bahan peledak (P1/P2/KP3), pemantauan getaran seismograf, flyrock, dan berita acara peledakan.' },
+                { id: 'db_drone_survey_volumetrics',    tag: 'engineering',  archetype: 'enterprise_dashboard', name: '🛰️ Mine Survey: Drone LiDAR, Ortofoto & Volumetri Opname Kemajuan', desc: 'Sistem survei topografi dan volumetri tambang: integrasi data terbang drone LiDAR & fotogrametri ortofoto, kalkulasi kemajuan tambang bulanan (cut and fill volume opname BAP), survei stockpile ore/batubara berkala, dan validasi patok batas konsesi IUP.' },
+
+                // --- DEPARTEMEN MONITORING OPERATIONAL CONTROL (MOCO) ---
+                { id: 'db_moco_rainfall_weather',       tag: 'moco',         archetype: 'enterprise_dashboard', name: '🌧️ MOCO: Rainfall Analysis, Jam Hujan, Slippery & Water Sump', desc: 'Monitoring cuaca & delay tambang: stasiun cuaca telemetri curah hujan (mm/hari), analisis jam hujan (rain hours) & jam licin (slippery hours), waterfall kehilangan jam produksi BCM/Ton, elevasi debit air sump, dan kapasitas pompa Multiflo dewatering.' },
+                { id: 'db_moco_fleet_pa_ua',            tag: 'moco',         archetype: 'enterprise_dashboard', name: '🚜 MOCO: PA, UA, MA, EU & Fleet Availability Alat Berat',      desc: 'Pusat kendali ketersediaan armada tambang: kalkulasi otomatis Physical Availability (PA%), Utilization of Availability (UA%), Mechanical Availability (MA%), Effective Utilization (EU%), MTBF, MTTR, analisis downtime mekanikal vs elektrikal, dan delay standby.' },
+                { id: 'db_moco_cost_control',           tag: 'moco',         archetype: 'enterprise_dashboard', name: '💵 MOCO: Operational Cost Control (Cash Cost/BCM, Fuel & Blasting)', desc: 'Pengendalian biaya langsung tambang: tracking cash cost per BCM overburden & per MT batubara/ore, evaluasi rasio konsumsi bahan bakar (Fuel Ratio L/BCM), biaya pemakaian bahan peledak (blasting cost/BCM), konsumsi ban OTR, dan analisis varians Budget vs Actual.' },
+                { id: 'db_moco_fms_dispatch',           tag: 'moco',         archetype: 'enterprise_dashboard', name: '📡 MOCO: Fleet Management System (FMS) Dispatch & Cycle Time', desc: 'Pusat kendali dispatch armada pit real-time: penugasan dinamis hauler ke loading point, match factor excavator-hauler, analisis waktu edar (cycle time: loading, hauling, dumping, return, spotting), peringatan payload overload/underload, dan antrean bottleneck.' },
+
+                // --- DEPARTEMEN PRODUKSI & OPERASIONAL PIT ---
+                { id: 'db_mine_production_stripping_ratio', tag: 'production', archetype: 'enterprise_dashboard', name: '⛏️ Produksi Tambang: Overburden Stripping & Stripping Ratio (SR)', desc: 'Dashboard operasional pit harian: pemantauan target pengupasan overburden (OB) BCM vs coal/ore getting ton, pencapaian nisbah kupas aktual (Stripping Ratio / SR) vs plan, fleet assignment alat muat-angkut, loss time analysis di pit front, serta Daily Production Report (DPR).' },
+                { id: 'db_coal_pit_to_port',            tag: 'production',   archetype: 'enterprise_dashboard', name: '⛏️ ERP Tambang Batubara Terpadu (Pit-to-Port Operations)',       desc: 'Pusat kendali operasional hulu-hilir tambang batubara: monitoring ritase HD/DT pit ke stockpile, jembatan timbang RFID, ROM stockpile coal blending otomatis (GCV, TM, Ash, TS), crushing plant, overland conveyor, hingga barge loading tongkang dan integrasi SIMBARA Ditjen Minerba ESDM.' },
+                { id: 'db_production_ritase_dispatch',  tag: 'production',   archetype: 'enterprise_dashboard', name: '🚛 Dispatch Armada & Monitoring Ritase Produksi Real-Time',    desc: 'Monitoring ritase tambang per shift: produktivitas alat gali-muat (excavator/shovel), match factor hauler dump truck, waktu edar (cycle time), payload tonase, antrean loading point, tracking kecepatan hauling road, dan cetak SPK shift pengawas pit.' },
+                { id: 'db_ore_getting_grade_ni',        tag: 'production',   archetype: 'enterprise_dashboard', name: '⚒️ Ore Getting & Grade Control Selektif di Pit Front',         desc: 'Sistem pengendalian kadar bijih nikel laterit di pit front: pemetaan blok model ore, sampling channel cut per jenjang, pemisahan selective mining ore vs waste berdasarkan cut-off grade Ni%, dan rekap ore getting per shift.' },
+
+                // --- KOMPLEKSITAS NIKEL LATERIT & BLENDING S/M RATIO ---
+                { id: 'db_nickel_laterite_mine',        tag: 'laterite',     archetype: 'enterprise_dashboard', name: '⚙️ Manajemen Tambang Nikel Laterit (Limonit vs Saprolit Cut-off)', desc: 'Dashboard penambangan bijih nikel laterit: pemodelan cadangan laterisasi, grade control penambangan selektif limonit (HPAL cut-off Ni 1.0-1.3%, High Fe) vs saprolit (RKEF cut-off Ni > 1.6%, Low Fe), front pengeringan bijih (sun drying yard), dan blending rasio Ni/Fe/SiO2/MgO.' },
+                { id: 'db_laterite_grade_blending_sm',  tag: 'laterite',     archetype: 'enterprise_dashboard', name: '🧪 Nikel Laterit Blending & Rasio S/M (SiO2/MgO) Tanur Smelter', desc: 'Kalkulator optimasi blending bijih nikel laterit multi-pit: formulasi pencampuran target kadar Ni (min 1.6% / 1.8%), batasan Fe, dan rasio Silica-to-Magnesia (SiO2/MgO target 1.8-2.2) untuk kestabilan peleburan tanur smelter RKEF serta pencegahan penalti buyer.' },
+                { id: 'db_laterite_sun_drying_yard',    tag: 'laterite',     archetype: 'enterprise_dashboard', name: '☀️ Front Pengeringan Bijih (Sun Drying Yard) & Kontrol Moisture MC%', desc: 'Sistem pengelolaan front jemur nikel laterit: pemantauan kadar air (Moisture Content MC%) limonit dan saprolit sebelum dimuat, pencegahan fenomena likuifaksi (liquefaction) saat pengapalan tongkang, jadwal pembalikan material (rotasi dozer), dan kesiapan loading.' },
+
+                // --- DEPARTEMEN LABORATORIUM MINERBA (QA/QC & LIMS) ---
+                { id: 'db_lab_lims_geochem_assay',      tag: 'lab',          archetype: 'enterprise_dashboard', name: '🔬 LIMS Laboratorium Tambang (XRF, AAS Nikel & Proksimat Batubara)', desc: 'Dashboard LIMS pengujian laboratorium mineral & batubara: alur preparasi sampel (drying, jaw crusher, pulverizer 200 mesh), analisis XRF/AAS bijih nikel laterit (Ni, Fe, Co, SiO2, MgO), proksimat batubara (CV, TM, Ash, VM, TS), split sample re-check, dan penerbitan Certificate of Analysis (CoA).' },
+                { id: 'db_lab_gold_fire_assay',         tag: 'lab',          archetype: 'enterprise_dashboard', name: '🟡 Laboratorium Fire Assay & Cupellation Emas / Dore Bullion', desc: 'Dashboard pengujian kadar emas tingkat lanjut: metode Fire Assay peleburan flux timbal, kuppelasi cupellation pemisahan timbal, partelasi asam nitrat pemisahan perak, penimbangan microbalance kadar Au g/t, dan sertifikasi kemurnian emas dore bullion 99.99%.' },
+                { id: 'db_lab_reconciliation_surveyor', tag: 'lab',          archetype: 'enterprise_dashboard', name: '⚖️ Rekonsiliasi Kualitas Pit vs Stockpile vs CoA Surveyor Independen', desc: 'Sistem rekonsiliasi kualitas mineral & batubara: perbandingan assay model geologi vs face sampling pit front vs timbunan stockpile vs sampling pengapalan tongkang surveyor independen (Sucofindo/Carsurin), analisis bias recovery kadar, dan investigasi klaim buyer.' },
+
+                // --- DEPARTEMEN JETTY, TONGKANG & SHIPPING (PORT OPERATIONS) ---
+                { id: 'db_port_barge_vessel',           tag: 'jetty_shipping', archetype: 'enterprise_dashboard', name: '⚓ Jetty Terminal, Dome Stockpile & Barge Loading Conveyor (BLC)', desc: 'Dashboard kendali pelabuhan tambang (Jetty): manajemen kubah dome stockpile port, pemisahan grade nikel/kalori batubara, laju muat Barge Loading Conveyor (BLC) ton/jam, jadwal mooring tongkang (Barge 300-330ft) & tugboat, dan transshipment ke kapal Mother Vessel di anchorage.' },
+                { id: 'db_shipping_draught_survey',     tag: 'jetty_shipping', archetype: 'enterprise_dashboard', name: '🚢 Draught Survey Kapal, Laytime SOF, Demurrage & SPB Syahbandar', desc: 'Sistem dokumen dan kalkulasi pengapalan: initial & final draught survey (displacement, salinity, ballast, TPC), kalkulasi waktu muat Statement of Facts (SOF), perhitungan denda demurrage vs bonus despatch, penerbitan Bill of Lading (B/L), Cargo Manifest, dan izin SPB Syahbandar.' },
+                { id: 'db_crushing_conveyor_plant',     tag: 'jetty_shipping', archetype: 'enterprise_dashboard', name: '🏭 Crushing Plant, Stacker-Reclaimer & Overland Conveyor', desc: 'Dashboard otomatisasi stasiun peremukan (crushing plant) batubara & mineral: monitoring kecepatan conveyor belt, metal detector, apron feeder, vibratory screen, stacker-reclaimer stockpile, sensor panas bearing, dan pencegahan belt tear.' },
+
+                // --- BUYER, KOMERSIAL, TRADING & REGULASI SIMBARA ---
+                { id: 'db_buyer_contract_commercial',   tag: 'buyer_trade',  archetype: 'enterprise_dashboard', name: '🤝 Manajemen Kontrak Penjualan Buyer, Pricing HPM/HBA & L/C Settlement', desc: 'Sistem komersial dan kontrak penjualan mineral & batubara: master kontrak buyer (FOB Barge / FOB Mother Vessel / CIF), formula harga berbasis indeks HBA atau HPM Patokan Nikel Ditjen Minerba ESDM, penyesuaian penalti/bonus kualitas (CoA final), pembayaran Letter of Credit (L/C) & SKBDN, serta approval faktur.' },
+                { id: 'db_simbara_moms_compliance',     tag: 'buyer_trade',  archetype: 'enterprise_dashboard', name: '📋 Integrasi SIMBARA Ditjen Minerba ESDM, MOMS & e-PNBP Royalti', desc: 'Pusat kepatuhan regulasi pemerintah: integrasi sistem SIMBARA (Sistem Informasi Mineral dan Batubara), sinkronisasi MOMS produksi harian, verifikasi NTPN pelunasan e-PNBP royalti minerba, monitoring kuota RKAB tahunan, penerbitan Laporan Hasil Verifikasi (LHV) surveyor, dan kepatuhan DMO.' },
+
+                // --- OWNER, KONTRAKTOR & SUBKONTRAKTOR ---
+                { id: 'db_mining_contractor_multi_tenant', tag: 'contractor', archetype: 'enterprise_dashboard', name: '🏢 Multi-Tenant Portal: Owner IUP vs Main Contractor vs Subkon', desc: 'Portal terpadu kolaborasi 3 pihak penambangan: hak akses multi-role terisolasi (Owner IUP Konsesi, Kontraktor Utama Tambang, Subkontraktor Rental), pembagian scope of work (SOW) pit, pengawasan KPI performa penambangan, pelaporan gabungan harian, dan koordinasi K3 KTT.' },
+                { id: 'db_contractor_subkon_billing',   tag: 'contractor',   archetype: 'enterprise_dashboard', name: '📑 Joint Survey Opname Kemajuan (BAP), Klaim Billing & Rental Time Sheet', desc: 'Sistem verifikasi klaim tagihan pekerjaan tambang: rekonsiliasi Berita Acara Pemeriksaan (BAP) volume joint survey (BCM OB & MT Komoditas), potongan penalti ketersediaan unit PA/MA, klaim jam kerja alat sewa (Rental Time Sheet HM start/stop), dan persetujuan invoice bulanan.' },
+
+                // --- DEPARTEMEN HSE (K3LH, SMKP, TSF & LINGKUNGAN) ---
+                { id: 'db_hse_mining_smkp',             tag: 'hse_env',      archetype: 'enterprise_dashboard', name: '🦺 HSE K3LH Tambang Terpadu, SMKP Minerba & CAPA Insiden',    desc: 'Dashboard K3 pertambangan khusus: pelaporan insiden, near-miss, tindakan/kondisi tidak aman (unsafe act/condition), statistik keselamatan (LTI, LTIFR, Fatalities), investigasi insiden CAPA, implementasi Golden Rules, dan audit 7 Elemen SMKP Ditjen Minerba ESDM.' },
+                { id: 'db_p2h_heavy_equipment',         tag: 'hse_env',      archetype: 'enterprise_dashboard', name: '🚜 Inspeksi Digital P2H Alat Berat Tambang & Validasi RFU K3', desc: 'Sistem inspeksi pra-operasi (P2H) harian alat berat tambang: 20 poin kelaikan keselamatan K3 (sistem rem, steering, hidrolik, fire suppression, radio komunikasi, ban OTR), pelaporan temuan kerusakan fisik, validasi status RFU/Breakdown, dan integrasi work order bengkel tambang.' },
+                { id: 'db_settling_pond_environment',   tag: 'hse_env',      archetype: 'enterprise_dashboard', name: '🌿 Pemantauan Air Asam Tambang (AAT), Settling Pond & Reklamasi', desc: 'Dashboard otomatisasi lingkungan tambang: telemetri sensor pH, TSS, Fe, Mn di settling pond, dosing plant kapur tohor otomatis, neraca limbah B3, laporan RKL-RPL semesteran Ditjen Minerba/LHK, reklamasi revegetasi pascatambang, dan audit PROPER Emas/Hijau.' },
+                { id: 'db_tailing_tsf_monitoring',      tag: 'hse_env',      archetype: 'enterprise_dashboard', name: '🌊 Telemetri Kestabilan Bendungan Tailing (TSF) & Dekontaminasi Sianida', desc: 'Sistem telemetri pemantauan stabilitas bendungan tailing emas/nikel (Tailings Storage Facility): sensor piezometer tekanan air pori, inklinometer pergeseran lereng tanggul, dry stacking monitoring, dan pemantauan detoksifikasi sianida Inco SO2-Air / H2O2 (<0.5 ppm).' },
+                { id: 'db_mine_reclamation_esg',        tag: 'hse_env',      archetype: 'enterprise_dashboard', name: '🌱 Reklamasi Lahan, Penataan Topsoil & Revegetasi Pascatambang', desc: 'Dashboard manajemen reklamasi lahan pascatambang: penataan lereng void pit, penebaran tanah pucuk (topsoil), pembibitan nursery tanaman lokal, monitoring revegetasi Ha/tahun, dan pelepasan jaminan reklamasi Ditjen Minerba.' },
+
+                // --- DEPARTEMEN HRGA (HRIS SITE, ROSTER, MESS & LOGISTIK) ---
+                { id: 'db_hris_mining_roster',         tag: 'hrga',         archetype: 'enterprise_dashboard', name: '👥 HRIS Tambang Terpadu, Roster Kerja (6:2/8:2/10:2) & Payroll Site', desc: 'Sistem HRIS operasional site tambang: matriks rotasi roster lapangan (6:2, 8:2, 10:2), absensi geofencing & biometric site, kalkulasi lembur (overtime) tambang, tunjangan remote site/insentif produksi, validasi masa berlaku SIMPER/KIMPER, dan cetak slip gaji.' },
+                { id: 'db_ga_camp_mess_logistics',     tag: 'hrga',         archetype: 'enterprise_dashboard', name: '🏕️ General Affairs (GA) Tambang: Camp, Mess, Katering & Transit Transport', desc: 'Pusat operasional umum (GA) site tambang: alokasi kamar mess/camp karyawan & tamu, audit gizi & higienitas katering harian ribuan porsi, jadwal transportasi bus karyawan & booking tiket pesawat roster penerbangan site, sanitasi air bersih, dan perizinan gate pass.' },
+
+                // --- SUPPLY CHAIN, GUDANG & BAHAN BAKAR ---
+                { id: 'db_warehouse_management',       tag: 'warehouse',    archetype: 'enterprise_dashboard', name: '🏬 Warehouse Management System (WMS) & Bin Location Tambang', desc: 'Sistem pergudangan tambang multi-warehouse: penataan rak bin-rack-aisle 3D, penerimaan barang GRN (Goods Receipt Note), putaway, picking list suku cadang, mutasi antar-site, cetak barcode/QR parts, dan Surat Perintah Jalan (SPJ).' },
+                { id: 'db_inventory_management',       tag: 'warehouse',    archetype: 'enterprise_dashboard', name: '📦 Inventory Management Suku Cadang Alat Berat & Min-Max ROP', desc: 'Sistem persediaan suku cadang tambang: kalkulasi Reorder Point (ROP), safety stock, analisis fast/slow-moving & dead stock, valuasi persediaan FIFO/Weighted Average, pelacakan serial number sparepart kritis (engine, pump, undercarriage), dan auto-PR.' },
+                { id: 'db_fuel_management_dispenser',  tag: 'warehouse',    archetype: 'enterprise_dashboard', name: '⛽ Manajemen Fuel Farm, BBM Solar B35/B40 & Fuel Ratio (L/BCM)', desc: 'Sistem manajemen bahan bakar tambang: tangki timbun solar fuel farm, dispensing fuel truck dengan nozzle RFID per unit alat berat, monitoring konsumsi liter/HM, deteksi kebocoran BBM, dan kalkulasi rasio konsumsi bahan bakar (Fuel Ratio L/BCM).' },
+                { id: 'db_weighbridge_automation',      tag: 'warehouse',    archetype: 'enterprise_dashboard', name: '⚖️ Jembatan Timbang Otomatis & Tiket Tonase Terintegrasi RFID', desc: 'Sistem otomasi timbangan jembatan tambang: integrasi sensor RFID truk hauling, kamera ANPR plat nomor, timbang bruto-tarra-netto kilat, rekonsiliasi data timbang ROM stockpile, validasi surveyor independen, dan cetak tiket timbang resmi.' },
+                { id: 'db_stockpile_coal_blending',     tag: 'warehouse',    archetype: 'enterprise_dashboard', name: '🏔️ Manajemen ROM Stockpile Batubara & Blending Otomatis',    desc: 'Sistem pengelolaan stockpile batubara: peta seam batubara, pencegahan swabakar (spontaneous combustion), kalkulator coal blending optimasi kalori (GCV, TM, Ash, Volatile, Total Sulfur), rekap DO (Delivery Order), dan rekonsiliasi losses.' },
+
+                // --- BUDGETING, FINANCE & KEUANGAN ---
+                { id: 'db_budgeting_rkab_financial',   tag: 'finance',      archetype: 'enterprise_dashboard', name: '💰 Budgeting Tambang, Penyusunan RKAB & Capex/Opex Modeling', desc: 'Perencanaan anggaran pertambangan: penyusunan dokumen RKAB tahunan Ditjen Minerba ESDM, model proyeksi belanja modal (CAPEX unit alat berat baru) & belanja operasional (OPEX), cost per pit modeling, analisis sensitivitas harga komoditas, dan realisasi anggaran bulanan.' },
+                { id: 'db_finance_accounting_mining',  tag: 'finance',      archetype: 'enterprise_dashboard', name: '📑 Finance & Accounting Tambang (Billing Kontraktor & Cash Flow Site)', desc: 'Sistem keuangan dan akuntansi pertambangan: verifikasi tagihan bulanan kontraktor (joint survey billing), rekonsiliasi kas operasional site (petty cash remote camp), accounts payable/receivable vendor, penerbitan faktur pajak minerba, dan neraca laba rugi entitas tambang.' },
+
+                // --- PABRIK PENGOLAHAN & SMELTER ---
+                { id: 'db_rkef_smelter_pyro',          tag: 'smelter',      archetype: 'enterprise_dashboard', name: '🏭 Smelter Pirometalurgi Nikel RKEF (Rotary Kiln SAF)',       desc: 'Sistem kendali proses peleburan nikel pirometalurgi RKEF (Rotary Kiln Electric Furnace): rotary dryer kadar air, rotary kiln kalsinasi reduksi, submerged arc furnace (SAF), monitor suhu elektroda, tapping terak, dan output NPI / Feronikel.' },
+                { id: 'db_hpal_smelter_hydro',         tag: 'smelter',      archetype: 'enterprise_dashboard', name: '🔋 Smelter Hidrometalurgi Nikel HPAL (MHP & Baterai EV)',     desc: 'Dashboard pengolahan hidrometalurgi nikel limonit: monitoring autoklaf bertekanan & bersuhu tinggi (High Pressure Acid Leach), konsumsi asam sulfat H2SO4, netralisasi, presipitasi MHP (Mixed Hydroxide Precipitate), kristalisasi nikel sulfat & kobalt baterai EV.' },
+                { id: 'db_gold_cyanidation_cil_cip',    tag: 'smelter',      archetype: 'enterprise_dashboard', name: '⚗️ Pabrik Pengolahan & Ekstraksi Emas (CIL / CIP & Flotasi)', desc: 'Sistem kontrol sirkuit pengolahan bijih emas: primary crusher, SAG mill & Ball mill (P80 75um), sirkuit konsentrator sentrifugal Knelson, tangki sianidasi CIL (Carbon-in-Leach) / CIP, adsorpsi karbon aktif, dan profil konsentrasi NaCN.' },
+                { id: 'db_gold_refinery_bullion',      tag: 'smelter',      archetype: 'enterprise_dashboard', name: '🏆 Sirkuit Elusi, Electrowinning & Refinery Emas (99.99%)',    desc: 'Dashboard pemurnian emas tingkat lanjut: elusi desorpsi karbon panas metode Zadra/AARL, sel electrowinning katoda wool baja, tanur peleburan emas dore bullion 1150°C, pemurnian Wohlwill/Miller kadar 99.99%, dan pencetakan fine gold bar standar LBMA.' },
+                { id: 'db_gold_openpit_underground',   tag: 'production',   archetype: 'enterprise_dashboard', name: '🟡 Command Center Tambang Emas (Open Pit & Underground)',      desc: 'Sistem kendali tambang emas terpadu: operasional open pit benching, tambang bawah tanah (underground shaft & decline ramp), ventilasi, dewatering tambang dalam, grade control assay Au g/t, dan pencegahan ore dilution.' },
+
+                // --- KARIR, REKRUTMEN & ATS CV TAMBANG ---
+                { id: 'db_curriculum_vitae_mining_ats', tag: 'career',       archetype: 'editorial_club',      name: '📄 ATS Mining CV & Resume Builder (Format Khusus Loker Tambang)', desc: 'Aplikasi pembuat Curiculum Vitae (CV) & Resume profesional ATS-friendly spesialis industri pertambangan & smelter: input sertifikasi wajib minerba (POP, POM, POU, K3 BNSP, TOT, SIMPER/KIMPER), rekam jejak fleet alat berat, keahlian software tambang (Surpac, Micromine, Minescape, Vulcan), template A4 standar HRD kontraktor/owner tambang, dan ekspor instan ke format PDF/cetak.' },
+                { id: 'db_mining_job_career_portal',    tag: 'career',       archetype: 'enterprise_dashboard', name: '💼 Portal Karir & Rekrutmen Terpadu Industri Pertambangan Minerba', desc: 'Portal rekrutmen dan lowongan kerja khusus sektor pertambangan: manajemen pelamar kerja (Applicant Tracking System), seleksi berbasis sertifikasi kompetensi K3/POP/alat berat, jadwal tes psikotes & MCU (Medical Check Up) fit-to-work, verifikasi berkas pengalaman kerja site, dan cetak Offering Letter resmi.' },
+
+                // --- MODE CUSTOM & EKSPLORASI BEBAS (ANTI-RESTRICTION ENGINE) ---
+                { id: 'db_custom_freeform',             tag: 'custom',       archetype: 'enterprise_dashboard', name: '✨ Custom Domain / Eksplorasi Bebas (Tulis Modul Sendiri Tanpa Batas)', desc: 'Mode fleksibel tanpa batas: definisikan sendiri spesifikasi modul apa saja sesuai kebutuhan unik Anda di luar daftar. Generator akan secara adaptif menyusun prompt arsitektur berstandar dunia untuk konsep bebas Anda!' }
+            ]
+        },
+
         landing_page: {
             id: 'landing_page',
-            label: 'Landing Page',
-            badge: 'Konversi & Lead Gen',
+            label: 'Landing Page & Pemasaran',
+            badge: 'Pemasaran & Kemitraan Komoditas',
             icon: 'fa-solid fa-bolt',
             color: '#6366F1',
-            desc: 'Halaman web konversi tinggi berfokus pada pengenalan produk, penangkapan prospek (lead generation), promosi campaign, dan call-to-action (CTA) utama.',
+            desc: 'Halaman konversi tinggi dan showcase profesional untuk penawaran komoditas batubara, produk hilirisasi smelter nikel, fine gold bar emas, serta jasa kontraktor & eksplorasi pertambangan.',
             subtypes: [
-                { id: 'lp_saas_launch',       archetype: 'adaptive_studio',   name: 'SaaS Product Launch Landing Page',          desc: 'Halaman peluncuran produk software/SaaS dengan hero interaktif, value proposition, kalkulator harga bertingkat, dan ajakan coba gratis.' },
-                { id: 'lp_lead_funnel',       archetype: 'adaptive_studio',   name: 'Lead Generation & Sales Funnel Page',        desc: 'Halaman penangkap kontak calon klien dengan penawaran magnet prospek, testimoni otoritas, formulir instan, dan garansi risiko nol.' },
-                { id: 'lp_event_conf',        archetype: 'adaptive_studio',   name: 'Event, Conference & Webinar Registration',   desc: 'Halaman acara konferensi atau seminar daring dengan jadwal agenda sesi, profil pembicara (keynote), lokasi peta, dan registrasi tiket.' },
-                { id: 'lp_waitlist',          archetype: 'minimalist_hero',   name: 'Campaign & Pre-Order Waitlist Page',         desc: 'Halaman pra-peluncuran produk dengan hitung mundur (countdown), teaser visual eksklusif, dan formulir antrean pendaftaran VIP.' },
-                { id: 'lp_coming_soon',       archetype: 'minimalist_hero',   name: 'Coming Soon & Teaser Showcase',              desc: 'Halaman penahan peluncuran dengan visual sinematik animasi, bocoran fitur, dan kotak langganan email notifikasi peluncuran.' },
-                { id: 'lp_portfolio',         archetype: 'editorial_club',    name: 'Agency / Freelancer Portfolio One-Pager',    desc: 'Halaman portofolio satu halaman memamerkan studi kasus karya terbaik, klien ternama, video showreel, dan formulir konsultasi.' },
-                { id: 'lp_personal_brand',    archetype: 'editorial_club',    name: 'Personal Branding & Speaker Profile Page',   desc: 'Halaman personal brand profesional atau tokoh publik dengan headline kuat, video profil, testimonial klien, dan tautan sesi booking.' },
-                { id: 'lp_product_3d',        archetype: 'product_3d',        name: '3D Product Showcase Landing Page',            desc: 'Halaman pemasaran produk fisik premium dengan tampilan 3D interaktif 360°, animasi scroll, dan CTA pembelian instan.' },
-                { id: 'lp_app_promo',         archetype: 'minimalist_hero',   name: 'Mobile App Promotion Landing Page',          desc: 'Halaman promosi aplikasi mobile dengan mockup bingkai perangkat, fitur unggulan, tombol unduh App Store/Play Store, dan QR Code scan.' },
-                { id: 'lp_link_bio',          archetype: 'minimalist_hero',   name: 'Link-in-Bio & Social Tree Page',             desc: 'Halaman kartu tautan ringkas untuk bio media sosial merangkum portofolio, kanal YouTube, kontak WhatsApp, dan etalase produk.' },
-                { id: 'lp_ngo_cause',         archetype: 'adaptive_studio',   name: 'NGO, Charity & Social Cause Campaign Page',  desc: 'Halaman kampanye donasi dan gerakan sosial dengan counter donasi real-time, galeri dampak program, dan formulir donasi QRIS.' },
-                { id: 'lp_real_estate',       archetype: 'product_3d',        name: 'Real Estate & Property Showcase Page',       desc: 'Halaman pemasaran properti dengan galeri virtual tour 360°, tabel cicilan KPR kalkulasi, peta lokasi interaktif, dan formulir booking.' },
-                { id: 'lp_mining_services',   archetype: 'adaptive_studio',   name: '⛏ Mining Services & Contractor Tender Page', desc: 'Halaman pemasaran jasa kontraktor pertambangan: showcase fleet alat berat, rekam jejak proyek tambang, kalkulator estimasi biaya penawaran (cost per BCM/MT), dan formulir RFQ tender proyek.' },
-                { id: 'lp_webgl_immersive',   archetype: 'cinematic_webgl',   name: 'WebGL Immersive Brand Experience Page',      desc: 'Halaman brand experience sinematik menggunakan Three.js / WebGL dengan animasi scroll orbit, partikel, dan shader kustom.' },
-                { id: 'lp_game_launch',       archetype: 'interactive_game',  name: 'Game Launch & Interactive Teaser Page',      desc: 'Halaman peluncuran game dengan mini-interaksi playable, trailer video hero, leaderboard pendaftar awal, dan countdown server.' }
+                { id: 'lp_coal_supply_tender',      archetype: 'adaptive_studio',   name: '⛏️ Penawaran Pasokan Batubara Industri & PLTU (FOB/CIF)',  desc: 'Showcase spesifikasi kalori batubara (Gar 3800-6500), kapasitas produksi konsesi tambang, fasilitas jetty pemuatan tongkang, sertifikat CoA surveyor, dan formulir tender pengadaan batubara pembangkit listrik / pabrik semen.' },
+                { id: 'lp_nickel_ore_products',     archetype: 'adaptive_studio',   name: '⚙️ Pemasaran Produk Hilirisasi Nikel (NPI, FeNi & MHP)',   desc: 'Landing page promosi produk hilirisasi smelter: spesifikasi teknis Nickel Pig Iron kadar 10-14%, Ferronickel 20-25%, dan Mixed Hydroxide Precipitate (MHP) untuk bahan baku sel baterai kendaraan listrik global.' },
+                { id: 'lp_gold_dore_bullion',       archetype: 'editorial_club',    name: '🟡 Penjualan Fine Gold Bar 99.99% & Dore Bullion LBMA',    desc: 'Showcase emas batangan bersertifikasi murni 99.99% (24 karat), jaminan keaslian segel CertiCard, emas dore bullion smelter resmi, harga spot harian, dan formulir kemitraan institusi / toko emas.' },
+                { id: 'lp_mining_contractor_earthwork', archetype: 'adaptive_studio', name: '🚜 Jasa Kontraktor Penambangan Batubara & Mineral Terpadu', desc: 'Portofolio kontraktor tambang profesional: fleet armada alat berat kelas dunia (Excavator 100-400T, OHT 100T), rekam jejak pengupasan OB ratusan juta BCM, standar keselamatan K3LH internasional, dan RFQ tender penambangan.' },
+                { id: 'lp_geological_drilling_service', archetype: 'adaptive_studio', name: '🗺️ Jasa Konsultan Eksplorasi Geologi, Bor & JORC/KCMI',    desc: 'Pemasaran jasa eksplorasi mineral dan batubara: tim geologis berkompeten (CPI / KCMI), rig pengeboran inti diamond core drilling, interpretasi geofisika logging lubang bor, dan penyusunan laporan estimasi sumberdaya cadangan.' },
+                { id: 'lp_heavy_fleet_distributor', archetype: 'product_3d',        name: '🏗️ Distributor & Persewaan Alat Berat Tambang Ekstraktif', desc: 'Katalog distributor alat berat tambang: hydraulic excavator tambang, rigid dump truck, wheel loader, crawler bulldozer, jaminan ketersediaan suku cadang genuine parts, dan paket sewa full-maintenance.' },
+                { id: 'lp_smelter_epc_contractor',  archetype: 'adaptive_studio',   name: '🏭 Kontraktor EPC Pembangunan Smelter RKEF & HPAL Nikel',  desc: 'Showcase kontraktor rekayasa, pengadaan & konstruksi (EPC) fasilitas pengolahan nikel: teknologi tanur RKEF, autoklaf hidrometalurgi HPAL, penyediaan pembangkit captive power plant, dan fasilitas jetty ore pelabuhan.' },
+                { id: 'lp_mining_esg_reclamation',  archetype: 'editorial_club',    name: '🌱 Jasa Konsultasi Lingkungan Tambang, TSF & Reklamasi',   desc: 'Solusi ramah lingkungan untuk pertambangan: bioremediasi air asam tambang, revegetasi nursery bibit lokal, perancangan dry stack tailings (DST), dan pendampingan audit PROPER Lingkungan Hidup.' },
+                { id: 'lp_commodity_tender_portal', archetype: 'adaptive_studio',   name: '📢 Portal Tender Terbuka Pasokan Batubara, Ore & Emas',    desc: 'Portal pengumuman lelang pasokan komoditas minerba: jadwal pembukaan lelang kuota ekspor, dokumen persyaratan teknis RKS, kalkulator simulasi penawaran, dan registrasi vendor buyer terverifikasi.' }
             ]
         },
 
         company_profile: {
             id: 'company_profile',
-            label: 'Company Profile',
-            badge: 'Branding & Kredibilitas',
+            label: 'Company Profile Korporat',
+            badge: 'Korporasi & Tata Kelola Pertambangan',
             icon: 'fa-solid fa-building',
             color: '#38BDF8',
-            desc: 'Website representasi resmi perusahaan untuk membangun reputasi profesional, memaparkan lini bisnis, tim pimpinan, portofolio, dan legalitas perusahaan.',
+            desc: 'Website representasi resmi korporasi pertambangan terintegrasi, pemegang konsesi IUP/PKP2B/KK, grup kawasan industri hilirisasi smelter, dan kontraktor penambangan nasional dengan tata kelola ESG berstandar global.',
             subtypes: [
-                { id: 'cp_corporate',         archetype: 'editorial_club',    name: 'Corporate Enterprise Website',               desc: 'Profil perusahaan skala besar mencakup sejarah, visi-misi, tata kelola (GCG), hubungan investor, dan siaran pers resmi.' },
-                { id: 'cp_creative_agency',   archetype: 'adaptive_studio',   name: 'Creative Agency & Design Studio Profile',    desc: 'Profil studio desain dan agensi periklanan dengan tata letak visual artistik, filosofi desain, dan penghargaan internasional.' },
-                { id: 'cp_b2b_industrial',    archetype: 'editorial_club',    name: 'B2B Industrial, Heavy Equipment & Mining',   desc: 'Profil perusahaan kontraktor tambang, alat berat, atau manufaktur industri dengan daftar armada unit, sertifikasi ISO, dan kontak RFQ.' },
-                { id: 'cp_tech_startup',      archetype: 'adaptive_studio',   name: 'Tech Startup & Scale-up Profile',            desc: 'Profil perusahaan rintisan teknologi memaparkan visi pendiri, solusi inovasi industri, budaya kerja tim, dan lowongan karir terbuka.' },
-                { id: 'cp_architecture',      archetype: 'editorial_club',    name: 'Architecture, Interior & Construction Firm', desc: 'Profil biro arsitektur dan konstruksi dengan galeri foto proyek resolusi tinggi, denah blueprint, dan form konsultasi rancang bangun.' },
-                { id: 'cp_law_firm',          archetype: 'editorial_club',    name: 'Law Firm, Notary & Legal Services',          desc: 'Profil kantor hukum dan notariat dengan bidang spesialisasi perkara, kredensial advokat senior, dan sistem janji temu konsultasi.' },
-                { id: 'cp_healthcare',        archetype: 'editorial_club',    name: 'Healthcare Clinic & Specialist Center',      desc: 'Profil klinik kesehatan dan rumah sakit spesialis dengan profil dokter, jadwal praktik, fasilitas rawat, dan kontak darurat.' },
-                { id: 'cp_education',         archetype: 'editorial_club',    name: 'School, University & Academic Institution',  desc: 'Profil lembaga pendidikan resmi memaparkan fakultas/jurusan, kalender akademik, fasilitas laboratorium, dan admisi siswa baru.' },
-                { id: 'cp_hospitality',       archetype: 'product_3d',        name: 'Hotel, Resort & Luxury Villa Showcase',      desc: 'Profil resort dan vila mewah menyajikan galeri kamar, fasilitas kolam/spa, pengalaman kuliner, dan panduan lokasi wisata.' },
-                { id: 'cp_restaurant',        archetype: 'editorial_club',    name: 'Restaurant, Cafe & F&B Establishment',       desc: 'Profil restoran dan kedai kuliner menampilkan buku menu digital, profil koki (chef), suasana interior, dan reservasi meja.' },
-                { id: 'cp_logistics',         archetype: 'editorial_club',    name: 'Logistics, Shipping & Freight Forwarder',    desc: 'Profil perusahaan logistik dan ekspedisi dengan rute pelayanan armada, kalkulator tarif pengiriman, dan pelacak resi.' },
-                { id: 'cp_nonprofit',         archetype: 'adaptive_studio',   name: 'NGO, Foundation & Social Organization',      desc: 'Profil organisasi nirlaba dan yayasan dengan laporan dampak program, galeri kegiatan, dan transparansi keuangan donasi.' },
-                { id: 'cp_energy_mining',     archetype: 'editorial_club',    name: 'Energy, Mining & Natural Resources Company', desc: 'Profil perusahaan energi dan pertambangan dengan peta konsesi lahan, kapasitas produksi, sertifikasi AMDAL, dan kontak investor.' },
-                { id: 'cp_coal_mining',       archetype: 'editorial_club',    name: '⛏ Coal Mining Company Profile (PKP2B/IUP)',  desc: 'Profil perusahaan tambang batubara PKP2B/IUP dengan peta konsesi Kalimantan/Sumatera, laporan produksi tahunan (MT), spesifikasi kualitas produk batubara (GCV/TS), sertifikasi ESDM, dan investor relations.' },
-                { id: 'cp_nickel_smelter',    archetype: 'editorial_club',    name: '⚙ Nickel Mining & Smelting Company Profile',  desc: 'Profil perusahaan tambang dan pengolahan nikel dengan kapasitas produksi NPI/FeNi/MHP, peta blok ore Sulawesi/Maluku, RKEF line facility, sertifikasi PROPER Hijau, dan milestone ekspor.' },
-                { id: 'cp_mining_contractor', archetype: 'editorial_club',    name: '🚛 Mining Contractor & Earthwork Services',   desc: 'Profil kontraktor pertambangan dan earthwork dengan daftar fleet alat berat (DT/HD/Excavator/Dozer), rekam jejak proyek, sertifikasi ISO 9001/14001/45001, dan formulir tender RFQ.' },
-                { id: 'cp_portfolio_studio',  archetype: 'cinematic_webgl',   name: 'Portfolio Studio – WebGL Immersive Branding', desc: 'Profil studio kreatif premium dengan pengalaman scrolling sinematik WebGL, karya dalam 3D canvas, dan cursor interaktif.' }
+                { id: 'cp_holding_minerba_integrated', archetype: 'editorial_club', name: '🏢 Holding Korporasi Pertambangan Terintegrasi (Batubara, Nikel, Emas)', desc: 'Profil korporasi induk pertambangan skala nasional: peta izin usaha pertambangan (IUP/PKP2B/KK), struktur grup hilirisasi terintegrasi, laporan cadangan teruji JORC, hubungan investor bursa efek, dan dewan komisaris/direksi.' },
+                { id: 'cp_coal_mining_operator',    archetype: 'editorial_club',    name: '⛏️ Perusahaan Produsen Batubara PKP2B / IUP Terbuka',     desc: 'Profil produsen batubara terkemuka: sebaran pit tambang Kalimantan/Sumatera, kapasitas angkut infrastruktur jalan hauling dan jetty pelabuhan, ketaatan DMO nasional, serta laporan keuangan teraudit.' },
+                { id: 'cp_nickel_smelter_industrial_park', archetype: 'editorial_club', name: '⚙️ Kawasan Industri Terpadu Smelter & Hilirisasi Nikel', desc: 'Profil kawasan industri pengolahan nikel berskala raksasa (kawasan industri Morowali/Weda Bay style): rantai pasok bijih ore, fasilitas tanur RKEF & pabrik HPAL, pelabuhan laut internasional, dan komitmen net-zero carbon.' },
+                { id: 'cp_gold_mining_refinery_firm', archetype: 'editorial_club', name: '🟡 Perusahaan Penambangan Emas & Pemurnian Logam Mulia',    desc: 'Profil perusahaan tambang emas terbuka dan bawah tanah: sejarah penemuan deposit, teknologi pemrosesan sianidasi modern, pabrik refinery emas murni berstandar LBMA, dan standar keselamatan zero harm.' },
+                { id: 'cp_mining_contractor_tier1', archetype: 'editorial_club',    name: '🚜 Perusahaan Kontraktor Penambangan Batubara & Mineral',  desc: 'Profil perusahaan jasa kontraktor pertambangan Tier-1: ribuan unit armada alat berat berteknologi telematika otonom, rekam jejak puluhan tahun di industri minerba, sertifikasi ISO 9001/14001/45001, dan tata kelola safety SMKP.' },
+                { id: 'cp_surveyor_superintending', archetype: 'editorial_club',    name: '🔬 Lembaga Surveyor Independen Pengujian Mineral & Batubara', desc: 'Profil perusahaan inspeksi, superintending dan pengujian laboratorium independen: akreditasi KAN, laboratorium kimia analitik berstandar internasional, jaringan cabang di pelabuhan muat tambang, dan verifikasi kuantitas/kualitas resmi.' },
+                { id: 'cp_esg_community_development', archetype: 'editorial_club', name: '🤝 Laporan Keberlanjutan ESG & Program Pemberdayaan Masyarakat (PPM)', desc: 'Profil inisiatif keberlanjutan tambang: program beasiswa pendidikan lingkar tambang, klinik kesehatan gratis, konservasi flora fauna endemik, dekarbonisasi energi surya di fasilitas tambang, dan tata kelola anti-korupsi.' }
             ]
         },
 
         e_commerce: {
             id: 'e_commerce',
-            label: 'E-Commerce',
-            badge: 'Katalog, Cart & Transaksi',
+            label: 'E-Commerce & B2B Trading',
+            badge: 'Transaksi & Lelang Komoditas Tambang',
             icon: 'fa-solid fa-cart-shopping',
             color: '#10B981',
-            desc: 'Aplikasi transaksi perdagangan komersial lengkap dari etalase katalog barang, keranjang belanja (cart drawer), checkout multi-metode, hingga invoice dan kwitansi resmi.',
+            desc: 'Aplikasi transaksi perdagangan B2B komoditas energi dan mineral, platform lelang kuota bijih nikel dan batubara, penjualan emas batangan bersertifikat, hingga e-procurement suku cadang alat berat dan bahan kimia tambang.',
             subtypes: [
-                { id: 'ec_d2c_store',         archetype: 'transaction_store', name: 'Direct-to-Consumer (D2C) Retail Store',      desc: 'Toko online resmi brand mandiri dengan etalase visual mewah, ulasan pembeli terverifikasi, dan alur beli instan.' },
-                { id: 'ec_marketplace',       archetype: 'transaction_store', name: 'Multi-Vendor Marketplace Platform',          desc: 'Platform jual beli menghubungkan banyak merchant dengan lapak toko mandiri, perbandingan harga, dan rekening penengah escrow.' },
-                { id: 'ec_b2b_wholesale',     archetype: 'enterprise_dashboard', name: 'B2B Wholesale & Bulk Purchase Portal',    desc: 'Portal grosir antar bisnis dengan harga berjenjang kuantitas (MOQ), pengajuan faktur tempo (term of payment), dan negosiasi penawaran.' },
-                { id: 'ec_digital_downloads', archetype: 'transaction_store', name: 'Digital Products & Assets Download Store',   desc: 'Toko penjualan file digital (source code, ebook, preset desain) dengan tautan unduhan otomatis terenkripsi pasca-pembayaran.' },
-                { id: 'ec_booking',           archetype: 'enterprise_dashboard', name: 'Service & Facility Booking System',       desc: 'Sistem reservasi slot jadwal konsultasi atau sewa lapangan/ruangan dengan kalender ketersediaan langsung dan uang muka (DP).' },
-                { id: 'ec_ticketing',         archetype: 'transaction_store', name: 'Event Ticketing & Pass Registration',        desc: 'Sistem penjualan tiket konser musik atau festival dengan pemilihan kategori kursi (VIP/Festival) dan tiket elektronik QR Code.' },
-                { id: 'ec_subscription',      archetype: 'enterprise_dashboard', name: 'Subscription & Recurring Membership Portal', desc: 'Sistem langganan paket keanggotaan berkala dengan penagihan otomatis, manajemen upgrade paket, dan histori pembayaran.' },
-                { id: 'ec_rental',            archetype: 'enterprise_dashboard', name: 'Equipment & Vehicle Rental System',       desc: 'Sistem transaksi persewaan mobil, alat kerja, atau unit proyek dengan kalkulator durasi sewa harian dan dana jaminan deposit.' },
-                { id: 'ec_grocery',           archetype: 'transaction_store', name: 'Supermarket & Grocery Ordering System',      desc: 'Sistem belanja kebutuhan harian supermarket dengan kategori rak pangan, satuan timbangan, dan pemilihan jam slot pengantaran.' },
-                { id: 'ec_quick_checkout',    archetype: 'transaction_store', name: 'One-Page Quick Checkout Funnel',             desc: 'Halaman checkout kilat satu langkah yang dioptimasi tanpa friksi dengan integrasi pembayaran QRIS dan transfer instan.' },
-                { id: 'ec_fashion_luxury',    archetype: 'editorial_club',    name: 'Fashion, Luxury & Couture E-Boutique',       desc: 'Butik online mode mewah dengan lookbook editorial visual, galeri koleksi musiman, dan alur pembelian eksklusif bermerek.' },
-                { id: 'ec_food_delivery',     archetype: 'transaction_store', name: 'Online Food Delivery & Restaurant Order',    desc: 'Sistem pesan antar kuliner dengan menu kategori, pilihan varian saus/topping, hitung ongkir zona, dan status masak real-time.' },
-                { id: 'ec_auction',           archetype: 'enterprise_dashboard', name: 'Live Auction & Bidding Platform',         desc: 'Platform lelang online dengan countdown penawaran real-time, riwayat bidder, sertifikat digital pemenang, dan integrasi pembayaran.' },
-                { id: 'ec_property',          archetype: 'enterprise_dashboard', name: 'Property Listing & Real Estate Portal',   desc: 'Portal properti dengan filter lokasi/tipe/harga, galeri foto + virtual tour, kalkulator cicilan KPR, dan form inquiry agen.' }
-            ]
-        },
-
-        dashboard: {
-            id: 'dashboard',
-            label: 'Dashboard',
-            badge: 'Operasional & Master CRUD',
-            icon: 'fa-solid fa-chart-column',
-            color: '#818CF8',
-            desc: 'Sistem operasional terpadu untuk pengendalian proses bisnis, manajemen database master, pemantauan metrik KPI, alur kerja approval, dan cetak dokumen resmi.',
-            subtypes: [
-                { id: 'db_cmms',              archetype: 'enterprise_dashboard', name: 'CMMS & Heavy Equipment Maintenance',       desc: 'Dashboard perawatan armada & alat berat, status unit RFU/Breakdown, siklus Work Order, inspeksi harian P2H, dan cetak SPK servis.' },
-                { id: 'db_erp',               archetype: 'enterprise_dashboard', name: 'Enterprise ERP & Operations Command Center', desc: 'Pusat kendali operasional perusahaan mengintegrasikan purchasing, stok bahan baku, jadwal operasional, dan matriks approval.' },
-                { id: 'db_hris',              archetype: 'enterprise_dashboard', name: 'HRIS, Attendance, Leave & Payroll Dashboard', desc: 'Dashboard personalia mengelola master data karyawan, pencatatan absensi shift, pengajuan cuti, dan pencetakan slip gaji resmi.' },
-                { id: 'db_crm',               archetype: 'enterprise_dashboard', name: 'CRM & Sales Opportunity Pipeline',           desc: 'Dashboard pelacakan prospek pelanggan, papan Kanban tahap penjualan (deal stages), target penjualan, dan histori interaksi.' },
-                { id: 'db_wms',               archetype: 'enterprise_dashboard', name: 'Warehouse & Inventory Management (WMS)',     desc: 'Dashboard gudang mengelola stok minimum (safety stock), lokasi rak penyimpanan (bin location), proses barang masuk/keluar, dan opname.' },
-                { id: 'db_fleet',             archetype: 'enterprise_dashboard', name: 'Fleet Tracking & Logistics Dispatch',        desc: 'Dashboard pemantauan armada angkutan logistik, pencatatan konsumsi BBM, surat jalan pengiriman, dan penugasan pengemudi.' },
-                { id: 'db_finance',           archetype: 'enterprise_dashboard', name: 'Financial Accounting & Cash Flow Dashboard', desc: 'Dashboard pembukuan akuntansi, buku besar umum, laporan laba rugi (P&L), arus kas kasir, dan penagihan faktur piutang.' },
-                { id: 'db_project',           archetype: 'enterprise_dashboard', name: 'Project & Task Management Dashboard',        desc: 'Dashboard proyek tim dengan papan tugas Kanban, jadwal tonggak waktu Gantt chart, alokasi kapasitas tim, dan persentase progres.' },
-                { id: 'db_hse',               archetype: 'enterprise_dashboard', name: 'HSE, K3LH, Safety & P2H Inspection',        desc: 'Dashboard kepatuhan keselamatan kerja (K3), pelaporan temuan bahaya hazard, investigasi akar masalah insiden (CAPA), dan audit.' },
-                { id: 'db_helpdesk',          archetype: 'enterprise_dashboard', name: 'IT Helpdesk & Customer Support Ticket',      desc: 'Dashboard antrean tiket keluhan pengguna, SLA penanganan kendala IT, penugasan teknisi, dan evaluasi skor kepuasan.' },
-                { id: 'db_pos',               archetype: 'enterprise_dashboard', name: 'Point-of-Sale (POS) & Kasir Retail',         desc: 'Sistem kasir retail dengan input barcode produk, kalkulasi kembalian, cetak struk termal A58mm, manajemen shift, dan laporan harian.' },
-                { id: 'db_analytics',         archetype: 'enterprise_dashboard', name: 'Business Intelligence & Data Analytics',    desc: 'Dashboard BI dengan chart waterfall MoM, funnel konversi, drill-down segmen, dan ekspor laporan Excel/PDF terjadwal.' },
-                { id: 'db_school',            archetype: 'enterprise_dashboard', name: 'School Management Information System (SIMRS)', desc: 'Sistem informasi sekolah mengelola data siswa, nilai raport, absensi, jadwal pelajaran, dan komunikasi wali murid.' },
-                { id: 'db_clinic',            archetype: 'enterprise_dashboard', name: 'Clinic / Hospital Management Dashboard',    desc: 'Sistem manajemen klinik dengan antrian pasien, rekam medis SOAP, resep obat, jadwal dokter, dan tagihan BPJS/umum.' },
-                { id: 'db_procurement',       archetype: 'enterprise_dashboard', name: 'Procurement & Purchase Order Management',   desc: 'Dashboard pengadaan barang dengan siklus PR→PO→GR, perbandingan vendor, approval berjenjang, dan cetak PO resmi perusahaan.' },
-
-                // ─── INDUSTRI PERTAMBANGAN BATUBARA & NIKEL (HULU KE HILIR) ───
-                { id: 'db_mine_exploration',  archetype: 'enterprise_dashboard', name: '⛏ Eksplorasi & Geologi Tambang',             desc: 'Dashboard data eksplorasi tambang: peta sebaran titik bor (drilling), log litologi, estimasi sumber daya cadangan (JORC/KCMI), dan progres kegiatan eksplorasi per konsesi IUP.' },
-                { id: 'db_drill_blast',       archetype: 'enterprise_dashboard', name: '💣 Rencana Bor & Peledakan (Drill & Blast)',  desc: 'Sistem perencanaan bor dan peledakan (blasting) tambang: desain pola lubang bor, konsumsi ANFO/emulsion, cetak ijin peledak KP3, jadwal blasting per pit, dan rekap fragmen batuan.' },
-                { id: 'db_mine_planning',     archetype: 'enterprise_dashboard', name: '🗺 Mine Planning & Geometri Pit',             desc: 'Dashboard perencanaan tambang (mine plan): target strip ratio OB vs batubara, desain geometri pit sequence, progres tambang vs rencana Jangka Pendek/Panjang (JATAM), dan void management.' },
-                { id: 'db_production_ritase', archetype: 'enterprise_dashboard', name: '🚛 Produksi Tambang & Ritase Harian',          desc: 'Dashboard produksi tambang real-time: rekap ritase HD/DT per shift, volume OB & ore per jam, target vs realisasi tonase, produktivitas alat gali-muat, dan cetak laporan produksi harian PDF.' },
-                { id: 'db_fuel_bbm',          archetype: 'enterprise_dashboard', name: '⛽ Manajemen BBM & Konsumsi Bahan Bakar',     desc: 'Sistem manajemen bahan bakar tambang: pencatatan pengisian BBM per unit alat berat (HM/Liter), RFID fuel dispenser, kalkulasi Fuel Ratio, alert konsumsi abnormal, dan rekap tagihan BBM kontraktor.' },
-                { id: 'db_hauling_road',      archetype: 'enterprise_dashboard', name: '🛣 Hauling Road & Infrastruktur Tambang',      desc: 'Dashboard pemantauan jalan angkut (hauling road): kondisi jalan per segmen, progres grading & compaction, status jembatan timbang (weight bridge), rekap tonase hauling harian, dan perawatan jalan.' },
-                { id: 'db_stockpile',         archetype: 'enterprise_dashboard', name: '🏔 Stockpile Management & Coal Blending',      desc: 'Sistem manajemen stockpile batubara: peta ROM & product stockpile per seam, inventory tonase real-time, blending target GCV/TM/Ash, cetak Delivery Order batubara, dan rekonsiliasi losses.' },
-                { id: 'db_lab_quality',       archetype: 'enterprise_dashboard', name: '🔬 Laboratorium & Quality Control (QC)',       desc: 'Dashboard lab analisis batubara/nikel: input hasil uji proksimate (GCV/TM/IM/Ash/VM/FC/TS), trace element, plot tren kualitas per pit/seam, cetak CoA (Certificate of Analysis), dan laporan QC ke buyer.' },
-                { id: 'db_hse_mining',        archetype: 'enterprise_dashboard', name: '🦺 HSE Tambang & Inspeksi K3 Pertambangan',   desc: 'Dashboard K3 pertambangan khusus: laporan kecelakaan (LTI/LTIIF/LTIFR), inspeksi harian P2H alat berat, pemantauan dust & noise lingkungan kerja, permit to work (PTW), dan laporan KPI HSE ke ESDM.' },
-                { id: 'db_environment',       archetype: 'enterprise_dashboard', name: '🌿 Monitoring Lingkungan & AMDAL Tambang',     desc: 'Sistem pemantauan lingkungan hidup tambang: kualitas air settling pond (pH/TSS/BOD/COD), reklamasi lahan (Ha/tahun), penanaman revegetasi, laporan RKL-RPL semester ke Dinas LHK, dan audit PROPER.' },
-                { id: 'db_rkef_smelter',      archetype: 'enterprise_dashboard', name: '🏭 RKEF Smelter & Proses Pengolahan Nikel',    desc: 'Dashboard proses smelting nikel (RKEF/Blast Furnace): input data saprolit/limonit ore feed, monitor suhu elektroda, kadar NPI/FeNi output, konsumsi kokas & elektroda, dan OEE (Overall Equipment Effectiveness) line produksi.' },
-                { id: 'db_ore_getting',       archetype: 'enterprise_dashboard', name: '⚒ Ore Getting & Grade Control Nikel',         desc: 'Sistem pengendalian kadar bijih nikel: peta blok model ore, sampling channel cut, grade control per bench, pemisahan ore/waste berdasarkan cut-off grade Ni%, dan rekap ore getting per shift.' },
-                { id: 'db_port_shipping',     archetype: 'enterprise_dashboard', name: '⚓ Port Operations & Pengapalan Batubara',    desc: 'Dashboard operasional pelabuhan: jadwal dan realisasi vessel loading, rekap tonase per kapal (MT), laytime & despatch/demurrage kalkulasi, dokumen B/L (Bill of Lading), dan laporan shipper ke trader/buyer.' },
-                { id: 'db_contractor_mgmt',   archetype: 'enterprise_dashboard', name: '🤝 Kontraktor Mining & Manajemen Subkon',      desc: 'Sistem manajemen kontraktor tambang: data kontrak pekerjaan (BoQ/RAB), progress billing aktual vs rencana, approval invoice tagihan subkon, retensi jaminan pelaksanaan, dan evaluasi kinerja vendor.' },
-                { id: 'db_weigh_bridge',      archetype: 'enterprise_dashboard', name: '⚖ Jembatan Timbang & Ticketing Batubara',    desc: 'Sistem timbangan batubara (weight bridge): input timbangan masuk/keluar truk hauling, kalkulasi netto tonase per ritase, cetak tiket timbang, rekonsiliasi data stockpile, dan laporan tonase ke manajemen.' }
+                { id: 'ec_coal_b2b_spot_contract',  archetype: 'enterprise_dashboard', name: '⛏️ Platform B2B Trading & Kontrak Pasokan Batubara (FOB/CIF)', desc: 'Portal perdagangan batubara antar industri: simulasi penyesuaian harga indeks kalori (GCV bonus/penalty), kalkulator freight kapal tongkang / vessel FOB-CIF, verifikasi berkas CoA surveyor, penerbitan invoice proforma, dan klausul LC perbankan.' },
+                { id: 'ec_nickel_ore_auction_portal', archetype: 'enterprise_dashboard', name: '⚙️ Portal Lelang Spot & Alokasi Bijih Nikel Laterit Antar-Smelter', desc: 'Sistem lelang kuota bijih nikel laterit: penawaran harga spot per dmt berdasarkan kadar Ni%, Fe%, moisture content, booking slot tongkang pengapalan LCT ore, dan escrow pembayaran terintegrasi verifikasi surveyor independen.' },
+                { id: 'ec_gold_digital_bullion_vault', archetype: 'transaction_store', name: '🟡 Platform Tabungan & Perdagangan Emas Fisik Bersertifikat', desc: 'Platform jual-beli emas murni fisik & digital berizin bursa komoditas: harga real-time per gram mengikuti bursa dunia, pencetakan emas fisik (1g - 1000g) kemasan CertiCard kirim ke rumah, dan brankas kustodian terasuransi.' },
+                { id: 'ec_mining_spareparts_procurement', archetype: 'enterprise_dashboard', name: '🔩 E-Procurement Suku Cadang Alat Berat & Bahan Kimia Tambang', desc: 'Portal pengadaan kebutuhan operasional tambang (MRO): katalog suku cadang hidrolik, undercarriage track, ban dump truck (OTR tires), media giling grinding ball, natrium sianida (NaCN), asam sulfat HPAL, dan flocculant penjernih air.' },
+                { id: 'ec_fuel_b35_wholesale_portal', archetype: 'enterprise_dashboard', name: '⛽ Portal Pemesanan & Alokasi BBM Solar Industri B35/B40 Tambang', desc: 'Portal pemesanan grosir bahan bakar minyak Solar B35/B40 untuk industri tambang: jadwal pengiriman bunker tongkang BBM, PO kuota bulanan, surat jalan resmi Pertamina/Badan Usaha Niaga Migas, dan pelunasan tempo faktur pajak.' },
+                { id: 'ec_heavy_equipment_used_auction', archetype: 'enterprise_dashboard', name: '🏗️ Platform Lelang Alat Berat Bekas Tambang (Off-Highway Fleet)', desc: 'Pasar lelang online unit alat berat bekas tambang: inspeksi teknis independen (kondisi engine, undercarriage, hour meter), sistem penawaran bidding live terbuka, riwayat servis CMMS, dan pengurusan delivery logistik alat berat ke lokasi kerja baru.' }
             ]
         },
 
         blog_content: {
             id: 'blog_content',
-            label: 'Blog / Content',
-            badge: 'Editorial & Publikasi',
+            label: 'Blog / Publikasi & Media',
+            badge: 'Regulasi, Analisis Pasar & Pengetahuan Minerba',
             icon: 'fa-solid fa-pen-to-square',
             color: '#F59E0B',
-            desc: 'Platform penerbitan artikel, media editorial, dokumentasi pengetahuan, dan kurasi konten dengan tipografi nyaman baca, kategorisasi tag, dan arsip pencarian.',
+            desc: 'Media publikasi artikel berita industri minerba, pergerakan indeks harga komoditas batubara, nikel dan emas dunia, ensiklopedia regulasi ESDM, dan jurnal ilmiah rekayasa pertambangan.',
             subtypes: [
-                { id: 'bc_news_portal',       archetype: 'editorial_club',    name: 'Online News & Breaking Media Portal',        desc: 'Portal berita berkala dengan pita kabar terkini (running text), multi-kanal rubrik berita, artikel terpopuler, dan liputan khusus.' },
-                { id: 'bc_magazine',          archetype: 'editorial_club',    name: 'Magazine Editorial & Lifestyle Publication', desc: 'Media publikasi artikel bergaya majalah editorial dengan cerita sampul (cover story), kolom opini penulis, dan mode baca fokus.' },
-                { id: 'bc_tech_docs',         archetype: 'enterprise_dashboard', name: 'Technical Documentation & API Reference',  desc: 'Portal dokumentasi teknis dan panduan pemrograman dengan pohon topik hirarkis, blok sintaksis kode, dan search bar kilat.' },
-                { id: 'bc_knowledge_base',    archetype: 'enterprise_dashboard', name: 'Help Center, Knowledge Base & FAQ Hub',    desc: 'Pusat bantuan mandiri pengguna menyajikan kartu solusi kendala umum, tombol voting artikel bermanfaat, dan kolom pencarian solusi.' },
-                { id: 'bc_personal_blog',     archetype: 'editorial_club',    name: 'Personal Thought Leadership & Tech Blog',    desc: 'Blog personal profesional dengan estimasi waktu baca (read time), kategori tag topik, langganan buletin newsletter, dan profil penulis.' },
-                { id: 'bc_podcast',           archetype: 'adaptive_studio',   name: 'Audio Podcast & Video Streaming Catalog',    desc: 'Katalog kurasi siaran podcast dan rekaman video edukasi lengkap dengan pemutar audio web, catatan episode, dan transkrip teks.' },
-                { id: 'bc_forum',             archetype: 'enterprise_dashboard', name: 'Community Forum & Q&A Discussion Board',   desc: 'Forum diskusi komunitas berbasis utas (thread) tanya-jawab, voting respon terbaik, penanda solusi terverifikasi, dan reputasi anggota.' },
-                { id: 'bc_academic',          archetype: 'editorial_club',    name: 'Academic, Research & Journal Archive',       desc: 'Repositori publikasi karya ilmiah dan jurnal riset dengan penampil abstrak, metadata kutipan referensi, dan unduh berkas PDF.' },
-                { id: 'bc_newsletter',        archetype: 'editorial_club',    name: 'Newsletter Archive & Email Digest Hub',      desc: 'Arsip newsletter email premium dengan preview edisi, CTA berlangganan, pencarian edisi lama, dan rating konten.' },
-                { id: 'bc_tutorial',          archetype: 'adaptive_studio',   name: 'Tutorial, Course & Learning Path Platform',  desc: 'Platform kursus online mandiri dengan daftar modul terurut, progress bar per pelajaran, kuis interaktif, dan sertifikat penyelesaian.' },
-                { id: 'bc_recipe',            archetype: 'editorial_club',    name: 'Recipe, Food Blog & Culinary Guide',         desc: 'Blog kuliner dan resep masakan dengan filter bahan/waktu masak, rating bintang, video demo memasak, dan print-friendly mode.' },
-                { id: 'bc_travel',            archetype: 'adaptive_studio',   name: 'Travel Diary, Guide & Itinerary Blog',       desc: 'Blog perjalanan wisata dengan galeri foto destinasi, peta rute perjalanan, kalkulator biaya trip, dan tips lokal eksklusif.' }
+                { id: 'bc_mining_news_portal',      archetype: 'editorial_club',    name: '📰 Portal Berita & Investigasi Industri Minerba Indonesia', desc: 'Media berita jurnalistik terpercaya sektor energi & sumberdaya mineral: liputan harian dinamika tambang batubara, perkembangan megaproyek smelter nikel Sulawesi-Maluku, tren eksplorasi emas, dan kebijakan transisi energi.' },
+                { id: 'bc_commodity_price_index',   archetype: 'editorial_club',    name: '📊 Publikasi Analisis Harga Komoditas Batubara, Nikel & Emas', desc: 'Media publikasi riset pasar mingguan: pergerakan indeks harga batubara acuan (HBA, ICI, Newcastle), harga nikel tunai London Metal Exchange (LME), pergerakan spot emas LBMA, proyeksi permintaan global, dan analisis fluktuasi nilai tukar.' },
+                { id: 'bc_regulatory_esdm_portal',  archetype: 'enterprise_dashboard', name: '📜 Ensiklopedia Regulasi Minerba & Panduan Kepatuhan ESDM', desc: 'Repositori peraturan perundang-undangan minerba: arsip UU Minerba, Peraturan Pemerintah royalti, Permen ESDM RKAB & K3 pertambangan, panduan teknis pelaporan SIMBARA/MOMS, dan pedoman kepatuhan AMDAL lingkungan hidup.' },
+                { id: 'bc_metallurgy_technical_papers', archetype: 'editorial_club', name: '⚗️ Repositori Jurnal Rekayasa Pertambangan & Metalurgi',   desc: 'Arsip publikasi karya ilmiah dan whitepaper teknis: inovasi proses hidrometalurgi HPAL, optimasi pembakaran tanur RKEF, kinetika pelindian sianidasi emas bijih refraktori, geoteknik kestabilan lereng tambang, dan penanganan air asam tambang.' },
+                { id: 'bc_esg_community_magazine',  archetype: 'editorial_club',    name: '🌱 Majalah Keberlanjutan Tambang, Reklamasi & CSR Masyarakat', desc: 'Publikasi digital program lingkungan dan sosial pertambangan: cerita sukses revegetasi hutan pascatambang, konservasi hayati lingkar tambang, inovasi pemanfaatan abu terbang FABA PLTU dan slag nikel, serta pemberdayaan ekonomi masyarakat lokal binaan.' }
             ]
         }
     };
@@ -1443,28 +1524,28 @@
     /* ==================== STUDIO FLOW STATE & CONTROLLER ==================== */
     let currentStudioStep = 1;
     let studioData = {
-        appName: '',
-        manualNotes: '',
-        pillarKey: 'landing_page',
-        subtypeId: 'lp_saas',
+        appName: 'Dashboard ERP Tambang Batubara Terpadu (Pit-to-Port)',
+        manualNotes: 'Pusat kendali operasional hulu-hilir tambang batubara: monitoring ritase HD/DT pit ke stockpile, jembatan timbang terintegrasi RFID, ROM stockpile coal blending otomatis (GCV, TM, Ash, TS), crushing plant, overland conveyor, hingga vessel loading tongkang dan integrasi data SIMBARA Ditjen Minerba ESDM.',
+        pillarKey: 'dashboard',
+        subtypeId: 'db_coal_pit_to_port',
         subtypeObj: null,
-        archetype: 'auto',
+        archetype: 'enterprise_dashboard',
         styleId: 2, // Bento Grid default
         styleObj: null,
         lastGeneratedPrompt: ''
     };
 
     const STUDIO_PILLARS = [
-        { key: 'landing_page',    name: 'Landing Page',     icon: 'fa-rocket',            desc: 'High Conversion & Hero Showcase' },
-        { key: 'company_profile', name: 'Company Profile',  icon: 'fa-building-columns',  desc: 'Trust, Prestige & Corporate Story' },
-        { key: 'e_commerce',      name: 'E-Commerce',       icon: 'fa-bag-shopping',      desc: 'Catalog, Cart & Checkout Hub' },
-        { key: 'dashboard',       name: 'Dashboard',        icon: 'fa-chart-pie',         desc: 'Control Center & Master CRUD' },
-        { key: 'blog_content',    name: 'Blog / Content',   icon: 'fa-newspaper',         desc: 'Editorial Magazine & Reader' }
+        { key: 'dashboard',       name: 'Dashboard ERP',    icon: 'fa-chart-pie',             desc: 'Operasional, Pit-to-Port & Master CRUD' },
+        { key: 'landing_page',    name: 'Landing Page',     icon: 'fa-rocket',                desc: 'Pemasaran Jasa & Komoditas Tambang' },
+        { key: 'company_profile', name: 'Company Profile',  icon: 'fa-building-columns',      desc: 'Holding Korporat, Konsesi IUP & ESG' },
+        { key: 'e_commerce',      name: 'E-Commerce B2B',   icon: 'fa-cart-shopping',         desc: 'Trading B2B, Lelang Mineral & MRO' },
+        { key: 'blog_content',    name: 'Blog / Media',     icon: 'fa-newspaper',             desc: 'Regulasi ESDM, Indeks Harga & Riset' }
     ];
 
     function initStudioFlow() {
         renderStudioPillars();
-        renderStudioSubtypes('landing_page');
+        selectStudioPillar(studioData.pillarKey);
         renderStudioThemeCatFilter();
         renderStudioThemes('all', '');
         
@@ -1475,7 +1556,7 @@
         }
     }
 
-    function setStudioPreset(name, pillar, notes) {
+    function setStudioPreset(name, pillar, notes, subtypeId) {
         const nameInput = document.getElementById('studio-app-name');
         const notesInput = document.getElementById('studio-manual-notes');
         if (nameInput) nameInput.value = name;
@@ -1484,14 +1565,20 @@
         studioData.manualNotes = notes;
         if (pillar && FULL_TAXONOMY[pillar]) {
             selectStudioPillar(pillar);
+            if (subtypeId) {
+                setTimeout(() => {
+                    selectStudioSubtype(subtypeId);
+                }, 40);
+            }
         }
         Swal.fire({
             toast: true,
             position: 'top-end',
             icon: 'info',
-            title: `Preset diterapkan: ${name}`,
+            title: `Preset Tambang Diterapkan`,
+            text: name,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 2200,
             background: '#0D111A',
             color: '#F8FAFC'
         });
@@ -1534,7 +1621,60 @@
         const labelEl = document.getElementById('studio-selected-pillar-label');
         if (labelEl) labelEl.textContent = `Subtipe Terkurasi (${pillarObj.label}):`;
 
+        activeSubtypeTag = 'all';
+        renderStudioSubtypeTags();
         renderStudioSubtypes(key);
+    }
+
+    /* ==================== SUBTYPE TAGS FILTER (MINING & OPERATIONAL MODULES) ==================== */
+    let activeSubtypeTag = 'all';
+    const SUBTYPE_TAGS = [
+        { id: 'all',            label: 'Semua Modul' },
+        { id: 'plant',          label: '🔧 Plant & Workshop' },
+        { id: 'engineering',    label: '📐 Engineering & Survey' },
+        { id: 'moco',           label: '📈 MOCO (Rainfall/PA/Cost)' },
+        { id: 'production',     label: '⛏️ Produksi & Pit' },
+        { id: 'laterite',       label: '⚙️ Nikel Laterit & Blending' },
+        { id: 'lab',            label: '🔬 Lab QA/QC & LIMS' },
+        { id: 'jetty_shipping', label: '⚓ Jetty & Shipping' },
+        { id: 'buyer_trade',    label: '🤝 Buyer, Kontrak & SIMBARA' },
+        { id: 'contractor',     label: '📑 Owner, Kontraktor & Subkon' },
+        { id: 'hse_env',        label: '🦺 HSE K3LH & SMKP' },
+        { id: 'hrga',           label: '👥 HRGA Site & Mess' },
+        { id: 'warehouse',      label: '🏬 Gudang & Inventory' },
+        { id: 'finance',        label: '💰 Finance & RKAB' },
+        { id: 'smelter',        label: '🏭 Smelter & Pabrik' },
+        { id: 'career',         label: '📄 CV & Karir Tambang' },
+        { id: 'custom',         label: '✨ Custom / Ide Bebas' }
+    ];
+
+    function renderStudioSubtypeTags() {
+        const container = document.getElementById('studio-subtype-tags-filter');
+        if (!container) return;
+
+        if (studioData.pillarKey !== 'dashboard') {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = 'flex';
+        container.innerHTML = '';
+
+        SUBTYPE_TAGS.forEach(tag => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            const isActive = tag.id === activeSubtypeTag;
+            btn.className = 'tab-btn' + (isActive ? ' active' : '');
+            btn.style.fontSize = '11px';
+            btn.style.padding = '5px 12px';
+            btn.style.whiteSpace = 'nowrap';
+            btn.textContent = tag.label;
+            btn.onclick = () => {
+                activeSubtypeTag = tag.id;
+                renderStudioSubtypeTags();
+                renderStudioSubtypes(studioData.pillarKey);
+            };
+            container.appendChild(btn);
+        });
     }
 
     let currentSubtypeFilter = '';
@@ -1551,6 +1691,12 @@
         const pillarObj = FULL_TAXONOMY[pillarKey] || FULL_TAXONOMY.landing_page;
         let subtypes = pillarObj.subtypes || [];
 
+        // Filter by Tag if on dashboard
+        if (pillarKey === 'dashboard' && activeSubtypeTag !== 'all') {
+            subtypes = subtypes.filter(s => s.tag === activeSubtypeTag);
+        }
+
+        // Filter by Search Query
         if (currentSubtypeFilter) {
             subtypes = subtypes.filter(s => 
                 s.name.toLowerCase().includes(currentSubtypeFilter) || 
@@ -1567,6 +1713,17 @@
             studioData.subtypeObj = subtypes[0];
         }
 
+        if (subtypes.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column:1/-1; padding:30px 16px; text-align:center; color:#64748B;">
+                    <i class="fa-solid fa-magnifying-glass" style="font-size:24px; color:#334155; margin-bottom:8px;"></i>
+                    <div style="font-size:13px; font-weight:700; color:#E2E8FF;">Subtipe tidak ditemukan</div>
+                    <div style="font-size:11px; margin-top:4px;">Coba gunakan kata kunci lain atau pilih filter "Semua Modul".</div>
+                </div>
+            `;
+            return;
+        }
+
         subtypes.forEach(s => {
             const isSelected = s.id === studioData.subtypeId;
             if (isSelected) studioData.subtypeObj = s;
@@ -1577,14 +1734,16 @@
             card.onclick = () => selectStudioSubtype(s.id);
 
             const archeBadge = s.archetype ? `<span style="font-size:9.5px; padding:2px 6px; border-radius:4px; background:rgba(99,102,241,0.18); color:#A5B4FC; font-weight:700;">${s.archetype}</span>` : '';
+            const tagBadge = s.tag ? `<span style="font-size:9.5px; padding:2px 6px; border-radius:4px; background:rgba(16,185,129,0.15); color:#6EE7B7; font-weight:700;">${s.tag.toUpperCase()}</span>` : '';
 
             card.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; padding-right:16px;">
                     <div style="font-size:12.5px; font-weight:700; color:#FFFFFF;">${s.name}</div>
                 </div>
                 <div style="font-size:11px; color:#94A3B8; line-height:1.4; margin-bottom:8px;">${s.desc || 'Optimasi struktur landing & interaksi modern.'}</div>
-                <div style="display:flex; align-items:center; gap:6px;">
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                     ${archeBadge}
+                    ${tagBadge}
                 </div>
             `;
             container.appendChild(card);
@@ -1630,6 +1789,20 @@
                     : '⚡ ' + (labelMap[selectedVal] || selectedVal);
                 archetypeBadge.style.color = selectedVal === 'auto' ? '#10B981' : '#818CF8';
             }
+        }
+
+        if (subId === 'db_custom_freeform') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'info',
+                title: '✨ Mode Eksplorasi Bebas Aktif',
+                text: 'Silakan tulis kebutuhan unik & modul bebas Anda di Langkah 1 (Catatan Kebutuhan Manual).',
+                showConfirmButton: false,
+                timer: 3200,
+                background: '#0D111A',
+                color: '#F8FAFC'
+            });
         }
     }
 
@@ -1931,8 +2104,8 @@
         if (notesInput) notesInput.value = '';
         studioData.appName = '';
         studioData.manualNotes = '';
-        studioData.pillarKey = 'landing_page';
-        selectStudioPillar('landing_page');
+        studioData.pillarKey = 'dashboard';
+        selectStudioPillar('dashboard');
         goToStudioStep(1);
     }
 
@@ -1972,6 +2145,7 @@
     /* ==================== CATEGORIES & TABS ==================== */
     function renderCategories() {
         const nav = document.getElementById('category-nav');
+        if (!nav) return;
         nav.innerHTML = '';
         MOCK_DB.categories.forEach(cat => {
             const isActive = cat.type === currentCategory;
@@ -1991,11 +2165,12 @@
 
     function renderTabFilter() {
         const el = document.getElementById('tab-filter');
+        if (!el) return;
         el.innerHTML = '';
         MOCK_DB.categories.forEach(cat => {
             const btn = document.createElement('button');
             btn.className = 'tab-btn' + (cat.type === currentCategory ? ' active' : '');
-            btn.textContent = cat.name;
+            btn.innerHTML = `<i class="${cat.icon}" style="margin-right:6px; font-size:11px;"></i>${cat.name} <span style="opacity:0.75; font-size:10.5px; margin-left:4px;">(${cat.count})</span>`;
             btn.onclick = () => filterCategory(cat.type);
             el.appendChild(btn);
         });
@@ -2374,35 +2549,35 @@
                         </div>
                     </div>
 
-                    <!-- 1. CATEGORY SELECTOR (6 PILARS MATCHING SCREENSHOT) -->
-                    <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:8px;">1. Kategori WebApp (Pilih Pilar Utama)</label>
-                    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:12px;">
-                        <button type="button" id="btn-cat-landing_page" onclick="switchModalTaxonomyCategory('landing_page')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#0B0F19; border:1px solid #334155; color:#FFFFFF; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-bolt" style="font-size:16px; color:#FFFFFF;"></i>
-                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Landing Page</span>
+                    <!-- 1. CATEGORY SELECTOR (5 PILARS MATCHING USER REQUIREMENTS) -->
+                    <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:8px;">1. Kategori WebApp (Pilih 1 dari 5 Pilar Taksonomi)</label>
+                    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-bottom:12px;">
+                        <button type="button" id="btn-cat-dashboard" onclick="switchModalTaxonomyCategory('dashboard')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:10px 4px; border-radius:12px; background:#0B0F19; border:1px solid #334155; color:#FFFFFF; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+                            <i class="fa-solid fa-chart-column" style="font-size:15px; color:#FFFFFF;"></i>
+                            <span style="font-size:10px; font-weight:700; white-space:nowrap;">Dashboard ERP</span>
                         </button>
-                        <button type="button" id="btn-cat-company_profile" onclick="switchModalTaxonomyCategory('company_profile')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
-                            <i class="fa-solid fa-building" style="font-size:16px; color:#0F172A;"></i>
-                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Company Profile</span>
+                        <button type="button" id="btn-cat-landing_page" onclick="switchModalTaxonomyCategory('landing_page')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:10px 4px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-bolt" style="font-size:15px; color:#0F172A;"></i>
+                            <span style="font-size:10px; font-weight:700; white-space:nowrap;">Landing Page</span>
                         </button>
-                        <button type="button" id="btn-cat-e_commerce" onclick="switchModalTaxonomyCategory('e_commerce')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
-                            <i class="fa-solid fa-cart-shopping" style="font-size:16px; color:#0F172A;"></i>
-                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">E-Commerce</span>
+                        <button type="button" id="btn-cat-company_profile" onclick="switchModalTaxonomyCategory('company_profile')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:10px 4px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-building" style="font-size:15px; color:#0F172A;"></i>
+                            <span style="font-size:10px; font-weight:700; white-space:nowrap;">Company Profile</span>
                         </button>
-                        <button type="button" id="btn-cat-dashboard" onclick="switchModalTaxonomyCategory('dashboard')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
-                            <i class="fa-solid fa-chart-column" style="font-size:16px; color:#0F172A;"></i>
-                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Dashboard</span>
+                        <button type="button" id="btn-cat-e_commerce" onclick="switchModalTaxonomyCategory('e_commerce')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:10px 4px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-cart-shopping" style="font-size:15px; color:#0F172A;"></i>
+                            <span style="font-size:10px; font-weight:700; white-space:nowrap;">Trading B2B</span>
                         </button>
-                        <button type="button" id="btn-cat-blog_content" onclick="switchModalTaxonomyCategory('blog_content')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px 6px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
-                            <i class="fa-solid fa-pen-to-square" style="font-size:16px; color:#0F172A;"></i>
-                            <span style="font-size:10.5px; font-weight:700; white-space:nowrap;">Blog / Content</span>
+                        <button type="button" id="btn-cat-blog_content" onclick="switchModalTaxonomyCategory('blog_content')" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:10px 4px; border-radius:12px; background:#F1F5F9; border:1px solid #E2E8F0; color:#0F172A; cursor:pointer; transition:all 0.2s;">
+                            <i class="fa-solid fa-pen-to-square" style="font-size:15px; color:#0F172A;"></i>
+                            <span style="font-size:10px; font-weight:700; white-space:nowrap;">Blog / Media</span>
                         </button>
                     </div>
 
                     <!-- 2. SUBTYPE DROPDOWN WITH INSTANT SEARCH & DESCRIPTION -->
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                        <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px;">2. Subtipe Aplikasi (Taksonomi Lengkap)</label>
-                        <span id="subtype-counter" style="font-size:10px; color:#64748B; font-weight:600;">8 subtipe tersedia</span>
+                        <label style="font-size:11px; font-weight:700; color:#A5B4FC; text-transform:uppercase; letter-spacing:0.8px;">2. Subtipe Aplikasi (Taksonomi Lengkap Tambang)</label>
+                        <span id="subtype-counter" style="font-size:10px; color:#64748B; font-weight:600;">0 subtipe tersedia</span>
                     </div>
                     <select id="modal-subtype-select" onchange="updateSubtypeDescription(); updateArchetypeBadge();" style="width:100%; background:#1A2234; border:1px solid #1E293B; color:#FFF; font-size:12px; padding:10px 12px; border-radius:8px; outline:none; margin-bottom:6px; cursor:pointer;">
                     </select>
@@ -2456,8 +2631,8 @@
             confirmButtonText: '<i class="fa-solid fa-bolt" style="margin-right:6px;"></i> Generate Master index.html Prompt',
             cancelButtonText: 'Batal',
             didOpen: () => {
-                activeSelectedCat = 'landing_page';
-                populateSubtypesForCategory('landing_page');
+                activeSelectedCat = 'dashboard';
+                populateSubtypesForCategory('dashboard');
                 updateArchetypeBadge();
             }
         }).then((result) => {
@@ -2467,7 +2642,7 @@
             const subtypeId = document.getElementById('modal-subtype-select').value;
             const selectedArchetype = document.getElementById('modal-archetype-select') ? document.getElementById('modal-archetype-select').value : 'auto';
             const manualDetails = document.getElementById('modal-manual-details').value.trim();
-            const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.landing_page;
+            const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.dashboard;
             const sub = cat.subtypes.find(s => s.id === subtypeId) || cat.subtypes[0];
 
             const masterPrompt = generateWorldClassFrontendPrompt(style, appName, cat, sub, manualDetails, selectedArchetype);
@@ -2482,7 +2657,7 @@
         const val = archSelect.value;
         if (val === 'auto') {
             // Resolve based on current selected subtype
-            const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.landing_page;
+            const cat = FULL_TAXONOMY[activeSelectedCat] || FULL_TAXONOMY.dashboard;
             const subtypeSelect = document.getElementById('modal-subtype-select');
             const subId = subtypeSelect ? subtypeSelect.value : null;
             const sub = subId ? cat.subtypes.find(s => s.id === subId) : cat.subtypes[0];
@@ -2497,7 +2672,7 @@
 
     function switchModalTaxonomyCategory(catKey) {
         activeSelectedCat = catKey;
-        const categories = ['landing_page', 'company_profile', 'e_commerce', 'dashboard', 'blog_content'];
+        const categories = ['dashboard', 'landing_page', 'company_profile', 'e_commerce', 'blog_content'];
         categories.forEach(k => {
             const btn = document.getElementById('btn-cat-' + k);
             if (!btn) return;
@@ -2750,6 +2925,114 @@
 2. **Interactive Master Data Table**: Paginated records with checkbox selection, batch action bar, search highlight, and action buttons (View, Edit, Print, Delete).
 3. **Document Generator Modal (SPK / Work Order / PO)**: Complete company document layout formatted for A4 printing.
 4. **System Backup Engine (ZIP Simulation)**: 1-click backup button with progress spinner and download simulation.`;
+
+            // Specialized signature overlays for mining & enterprise modules
+            if (sub.id === 'db_curriculum_vitae_mining_ats' || (sub.name && (sub.name.includes('CV') || sub.name.includes('Curiculum')))) {
+                archetypeTitle = 'THE ATS MINING CV & PORTFOLIO BUILDER (Minerba Career Engine)';
+                signatureMechanics = `
+- **Dual-Pane Interactive Editor & Live A4 Print Preview**: Left pane with collapsible accordion forms (Biodata, Mining Certifications POP/POM/POU/K3 BNSP, Fleet Mastery CAT/Komatsu, Mining Software Minescape/Surpac, Work History site-by-site, Education). Right pane featuring pixel-perfect live A4 paper preview (210mm x 297mm) with zoom toggle (75%, 100%, 125%).
+- **Automated ATS Mining Match Score Meter (0-100%)**: Real-time keyword scanner analyzing user input against high-value minerba criteria (e.g. "K3 Pertambangan", "Overburden", "Cut-Off Grade", "Fleet Dispatch", "Blasting", "SMKP ESDM") with an animated visual donut gauge and recommendation chips.
+- **3 Curated Mining CV Styles**: Instant template switcher (Executive Minerba, Technical Mining Engineer, Heavy Equipment Operator).
+- **Zero-Margin A4 Print CSS**: Strict \`@media print { @page { size: A4; margin: 10mm; } body { background: white; color: black; } .editor-pane, .no-print { display: none !important; } .preview-pane { width: 100% !important; margin: 0 !important; } }\` ensuring crisp single/double page output without stray blank pages.
+- **JSON Profile Import/Export**: Save user CV profile directly to \`localStorage\` with 1-click JSON backup download and file restore.`;
+                signatureSection = `
+### Signature Experience: ATS Mining CV & Resume Builder
+1. **Interactive Minerba Form Sections**: Pre-filled realistic templates for Pit Engineer, Geologist, Safety Officer, and Heavy Fleet Operator.
+2. **Certification & SIMPER / KIMPER Checklist**: Dedicated badge tags for POP (Pengawas Operasional Pertama), POM, POU, JORC Competent Person, and K3 BNSP.
+3. **Live A4 Paper Mirror Preview**: Instant synchronization between input fields and formatted printable resume document.
+4. **1-Click Export Engine**: "Download PDF / Cetak A4" trigger invoking print dialog with clean styling and SweetAlert2 celebration toast.`;
+            } else if (sub.tag === 'plant' || (sub.id && (sub.id.startsWith('db_plant_') || sub.id === 'db_cmms_heavy_fleet'))) {
+                signatureSection = `
+### Signature Experience: Plant Maintenance, Workshop & Component Health Center
+1. **Periodic Service (PS) & Work Order Cockpit**: Preventive maintenance schedule matrix (PS 250, 500, 1000, 2000 Jam), backlog triage (Critical, High, Routine), and interactive Work Order assignment to mechanics.
+2. **Scheduled Oil Sampling (SOS) Laboratory Telemetry**: Multi-element wear metal chart (Fe, Cu, Cr, Al, Pb, Si in ppm), soot index, and fuel dilution alert indicating internal component health before engine failure.
+3. **Tyre OTR (TKPH) & Undercarriage Wear Tracker**: Real-time Ton-Kilometer-Per-Hour heat curve for haul truck tires, inflation pressure telemetry, and % wear measurement caliper for excavator track links & sprockets.
+4. **Official Workshop SPK & Service Report Modal**: Printable formal mechanical repair order (Surat Perintah Kerja SPK A4) with spare parts requisition checklist and supervisor sign-off blocks.`;
+            } else if (sub.tag === 'laterite' || (sub.id && (sub.id.includes('laterite') || sub.id.includes('nickel_laterite')))) {
+                signatureSection = `
+### Signature Experience: Nickel Laterite Management & S/M Blending Optimizer
+1. **Selective Mining Cut-Off Controller**: Interactive geological profile switcher separating Limonite layer (Low Ni 1.0-1.3%, High Fe >40% for HPAL EV Battery) from Saprolite layer (High Ni >1.6%, Low Fe for RKEF Smelter).
+2. **Silica-to-Magnesia (S/M Ratio) Blending Engine**: Auto-balancing calculator maintaining SiO2/MgO ratio strictly within 1.8 - 2.2 and moisture content <33% to prevent slag freezing in rotary kiln/SAF and eliminate buyer penalty deductions.
+3. **Sun Drying Yard Moisture Reduction Matrix**: Heatmap of ore stockpile parcels exposed to sun drying, dozer turning schedule, and real-time Moisture Content (MC%) meter preventing cargo liquefaction during barge shipping.
+4. **Smelter Ore Parcel Delivery Slip**: Formal A4 dispatch document listing lot number, composite assay Ni%, Fe%, SiO2/MgO, and moisture determination.`;
+            } else if (sub.tag === 'lab' || (sub.id && (sub.id.startsWith('db_lab_') || sub.id.includes('assay')))) {
+                signatureSection = `
+### Signature Experience: Mining Laboratory LIMS & Quality Assurance (QA/QC)
+1. **Sample Prep & Tracking Pipeline**: End-to-end sample chain of custody (Core logging / Face sample -> Drying oven -> Jaw crusher -> Pulverizer 200 mesh -> Split sample barcode).
+2. **Multi-Method Assay Matrix (XRF, AAS & Fire Assay)**: Real-time analytical entry for Nickel Laterite (Ni, Fe, Co, SiO2, MgO), Coal Proximate (CV, TM, Ash, VM, TS), and Gold Fire Assay (Au g/t, Ag g/t).
+3. **Surveyor Grade Reconciliation & Bias Detector**: Comparison chart matching internal pit assay vs stockpile composite vs independent surveyor (Sucofindo/Carsurin) Certificate of Analysis.
+4. **Official Certificate of Analysis (CoA) Generator**: Standard certificate layout with sample seal number, laboratory chemist accreditation stamp, QR code verification, and A4 print engine.`;
+            } else if (sub.tag === 'jetty_shipping' || (sub.id && (sub.id.includes('shipping') || sub.id.includes('port_barge')))) {
+                signatureSection = `
+### Signature Experience: Jetty Terminal, Barge Loading & Transshipment Command
+1. **Port Stockpile Dome Allocation & Shiploader Telemetry**: Real-time cargo dome segregation (by grade/calorie) and Barge Loading Conveyor (BLC) live tonnage rate (TPH) with belt-weigher sensors.
+2. **Interactive Draught Survey Calculator**: Initial & final displacement calculator computing forward, aft, and midship draft readings, seawater density correction, ballast water deduction, and net metric tons loaded.
+3. **Laytime, Statement of Facts (SOF) & Demurrage Engine**: Time-sheet tracker logging Nor (Notice of Readiness), rain delay stoppages, mooring time, and automated financial calculation of Demurrage vs Despatch.
+4. **Shipping Documents Suite Modal**: Instant generation of Bill of Lading (B/L), Cargo Manifest, Mate's Receipt, and Syahbandar Port Clearance (SPB) formatted for A4 printing.`;
+            } else if (sub.tag === 'buyer_trade' || (sub.id && (sub.id.includes('buyer_contract') || sub.id.includes('simbara')))) {
+                signatureSection = `
+### Signature Experience: Buyer Commercial Contract, HPM/HBA & SIMBARA Minerba
+1. **Master Sales Contract & Trade Ledger**: Contract lifecycle management for FOB Barge, FOB Mother Vessel, and CIF deliveries with payment terms (L/C At Sight, Usance, SKBDN, Cash in Advance).
+2. **Formula Pricing Engine (HPM Nikel & HBA Batubara)**: Automated calculation based on official Ditjen Minerba ESDM price benchmarks with grade bonus/penalty adjustments (Moisture, Ash, Silica).
+3. **Ditjen Minerba SIMBARA API Compliance Cockpit**: Real-time simulation of SIMBARA government integration: electronic royalty billing code (e-PNBP), NTPN payment validation, Surveyor Verification Report (LHV), and annual RKAB quota deduction.
+4. **Commercial Invoice & Letter of Credit Release Modal**: Multi-stage commercial invoice with escrow settlement triggers and official stamp seals.`;
+            } else if (sub.tag === 'contractor' || (sub.id && (sub.id.includes('contractor') || sub.id.includes('subkon')))) {
+                signatureSection = `
+### Signature Experience: Multi-Tenant Mining Portal (Owner vs Main Contractor vs Subcon)
+1. **Role-Based Tri-Party Viewport**: Instant switcher between Owner IUP Konsesi, Main Mining Contractor, and Subkontraktor Rental Unit with isolated permission scopes and shared K3 safety metrics.
+2. **Joint Survey Opname Kemajuan (BAP) Engine**: Production volume reconciliation (BCM Overburden & Ton Ore/Coal) between owner engineering and contractor survey teams with 3D cut-and-fill contour verification.
+3. **Monthly Billing & Fleet Deduction Matrix**: Automated monthly invoice formulation factoring unit availability penalties (PA/MA below contract baseline), fuel adjustments, and equipment rental time sheet hours.
+4. **Official Berita Acara Pemeriksaan (BAP) Modal**: Formal bilingual legal document for monthly mining volume hand-over with tripartite signature authorization.`;
+            } else if (sub.tag === 'hse_env' || (sub.id && (sub.id.includes('hse') || sub.id.includes('settling_pond') || sub.id.includes('tailing')))) {
+                signatureSection = `
+### Signature Experience: HSE K3LH, SMKP Minerba & Environmental Telemetry
+1. **SMKP Ditjen Minerba 7-Element Audit Cockpit**: Comprehensive safety index tracking LTI, LTIFR, Safe Man-Hours, Golden Rules compliance, and CAPA (Corrective Action Preventive Action) status.
+2. **Digital 20-Point Pre-Shift P2H Equipment Inspection**: Mobile-first checklist verifying emergency brakes, fire suppression, seatbelts, and steering before releasing Ready For Use (RFU) status.
+3. **Acid Mine Drainage (AAT) & Settling Pond Telemetry**: Real-time sensors for pH, TSS, Fe, and Mn with automated lime-dosing plant control and PROPER environmental compliance reporting.
+4. **TSF Tailings Storage Facility Dam Stability Radar**: Piezometer pore-water pressure graphs, inclinometer embankment displacement warnings, and cyanide detoxification (<0.5 ppm) monitoring.`;
+            } else if (sub.id && sub.id.startsWith('db_moco_')) {
+                signatureSection = `
+### Signature Experience: MOCO (Monitoring & Operational Control) Center
+1. **Rainfall & Slippery Telemetry Tracker**: Interactive chart of daily rainfall (mm/day), rain hours, and slippery hours with productivity loss waterfall.
+2. **PA / UA / MA / EU Fleet Availability Cockpit**: 4 animated radial gauges displaying Physical Availability (PA%), Utilization (UA%), Mechanical Availability (MA%), and Effective Utilization (EU%) with unit breakdown drill-down.
+3. **Operational Cost Control Matrix**: Real-time tracking of Cash Cost per BCM overburden & per MT ore/coal, Fuel Ratio (L/BCM), and Budget vs Actual variance with red/green status alerts.
+4. **Fleet Dispatch & Dewatering Telemetry**: Live hauler dispatch match factor, loading point queue warnings, and visual sump elevation indicator with Multiflo pump status.`;
+            } else if (sub.id && (sub.id.includes('warehouse') || sub.id.includes('inventory') || sub.id.includes('fuel_management'))) {
+                signatureSection = `
+### Signature Experience: Mining Warehouse, Fuel Farm & Inventory Control (WMS)
+1. **3D/2D Bin-Rack Visual Storage Matrix**: Interactive warehouse grid (Aisle-Rack-Shelf-Bin) showing real-time occupancy and bin coordinates for fast sparepart retrieval.
+2. **Fuel Farm Telemetry & RFID Fuel Truck Dispenser**: Monitoring bulk fuel storage tanks, dispensing flowmeters per unit heavy equipment, and Fuel Ratio (L/BCM) efficiency meters.
+3. **Min-Max & Reorder Point (ROP) Automatic Engine**: Visual threshold meters triggering automated Purchase Requisition (PR) when critical fleet spare parts drop below safety stock.
+4. **Goods Receipt Note (GRN) & Surat Perintah Jalan (SPJ) Modal**: Standard warehouse receipt and delivery dispatch document formatted for A4 printing.`;
+            } else if (sub.tag === 'hrga' || (sub.id && (sub.id.includes('hris') || sub.id.includes('ga_camp')))) {
+                signatureSection = `
+### Signature Experience: Mining HRGA, Roster Kerja, Camp & Mess Command
+1. **Interactive Roster Kerja Gantt Calendar**: Visual 6:2, 8:2, 10:2 shift rotation schedule with on-duty, off-duty, and travel day indicators for crew members.
+2. **SIMPER / KIMPER License Expiry Watchdog**: Active badge tracking license validity (30-day countdown alert before expiration) with digital permit card preview.
+3. **Site Camp Room Allocation & Catering Headcount Matrix**: Interactive bunkhouse room occupancy grid and daily meal headcount planner (Breakfast, Lunch, Dinner, Night Shift ration).
+4. **Site Payroll & Slip Gaji Modal**: Automated calculation of base salary, remote site allowance, hazard pay, overtime multiplier, and official printable pay slip.`;
+            } else if (sub.tag === 'engineering' || sub.tag === 'production' || (sub.id && (sub.id.includes('engineering') || sub.id.includes('production') || sub.id.includes('drone')))) {
+                signatureSection = `
+### Signature Experience: Mine Engineering, Production & Drone Survey Center
+1. **Stripping Ratio (SR) & Production Cockpit**: Real-time comparison of planned vs actual Overburden (OB) BCM and Coal/Ore MT with live Stripping Ratio calculator.
+2. **Pit Sequencing & Bench Elevation Contour Map**: Interactive SVG/Canvas pit visualizer showing bench cuts, active loading fronts, and waste dump locations.
+3. **Drill & Blast Pattern Simulator**: Geometric burden & spacing planner, Powder Factor (PF kg/BCM) optimizer, and seismic vibration monitoring log.
+4. **Drone LiDAR Volumetrics Opname Modal**: Cut-and-fill volumetrics comparison table between original topography and current survey with printable joint-survey report.`;
+            } else if (sub.tag === 'finance' || (sub.id && (sub.id.includes('budgeting') || sub.id.includes('finance')))) {
+                signatureSection = `
+### Signature Experience: Mining Budgeting, RKAB & Financial Control
+1. **Annual RKAB Formulation Dashboard**: Standard Ditjen Minerba ESDM template with CAPEX heavy equipment acquisition, OPEX pit extraction, and royalty projections.
+2. **Joint-Survey Contractor Billing Verifier**: Production volume reconciliation matrix (surveyor vs contractor), penalty deductions, and monthly billing invoice generator.
+3. **Cash Flow & Remote Site Petty Cash Ledger**: Real-time accounts payable, vendor aging schedule, and cash drawdown reconciliation.
+4. **Minerba Tax & e-PNBP Royalty Calculator**: Automated withholding tax (PPh 21/23/Final) and NTPN verification for official government royalty compliance.`;
+            } else if (sub.tag === 'custom' || sub.id === 'db_custom_freeform') {
+                signatureSection = `
+### Signature Experience: Custom Freeform Architecture Engine
+1. **Adaptive Domain Schema Generator**: Dynamically synthesizes the user's bespoke operational requirements into high-fidelity database tables and relational master-detail records.
+2. **Custom Operational KPI & Cockpit Cards**: 4 domain-specific metric cards reflecting the unique core units, rates, and statuses specified in the client brief.
+3. **Specialized Action Flow & Interactive Modal**: Bespoke interactive workflow specifically matching the operational logic and input forms declared in the user requirements.
+4. **Custom Document & Export Engine**: High-fidelity formal document generator with print formatting and JSON backup simulation tailored to the user's custom specifications.`;
+            }
         }
 
         const manualNotesBlock = manualNotes ? `
