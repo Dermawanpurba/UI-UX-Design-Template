@@ -4,7 +4,6 @@
   "description": "Enterprise PRD Studio & Single-File MVP Prompt Engine",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'Build complete. Serving static index.html and api/proxy.js'",
     "compile": "python build_studio.py"
   },
   "keywords": ["prd", "enterprise", "ai", "generator", "mvp"],
