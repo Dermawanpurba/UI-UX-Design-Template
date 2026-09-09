@@ -589,6 +589,20 @@ function goToStep(step) {
     const mainView = document.querySelector('.main-viewport');
     if (mainView) mainView.scrollTop = 0;
 
+    // Dynamically update top navbar AI button label to match active step
+    const topAiBtnText = document.getElementById('top-btn-ai-text');
+    if (topAiBtnText) {
+        if (step <= 13) {
+            topAiBtnText.textContent = `Isi Step ${step} by AI`;
+        } else if (step === 14) {
+            topAiBtnText.textContent = 'Audit PRD by AI';
+        } else if (step === 15) {
+            topAiBtnText.textContent = 'Refresh Dokumen PRD';
+        } else if (step === 16) {
+            topAiBtnText.textContent = 'Optimasi Prompt by AI';
+        }
+    }
+
     // Trigger step-specific logic
     if (step === 8) renderRbacMatrix();
     if (step === 14) checkCompleteness();
@@ -3766,6 +3780,29 @@ Tolong rumuskan DEFINISI PROYEK (Step 1) dalam format JSON berikut:
 \`\`\``;
     }
 
+    if (scope === 'step2') {
+        return `${header}
+
+Tolong rekomendasikan PILAR ARSITEKTUR & ARCHETYPE (Step 2) yang paling relevan untuk sistem "${titleText}".
+Pilih salah satu nilai "pillar" yang tepat dari 5 pilihan ini:
+- "dashboard" (ERP, Control Center, Gudang, Operasional Internal, Work Order, High Data Density)
+- "landing_page" (Pemasaran produk/jasa, konversi lead, showcase penawaran)
+- "company_profile" (Profil holding korporasi, hubungan investor, ESG)
+- "e_commerce" (Toko online, katalog barang, keranjang, checkout & pesanan)
+- "blog_content" (Portal berita, artikel riset, publikasi editorial)
+
+Keluarkan dalam format JSON:
+\`\`\`json
+{
+  "taxonomy": {
+    "pillar": "dashboard",
+    "archetype": "Enterprise Control Center / Operational ERP",
+    "rationale": "Alasan arsitektur ini dipilih..."
+  }
+}
+\`\`\``;
+    }
+
     if (scope === 'step3') {
         return `${header}
 
@@ -3969,10 +4006,10 @@ Tolong buatkan INTEGRASI SISTEM (Step 11) minimal 2 integrasi eksternal (API/Web
 \`\`\``;
     }
 
-    if (scope === 'step13') {
+    if (scope === 'step12') {
         return `${header}
 
-Tolong buatkan ARSITEKTUR LAYAR UI/UX (Step 13) minimal 3-4 screen halaman utama dalam format JSON:
+Tolong buatkan ARSITEKTUR LAYAR UI/UX & SCREEN MAPPING (Step 12) minimal 3-4 screen halaman utama dalam format JSON:
 \`\`\`json
 {
   "uiux": {
@@ -3990,6 +4027,21 @@ Tolong buatkan ARSITEKTUR LAYAR UI/UX (Step 13) minimal 3-4 screen halaman utama
         "components": "Reactive Data Table, Filter Bar, Pagination, Status Badges"
       }
     ]
+  }
+}
+\`\`\``;
+    }
+
+    if (scope === 'step13') {
+        return `${header}
+
+Tolong buatkan SPESIFIKASI TEKNIS MVP SINGLE-FILE (Step 13) yang mendefinisikan strategi state lokal dan arsitektur browser dalam format JSON:
+\`\`\`json
+{
+  "techMvp": {
+    "notes": "Strategi persistensi localStorage browser, simulasi mock data realistis 10-15 baris, dan penanganan interaktivitas tanpa server eksternal.",
+    "stateManagement": "localStorage reactive dispatch",
+    "offlineStrategy": "Zero external dependencies, standalone single-file index.html"
   }
 }
 \`\`\``;
@@ -4921,6 +4973,39 @@ function applyPrdData(data, sourceLabel = 'AI') {
 }
 
 async function generatePrdWithDirectAi() {
+    const alertResult = await Swal.fire({
+        title: 'Rekomendasi: Generate Per-Step',
+        icon: 'info',
+        html: `
+            <div style="font-size:12.5px; color:#94A3B8; text-align:left; line-height:1.6; background:#080C14; padding:14px; border-radius:10px; border:1px solid #1E293B;">
+                <p style="margin-bottom:10px; color:#FCA5A5;">
+                    <i class="fa-solid fa-triangle-exclamation" style="color:#F43F5E; margin-right:4px;"></i>
+                    Mengisi seluruh 16 tahapan sekaligus memerlukan waktu sangat lama (&gt; 60 detik) sehingga rawan <strong>timeout / error</strong> pada koneksi serverless.
+                </p>
+                <p style="color:#38BDF8; font-weight:700; margin-bottom:0;">
+                    <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047; margin-right:4px;"></i>
+                    Gunakan <strong>"Isi Step Ini by AI"</strong> di setiap langkah (hanya butuh 5–15 detik, super cepat &amp; 100% bebas error).
+                </p>
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: `<i class="fa-solid fa-wand-magic-sparkles"></i> Isi Step ${currentStep} by AI (Cepat)`,
+        cancelButtonText: 'Tetap Coba Isi Semua',
+        confirmButtonColor: '#6366F1',
+        cancelButtonColor: '#334155',
+        background: '#0D111A',
+        color: '#F8FAFC'
+    });
+
+    if (alertResult.isConfirmed) {
+        generateCurrentStepByAi();
+        return;
+    }
+
+    if (alertResult.dismiss !== Swal.DismissReason.cancel) {
+        return;
+    }
+
     if (currentStep === 1) saveStep1Inputs();
 
     const nameInput = document.getElementById('p-name');
@@ -5115,7 +5200,7 @@ async function generateStepWithDirectAi(stepScope, stepName) {
     const descInput = document.getElementById('p-desc');
     const problemInput = document.getElementById('p-problem');
 
-    const title = nameInput && nameInput.value.trim() ? nameInput.value.trim() : (projectPRD.project.name || '');
+    let title = nameInput && nameInput.value.trim() ? nameInput.value.trim() : (projectPRD.project.name || '');
     let detailedDesc = descInput && descInput.value.trim() ? descInput.value.trim() : (projectPRD.project.description || '');
 
     if (problemInput && problemInput.value.trim()) {
@@ -5123,19 +5208,29 @@ async function generateStepWithDirectAi(stepScope, stepName) {
     }
 
     if (!title) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Judul Proyek Masih Kosong',
-            html: 'Silakan isi <strong>Judul / Nama Proyek</strong> pada Step 1 terlebih dahulu sebagai panduan AI.',
+        const promptRes = await Swal.fire({
+            title: 'Masukkan Nama / Ide Sistem',
+            input: 'text',
+            inputLabel: 'Tuliskan ide aplikasi Anda sebagai panduan AI:',
+            inputPlaceholder: 'Contoh: Sistem Manajemen Gudang & Logistik Spareparts',
+            showCancelButton: true,
+            confirmButtonText: 'Lanjut Generate',
+            cancelButtonText: 'Batal',
+            confirmButtonColor: '#6366F1',
+            cancelButtonColor: '#334155',
             background: '#0D111A',
             color: '#F8FAFC',
-            confirmButtonColor: '#6366F1',
-            confirmButtonText: 'Ke Step 1'
-        }).then(() => {
-            goToStep(1);
-            if (nameInput) nameInput.focus();
+            inputValidator: (val) => {
+                if (!val || !val.trim()) return 'Nama / ide sistem tidak boleh kosong!';
+            }
         });
-        return;
+
+        if (!promptRes.value) return;
+
+        title = promptRes.value.trim();
+        projectPRD.project.name = title;
+        if (nameInput) nameInput.value = title;
+        updateUiMetadata();
     }
 
     const settings = getAiSettings();
@@ -5292,6 +5387,18 @@ function processAiJsonImport() {
             syncStep1Form();
             updatedStepName = '1. Project Definition';
             targetGoToStep = 1;
+        }
+
+        // 1.5 Taxonomy & 5 Pilar Arsitektur (Step 2)
+        if (data.taxonomy) {
+            if (data.taxonomy.pillar) {
+                selectPillar(data.taxonomy.pillar);
+            }
+            if (data.taxonomy.archetype) {
+                projectPRD.taxonomy.archetype = data.taxonomy.archetype;
+            }
+            updatedStepName = '2. 5 Pilar Arsitektur';
+            targetGoToStep = 2;
         }
 
         // 2. Roles (Step 3)
@@ -5467,7 +5574,7 @@ function processAiJsonImport() {
             targetGoToStep = 11;
         }
 
-        // 11. UIUX Screens (Step 13)
+        // 11. UIUX Screens Architecture (Step 12)
         if (data.uiux && data.uiux.screens && Array.isArray(data.uiux.screens)) {
             projectPRD.uiux.screens = data.uiux.screens.map((s, idx) => ({
                 id: s.id || 's_' + (Date.now() + idx),
@@ -5476,7 +5583,17 @@ function processAiJsonImport() {
                 components: s.components || 'Stat Cards, Data Table, Filter Bar'
             }));
             renderScreens();
-            updatedStepName = '13. Screen Architecture & UI';
+            updatedStepName = '12. UI/UX Screens Architecture';
+            targetGoToStep = 12;
+        }
+
+        // 12. Technical MVP Specification (Step 13)
+        if (data.techMvp) {
+            if (data.techMvp.notes) {
+                projectPRD.project.additionalNotes = (projectPRD.project.additionalNotes ? projectPRD.project.additionalNotes + '\n' : '') + data.techMvp.notes;
+                syncStep1Form();
+            }
+            updatedStepName = '13. Technical MVP Specification';
             targetGoToStep = 13;
         }
 
@@ -5513,6 +5630,257 @@ function processAiJsonImport() {
             background: '#0D111A',
             color: '#F8FAFC',
             confirmButtonColor: '#F43F5E'
+        });
+    }
+}
+
+// Helper for executing AI generation on currently active step
+function generateCurrentStepByAi() {
+    const stepScopeMap = {
+        1: { scope: 'step1', name: 'Step 1: Project Definition & Scope' },
+        2: { scope: 'step2', name: 'Step 2: 5 Pilar Arsitektur' },
+        3: { scope: 'step3', name: 'Step 3: Users & Roles' },
+        4: { scope: 'step4', name: 'Step 4: Modules & Features' },
+        5: { scope: 'step5', name: 'Step 5: Workflows' },
+        6: { scope: 'step6', name: 'Step 6: Business Rules' },
+        7: { scope: 'step7', name: 'Step 7: Data Entities' },
+        8: { scope: 'step8', name: 'Step 8: RBAC Permissions' },
+        9: { scope: 'step9', name: 'Step 9: KPIs & Reporting' },
+        10: { scope: 'step10', name: 'Step 10: Notifications' },
+        11: { scope: 'step11', name: 'Step 11: System Integrations' },
+        12: { scope: 'step12', name: 'Step 12: UI Screens Architecture' },
+        13: { scope: 'step13', name: 'Step 13: Technical MVP Spec' },
+        14: { scope: 'step14', name: 'Step 14: PRD Completeness Audit' },
+        15: { scope: 'step15', name: 'Step 15: Quality PRD' },
+        16: { scope: 'step16', name: 'Step 16: MVP Implementation Prompt' }
+    };
+
+    if (currentStep === 14) {
+        runAiPrdReviewAudit();
+    } else if (currentStep === 15) {
+        renderPrdDocument();
+        Swal.fire({
+            icon: 'success',
+            title: 'Dokumen PRD Diperbarui!',
+            text: 'Dokumen PRD 24-seksi berhasil disusun dari data seluruh langkah.',
+            background: '#0D111A',
+            color: '#F8FAFC',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    } else if (currentStep === 16) {
+        enhanceMvpPromptWithAi();
+    } else {
+        const info = stepScopeMap[currentStep] || { scope: 'step' + currentStep, name: 'Step ' + currentStep };
+        generateStepWithDirectAi(info.scope, info.name);
+    }
+}
+
+async function runAiPrdReviewAudit() {
+    const settings = getAiSettings();
+    if (!settings.apiKey) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Konfigurasi API AI Diperlukan',
+            text: 'Masukkan API Key Anda di Pengaturan AI terlebih dahulu.',
+            background: '#0D111A',
+            color: '#F8FAFC',
+            confirmButtonColor: '#38BDF8',
+            confirmButtonText: 'Buka Pengaturan AI'
+        }).then(() => openAiSettingsModal());
+        return;
+    }
+
+    const title = projectPRD.project.name || 'Sistem Tanpa Judul';
+    const endpoint = getNormalizedAiEndpoint(settings.baseUrl);
+    const model = settings.model || 'gpt-5.6-luna.st';
+
+    Swal.fire({
+        title: 'Mengaudit PRD via AI...',
+        html: `
+            <div style="font-size:12px; color:#94A3B8; margin-top:8px;">
+                AI sedang mengevaluasi koherensi arsitektur, kelengkapan entitas, dan aturan bisnis...
+            </div>
+            <div style="margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#38BDF8;">
+                Model: ${escapeHtml(model)} &bull; Audit Cepat (5-10 detik)
+            </div>
+        `,
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
+        background: '#0D111A',
+        color: '#F8FAFC'
+    });
+
+    try {
+        const auditPrompt = `Anda adalah Lead Software Auditor dan Requirements Reviewer.
+Audit spesifikasi PRD berikut:
+- Produk: "${title}"
+- Deskripsi: "${projectPRD.project.description || '-'}"
+- Jumlah Role: ${projectPRD.roles.length}
+- Jumlah Modul: ${projectPRD.modules.length}
+- Jumlah Fitur: ${projectPRD.features.length}
+- Jumlah Workflow: ${projectPRD.workflows.length}
+- Jumlah Aturan Bisnis: ${projectPRD.businessRules.length}
+- Jumlah Entitas Data: ${projectPRD.entities.length}
+- Jumlah KPI: ${projectPRD.kpis.length}
+
+Berikan review singkat dalam format JSON:
+\`\`\`json
+{
+  "score": 92,
+  "strengths": ["Poin kelebihan 1", "Poin kelebihan 2"],
+  "recommendations": ["Rekomendasi perbaikan 1", "Rekomendasi perbaikan 2"],
+  "verdict": "PRD Ready for MVP Coding / Need minor refinement"
+}
+\`\`\``;
+
+        const resData = await callAiChatCompletions(endpoint, settings.apiKey, {
+            model: model,
+            messages: [
+                { role: 'system', content: 'Jawaban WAJIB HANYA berupa JSON valid tanpa teks di luar blok json.' },
+                { role: 'user', content: auditPrompt }
+            ],
+            temperature: 0.5,
+            max_tokens: 1024
+        });
+
+        const raw = resData.choices && resData.choices[0] && resData.choices[0].message ? resData.choices[0].message.content : '';
+        const parsed = cleanAndParseJson(raw);
+
+        const warningsBox = document.getElementById('checker-warnings-box');
+        if (warningsBox && parsed) {
+            warningsBox.innerHTML = `
+                <div style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.3); border-radius:12px; padding:16px; margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <div style="font-weight:800; color:#A5B4FC; font-size:14px;">
+                            <i class="fa-solid fa-clipboard-check" style="margin-right:6px;"></i> Hasil Audit Kualitas AI (Skor: ${parsed.score || 90}/100)
+                        </div>
+                        <span class="badge badge-emerald">${escapeHtml(parsed.verdict || 'Ready for MVP')}</span>
+                    </div>
+                    <div style="font-size:12px; color:#E2E8FF; margin-bottom:8px;">
+                        <strong>Kelebihan:</strong> ${(parsed.strengths || []).join(' &bull; ')}
+                    </div>
+                    <div style="font-size:12px; color:#FDE68A;">
+                        <strong>Rekomendasi AI:</strong> ${(parsed.recommendations || []).join(' &bull; ')}
+                    </div>
+                </div>
+            ` + warningsBox.innerHTML;
+        }
+
+        Swal.fire({
+            icon: 'success',
+            title: `Audit Selesai (Skor: ${parsed.score || 90}/100)`,
+            html: `
+                <div style="font-size:12.5px; text-align:left; color:#CBD5E1; line-height:1.6;">
+                    <strong style="color:#6EE7B7;">Status:</strong> ${escapeHtml(parsed.verdict || 'PRD Siap Diimplementasikan')}<br><br>
+                    <strong style="color:#A5B4FC;">Rekomendasi AI:</strong>
+                    <ul style="margin:6px 0 0 16px; padding:0;">
+                        ${(parsed.recommendations || []).map(r => `<li>${escapeHtml(r)}</li>`).join('')}
+                    </ul>
+                </div>
+            `,
+            background: '#0D111A',
+            color: '#F8FAFC',
+            confirmButtonColor: '#6366F1'
+        });
+
+    } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Audit AI Gagal',
+            text: err.message,
+            background: '#0D111A',
+            color: '#F8FAFC'
+        });
+    }
+}
+
+async function enhanceMvpPromptWithAi() {
+    const settings = getAiSettings();
+    if (!settings.apiKey) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Konfigurasi API AI Diperlukan',
+            text: 'Masukkan API Key Anda di Pengaturan AI terlebih dahulu.',
+            background: '#0D111A',
+            color: '#F8FAFC',
+            confirmButtonColor: '#38BDF8',
+            confirmButtonText: 'Buka Pengaturan AI'
+        }).then(() => openAiSettingsModal());
+        return;
+    }
+
+    const title = projectPRD.project.name || 'Aplikasi';
+    const endpoint = getNormalizedAiEndpoint(settings.baseUrl);
+    const model = settings.model || 'gpt-5.6-luna.st';
+
+    Swal.fire({
+        title: 'Mengoptimasi Prompt MVP via AI...',
+        html: `
+            <div style="font-size:12px; color:#94A3B8; margin-top:8px;">
+                AI sedang menyempurnakan aturan coding, state mocking, dan guardrail implementasi...
+            </div>
+            <div style="margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#38BDF8;">
+                Model: ${escapeHtml(model)} &bull; Cepat (5-10 detik)
+            </div>
+        `,
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
+        background: '#0D111A',
+        color: '#F8FAFC'
+    });
+
+    try {
+        const promptOptimizeQuery = `Anda adalah Principal AI Prompt Engineer.
+Berdasarkan sistem "${title}" dengan ${projectPRD.roles.length} roles, ${projectPRD.modules.length} modul, dan ${projectPRD.entities.length} data entitas,
+Tuliskan 3 instruksi pembatas teknis tingkat tinggi (technical constraints & anti-slop rules) dalam format JSON:
+\`\`\`json
+{
+  "constraints": [
+    "Wajib menggunakan interaktivitas DOM murni tanpa reload halaman",
+    "Gunakan schema validasi strict di setiap input modal sebelum commit ke localStorage",
+    "Sediakan mock user switcher untuk verifikasi role RBAC secara visual"
+  ]
+}
+\`\`\``;
+
+        const resData = await callAiChatCompletions(endpoint, settings.apiKey, {
+            model: model,
+            messages: [
+                { role: 'system', content: 'Jawaban WAJIB HANYA berupa JSON valid tanpa teks lain.' },
+                { role: 'user', content: promptOptimizeQuery }
+            ],
+            temperature: 0.5,
+            max_tokens: 1024
+        });
+
+        const raw = resData.choices && resData.choices[0] && resData.choices[0].message ? resData.choices[0].message.content : '';
+        const parsed = cleanAndParseJson(raw);
+
+        if (parsed && parsed.constraints && Array.isArray(parsed.constraints)) {
+            const extraRules = '\n\n/* AI ENHANCED TECHNICAL CONSTRAINTS */\n' + parsed.constraints.map((c, i) => `// ${i+1}. ${c}`).join('\n');
+            const promptBox = document.getElementById('mvp-prompt-raw-textarea');
+            if (promptBox) {
+                promptBox.value += extraRules;
+            }
+        }
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Prompt MVP Dioptimasi!',
+            text: 'AI telah menambahkan guardrails teknis dan edge-case constraints ke dalam Prompt MVP.',
+            background: '#0D111A',
+            color: '#F8FAFC',
+            confirmButtonColor: '#6366F1'
+        });
+
+    } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal Mengoptimasi Prompt',
+            text: err.message,
+            background: '#0D111A',
+            color: '#F8FAFC'
         });
     }
 }

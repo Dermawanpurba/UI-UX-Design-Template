@@ -57,10 +57,10 @@ def get_html():
                 <span>Pengaturan AI</span>
             </button>
 
-            <!-- FORMAT PROMPT AI & IMPOR JSON (FAST TRACK) -->
-            <button type="button" class="btn btn-primary btn-sm" onclick="generatePrdWithDirectAi()" title="Ketik judul & deskripsi produk, lalu klik untuk mengisi seluruh 16 langkah PRD otomatis langsung via AI!" style="background:linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); border-color:#7C3AED; box-shadow:0 0 14px rgba(99,102,241,0.35); font-weight:700;">
+            <!-- GENERATE AI PER-STEP (FAST & RELIABLE) -->
+            <button type="button" class="btn btn-primary btn-sm" onclick="generateCurrentStepByAi()" id="top-btn-ai" title="Generate spesifikasi langkah yang sedang aktif saat ini via AI (Cepat 5-15 detik & bebas timeout)" style="background:linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); border-color:#7C3AED; box-shadow:0 0 14px rgba(99,102,241,0.35); font-weight:700;">
                 <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
-                <span id="top-btn-ai-text">Isi Semua Otomatis by AI</span>
+                <span id="top-btn-ai-text">Isi Step 1 by AI</span>
             </button>
 
             <!-- Template Preset Dropdown (Opsional) -->
@@ -271,7 +271,13 @@ def get_html():
                             <h2 class="font-outfit" style="font-size:20px; font-weight:800; color:#FFFFFF; margin:6px 0 2px;">Project Definition &amp; Scope</h2>
                             <p style="font-size:12px; color:var(--text-secondary);">Mulai dari lembar kerja bersih. Definisikan nama produk, masalah bisnis, target objektif, batasan ruang lingkup, dan kriteria sukses.</p>
                         </div>
-                        <span class="badge badge-emerald" id="auto-draft-chip"><i class="fa-solid fa-clock-rotate-left" style="margin-right:4px;"></i>Draft Siap Simpan</span>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateStepWithDirectAi('step1', 'Step 1: Project Definition & Scope')" title="Rancang nama, deskripsi, masalah & ruang lingkup via AI" style="border-color:#6366F1; color:#A5B4FC;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
+                                <span>Isi Step Ini by AI</span>
+                            </button>
+                            <span class="badge badge-emerald" id="auto-draft-chip"><i class="fa-solid fa-clock-rotate-left" style="margin-right:4px;"></i>Draft Siap Simpan</span>
+                        </div>
                     </div>
 
                     <!-- Fast-Track Callout Banner -->
@@ -282,10 +288,10 @@ def get_html():
                             </div>
                             <div>
                                 <div style="font-size:14px; font-weight:800; color:#FFFFFF; display:flex; align-items:center; gap:8px;">
-                                    <span>Isi Semua Otomatis by AI (Direct API &bull; Tanpa Ribet JSON)</span>
-                                    <span class="badge badge-emerald">ChatGPT Compatible</span>
+                                    <span>AI Generator Per-Step (Cepat &bull; Bebas Timeout)</span>
+                                    <span class="badge badge-emerald">5–15 Detik</span>
                                 </div>
-                                <div style="font-size:11.5px; color:#C7D2FE; margin-top:2px;">Cukup isi <strong>Nama Produk &amp; Deskripsi Detail</strong> di bawah, lalu klik <strong>"Isi Semua by AI"</strong>. Sistem akan langsung memanggil AI dan mengisi 16 langkah PRD secara instan!</div>
+                                <div style="font-size:11.5px; color:#C7D2FE; margin-top:2px;">Gunakan tombol <strong>"Isi Step Ini by AI"</strong> pada setiap langkah untuk hasil cepat, terstruktur, dan stabil tanpa resiko timeout.</div>
                             </div>
                         </div>
                         <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
@@ -293,12 +299,8 @@ def get_html():
                                 <i class="fa-solid fa-gear" style="color:#38BDF8;"></i>
                                 <span>Pengaturan AI</span>
                             </button>
-                            <button type="button" class="btn btn-secondary btn-sm" onclick="openAiPromptFormatModal()" title="Buka mode generator per-step ringan untuk ChatGPT/Gemini">
-                                <i class="fa-solid fa-layer-group" style="color:#818CF8;"></i>
-                                <span>Isi Per Step</span>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="generatePrdWithDirectAi()" style="background:linear-gradient(135deg, #10B981 0%, #059669 100%); border-color:#059669; font-weight:800; box-shadow:0 0 16px rgba(16,185,129,0.35);">
-                                <i class="fa-solid fa-bolt" style="color:#FDE047; margin-right:6px;"></i><span id="banner-btn-ai-text">Isi Semua by AI</span>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="generateStepWithDirectAi('step1', 'Step 1: Project Definition & Scope')" style="background:linear-gradient(135deg, #10B981 0%, #059669 100%); border-color:#059669; font-weight:800; box-shadow:0 0 16px rgba(16,185,129,0.35);">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047; margin-right:6px;"></i><span id="banner-btn-ai-text">Isi Step 1 by AI</span>
                             </button>
                         </div>
                     </div>
@@ -384,7 +386,13 @@ def get_html():
                             <h2 class="font-outfit" style="font-size:20px; font-weight:800; color:#FFFFFF; margin:6px 0 2px;">5 Pilar Arsitektur</h2>
                             <p style="font-size:12px; color:var(--text-secondary);">Pilih salah satu dari 5 Pilar Arsitektur utama sebagai fondasi sistem Anda.</p>
                         </div>
-                        <span class="badge badge-emerald"><i class="fa-solid fa-layer-group" style="margin-right:4px;"></i>5 Pilar Utama</span>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateStepWithDirectAi('step2', 'Step 2: 5 Pilar Arsitektur')" title="Rekomendasikan Pilar Arsitektur via AI" style="border-color:#6366F1; color:#A5B4FC;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
+                                <span>Isi Step Ini by AI</span>
+                            </button>
+                            <span class="badge badge-emerald"><i class="fa-solid fa-layer-group" style="margin-right:4px;"></i>5 Pilar Utama</span>
+                        </div>
                     </div>
 
                     <!-- 5 Architecture Pillars Large Cards -->
@@ -779,7 +787,7 @@ def get_html():
                             <p style="font-size:12px; color:var(--text-secondary);">Pilih estetika visual dari 60 gaya desain modern dan petakan struktur halaman/screen yang mewadahi fitur-fitur PRD.</p>
                         </div>
                         <div style="display:flex; gap:8px;">
-                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateStepWithDirectAi('step13', 'Step 12: UI Screens Architecture')" title="Generate pemetaan screen & UI via AI" style="border-color:#6366F1; color:#A5B4FC;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateStepWithDirectAi('step12', 'Step 12: UI Screens Architecture')" title="Generate pemetaan screen & UI via AI" style="border-color:#6366F1; color:#A5B4FC;">
                                 <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
                                 <span>Isi Step Ini by AI</span>
                             </button>
@@ -879,7 +887,13 @@ def get_html():
                             <h2 class="font-outfit" style="font-size:20px; font-weight:800; color:#FFFFFF; margin:6px 0 2px;">Technical MVP Specification (Single-File Architecture)</h2>
                             <p style="font-size:12px; color:var(--text-secondary);">Target implementasi MVP: satu file <code>index.html</code> mandiri tanpa database dan backend sungguhan.</p>
                         </div>
-                        <span class="badge badge-emerald"><i class="fa-solid fa-file-code" style="margin-right:4px;"></i>Strict 1-File MVP</span>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateStepWithDirectAi('step13', 'Step 13: Technical MVP Spec')" title="Rancang panduan teknis & state mocking via AI" style="border-color:#6366F1; color:#A5B4FC;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
+                                <span>Isi Step Ini by AI</span>
+                            </button>
+                            <span class="badge badge-emerald"><i class="fa-solid fa-file-code" style="margin-right:4px;"></i>Strict 1-File MVP</span>
+                        </div>
                     </div>
 
                     <div class="grid-2" style="margin-bottom:16px;">
@@ -939,9 +953,15 @@ def get_html():
                             <h2 class="font-outfit" style="font-size:20px; font-weight:800; color:#FFFFFF; margin:6px 0 2px;">PRD Completeness Checker &amp; Review</h2>
                             <p style="font-size:12px; color:var(--text-secondary);">Verifikasi otomatis kelengkapan seluruh 13 seksi spesifikasi sebelum menghasilkan dokumen PRD final.</p>
                         </div>
-                        <div style="text-align:right;">
-                            <div style="font-size:11px; color:var(--text-muted); font-weight:700;">TOTAL SKOR KELENGKAPAN:</div>
-                            <div class="font-outfit" style="font-size:24px; font-weight:900; color:#34D399;" id="checker-score-display">0%</div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="runAiPrdReviewAudit()" title="Analisis kelengkapan dan rekomendasi perbaikan PRD via AI" style="border-color:#6366F1; color:#A5B4FC;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
+                                <span>Audit PRD by AI</span>
+                            </button>
+                            <div style="text-align:right;">
+                                <div style="font-size:11px; color:var(--text-muted); font-weight:700;">TOTAL SKOR:</div>
+                                <div class="font-outfit" style="font-size:22px; font-weight:900; color:#34D399;" id="checker-score-display">0%</div>
+                            </div>
                         </div>
                     </div>
 
@@ -1036,6 +1056,10 @@ def get_html():
                             <p style="font-size:12px; color:var(--text-secondary);">Prompt khusus yang menginstruksikan AI coding agent untuk membangun PRD menjadi single-file <code>index.html</code> fungsional.</p>
                         </div>
                         <div style="display:flex; align-items:center; gap:8px;">
+                            <button type="button" class="btn btn-secondary" onclick="enhanceMvpPromptWithAi()" title="Optimasi Prompt Implementasi MVP via AI" style="border-color:#6366F1; color:#A5B4FC;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color:#FDE047;"></i>
+                                <span>Optimasi Prompt by AI</span>
+                            </button>
                             <button type="button" class="btn btn-primary" onclick="copyMvpPrompt()">
                                 <i class="fa-regular fa-copy"></i> Salin Prompt MVP
                             </button>
