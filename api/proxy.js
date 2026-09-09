@@ -39,7 +39,17 @@ module.exports = async function handler(req, res) {
     const body = req.body || {};
     const { endpoint, apiKey, body: aiPayload } = body;
 
-    if (!endpoint || typeof endpoint !== 'string' || !endpoint.trim()) {
+      let endpointUrl;
+      try {
+        endpointUrl = new URL(endpoint);
+      } catch {
+        return res.status(400).json({ error: { message: 'Invalid endpoint URL.' } });
+      }
+      if (!['http:', 'https:'].includes(endpointUrl.protocol)) {
+        return res.status(400).json({ error: { message: 'Only HTTP(S) endpoint URLs are allowed.' } });
+      }
+  
+      if (!endpoint || typeof endpoint !== 'string' || !endpoint.trim()) {
       return res.status(400).json({
         error: { message: 'Missing or invalid "endpoint" in request payload.' }
       });
@@ -59,7 +69,7 @@ module.exports = async function handler(req, res) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 55000);
 
-    const upstreamResponse = await fetch(endpoint.trim(), {
+    const upstreamResponse = await fetch(endpointUrl.toString(), {
       method: 'POST',
       headers,
       body: JSON.stringify(aiPayload || {}),

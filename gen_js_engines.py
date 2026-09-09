@@ -2579,6 +2579,42 @@ function checkCompleteness() {
 // ============================================================================
 // STEP 15: QUALITY PRD GENERATOR (24 SECTIONS MARKDOWN)
 // ============================================================================
+function generateDesignContract(p) {
+    const theme = MOCK_DB.styles.find(s => String(s.id) === String(p.uiux.themeId));
+    const directions = {
+        dashboard: 'Operational clarity: compact sidebar, actionable work queue first, restrained KPI summary, aligned numeric columns and persistent filters. No oversized marketing hero.',
+        landing_page: 'Conversion editorial: clear value proposition and one primary CTA, asymmetric hero, product evidence, benefits then FAQ. No admin sidebar or invented testimonials.',
+        company_profile: 'Corporate editorial: strong typographic masthead, project case studies, factual credentials and clear contact path. Avoid generic KPI tiles and fabricated client logos.',
+        e_commerce: 'Product-led commerce: search and category navigation, consistent product imagery ratios, visible price and stock, clear cart totals and recoverable checkout steps.',
+        blog_content: 'Reading-first editorial: distinctive masthead, featured story, category index and 60–75 character reading measure. Do not turn articles into dashboard stat cards.'
+    };
+    const palette = theme && theme.color ? theme.color.split(',').filter(c => /^[0-9a-f]{6}$/i.test(c)).map(c => '#' + c) : [];
+    return `### 19.1 Art Direction & Product Fit
+- **Direction:** ${directions[p.taxonomy.pillar] || 'Pillar belum dipilih; arah visual perlu dikonfirmasi sebelum implementasi.'}
+- **Theme reference:** ${theme ? theme.name : 'Belum dipilih; jangan mengklaim tema telah disepakati.'}
+- **Catalog accent candidates:** ${palette.join(', ') || 'Belum ditentukan'}. These are accents, NOT a verified accessible surface/text palette.
+- Preserve selected theme character. No automatic purple gradient, glass panels, glowing borders, or identical bento cards unless explicitly required by the chosen theme.
+
+### 19.2 Design Tokens & Component Contract
+- Define semantic CSS variables for canvas, surface, raised surface, primary text, muted text, border, accent, on-accent, success, warning and danger. Specify actual values before coding; measure text contrast >=4.5:1 and meaningful controls >=3:1.
+- Type scale: body 16px/1.5, metadata 12–14px/1.4, section title 24–32px/1.2; editorial hero 36–64px with responsive clamp. Maximum two font families with local/system fallbacks. Numeric data uses tabular figures.
+- Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64px. Content gutters 16px mobile, 24px tablet, 32px desktop. Use 8px control radius, 12px surface radius as baseline; adapt deliberately to selected theme.
+- One primary action per task region; secondary actions lower emphasis. Consistent button/input height 44px. No hover-only controls. Icons use one SVG family and consistent stroke.
+
+### 19.3 Screen-Specific Interaction Plan
+${p.uiux.screens.map((s, i) => `- **${i + 1}. ${s.name}:** features: ${s.features || 'Belum dipetakan'}; components: ${s.components || 'Belum ditentukan'}. Define primary task, initial viewport hierarchy, primary CTA, action outcome and return path. Missing details are proposed decisions, not approved requirements.`).join('\n') || '- No screens mapped. Screen hierarchy and core task require confirmation.'}
+- Each data-backed screen defines loading, empty-first-use, no-results, error with retry, populated and permission-denied states. Never show fabricated success after an error.
+- Forms retain entered values on failure, show linked inline errors, prevent duplicate submit and focus first invalid field. Destructive actions name the affected record and require confirmation or undo.
+
+### 19.4 Responsive, Accessibility & Visual Acceptance
+- Test 375, 768 and 1440px widths, landscape and 200% zoom. No page-level horizontal overflow. Tables may scroll inside labeled containers; do not remove critical columns without a detail alternative.
+- Keyboard-visible focus; labeled icon buttons; semantic headings and landmarks. Dialogs trap focus, close on Escape and return focus to opener. Status never relies on color alone.
+- Motion uses opacity/transform 120–200ms without layout shifts; honor prefers-reduced-motion. No autoplay or decorative perpetual animation.
+- Review actual screens, not adjectives: clear first task, readable type hierarchy, consistent spacing, coherent states and realistic domain copy. Mark sample data as demo. No fake ratings, customer counts, revenue or compliance claims.
+- Deliver screenshots at tested widths and report unresolved visual/accessibility issues. These criteria are acceptance targets, not claims that testing has already passed.
+`;
+}
+
 function generateQualityPrdMarkdown() {
     const p = projectPRD;
     const now = new Date();
@@ -2586,10 +2622,10 @@ function generateQualityPrdMarkdown() {
 
     let md = `# PRODUCT REQUIREMENTS DOCUMENT (PRD)
 **Product Title:** ${p.project.name || 'Enterprise Solution'}  
-**Document Version:** 1.0.0 (Production Blueprint)  
+**Document Version:** 1.0.0 (MVP Draft — requires stakeholder validation)
 **Generation Date:** ${dateStr}  
 **Architecture Paradigm:** Single-File MVP Architecture (\`index.html\`)  
-**Standard Compliance:** Anti-Slop Requirements Engineering (No Guesswork)
+**Validation Status:** Generated specification, not certification. Unspecified requirements need confirmation.
 
 ---
 
@@ -2728,6 +2764,7 @@ ${p.integrations.map(i => `| **${i.system}** | ${i.purpose || '-'} | ${i.directi
 - **Navigation Scheme:** \`${p.uiux.navigation}\`
 - **Accessibility Compliance:** \`${p.uiux.accessibility}\` (Minimum 4.5:1 text contrast, WCAG AA touch targets).
 
+${generateDesignContract(p)}
 ## 20. Screen & Information Architecture Mapping
 | Screen Name | Mapped Features | Key Interactive Components |
 |:---|:---|:---|
@@ -2736,7 +2773,7 @@ ${p.uiux.screens.map(s => `| **${s.name}** | ${s.features || '-'} | ${s.componen
 ## 21. Technical MVP Specification (Single-File Architecture)
 Untuk menjamin kecepatan validasi tanpa kompleksitas server, MVP dibangun dengan spesifikasi teknis:
 - **Deliverable:** Tepat 1 file tunggal \`index.html\`.
-- **Frontend Stack:** HTML5 murni, Embedded CSS (Tailwind CDN / Custom Tokens), Vanilla JavaScript ES6+.
+- **Frontend Stack:** HTML5 murni, Embedded CSS semantic tokens, Vanilla JavaScript ES6+ tanpa dependency CDN runtime.
 - **Data Persistence:** \`localStorage\` browser + Reactive In-Memory State.
 - **Backend / Database:** Tidak diperlukan server backend (Zero Node.js/Python server, Zero SQL/NoSQL DB setup).
 - **Authentication:** Mock User Switcher pada header untuk beralih antar-role secara instan.
@@ -2841,10 +2878,14 @@ function downloadPrdMarkdown() {
 function printPrdDocument() {
     const md = generateQualityPrdMarkdown();
     const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+        Swal.fire({ icon: 'error', title: 'Jendela cetak diblokir', text: 'Izinkan popup untuk mencetak PRD.' });
+        return;
+    }
     printWindow.document.write(`
         <html>
         <head>
-            <title>PRD - ${projectPRD.project.name || 'Enterprise Solution'}</title>
+            <title>PRD - ${escapeHtml(projectPRD.project.name || 'Enterprise Solution')}</title>
             <style>
                 body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #111; padding: 40px; }
                 h1 { font-size: 24px; border-bottom: 2px solid #333; padding-bottom: 8px; }
@@ -2864,7 +2905,7 @@ function printPrdDocument() {
 }
 
 function convertMarkdownToHtml(md) {
-    return md
+    return escapeHtml(md)
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
         .replace(/^### (.*$)/gim, '<h3>$1</h3>')
@@ -2879,7 +2920,7 @@ function convertMarkdownToHtml(md) {
             const isHeader = false;
             return `<tr>${cells.map(c => `<td>${c.trim()}</td>`).join('')}</tr>`;
         })
-        .replace(/(<tr>.*<\/tr>)/gs, '<div class="table-responsive"><table class="custom-table">$1</table></div>');
+        .replace(/(?:<tr>[^\n]*<\/tr>\s*)+/g, '<div class="table-responsive"><table class="custom-table">$&</table></div>');
 }
 
 // ============================================================================
@@ -2899,7 +2940,7 @@ Output exactly ONE file:
 
 The file must contain:
 1. All HTML5 semantic markup
-2. All CSS3 styling (use Tailwind CSS via CDN or custom vanilla CSS variables matching the PRD theme)
+2. All CSS styling embedded with semantic CSS variables matching the PRD theme; no runtime CDN dependencies
 3. All JavaScript application logic (Vanilla JS ES6+)
 4. All initial mock data (10-15 realistic, comprehensive records pre-seeded into state)
 
@@ -2912,7 +2953,7 @@ The file must contain:
 - The file MUST run directly in any browser by double-clicking it offline (\`file:///...\`).
 
 # FUNCTIONAL MVP REQUIREMENTS (NO VISUAL DUMMIES)
-The output must NOT be a static mockup. All core workflows described in the PRD must be functional in-browser:
+The output must NOT be a static mockup. Implement only interactions supported by the PRD. The following patterns apply ONLY when mapped to its features; do not add ERP tables, approval flows, or KPI dashboards to editorial, marketing, or commerce pages without a stated requirement:
 1. **Interactive Data Tables & Filters:**
    - Multi-criteria filtering by status, priority, category, and real-time text search.
    - Sorting and pagination.
@@ -2931,9 +2972,9 @@ The output must NOT be a static mockup. All core workflows described in the PRD 
 
 # UI/UX & STYLING GUIDELINES
 - Visual Aesthetic: Match the selected theme: #${p.uiux.themeId} (${p.uiux.themeName}).
-- Color Palette: Professional enterprise dark mode with WCAG AA compliance (4.5:1 contrast).
-- Icons: Use FontAwesome 6 CDN (\`<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">\`).
-- Feedback: Use SweetAlert2 CDN for alerts and modal confirmations.
+- Color Palette: Follow section 19. Respect selected theme; do not force dark mode. Verify contrast, not merely claim WCAG compliance.
+- Icons: Inline SVG from one consistent icon family; no CDN or emoji navigation.
+- Feedback: Accessible local dialogs and inline validation; no external alert dependency.
 - Layout: ${p.uiux.layout.replace(/_/g, ' ').toUpperCase()} with clean optical alignments and responsive mobile/desktop handling.
 
 ---
@@ -2946,7 +2987,7 @@ ${prdMarkdown}
 \`\`\`
 
 # INSTRUCTION TO AI CODING AGENT
-Generate the complete, robust, production-ready \`index.html\` file now. Begin directly with \`<!DOCTYPE html>\` and end with \`</html>\`. Do not skip any JavaScript functions or mock data records.`;
+Generate the complete, testable prototype \`index.html\` file now. Begin directly with \`<!DOCTYPE html>\` and end with \`</html>\`. Do not skip any JavaScript functions or mock data records. Mock roles are not production authentication; do not store real sensitive data in this prototype.`;
 
     return prompt;
 }
@@ -4770,7 +4811,8 @@ function applyPrdData(data, sourceLabel = 'AI') {
         id: m.id || 'm_' + (idx + 1),
         name: m.name || 'Modul ' + (idx + 1),
         description: m.description || m.desc || '',
-        submodules: m.submodules || (m.features ? m.features.map(f => f.name).join(', ') : '')
+        submodules: m.submodules || (Array.isArray(m.features) ? m.features.map(f => f.name).join(', ') : ''),
+        features: Array.isArray(m.features) ? m.features : []
     }));
 
     if (!data.features) data.features = [];
@@ -4868,6 +4910,7 @@ function applyPrdData(data, sourceLabel = 'AI') {
     data.notifications = data.notifications.map((n, idx) => ({
         id: n.id || 'n_' + (idx + 1),
         name: n.name || n.event || 'Notifikasi ' + (idx + 1),
+        trigger: n.trigger || n.triggerCondition || '',
         recipient: n.recipient || (data.roles[0] ? data.roles[0].name : 'Semua Role'),
         channel: n.channel || 'In-App Toast',
         priority: n.priority || 'P2 High',
